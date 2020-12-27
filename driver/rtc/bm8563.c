@@ -71,7 +71,6 @@ int_fast8_t bm8563_write_date_time(bm8563_t *this, const struct tm *tm)
 
 int_fast8_t bm8563_read_date_time(bm8563_t *this, struct tm *tm)
 {
-    uint8_t year;
     uint8_t data[7] = { 0 };
 
     if (this->opt.i2c_mem_read(this, this->devaddr, 0x02,
@@ -83,15 +82,13 @@ int_fast8_t bm8563_read_date_time(bm8563_t *this, struct tm *tm)
     AL_DEBUG(AL_DRV_RTC_LOG, "bm8563 read:");
     AL_BIN_D(AL_DRV_RTC_LOG, data, sizeof(data));
 
-    tm->tm_sec = bcd2bin(data[0]);
-    tm->tm_min = bcd2bin(data[1]);
-    tm->tm_hour = bcd2bin(data[2]);
-    tm->tm_mday = bcd2bin(data[3]);
-    tm->tm_wday = bcd2bin(data[4]);
-    tm->tm_mon = bcd2bin(data[5]) - 1;
-
-    year = bcd2bin(data[6]);
-    tm->tm_year = ((year & 0x80) ? 100 : 0) + (year & 0x7F);
+    tm->tm_sec = bcd2bin(data[0] & 0x7F);
+    tm->tm_min = bcd2bin(data[1] & 0x7F);
+    tm->tm_hour = bcd2bin(data[2] & 0x3F);
+    tm->tm_mday = bcd2bin(data[3] & 0x3F);
+    tm->tm_wday = bcd2bin(data[4]& 0x07);
+    tm->tm_mon = bcd2bin(data[5] & 0x1f) - 1;
+    tm->tm_year = ((data[5] & 0x80) ? 100 : 0) + bcd2bin(data[6]);
 
     BUG_ON(!(tm->tm_sec >= 0 && tm->tm_sec <= 59));
     BUG_ON(!(tm->tm_min >= 0 && tm->tm_min <= 59));
@@ -101,8 +98,15 @@ int_fast8_t bm8563_read_date_time(bm8563_t *this, struct tm *tm)
     BUG_ON(!(tm->tm_mon >= 0 && tm->tm_mon <= 11));
     BUG_ON(!(tm->tm_year >= 0 && tm->tm_year <= 199));
 
+    this->vl = data[0] & 0x80;
+
     set_errno(0);
     return 0;
+}
+
+bool bm8563_is_power_down(bm8563_t *this)
+{
+    return this->vl;
 }
 
 __END_DECLS

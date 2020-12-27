@@ -20,6 +20,7 @@ typedef struct bm8563_opt {
 
 struct bt8563 {
     uint8_t devaddr;
+    bool vl;
     bm8563_opt_t opt;
     void *i2c;
 };
@@ -30,6 +31,7 @@ int_fast8_t bm8563_final(bm8563_t *this);
 
 int_fast8_t bm8563_write_date_time(bm8563_t *this, const struct tm *tm);
 int_fast8_t bm8563_read_date_time(bm8563_t *this, struct tm *tm);
+bool bm8563_is_power_down(bm8563_t *this);
 
 __END_DECLS
 
