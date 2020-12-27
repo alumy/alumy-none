@@ -39,10 +39,10 @@ void sw_i2c_send_byte(sw_i2c_t *i2c, uint8_t byte);
 uint8_t sw_i2c_recv_byte(sw_i2c_t *i2c);
 
 ssize_t sw_i2c_mem_write(sw_i2c_t *i2c, uint16_t dev_addr, uint16_t addr,
-                         uint_fast16_t timeout, const void *data, size_t len);
+                         const void *data, size_t len, uint_fast16_t timeout);
 
 ssize_t sw_i2c_mem_read(sw_i2c_t *i2c, uint16_t dev_addr, uint16_t addr,
-                        uint_fast16_t timeout, void *buf, size_t len);
+                        void *buf, size_t len, uint_fast16_t timeout);
 
 __END_DECLS
 

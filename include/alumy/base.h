@@ -54,6 +54,10 @@
     #define __always_unused		__attribute__((unused))
   #endif
 
+  #ifndef __always_inline
+    #define __always_inline     __attribute__((always_inline))
+  #endif
+
   #ifndef __section
     #define __section(sec)		__attribute_used__ __attribute__((section(sec)))
   #endif
@@ -86,6 +90,10 @@
     #define __always_unused		__attribute__((unused))
   #endif
 
+  #ifndef __always_inline
+    #define __always_inline     __attribute__((always_inline))
+  #endif
+
   #ifndef __aligned
     #define __aligned(x)    __attribute__((aligned(x)))
   #endif
@@ -96,6 +104,10 @@
 
   #ifndef __section
     #define __section(sec)  __attribute__((used, section(sec)))
+  #endif
+
+  #ifndef __attribute_const__
+    #define __attribute_const__     __attribute__((__const__))
   #endif
 #endif /* __CC_ARM */
 
