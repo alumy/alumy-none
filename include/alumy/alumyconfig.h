@@ -10,7 +10,7 @@ extern "C" {
 /* Verbose log */
 #define AL_LOG                  1
 #define AL_LOG_COLOR            1
-#define AL_USE_ERRNO            1
+#define AL_USE_ERRNO            0
 #define AL_HAVE_SYS_CDEFS       0
 #define AL_HAVE_SYS_TYPES       0
 

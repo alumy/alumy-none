@@ -8,12 +8,6 @@ static const al_version_t al_version = {
     .minor = ALUMY_MINOR,
     .rev = ALUMY_REV,
     .build = ALUMY_BUILD,
-
-#ifndef ALUMY_SUFFIX
-    .suffix = NULL
-#else
-    .suffix = ALUMY_SUFFIX
-#endif
 };
 
 const char *al_get_version_s(void)

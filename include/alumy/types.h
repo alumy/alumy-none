@@ -64,9 +64,11 @@ typedef long int off_t;
 #define __off_t_defined
 #endif
 
-#ifndef __ssize_t_defined
-typedef long ssize_t;
-#define __ssize_t_defined
+#if defined(__CC_ARM)
+	#ifndef __ssize_t_defined
+	typedef long ssize_t;
+	#define __ssize_t_defined
+	#endif
 #endif
 
 #endif	/* end of _TYPES_H */

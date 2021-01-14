@@ -28,5 +28,10 @@ int32_t alumy_test(void)
     return UnityMain(argc, argv, run_all_test);
 }
 
+int main(int argc, char *argv[])
+{
+	return alumy_test();
+}
+
 __END_DECLS
 
