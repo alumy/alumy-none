@@ -108,6 +108,7 @@ endif()
 
 add_library("${PROJECT_NAME}-static" STATIC ${${PROJECT_NAME}_src} ${objs})
 # target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR})
+# target_compile_options(<target> [BEFORE] <INTERFACE|PUBLIC|PRIVATE> [items1...] [<INTERFACE|PUBLIC|PRIVATE> [items2...] ...])
 
 set_target_properties("${PROJECT_NAME}-static" PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
 set_target_properties("${PROJECT_NAME}-static" PROPERTIES PREFIX "lib")
@@ -162,6 +163,40 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 			COMMENT "Copying configurations")
 
 	target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
+
+	enable_testing()
+
+	add_test(test_alumy alumy-test)
+	add_test(test_cov "${CMAKE_CURRENT_BINARY_DIR}/covgen.sh")
+	# set_tests_properties (test_cov
+	#	PROPERTIES PASS_REGULAR_EXPRESSION "Test coverage")
+endif()
+
+if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
+	message(STATUS "Building test for Generic")
+	
+	aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
+
+	add_executable(${PROJECT_NAME}-test ${test_src} ${${PROJECT_NAME}_src})
+
+	add_custom_command(TARGET ${PROJECT_NAME}-test
+			POST_BUILD
+			COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/tools/covgen.sh .
+			COMMENT "Copying covgen.sh to calculate coverage")
+
+	add_custom_command(TARGET ${PROJECT_NAME}-test
+			POST_BUILD
+			COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/tools/cunit/xml/* .
+			COMMENT "Copying cunit resources")
+		
+	add_custom_command(TARGET ${PROJECT_NAME}-test
+			POST_BUILD
+			COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/config/* .
+			COMMENT "Copying configurations")
+
+	target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME}-static)
+	
+	# target_link_options(${PROJECT_NAME}-test PRIVATE -T "${CMAKE_LINK_FILE}")
 
 	enable_testing()
 

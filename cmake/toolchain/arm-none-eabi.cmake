@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 # set(TOOLCHAIN_DIR "${PROJECT_SOURCE_DIR}/../tools/gcc-arm-none-eabi/bin")
 
-set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_SYSTEM_PROCESSOR arm)
+set(CMAKE_SYSTEM_NAME Generic CACHE STRING "" FORCE)
+set(CMAKE_SYSTEM_PROCESSOR arm CACHE STRING "" FORCE)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(CMAKE_C_COMPILER "arm-none-eabi-gcc")

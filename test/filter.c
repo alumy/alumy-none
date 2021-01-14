@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "alumy/config.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
@@ -7,6 +8,7 @@
 
 __BEGIN_DECLS
 
+#if 0
 TEST_GROUP(filter);
 
 TEST_SETUP(filter)
@@ -27,6 +29,7 @@ TEST_GROUP_RUNNER(filter)
 {
     RUN_TEST_CASE(filter, kalman_succ);
 }
+#endif
 
 __END_DECLS
 
