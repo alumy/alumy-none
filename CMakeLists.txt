@@ -153,17 +153,17 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/tools/covgen.sh ${CMAKE_CURRENT_BINARY_DIR}
+			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/covgen.sh ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying covgen.sh to calculate coverage")
 
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/tools/cunit/xml/* ${CMAKE_CURRENT_BINARY_DIR}
+			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/cunit/xml/* ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying cunit resources")
 		
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
+			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying configurations")
 
 	target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
@@ -209,7 +209,7 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 		
 	add_custom_command(TARGET ${PROJECT_NAME}-test.elf
 			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
+			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying configurations")
 
 	#enable_testing()
