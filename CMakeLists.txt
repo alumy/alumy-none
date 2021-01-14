@@ -59,16 +59,16 @@ add_definitions(-D__STDC_FORMAT_MACROS)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
-	include_directories(${ROOTFS_DIR}/usr/include)
-	include_directories(${ROOTFS_DIR}/usr/local/include)
+	# include_directories(${ROOTFS_DIR}/usr/include)
+	# include_directories(${ROOTFS_DIR}/usr/local/include)
 
-	link_directories(
-			${ROOTFS_DIR}/usr/lib
-			${ROOTFS_DIR}/usr/lib64
-			${ROOTFS_DIR}/usr/local/lib
-			${ROOTFS_DIR}/usr/local/lib64)
+	# link_directories(
+	#		${ROOTFS_DIR}/usr/lib
+	#		${ROOTFS_DIR}/usr/lib64
+	#		${ROOTFS_DIR}/usr/local/lib
+	#		${ROOTFS_DIR}/usr/local/lib64)
 
-	link_libraries(cunit rt curl)
+	link_libraries(rt)
 endif()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/crc)
@@ -153,17 +153,17 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 			POST_BUILD
-			COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/tools/covgen.sh .
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/tools/covgen.sh ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying covgen.sh to calculate coverage")
 
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 			POST_BUILD
-			COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/tools/cunit/xml/* .
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/tools/cunit/xml/* ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying cunit resources")
 		
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 			POST_BUILD
-			COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/config/* .
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying configurations")
 
 	target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
@@ -181,9 +181,10 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 	
 	aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
-	add_executable(${PROJECT_NAME}-test.elf ${test_src} ${${PROJECT_NAME}_src} ${cunit_src})
+	add_executable(${PROJECT_NAME}-test.elf ${test_src} ${${PROJECT_NAME}_src})
 
-	target_link_libraries(${PROJECT_NAME}-test.elf ${PROJECT_NAME}-static)
+	target_link_libraries(${PROJECT_NAME}-test.elf ${PROJECT_NAME}-static 
+			$<TARGET_OBJECTS:cunit>)
 
 	 add_custom_command(TARGET ${PROJECT_NAME}-test.elf
 			POST_BUILD
