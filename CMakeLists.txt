@@ -171,7 +171,11 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 	enable_testing()
 
 	add_test(test_alumy alumy-test)
+	set_tests_properties (test_alumy PROPERTIES PASS_REGULAR_EXPRESSION 0)
+		
 	add_test(test_cov "${CMAKE_CURRENT_BINARY_DIR}/covgen.sh")
+	set_tests_properties (test_cov PROPERTIES PASS_REGULAR_EXPRESSION 0)
+
 	# set_tests_properties (test_cov
 	#	PROPERTIES PASS_REGULAR_EXPRESSION "Test coverage")
 endif()
