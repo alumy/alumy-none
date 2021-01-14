@@ -77,6 +77,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/string)
 add_subdirectory(${PROJECT_SOURCE_DIR}/bcd)
 add_subdirectory(${PROJECT_SOURCE_DIR}/base64)
 add_subdirectory(${PROJECT_SOURCE_DIR}/unity)
+add_subdirectory(${PROJECT_SOURCE_DIR}/sys)
 
 #############################################################################
 # libalumy
@@ -88,6 +89,7 @@ set(objs
 		$<TARGET_OBJECTS:mem>
 		$<TARGET_OBJECTS:string>
 		$<TARGET_OBJECTS:bcd>
+		$<TARGET_OBJECTS:sys>
 		$<TARGET_OBJECTS:base64>)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_src)
