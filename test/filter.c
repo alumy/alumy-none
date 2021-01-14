@@ -1,32 +1,37 @@
 #include <stdio.h>
-#include "alumy/config.h"
-#include "alumy/types.h"
-#include "alumy/base.h"
-#include "alumy/unity/unity.h"
-#include "alumy/unity/unity_fixture.h"
-#include "alumy/filter.h"
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include "alumy/cunit/CUnit.h"
+#include "alumy/cunit/Automated.h"
+#include "alumy/cunit/Basic.h"
+#include "alumy.h"
+#include "test.h"
 
 __BEGIN_DECLS
 
-TEST_GROUP(filter);
+static int filter_suite_init(void)
+{
+	return 0;
+}
 
-TEST_SETUP(filter)
+static int filter_suite_clean(void)
+{
+	return 0;
+}
+
+static void kalman_filter_succ_test(void)
 {
 
 }
 
-TEST_TEAR_DOWN(filter)
+void add_filter_tests(void)
 {
+	CU_pSuite suite;
 
-}
+	suite = CU_add_suite("filter", filter_suite_init, filter_suite_clean);
 
-TEST(filter, kalman_succ)
-{
-}
-
-TEST_GROUP_RUNNER(filter)
-{
-    RUN_TEST_CASE(filter, kalman_succ);
+	CU_add_test(suite, "kalman_filter", kalman_filter_succ_test);
 }
 
 __END_DECLS

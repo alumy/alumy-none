@@ -77,6 +77,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/string)
 add_subdirectory(${PROJECT_SOURCE_DIR}/bcd)
 add_subdirectory(${PROJECT_SOURCE_DIR}/base64)
 add_subdirectory(${PROJECT_SOURCE_DIR}/unity)
+add_subdirectory(${PROJECT_SOURCE_DIR}/cunit)
 add_subdirectory(${PROJECT_SOURCE_DIR}/sys)
 
 #############################################################################
@@ -85,6 +86,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/sys)
 
 set(objs 
 		$<TARGET_OBJECTS:unity>
+		$<TARGET_OBJECTS:cunit>
 		$<TARGET_OBJECTS:crc>
 		$<TARGET_OBJECTS:mem>
 		$<TARGET_OBJECTS:string>
@@ -179,8 +181,8 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 	
 	aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
-	add_executable(${PROJECT_NAME}-test.elf ${test_src} ${${PROJECT_NAME}_src})
-	
+	add_executable(${PROJECT_NAME}-test.elf ${test_src} ${${PROJECT_NAME}_src} ${cunit_src})
+
 	target_link_libraries(${PROJECT_NAME}-test.elf ${PROJECT_NAME}-static)
 
 	 add_custom_command(TARGET ${PROJECT_NAME}-test.elf

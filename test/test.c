@@ -1,36 +1,76 @@
-#include <setjmp.h>
 #include <stdio.h>
-#include "alumy/config.h"
-#include "alumy/types.h"
-#include "alumy/base.h"
-#include "alumy/test.h"
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include "alumy/cunit/CUnit.h"
+#include "alumy/cunit/Automated.h"
+#include "alumy/cunit/Basic.h"
+#include "alumy.h"
+#include "test.h"
 
 __BEGIN_DECLS
 
-static void run_all_test(void)
+static int example_suite_init(void)
 {
-    RUN_TEST_GROUP(base64);
-
-#if AL_TEST_FILTER
-    RUN_TEST_GROUP(filter);
-#endif
+	return 0;
 }
 
-int32_t alumy_test(void)
+static int example_suite_clean(void)
 {
-    const char *argv[] = {
-        "alumy",
-        "-v",
-    };
+	return 0;
+}
 
-    int32_t argc = ARRAY_SIZE(argv);
+static void example_test(void)
+{
+	CU_ASSERT(1);
+}
 
-    return UnityMain(argc, argv, run_all_test);
+static void add_example_tests(void)
+{
+	CU_pSuite suite;
+
+	suite = CU_add_suite("example", example_suite_init, example_suite_clean);
+	CU_add_test(suite, "example", example_test);
+}
+
+static void add_tests(void)
+{
+	void (*add_test_tab[])(void) = {
+		add_example_tests,
+		add_mem_tests,
+		add_string_tests,
+        add_filter_tests,
+	};
+
+	assert(CU_get_registry() != NULL);
+	assert(!CU_is_test_running());
+
+	for (int32_t i = 0; i < ARRAY_SIZE(add_test_tab); ++i) {
+		if (add_test_tab[i] != NULL) {
+			add_test_tab[i]();
+		}
+	}
 }
 
 int main(int argc, char *argv[])
 {
-	return alumy_test();
+	if (CU_initialize_registry()) {
+		fprintf(stderr, "\nInitialization of Test Registry failed.");
+		return -1;
+	}
+
+	add_tests();
+
+    CU_set_output_filename("test");
+    CU_list_tests_to_file();
+    CU_automated_run_tests();
+
+	CU_basic_set_mode(CU_BRM_VERBOSE);
+    CU_basic_run_tests();
+
+	CU_cleanup_registry();
+
+	return 0;
 }
 
 __END_DECLS
