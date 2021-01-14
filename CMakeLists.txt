@@ -183,8 +183,7 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 
 	add_executable(${PROJECT_NAME}-test.elf ${test_src} ${${PROJECT_NAME}_src})
 
-	target_link_libraries(${PROJECT_NAME}-test.elf ${PROJECT_NAME}-static 
-			$<TARGET_OBJECTS:cunit>)
+	target_link_libraries(${PROJECT_NAME}-test.elf ${PROJECT_NAME}-static)
 
 	 add_custom_command(TARGET ${PROJECT_NAME}-test.elf
 			POST_BUILD
