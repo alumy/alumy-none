@@ -8,8 +8,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 set(CMAKE_C_COMPILER "arm-none-eabi-gcc")
 set(CMAKE_CXX_COMPILER "arm-none-eabi-g++")
-# set(CMAKE_AR "${TOOLCHAIN_DIR}/arm-none-eabi-ar")
+set(CMAKE_AR "arm-none-eabi-ar")
 set(CMAKE_OBJCOPY "arm-none-eabi-objcopy")
+set(CMAKE_SIZE "arm-none-eabi-size")
 
 set(CMAKE_FIND_ROOT_PATH "...")
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
@@ -37,7 +38,7 @@ set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/release" CACHE STRING "" FORCE)
 
 set(LINKER_SCRIPT "${PROJECT_SOURCE_DIR}/cmake/toolchain/es32/es32f0654lt.ld" CACHE STRING "" FORCE)
 
-set(CMAKE_EXTERNAL_FLAGS " -Wl,--sort-section=alignment -mcpu=cortex-m3 -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb ")
+set(CMAKE_EXTERNAL_FLAGS " -Wl,--sort-section=alignment -mcpu=cortex-m0 -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb ")
 set(CMAKE_EXE_LINKER_FLAGS
 "${CMAKE_EXTERNAL_FLAGS} --specs=nano.specs -specs=nosys.specs -static -T${LINKER_SCRIPT} -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map -Wl,--cref -Wl,--gc-sections -Wl,-print-memory-usage"
 )

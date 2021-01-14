@@ -5,7 +5,7 @@ message(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}.")
 
 cmake_minimum_required(VERSION 2.8)
 
-project(alumy C)
+project(alumy C ASM)
 
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT_VERSION_MINOR 0)
@@ -177,31 +177,40 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 	
 	aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
-	add_executable(${PROJECT_NAME}-test ${test_src} ${${PROJECT_NAME}_src})
+	add_executable(${PROJECT_NAME}-test.elf ${test_src} ${${PROJECT_NAME}_src})
+	
+	target_link_libraries(${PROJECT_NAME}-test.elf ${PROJECT_NAME}-static)
 
-	add_custom_command(TARGET ${PROJECT_NAME}-test
+	 add_custom_command(TARGET ${PROJECT_NAME}-test.elf
 			POST_BUILD
-			COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/tools/covgen.sh .
+			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/covgen.sh ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying covgen.sh to calculate coverage")
 
-	add_custom_command(TARGET ${PROJECT_NAME}-test
+	add_custom_command(TARGET ${PROJECT_NAME}-test.elf
 			POST_BUILD
-			COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/tools/cunit/xml/* .
+			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/cunit/xml/* ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying cunit resources")
-		
-	add_custom_command(TARGET ${PROJECT_NAME}-test
+			
+	add_custom_command(TARGET ${PROJECT_NAME}-test.elf
 			POST_BUILD
-			COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/config/* .
-			COMMENT "Copying configurations")
+			COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}-test.elf ${PROJECT_NAME}-test.bin
+			COMMAND ${CMAKE_OBJCOPY} -O ihex ${PROJECT_NAME}-test.elf ${PROJECT_NAME}-test.hex
+			COMMENT "Building ${PROJECT_NAME}-test.bin and ${PROJECT_NAME}-test.hex")
+			
+	add_custom_command(TARGET ${PROJECT_NAME}-test.elf
+			POST_BUILD
+			COMMAND ${CMAKE_SIZE} --format=berkeley ${PROJECT_NAME}-test.elf ${PROJECT_NAME}-test.hex
+			COMMENT "Parsing program size:")
+		
+	# add_custom_command(TARGET ${PROJECT_NAME}-test.elf
+	#		POST_BUILD
+	#		COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/config/* .
+	#		COMMENT "Copying configurations")
 
-	target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME}-static)
-	
-	# target_link_options(${PROJECT_NAME}-test PRIVATE -T "${CMAKE_LINK_FILE}")
+	#enable_testing()
 
-	enable_testing()
-
-	add_test(test_alumy alumy-test)
-	add_test(test_cov "${CMAKE_CURRENT_BINARY_DIR}/covgen.sh")
+	#add_test(test_alumy alumy-test.elf)
+	#add_test(test_cov "${CMAKE_CURRENT_BINARY_DIR}/covgen.sh")
 	# set_tests_properties (test_cov
 	#	PROPERTIES PASS_REGULAR_EXPRESSION "Test coverage")
 endif()
