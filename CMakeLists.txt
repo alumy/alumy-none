@@ -202,10 +202,10 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 			COMMAND ${CMAKE_SIZE} --format=berkeley ${PROJECT_NAME}-test.elf ${PROJECT_NAME}-test.hex
 			COMMENT "Parsing program size:")
 		
-	# add_custom_command(TARGET ${PROJECT_NAME}-test.elf
-	#		POST_BUILD
-	#		COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/config/* .
-	#		COMMENT "Copying configurations")
+	add_custom_command(TARGET ${PROJECT_NAME}-test.elf
+			POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
+			COMMENT "Copying configurations")
 
 	#enable_testing()
 
