@@ -48,7 +48,7 @@ void al_put_into_pool(al_pool_t *po, void *ent, int32_t offset)
 {
     list_head_t *link;
 
-    link = (list_head_t *)((uint8_t *)ent + offset);
+    link = (list_head_t *)((uintptr_t)ent + offset);
     list_add_tail(link, &po->free);
     --po->nr_used;
     ++po->nr_free;
