@@ -38,6 +38,9 @@
 #include "alumy/xyzmodem.h"
 #include "alumy/initialized.h"
 #include "alumy/pid.h"
+#include "alumy/cm_backtrace.h"
+#include "alumy/cJson.h"
+#include "alumy/cJSON_Utils.h"
 
 __BEGIN_DECLS
 
