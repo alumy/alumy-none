@@ -16,6 +16,8 @@ extern "C" {
 
 #define AL_DYNAMIC_CRC_TABLE
 
+#define CMB_CPU_PLATFORM_TYPE		CMB_CPU_ARM_CORTEX_M0
+
 #ifdef __cplusplus
 extern }
 #endif
