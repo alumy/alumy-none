@@ -58,19 +58,19 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 			
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 			POST_BUILD
-			COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}-test ${PROJECT_NAME}-test.bin
-			COMMAND ${CMAKE_OBJCOPY} -O ihex ${PROJECT_NAME}-test ${PROJECT_NAME}-test.hex
+			COMMAND ${CMAKE_OBJCOPY} -O binary ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test.bin
+			COMMAND ${CMAKE_OBJCOPY} -O ihex ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test.hex
 			COMMENT "Object copying to ${PROJECT_NAME}-test.bin and ${PROJECT_NAME}-test.hex")
 			
-	#add_custom_command(TARGET ${PROJECT_NAME}-test
-	#	POST_BUILD
-	#	COMMAND ${CMAKE_SIZE} --format=berkeley ${PROJECT_NAME}-test ${PROJECT_NAME}-test.hex
-	#	COMMENT "Parsing program size:")
+	add_custom_command(TARGET ${PROJECT_NAME}-test
+		POST_BUILD
+		COMMAND ${CMAKE_SIZE} --format=berkeley ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test.hex
+		COMMENT "Parsing program size:")
 		
-	#add_custom_command(TARGET ${PROJECT_NAME}-test
-	#		POST_BUILD
-	#		COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
-	#		COMMENT "Copying configurations")
+	add_custom_command(TARGET ${PROJECT_NAME}-test
+			POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
+			COMMENT "Copying configurations")
 
 	#enable_testing()
 
