@@ -40,14 +40,14 @@ if(CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif(CCACHE_FOUND)
 
-if(EXISTS "${ROOT_DIR}/.svn/")
+if(EXISTS "${PROJECT_SOURCE_DIR}/.svn/")
 	find_package(Subversion)
 	
 	if(SUBVERSION_FOUND)
-		Subversion_WC_INFO(${ROOT_DIR} PROJ)
+		Subversion_WC_INFO(${PROJECT_SOURCE_DIR} PROJ)
 		set(SVN_VERSION ${PROJ_WC_REVISION})
 	endif(SUBVERSION_FOUND)
-endif(EXISTS "${ROOT_DIR}/.svn/")
+endif(EXISTS "${PROJECT_SOURCE_DIR}/.svn/")
 
 configure_file(
 	${PROJECT_SOURCE_DIR}/include/alumy/version.h.in

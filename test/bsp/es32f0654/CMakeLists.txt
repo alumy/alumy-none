@@ -5,5 +5,5 @@ add_subdirectory(bsp)
 add_subdirectory(Drivers)
 add_subdirectory(startup)
 
-make_flash(${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test.hex ${PROJECT_NAME}-test)
+es32_make_flash(${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test.hex ${PROJECT_NAME}-test)
 
