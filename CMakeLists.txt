@@ -133,6 +133,5 @@ set(CPACK_SOURCE_GENERATOR "TGZ")
 
 include(CPack)
 
-# include(${PROJECT_SOURCE_DIR}/cmake/test.cmake)
 add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 

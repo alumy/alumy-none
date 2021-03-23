@@ -71,11 +71,4 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 			POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying configurations")
-
-	#enable_testing()
-
-	#add_test(test_alumy alumy-test.elf)
-	#add_test(test_cov "${CMAKE_CURRENT_BINARY_DIR}/covgen.sh")
-	# set_tests_properties (test_cov
-	#	PROPERTIES PASS_REGULAR_EXPRESSION "Test coverage")
 endif()
