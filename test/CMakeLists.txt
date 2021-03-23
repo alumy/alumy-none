@@ -4,10 +4,12 @@
 if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 	message(STATUS "Building test for Linux")
 	
-	# aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
+	aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
 	add_executable(${PROJECT_NAME}-test ${test_src})
 
+	target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME}-static)
+	
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 			POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/covgen.sh ${CMAKE_CURRENT_BINARY_DIR}
@@ -22,8 +24,6 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 			POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
 			COMMENT "Copying configurations")
-
-	target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 
 	enable_testing()
 
@@ -61,7 +61,7 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 			COMMAND ${CMAKE_OBJCOPY} -O binary ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test.bin
 			COMMAND ${CMAKE_OBJCOPY} -O ihex ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test.hex
 			COMMENT "Object copying to ${PROJECT_NAME}-test.bin and ${PROJECT_NAME}-test.hex")
-			
+
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 		POST_BUILD
 		COMMAND ${CMAKE_SIZE} --format=berkeley ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test.hex

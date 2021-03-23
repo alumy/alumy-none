@@ -17,12 +17,11 @@ set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT
 # Check for linux
 #############################################################################
 include(${PROJECT_SOURCE_DIR}/cmake/linux_check.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/generic_check.cmake)
 
 #############################################################################
 # Parameter for compile
 #############################################################################
-# Project root directory
-set(ROOT_DIR ${PROJECT_SOURCE_DIR}/../..)
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 	message(STATUS "64 bits cpu")
@@ -59,15 +58,6 @@ add_definitions(-D__STDC_FORMAT_MACROS)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
-	# include_directories(${ROOTFS_DIR}/usr/include)
-	# include_directories(${ROOTFS_DIR}/usr/local/include)
-
-	# link_directories(
-	#		${ROOTFS_DIR}/usr/lib
-	#		${ROOTFS_DIR}/usr/lib64
-	#		${ROOTFS_DIR}/usr/local/lib
-	#		${ROOTFS_DIR}/usr/local/lib64)
-
 	link_libraries(rt)
 endif()
 
