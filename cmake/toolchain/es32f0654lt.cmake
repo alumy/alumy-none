@@ -14,8 +14,9 @@ set(CPU "-mcpu=cortex-m0" CACHE STRING "" FORCE)
 set(MCU "${CPU} -mthumb" CACHE STRING "" FORCE)
 
 set(FLASH_SIZE "262144" CACHE STRING "" FORCE)
-set(IAP_HEX ${PROJECT_SOURCE_DIR}/test/bsp/es32f0654/iap/ES32F065x.hex CACHE STRING "" FORCE)
 set(IAP_CORE "Cortex-M0" CACHE STRING "" FORCE)
+set(IAP_HEX ${PROJECT_SOURCE_DIR}/cmake/toolchain/es32/iap/ES32F065x.hex CACHE STRING "" FORCE)
+set(JLINKIAP ${PROJECT_SOURCE_DIR}/cmake/toolchain/es32/tools/JLinkIAP/JLinkIAP)
 
 set(LINKER_SCRIPT ${PROJECT_SOURCE_DIR}/test/bsp/es32f0654/es32f0654lt.ld CACHE STRING "" FORCE)
 set(BSP_DIR ${PROJECT_SOURCE_DIR}/test/bsp/es32f0654 CACHE STRING "" FORCE)
@@ -55,4 +56,10 @@ set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/release" CACHE STRING "" FORCE)
 link_libraries(m c)
 
 add_definitions(-DES32F065x)
+
+function(make_flash hex depend)
+add_custom_target(flash
+		COMMAND ${JLINKIAP} -hex'${hex}' -iap'${IAP_HEX}' -core${IAP_CORE} -rom${FLASH_SIZE}
+		DEPENDS ${depend})
+endfunction(make_flash)
 
