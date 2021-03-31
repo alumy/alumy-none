@@ -1,47 +1,17 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 2.8)
 
-# set(TOOLCHAIN_DIR "${PROJECT_SOURCE_DIR}/../tools/gcc-arm-none-eabi/bin")
+set(CPU "-mcpu=cortex-m0" CACHE STRING "" FORCE)
+set(MCU "${CPU} -mthumb" CACHE STRING "" FORCE)
 
-set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_SYSTEM_PROCESSOR arm)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(FLASH_SIZE "262144" CACHE STRING "" FORCE)
+set(IAP_CORE "Cortex-M0" CACHE STRING "" FORCE)
+set(IAP_HEX ${PROJECT_SOURCE_DIR}/cmake/toolchain/es32/iap/ES32F065x.hex CACHE STRING "" FORCE)
 
-set(CMAKE_C_COMPILER "arm-none-eabi-gcc")
-set(CMAKE_CXX_COMPILER "arm-none-eabi-g++")
-set(CMAKE_AR "arm-none-eabi-ar")
-set(CMAKE_OBJCOPY "arm-none-eabi-objcopy")
-set(CMAKE_SIZE "arm-none-eabi-size")
+set(LINKER_SCRIPT ${PROJECT_SOURCE_DIR}/test/bsp/es32f0654/es32f0654lt.ld CACHE STRING "" FORCE)
+set(BSP_DIR ${PROJECT_SOURCE_DIR}/test/bsp/es32f0654 CACHE STRING "" FORCE)
 
-set(CMAKE_FIND_ROOT_PATH "...")
-set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
-set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+add_definitions(-DES32F065x)
 
-set(CMAKE_C_COMPILER_WORKS 1)
-set(CMAKE_CXX_COMPILER_WORKS 1)
-set(CMAKE_ASM_COMPILER_WORKS 1)
+include(${CMAKE_CURRENT_LIST_DIR}/es32/es32.cmake)
 
-set(CMAKE_C_FLAGS 
-		"-std=gnu99 -Wall -Werror -fPIC" CACHE STRING "" FORCE)
-set(CMAKE_C_FLAGS_DEBUG "-g" CACHE STRING "" FORCE)
-set(CMAKE_C_FLAGS_MINSIZEREL "-Os -DNDEBUG" CACHE STRING "" FORCE)
-set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "" FORCE)
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g" CACHE STRING "" FORCE)
-
-set(CMAKE_CXX_FLAGS "-Wall" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS_DEBUG "-g" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g" CACHE STRING "" FORCE)
-
-set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/release" CACHE STRING "" FORCE)
-
-set(LINKER_SCRIPT "${PROJECT_SOURCE_DIR}/cmake/toolchain/es32/es32f0654lt.ld" CACHE STRING "" FORCE)
-
-set(CMAKE_EXTERNAL_FLAGS " -Wl,--sort-section=alignment -mcpu=cortex-m0 -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb ")
-set(CMAKE_EXE_LINKER_FLAGS
-"${CMAKE_EXTERNAL_FLAGS} --specs=nano.specs -specs=nosys.specs -static -T${LINKER_SCRIPT} -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map -Wl,--cref -Wl,--gc-sections -Wl,-print-memory-usage"
-)
-
-# target_link_options(${PROJECT_NAME}-test "-T ${CMAKE_CURRENT_SOURCE_DIR}/es32/es32f0654lt.ld")
 

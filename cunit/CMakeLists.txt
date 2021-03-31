@@ -8,4 +8,8 @@ FILE (GLOB_RECURSE ${target}_src
 
 add_library(${target} OBJECT ${${target}_src})
 
-target_compile_options(${target} PRIVATE -Wno-format -Wno-char-subscripts)
+target_compile_options(${target} PRIVATE 
+	-Wno-format 
+	-Wno-char-subscripts 
+	-Wno-error=unused-result 
+	-Wno-unused-result)

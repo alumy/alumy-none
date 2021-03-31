@@ -17,12 +17,11 @@ set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT
 # Check for linux
 #############################################################################
 include(${PROJECT_SOURCE_DIR}/cmake/linux_check.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/generic_check.cmake)
 
 #############################################################################
 # Parameter for compile
 #############################################################################
-# Project root directory
-set(ROOT_DIR ${PROJECT_SOURCE_DIR}/../..)
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 	message(STATUS "64 bits cpu")
@@ -41,14 +40,14 @@ if(CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif(CCACHE_FOUND)
 
-if(EXISTS "${ROOT_DIR}/.svn/")
+if(EXISTS "${PROJECT_SOURCE_DIR}/.svn/")
 	find_package(Subversion)
 	
 	if(SUBVERSION_FOUND)
-		Subversion_WC_INFO(${ROOT_DIR} PROJ)
+		Subversion_WC_INFO(${PROJECT_SOURCE_DIR} PROJ)
 		set(SVN_VERSION ${PROJ_WC_REVISION})
 	endif(SUBVERSION_FOUND)
-endif(EXISTS "${ROOT_DIR}/.svn/")
+endif(EXISTS "${PROJECT_SOURCE_DIR}/.svn/")
 
 configure_file(
 	${PROJECT_SOURCE_DIR}/include/alumy/version.h.in
@@ -59,15 +58,6 @@ add_definitions(-D__STDC_FORMAT_MACROS)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
-	# include_directories(${ROOTFS_DIR}/usr/include)
-	# include_directories(${ROOTFS_DIR}/usr/local/include)
-
-	# link_directories(
-	#		${ROOTFS_DIR}/usr/lib
-	#		${ROOTFS_DIR}/usr/lib64
-	#		${ROOTFS_DIR}/usr/local/lib
-	#		${ROOTFS_DIR}/usr/local/lib64)
-
 	link_libraries(rt)
 endif()
 
@@ -143,81 +133,5 @@ set(CPACK_SOURCE_GENERATOR "TGZ")
 
 include(CPack)
 
-#############################################################################
-# test for libalumy
-#############################################################################
-if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
-	message(STATUS "Building test for Linux")
-	
-	aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
+add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 
-	add_executable(${PROJECT_NAME}-test ${test_src} ${${PROJECT_NAME}_src})
-
-	add_custom_command(TARGET ${PROJECT_NAME}-test
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/covgen.sh ${CMAKE_CURRENT_BINARY_DIR}
-			COMMENT "Copying covgen.sh to calculate coverage")
-
-	add_custom_command(TARGET ${PROJECT_NAME}-test
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/cunit/xml/* ${CMAKE_CURRENT_BINARY_DIR}
-			COMMENT "Copying cunit resources")
-		
-	add_custom_command(TARGET ${PROJECT_NAME}-test
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
-			COMMENT "Copying configurations")
-
-	target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-
-	enable_testing()
-
-	add_test(test_alumy alumy-test)
-	set_tests_properties (test_alumy PROPERTIES PASS_REGULAR_EXPRESSION 0)
-		
-	add_test(test_cov "${CMAKE_CURRENT_BINARY_DIR}/covgen.sh")
-	set_tests_properties (test_cov PROPERTIES PASS_REGULAR_EXPRESSION 0)
-endif()
-
-if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
-	message(STATUS "Building test for Generic")
-	
-	aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
-
-	add_executable(${PROJECT_NAME}-test.elf ${test_src} ${${PROJECT_NAME}_src})
-
-	target_link_libraries(${PROJECT_NAME}-test.elf ${PROJECT_NAME}-static)
-
-	 add_custom_command(TARGET ${PROJECT_NAME}-test.elf
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/covgen.sh ${CMAKE_CURRENT_BINARY_DIR}
-			COMMENT "Copying covgen.sh to calculate coverage")
-
-	add_custom_command(TARGET ${PROJECT_NAME}-test.elf
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/cunit/xml/* ${CMAKE_CURRENT_BINARY_DIR}
-			COMMENT "Copying cunit resources")
-			
-	add_custom_command(TARGET ${PROJECT_NAME}-test.elf
-			POST_BUILD
-			COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}-test.elf ${PROJECT_NAME}-test.bin
-			COMMAND ${CMAKE_OBJCOPY} -O ihex ${PROJECT_NAME}-test.elf ${PROJECT_NAME}-test.hex
-			COMMENT "Building ${PROJECT_NAME}-test.bin and ${PROJECT_NAME}-test.hex")
-			
-	add_custom_command(TARGET ${PROJECT_NAME}-test.elf
-			POST_BUILD
-			COMMAND ${CMAKE_SIZE} --format=berkeley ${PROJECT_NAME}-test.elf ${PROJECT_NAME}-test.hex
-			COMMENT "Parsing program size:")
-		
-	add_custom_command(TARGET ${PROJECT_NAME}-test.elf
-			POST_BUILD
-			COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/config/* ${CMAKE_CURRENT_BINARY_DIR}
-			COMMENT "Copying configurations")
-
-	#enable_testing()
-
-	#add_test(test_alumy alumy-test.elf)
-	#add_test(test_cov "${CMAKE_CURRENT_BINARY_DIR}/covgen.sh")
-	# set_tests_properties (test_cov
-	#	PROPERTIES PASS_REGULAR_EXPRESSION "Test coverage")
-endif()
