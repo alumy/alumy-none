@@ -2,5 +2,6 @@
 #define __AL_DRV_RTC_H 1
 
 #include "alumy/driver/rtc/bm8563.h"
+#include "alumy/driver/rtc/sd3078.h"
 
 #endif

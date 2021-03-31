@@ -31,11 +31,17 @@ int_fast8_t sw_i2c_init(sw_i2c_t *i2c, uint8_t addr_bits,
 int_fast8_t sw_i2c_final(sw_i2c_t *i2c);
 
 int_fast8_t sw_i2c_start(sw_i2c_t *i2c);
+
 void sw_i2c_stop(sw_i2c_t *i2c);
+
 void sw_i2c_ack(sw_i2c_t *i2c);
+
 void sw_i2c_nack(sw_i2c_t *i2c);
+
 int_fast8_t sw_i2c_wait_ack(sw_i2c_t *i2c, uint_fast16_t timeout);
+
 void sw_i2c_send_byte(sw_i2c_t *i2c, uint8_t byte);
+
 uint8_t sw_i2c_recv_byte(sw_i2c_t *i2c);
 
 ssize_t sw_i2c_mem_write(sw_i2c_t *i2c, uint16_t dev_addr, uint16_t addr,
