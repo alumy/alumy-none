@@ -8,6 +8,26 @@
 
 __BEGIN_DECLS
 
+#define SD3078_SEC          0x00
+#define SD3078_MIN          0x01
+#define SD3078_HOUR         0x02
+#define SD3078_WDAY         0x03
+#define SD3078_MDAY         0x04
+#define SD3078_MON          0x05
+#define SD3078_YEAR         0x06
+
+#define SD3078_CTR1         0x0F
+#define SD3078_CTR2         0x10
+
+#define SD3078_CHG          0x18
+
+#define SD3078_CTR4         0x19
+#define SD3078_CTR5         0x1A
+#define SD3078_BAT_VAL      0x1B
+
+#define SD3078_RAM_START        0x2C
+#define SD3078_RAM_END          0x71
+
 typedef struct sd3078 sd3078_t;
 
 typedef struct sd3078_opt {
