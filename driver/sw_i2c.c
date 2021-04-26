@@ -57,28 +57,10 @@ int_fast8_t sw_i2c_start(sw_i2c_t *i2c)
     i2c->opt.scl_set(AL_GPIO_HIGH);
     i2c->opt.delay();
 
-    /*
-     * check the bus
-     */
-    i2c->opt.sda_dir_set(AL_GPIO_INPUT);
-    if (i2c->opt.sda_get() == AL_GPIO_LOW) {
-        set_errno(EBUSY);
-        return -1;
-    }
-
-    i2c->opt.sda_dir_set(AL_GPIO_OUTPUT);
-
+    i2c->opt.scl_set(AL_GPIO_HIGH);
     i2c->opt.sda_set(AL_GPIO_LOW);
-    i2c->opt.delay();
 
-    /*
-     * check the bus
-     */
-    i2c->opt.sda_dir_set(AL_GPIO_INPUT);
-    if (i2c->opt.sda_get() == AL_GPIO_HIGH) {
-        set_errno(EIO);
-        return -1;
-    }
+    i2c->opt.delay();
 
     i2c->opt.scl_set(AL_GPIO_LOW);
 

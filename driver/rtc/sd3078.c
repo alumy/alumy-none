@@ -136,8 +136,8 @@ int_fast8_t sd3078_write_date_time(sd3078_t *this, const struct tm *tm)
     data[SD3078_SEC] = bin2bcd(tm->tm_sec);
     data[SD3078_MIN] = bin2bcd(tm->tm_min);
     data[SD3078_HOUR] = bin2bcd(tm->tm_hour) | 0x80;
-    data[SD3078_WDAY] = bin2bcd(tm->tm_mday);
-    data[SD3078_MDAY] = bin2bcd(tm->tm_wday);
+    data[SD3078_WDAY] = bin2bcd(tm->tm_wday);
+    data[SD3078_MDAY] = bin2bcd(tm->tm_mday);
     data[SD3078_MON] = bin2bcd(tm->tm_mon + 1);
     data[SD3078_YEAR] = bin2bcd(tm->tm_year % 100);
 
@@ -176,9 +176,9 @@ int_fast8_t sd3078_read_date_time(sd3078_t *this, struct tm *tm)
 
     tm->tm_sec = bcd2bin(data[SD3078_SEC]);
     tm->tm_min = bcd2bin(data[SD3078_MIN]);
-    tm->tm_hour = bcd2bin(data[SD3078_HOUR] & 0x1F);
-    tm->tm_mday = bcd2bin(data[SD3078_WDAY]);
-    tm->tm_wday = bcd2bin(data[SD3078_MDAY]);
+    tm->tm_hour = bcd2bin(data[SD3078_HOUR] & 0x7F);
+    tm->tm_wday = bcd2bin(data[SD3078_WDAY]);
+    tm->tm_mday = bcd2bin(data[SD3078_MDAY]);
     tm->tm_mon = bcd2bin(data[SD3078_MON]) - 1;
     tm->tm_year = bcd2bin(data[SD3078_YEAR]) + 100;
 
