@@ -69,6 +69,11 @@ typedef long int off_t;
 	typedef long ssize_t;
 	#define __ssize_t_defined
 	#endif
+#elif defined(__GNUC__)
+    #ifndef __ssize_t_defined
+    typedef long ssize_t;
+    #define __ssize_t_defined
+    #endif
 #endif
 
 #endif	/* end of _TYPES_H */

@@ -31,9 +31,9 @@
 #ifndef __FLEXIBLE_BUTTON_H__
 #define __FLEXIBLE_BUTTON_H__
 
-#include "stdint.h"
+#include <stdint.h>
+#include "alumy/config.h"
 
-#define FLEX_BTN_SCAN_FREQ_HZ 50 // How often flex_button_scan () is called
 #define FLEX_MS_TO_SCAN_CNT(ms) (ms / (1000 / FLEX_BTN_SCAN_FREQ_HZ))
 
 /* Multiple clicks interval, default 300ms */

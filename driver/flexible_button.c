@@ -28,7 +28,7 @@
  * 
 */
 
-#include "flexible_button.h"
+#include "alumy/driver/flexible_button.h"
 
 #ifndef NULL
 #define NULL 0

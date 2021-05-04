@@ -18,6 +18,8 @@ extern "C" {
 
 #define CMB_CPU_PLATFORM_TYPE		CMB_CPU_ARM_CORTEX_M0
 
+#define FLEX_BTN_SCAN_FREQ_HZ 100 // How often flex_button_scan () is called
+
 #ifdef __cplusplus
 extern }
 #endif
