@@ -72,7 +72,7 @@ typedef long int off_t;
 #endif
 
 #if defined(__GNUC__)
-	#ifndef __ssize_t_defined
+	#if !(defined(__ssize_t_defined) || defined(_SSIZE_T_DECLARED))
 	typedef long ssize_t;
 	#define __ssize_t_defined
 	#endif

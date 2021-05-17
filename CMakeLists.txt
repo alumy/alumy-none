@@ -3,7 +3,7 @@
 #############################################################################
 message(STATUS "Using toolchain file: ${CMAKE_TOOLCHAIN_FILE}.")
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
 
 project(alumy C ASM)
 
@@ -54,6 +54,7 @@ configure_file(
 	${PROJECT_SOURCE_DIR}/include/alumy/version.h)
 
 add_definitions(-D__STDC_FORMAT_MACROS)
+add_definitions(-DALUMY_USE_DEFAULT_CONFIG)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
