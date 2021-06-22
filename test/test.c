@@ -40,6 +40,7 @@ static void add_tests(void)
 		add_mem_tests,
 		add_string_tests,
         add_filter_tests,
+        add_bitband_tests,
 	};
 
 	assert(CU_get_registry() != NULL);

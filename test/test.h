@@ -16,6 +16,7 @@ void add_version_tests(void);
 void add_rbtree_tests(void);
 void add_ftp_tests(void);
 void add_filter_tests(void);
+void add_bitband_tests(void);
 
 __END_DECLS
 
