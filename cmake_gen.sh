@@ -5,7 +5,7 @@ BUILD_TYPE=$2
 
 TOOLCHAIN_DIR=$PWD/cmake/toolchain
 
-CMAKE=$(which cmake 2>/dev/null || which cmake3 2>/dev/null || which cmake2 2>/dev/null)
+CMAKE=$(which cmake3 2>/dev/null || which cmake2 2>/dev/null || which cmake 2>/dev/null)
 
 if [ -x "$CMAKE" ]; then
 	echo "Using cmake: $CMAKE"
