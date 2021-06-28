@@ -10,10 +10,7 @@
 
 __BEGIN_DECLS
 
-__weak void bsp_init(void)
-{
-
-}
+extern int32_t bsp_init(void);
 
 static int example_suite_init(void)
 {

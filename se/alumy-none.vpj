@@ -1,760 +1,779 @@
 <!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
 <Project
-    Version="10.0"
-    VendorName="SlickEdit"
-    TemplateName="GNU C/C++"
-    WorkingDir="."
-    BuildSystem="vsbuild">
-    <Config
-        Name="Debug"
-        Type="gnuc"
-        DebugCallbackName="gdb"
-        Version="1"
-        OutputFile="%bdalumy-none.exe"
-        CompilerConfigName="Latest Version">
-        <Menu>
-            <Target
-                Name="Compile"
-                MenuCaption="&amp;Compile"
-                Dialog="_gnuc_options_form Compile"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                OutputExts="*.o"
-                SaveOption="SaveCurrent"
-                RunFromDir="%rw">
-                <Exec CmdLine='gcc -c %xup  %defd -g -o "%bd%n%oe" %i "%f"'/>
-            </Target>
-            <Target
-                Name="Link"
-                MenuCaption="&amp;Link"
-                ShowOnMenu="Never"
-                Dialog="_gnuc_options_form Link"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveCurrent"
-                RunFromDir="%rw">
-                <Exec CmdLine='gcc %xup -g -o "%o" %f %libs'/>
-            </Target>
-            <Target
-                Name="Build"
-                MenuCaption="&amp;Build"
-                Dialog="_gnuc_options_form Compile"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
-            </Target>
-            <Target
-                Name="Rebuild"
-                MenuCaption="&amp;Rebuild"
-                Dialog="_gnuc_options_form Compile"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
-            </Target>
-            <Target
-                Name="Debug"
-                MenuCaption="&amp;Debug"
-                Dialog="_gnuc_options_form Run/Debug"
-                BuildFirst="1"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveNone"
-                RunFromDir="%rw">
-                <Exec CmdLine='vsdebugio -prog "%o"'/>
-            </Target>
-            <Target
-                Name="Execute"
-                MenuCaption="E&amp;xecute"
-                Dialog="_gnuc_options_form Run/Debug"
-                BuildFirst="1"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine='"%o"'/>
-            </Target>
-            <Target
-                Name="dash"
-                MenuCaption="-"
-                Deletable="0">
-                <Exec/>
-            </Target>
-            <Target
-                Name="GNU C Options"
-                MenuCaption="GNU C &amp;Options..."
-                ShowOnMenu="HideIfNoCmdLine"
-                Deletable="0"
-                SaveOption="SaveNone">
-                <Exec
-                    CmdLine="gnucoptions"
-                    Type="Slick-C"/>
-            </Target>
-        </Menu>
-        <Rules Name="Compile">
-            <Rule
-                InputExts="*.ada"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gnat -g -c -o "%bd%n.o" "%f"'/>
-            </Rule>
-            <Rule
-                InputExts="*.adb"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gnat -g -c -o "%bd%n.o" "%f"'/>
-            </Rule>
-            <Rule
-                InputExts="*.f"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gfortran -c -g -o "%bd%n.o" "%f"'/>
-            </Rule>
-            <Rule
-                InputExts="*.f90"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gfortran -c -g -o "%bd%n.o" "%f"'/>
-            </Rule>
-            <Rule
-                InputExts="*.d"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gdc -c -g -o "%bd%n.o" "%f"'/>
-            </Rule>
-        </Rules>
-        <List Name="GNUC Options">
-            <Item
-                Name="LinkerOutputType"
-                Value="Executable"/>
-        </List>
-    </Config>
-    <Config
-        Name="Release"
-        Type="gnuc"
-        DebugCallbackName="gdb"
-        Version="1"
-        OutputFile="%bdalumy-none.exe"
-        CompilerConfigName="Latest Version">
-        <Menu>
-            <Target
-                Name="Compile"
-                MenuCaption="&amp;Compile"
-                Dialog="_gnuc_options_form Compile"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                OutputExts="*.o"
-                SaveOption="SaveCurrent"
-                RunFromDir="%rw">
-                <Exec CmdLine='gcc -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
-            </Target>
-            <Target
-                Name="Link"
-                MenuCaption="&amp;Link"
-                ShowOnMenu="Never"
-                Dialog="_gnuc_options_form Link"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveCurrent"
-                RunFromDir="%rw">
-                <Exec CmdLine='gcc %xup -o "%o" %f %libs'/>
-            </Target>
-            <Target
-                Name="Build"
-                MenuCaption="&amp;Build"
-                Dialog="_gnuc_options_form Compile"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
-            </Target>
-            <Target
-                Name="Rebuild"
-                MenuCaption="&amp;Rebuild"
-                Dialog="_gnuc_options_form Compile"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
-            </Target>
-            <Target
-                Name="Debug"
-                MenuCaption="&amp;Debug"
-                Dialog="_gnuc_options_form Run/Debug"
-                BuildFirst="1"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveNone"
-                RunFromDir="%rw">
-                <Exec CmdLine='vsdebugio -prog "%o"'/>
-            </Target>
-            <Target
-                Name="Execute"
-                MenuCaption="E&amp;xecute"
-                Dialog="_gnuc_options_form Run/Debug"
-                BuildFirst="1"
-                CaptureOutputWith="ProcessBuffer"
-                Deletable="0"
-                SaveOption="SaveWorkspaceFiles"
-                RunFromDir="%rw">
-                <Exec CmdLine='"%o"'/>
-            </Target>
-            <Target
-                Name="dash"
-                MenuCaption="-"
-                Deletable="0">
-                <Exec/>
-            </Target>
-            <Target
-                Name="GNU C Options"
-                MenuCaption="GNU C &amp;Options..."
-                ShowOnMenu="HideIfNoCmdLine"
-                Deletable="0"
-                SaveOption="SaveNone">
-                <Exec
-                    CmdLine="gnucoptions"
-                    Type="Slick-C"/>
-            </Target>
-        </Menu>
-        <Rules Name="Compile">
-            <Rule
-                InputExts="*.ada"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
-            </Rule>
-            <Rule
-                InputExts="*.adb"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
-            </Rule>
-            <Rule
-                InputExts="*.f"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gfortran -O -g -o "%bd%n.o" "%f"'/>
-            </Rule>
-            <Rule
-                InputExts="*.f90"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gfortran -O -g -o "%bd%n.o" "%f"'/>
-            </Rule>
-            <Rule
-                InputExts="*.d"
-                OutputExts="*.o"
-                LinkObject="1">
-                <Exec CmdLine='gdc -c -g -o "%bd%n.o" "%f"'/>
-            </Rule>
-        </Rules>
-        <List Name="GNUC Options">
-            <Item
-                Name="LinkerOutputType"
-                Value="Executable"/>
-        </List>
-    </Config>
-    <CustomFolders>
-        <Folder
-            Name="Source Files"
-            Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d;*.m;*.mm;*.go;*.groovy;*.gsh"
-            GUID="{A37A1226-118C-4EBA-26F5-85DBBC8AF5B1}"></Folder>
-        <Folder
-            Name="Header Files"
-            Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.h++;*.inc;*.sh;*.cpy;*.if"
-            GUID="{750C9A63-6290-4649-6800-97EE4165EB89}"></Folder>
-        <Folder
-            Name="Resource Files"
-            Filters="*.ico;*.cur;*.dlg"
-            GUID="{D2F81F85-BB86-4D07-510C-CB47A93F29BF}"/>
-        <Folder
-            Name="Bitmaps"
-            Filters="*.bmp"
-            GUID="{70E1C2BB-B93A-4695-9176-B6D3B122E58E}"/>
-        <Folder
-            Name="Other Files"
-            Filters=""
-            GUID="{00AAA3DF-9E38-4038-1F05-ECFBCCDFEC9A}"/>
-    </CustomFolders>
-    <Files AutoFolders="DirectoryView">
-        <Folder Name="..">
-            <F N="../alumy.c"/>
-            <F N="../CMakeLists.txt"/>
-            <F N="../errno.c"/>
-            <F N="../fifo.c"/>
-            <F N="../log.c"/>
-            <F N="../pool.c"/>
-            <F N="../rbtree.c"/>
-            <F N="../version.c"/>
-        </Folder>
-        <Folder Name="../base64">
-            <F N="../base64/base64.c"/>
-            <F N="../base64/CMakeLists.txt"/>
-        </Folder>
-        <Folder Name="../bcd">
-            <F N="../bcd/bcd.c"/>
-            <F N="../bcd/CMakeLists.txt"/>
-        </Folder>
-        <Folder Name="../cjson">
-            <F N="../cjson/cJSON.c"/>
-            <F N="../cjson/cJSON_Utils.c"/>
-            <F N="../cjson/CMakeLists.txt"/>
-        </Folder>
-        <Folder Name="../cm_backtrace">
-            <F N="../cm_backtrace/cm_backtrace.c"/>
-        </Folder>
-        <Folder Name="../cmake">
-            <Folder Name="toolchain">
-                <Folder Name="es32">
-                    <F N="../cmake/toolchain/es32/es32.cmake"/>
-                </Folder>
-                <F N="../cmake/toolchain/arm-fsl-linux-gnueabi.cmake"/>
-                <F N="../cmake/toolchain/arm-none-eabi.cmake"/>
-                <F N="../cmake/toolchain/clang.cmake"/>
-                <F N="../cmake/toolchain/es32f0654lt.cmake"/>
-                <F N="../cmake/toolchain/gcc.cmake"/>
-                <F N="../cmake/toolchain/xtensa-esp32.cmake"/>
-            </Folder>
-            <F N="../cmake/generic_check.cmake"/>
-            <F N="../cmake/linux_check.cmake"/>
-            <F N="../cmake/message.cmake"/>
-        </Folder>
-        <Folder Name="../crc">
-            <F N="../crc/CMakeLists.txt"/>
-            <F N="../crc/crc32.c"/>
-            <F N="../crc/mb_crc16.c"/>
-        </Folder>
-        <Folder Name="../cunit">
-            <Folder Name="Automated">
-                <F N="../cunit/Automated/Automated.c"/>
-            </Folder>
-            <Folder Name="Basic">
-                <F N="../cunit/Basic/Basic.c"/>
-            </Folder>
-            <Folder Name="Console">
-                <F N="../cunit/Console/Console.c"/>
-            </Folder>
-            <Folder Name="Curses">
-                <F N="../cunit/Curses/Curses.c"/>
-            </Folder>
-            <Folder Name="Framework">
-                <F N="../cunit/Framework/CUError.c"/>
-                <F N="../cunit/Framework/MyMem.c"/>
-                <F N="../cunit/Framework/TestDB.c"/>
-                <F N="../cunit/Framework/TestRun.c"/>
-                <F N="../cunit/Framework/Util.c"/>
-            </Folder>
-            <Folder Name="Test">
-                <F N="../cunit/Test/test_cunit.c"/>
-                <F N="../cunit/Test/test_cunit.h"/>
-            </Folder>
-            <Folder Name="Win">
-                <F N="../cunit/Win/resource.h"/>
-                <F N="../cunit/Win/Win.c"/>
-                <F N="../cunit/Win/Win.h"/>
-            </Folder>
-            <F N="../cunit/CMakeLists.txt"/>
-        </Folder>
-        <Folder Name="../driver">
-            <Folder Name="eeprom">
-                <F N="../driver/eeprom/bl24cxx.c"/>
-            </Folder>
-            <Folder Name="rtc">
-                <F N="../driver/rtc/bm8563.c"/>
-                <F N="../driver/rtc/sd3078.c"/>
-            </Folder>
-            <F N="../driver/boost.c"/>
-            <F N="../driver/flexible_button.c"/>
-            <F N="../driver/sw_i2c.c"/>
-        </Folder>
-        <Folder Name="../filter">
-            <F N="../filter/CMakeLists.txt"/>
-            <F N="../filter/kalman.c"/>
-        </Folder>
-        <Folder Name="../freemodbus">
-            <Folder Name="modbus">
-                <Folder Name="ascii">
-                    <F N="../freemodbus/modbus/ascii/mbascii.c"/>
-                </Folder>
-                <Folder Name="functions">
-                    <F N="../freemodbus/modbus/functions/mbfunccoils.c"/>
-                    <F N="../freemodbus/modbus/functions/mbfuncdiag.c"/>
-                    <F N="../freemodbus/modbus/functions/mbfuncdisc.c"/>
-                    <F N="../freemodbus/modbus/functions/mbfuncholding.c"/>
-                    <F N="../freemodbus/modbus/functions/mbfuncinput.c"/>
-                    <F N="../freemodbus/modbus/functions/mbfuncother.c"/>
-                    <F N="../freemodbus/modbus/functions/mbutils.c"/>
-                </Folder>
-                <Folder Name="rtu">
-                    <F N="../freemodbus/modbus/rtu/mbcrc.c"/>
-                    <F N="../freemodbus/modbus/rtu/mbrtu.c"/>
-                </Folder>
-                <Folder Name="tcp">
-                    <F N="../freemodbus/modbus/tcp/mbtcp.c"/>
-                </Folder>
-                <F N="../freemodbus/modbus/mb.c"/>
-            </Folder>
-            <Folder Name="port">
-                <F N="../freemodbus/port/portevent.c"/>
-                <F N="../freemodbus/port/portserial.c"/>
-                <F N="../freemodbus/port/porttimer.c"/>
-            </Folder>
-            <F N="../freemodbus/demo.c"/>
-        </Folder>
-        <Folder Name="../include">
-            <Folder Name="alumy">
-                <Folder Name="arch">
-                    <Folder Name="arm">
-                        <F N="../include/alumy/arch/arm/bitband.h"/>
-                    </Folder>
-                    <F N="../include/alumy/arch/arm.h"/>
-                </Folder>
-                <Folder Name="cm_backtrace">
-                    <F N="../include/alumy/cm_backtrace/cmb_cfg.h"/>
-                    <F N="../include/alumy/cm_backtrace/cmb_def.h"/>
-                </Folder>
-                <Folder Name="cunit">
-                    <F N="../include/alumy/cunit/Automated.h"/>
-                    <F N="../include/alumy/cunit/Basic.h"/>
-                    <F N="../include/alumy/cunit/Console.h"/>
-                    <F N="../include/alumy/cunit/CUCurses.h"/>
-                    <F N="../include/alumy/cunit/CUError.h"/>
-                    <F N="../include/alumy/cunit/CUnit.h"/>
-                    <F N="../include/alumy/cunit/CUnit_intl.h"/>
-                    <F N="../include/alumy/cunit/MyMem.h"/>
-                    <F N="../include/alumy/cunit/TestDB.h"/>
-                    <F N="../include/alumy/cunit/TestRun.h"/>
-                    <F N="../include/alumy/cunit/Util.h"/>
-                    <F N="../include/alumy/cunit/wxWidget.h"/>
-                </Folder>
-                <Folder Name="driver">
-                    <Folder Name="eeprom">
-                        <F N="../include/alumy/driver/eeprom/bl24c128.h"/>
-                    </Folder>
-                    <Folder Name="rtc">
-                        <F N="../include/alumy/driver/rtc/bm8563.h"/>
-                        <F N="../include/alumy/driver/rtc/sd3078.h"/>
-                    </Folder>
-                    <F N="../include/alumy/driver/boost.h"/>
-                    <F N="../include/alumy/driver/eeprom.h"/>
-                    <F N="../include/alumy/driver/flexible_button.h"/>
-                    <F N="../include/alumy/driver/gpio.h"/>
-                    <F N="../include/alumy/driver/i2c.h"/>
-                    <F N="../include/alumy/driver/rtc.h"/>
-                    <F N="../include/alumy/driver/sw_i2c.h"/>
-                </Folder>
-                <Folder Name="filter">
-                    <F N="../include/alumy/filter/kalman.h"/>
-                </Folder>
-                <Folder Name="freemodbus">
-                    <Folder Name="ascii">
-                        <F N="../include/alumy/freemodbus/ascii/mbascii.h"/>
-                    </Folder>
-                    <Folder Name="port">
-                        <F N="../include/alumy/freemodbus/port/port.h"/>
-                    </Folder>
-                    <Folder Name="rtu">
-                        <F N="../include/alumy/freemodbus/rtu/mbcrc.h"/>
-                        <F N="../include/alumy/freemodbus/rtu/mbrtu.h"/>
-                    </Folder>
-                    <Folder Name="tcp">
-                        <F N="../include/alumy/freemodbus/tcp/mbtcp.h"/>
-                    </Folder>
-                    <F N="../include/alumy/freemodbus/mb.h"/>
-                    <F N="../include/alumy/freemodbus/mbconfig.h"/>
-                    <F N="../include/alumy/freemodbus/mbframe.h"/>
-                    <F N="../include/alumy/freemodbus/mbfunc.h"/>
-                    <F N="../include/alumy/freemodbus/mbport.h"/>
-                    <F N="../include/alumy/freemodbus/mbproto.h"/>
-                    <F N="../include/alumy/freemodbus/mbutils.h"/>
-                </Folder>
-                <Folder Name="lzma">
-                    <F N="../include/alumy/lzma/7zTypes.h"/>
-                    <F N="../include/alumy/lzma/Alloc.h"/>
-                    <F N="../include/alumy/lzma/Compiler.h"/>
-                    <F N="../include/alumy/lzma/LzmaDec.h"/>
-                    <F N="../include/alumy/lzma/Precomp.h"/>
-                </Folder>
-                <Folder Name="unity">
-                    <F N="../include/alumy/unity/unity.h"/>
-                    <F N="../include/alumy/unity/unity_config.h"/>
-                    <F N="../include/alumy/unity/unity_fixture.h"/>
-                    <F N="../include/alumy/unity/unity_fixture_internals.h"/>
-                    <F N="../include/alumy/unity/unity_fixture_malloc_overrides.h"/>
-                    <F N="../include/alumy/unity/unity_internals.h"/>
-                </Folder>
-                <Folder Name="xyzmodem">
-                    <F N="../include/alumy/xyzmodem/ymodem.h"/>
-                </Folder>
-                <F N="../include/alumy/alumyconfig_dft.h"/>
-                <F N="../include/alumy/ascii.h"/>
-                <F N="../include/alumy/base.h"/>
-                <F N="../include/alumy/base64.h"/>
-                <F N="../include/alumy/bcd.h"/>
-                <F N="../include/alumy/bug.h"/>
-                <F N="../include/alumy/byteorder.h"/>
-                <F N="../include/alumy/byteswap.h"/>
-                <F N="../include/alumy/cdefs.h"/>
-                <F N="../include/alumy/cJSON.h"/>
-                <F N="../include/alumy/cJSON_Utils.h"/>
-                <F N="../include/alumy/cm_backtrace.h"/>
-                <F N="../include/alumy/config.h"/>
-                <F N="../include/alumy/crc.h"/>
-                <F N="../include/alumy/driver.h"/>
-                <F N="../include/alumy/errno.h"/>
-                <F N="../include/alumy/fifo.h"/>
-                <F N="../include/alumy/filter.h"/>
-                <F N="../include/alumy/format_color.h"/>
-                <F N="../include/alumy/initialized.h"/>
-                <F N="../include/alumy/list.h"/>
-                <F N="../include/alumy/log.h"/>
-                <F N="../include/alumy/mem.h"/>
-                <F N="../include/alumy/pid.h"/>
-                <F N="../include/alumy/pool.h"/>
-                <F N="../include/alumy/protobuf-c.h"/>
-                <F N="../include/alumy/rbtree.h"/>
-                <F N="../include/alumy/string.h"/>
-                <F N="../include/alumy/test.h"/>
-                <F N="../include/alumy/types.h"/>
-                <F N="../include/alumy/version.h"/>
-                <F N="../include/alumy/xyzmodem.h"/>
-            </Folder>
-            <F N="../include/alumy.h"/>
-        </Folder>
-        <Folder Name="../lzma">
-            <F N="../lzma/Alloc.c"/>
-            <F N="../lzma/LzmaDec.c"/>
-        </Folder>
-        <Folder Name="../mem">
-            <F N="../mem/CMakeLists.txt"/>
-            <F N="../mem/mem.c"/>
-        </Folder>
-        <Folder Name="../pid">
-            <F N="../pid/increment.c"/>
-            <F N="../pid/pid.c"/>
-            <F N="../pid/position.c"/>
-        </Folder>
-        <Folder Name="../protobuf-c">
-            <F N="../protobuf-c/protobuf-c.c"/>
-        </Folder>
-        <Folder Name="../qrcode">
-            <F N="../qrcode/CMakeLists.txt"/>
-            <F N="../qrcode/qrcode.c"/>
-        </Folder>
-        <Folder Name="../string">
-            <F N="../string/CMakeLists.txt"/>
-            <F N="../string/format.c"/>
-            <F N="../string/str_add_null.c"/>
-            <F N="../string/strlcpy.c"/>
-        </Folder>
-        <Folder Name="../sys">
-            <F N="../sys/CMakeLists.txt"/>
-            <F N="../sys/sysinfo.c"/>
-        </Folder>
-        <Folder Name="../test">
-            <Folder Name="bsp">
-                <Folder Name="es32f0654">
-                    <Folder Name="bsp">
-                        <Folder Name="include">
-                            <Folder Name="bsp">
-                                <F N="../test/bsp/es32f0654/bsp/include/bsp/uart.h"/>
-                            </Folder>
-                            <F N="../test/bsp/es32f0654/bsp/include/bsp.h"/>
-                        </Folder>
-                        <F N="../test/bsp/es32f0654/bsp/bsp.c"/>
-                        <F N="../test/bsp/es32f0654/bsp/CMakeLists.txt"/>
-                        <F N="../test/bsp/es32f0654/bsp/irq.c"/>
-                        <F N="../test/bsp/es32f0654/bsp/uart.c"/>
-                    </Folder>
-                    <Folder Name="Drivers">
-                        <Folder Name="ALD">
-                            <Folder Name="ES32F065x">
-                                <Folder Name="Include">
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_acmp.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_adc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_bkpc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_calc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_can.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_cmu.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_crc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_crypt.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_dbgc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_dma.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_flash.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_gpio.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_i2c.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_iap.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_pis.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_pmu.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_rmu.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_rtc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_smartcard.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_spi.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_syscfg.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_timer.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_trng.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_tsense.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_uart.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_usart.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_wdt.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/type.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/utils.h"/>
-                                </Folder>
-                                <Folder Name="Source">
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_acmp.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_adc.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_bkpc.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_calc.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_can.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_cmu.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_crc.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_crypt.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_dma.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_flash.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_flash_ext.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_gpio.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_i2c.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_iap.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_pis.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_pmu.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_rmu.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_rtc.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_smartcard.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_spi.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_timer.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_trng.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_tsense.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_uart.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_usart.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_wdt.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/utils.c"/>
-                                </Folder>
-                            </Folder>
-                        </Folder>
-                        <Folder Name="CMSIS">
-                            <Folder Name="Device">
-                                <Folder Name="EastSoft">
-                                    <Folder Name="ES32F065x">
-                                        <Folder Name="Include">
-                                            <F N="../test/bsp/es32f0654/Drivers/CMSIS/Device/EastSoft/ES32F065x/Include/es32f065x.h"/>
-                                        </Folder>
-                                        <Folder Name="System">
-                                            <F N="../test/bsp/es32f0654/Drivers/CMSIS/Device/EastSoft/ES32F065x/System/system_es32f065x.c"/>
-                                        </Folder>
-                                    </Folder>
-                                </Folder>
-                            </Folder>
-                            <Folder Name="Include">
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/arm_common_tables.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/arm_const_structs.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/arm_math.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_armcc.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_armclang.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_compiler.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_gcc.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_iccarm.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_version.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_armv8mbl.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_armv8mml.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm0.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm0plus.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm23.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm3.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm33.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm4.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm7.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_sc000.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_sc300.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/mpu_armv7.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/mpu_armv8.h"/>
-                                <F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/tz_context.h"/>
-                            </Folder>
-                        </Folder>
-                        <Folder Name="MD">
-                            <Folder Name="ES32F065x">
-                                <Folder Name="Include">
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_adc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_cmu.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_crc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_crypt.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_dma.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_flash.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_gpio.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_i2c.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_iwdt.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_msc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_pmu.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_rmu.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_rtc.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_spi.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_syscfg.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_tim.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_trng.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_uart.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_usart.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_utils.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_wwdt.h"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/type.h"/>
-                                </Folder>
-                                <Folder Name="Source">
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_adc.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_cmu.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_crc.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_crypt.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_dma.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_flash.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_flash_ext.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_gpio.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_i2c.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_iwdt.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_pmu.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_rmu.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_rtc.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_spi.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_tim.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_trng.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_uart.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_usart.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_utils.c"/>
-                                    <F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_wwdt.c"/>
-                                </Folder>
-                            </Folder>
-                        </Folder>
-                        <F N="../test/bsp/es32f0654/Drivers/CMakeLists.txt"/>
-                    </Folder>
-                    <Folder Name="inc">
-                        <F N="../test/bsp/es32f0654/inc/ald_conf.h"/>
-                        <F N="../test/bsp/es32f0654/inc/config.h"/>
-                        <F N="../test/bsp/es32f0654/inc/main.h"/>
-                        <F N="../test/bsp/es32f0654/inc/md_conf.h"/>
-                    </Folder>
-                    <Folder Name="startup">
-                        <F N="../test/bsp/es32f0654/startup/CMakeLists.txt"/>
-                        <F N="../test/bsp/es32f0654/startup/syscalls.c"/>
-                    </Folder>
-                    <F N="../test/bsp/es32f0654/CMakeLists.txt"/>
-                </Folder>
-            </Folder>
-            <F N="../test/bitband.c"/>
-            <F N="../test/CMakeLists.txt"/>
-            <F N="../test/filter.c"/>
-            <F N="../test/mem.c"/>
-            <F N="../test/string.c"/>
-            <F N="../test/test.c"/>
-            <F N="../test/test.h"/>
-        </Folder>
-        <Folder Name="../unity">
-            <F N="../unity/CMakeLists.txt"/>
-            <F N="../unity/unity.c"/>
-            <F N="../unity/unity_fixture.c"/>
-        </Folder>
-        <Folder Name="../xyzmodem">
-            <F N="../xyzmodem/ymodem.c"/>
-        </Folder>
-    </Files>
+	Version="10.0"
+	VendorName="SlickEdit"
+	TemplateName="GNU C/C++"
+	WorkingDir="."
+	BuildSystem="vsbuild">
+	<Config
+		Name="Debug"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdalumy-none.exe"
+		CompilerConfigName="Latest Version">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='gcc -c %xup  %defd -g -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='gcc %xup -g -o "%o" %f %libs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Rules Name="Compile">
+			<Rule
+				InputExts="*.ada"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gnat -g -c -o "%bd%n.o" "%f"'/>
+			</Rule>
+			<Rule
+				InputExts="*.adb"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gnat -g -c -o "%bd%n.o" "%f"'/>
+			</Rule>
+			<Rule
+				InputExts="*.f"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gfortran -c -g -o "%bd%n.o" "%f"'/>
+			</Rule>
+			<Rule
+				InputExts="*.f90"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gfortran -c -g -o "%bd%n.o" "%f"'/>
+			</Rule>
+			<Rule
+				InputExts="*.d"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gdc -c -g -o "%bd%n.o" "%f"'/>
+			</Rule>
+		</Rules>
+		<List Name="GNUC Options">
+			<Item
+				Name="LinkerOutputType"
+				Value="Executable"/>
+		</List>
+	</Config>
+	<Config
+		Name="Release"
+		Type="gnuc"
+		DebugCallbackName="gdb"
+		Version="1"
+		OutputFile="%bdalumy-none.exe"
+		CompilerConfigName="Latest Version">
+		<Menu>
+			<Target
+				Name="Compile"
+				MenuCaption="&amp;Compile"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				OutputExts="*.o"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='gcc -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
+			</Target>
+			<Target
+				Name="Link"
+				MenuCaption="&amp;Link"
+				ShowOnMenu="Never"
+				Dialog="_gnuc_options_form Link"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveCurrent"
+				RunFromDir="%rw">
+				<Exec CmdLine='gcc %xup -o "%o" %f %libs'/>
+			</Target>
+			<Target
+				Name="Build"
+				MenuCaption="&amp;Build"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+			</Target>
+			<Target
+				Name="Rebuild"
+				MenuCaption="&amp;Rebuild"
+				Dialog="_gnuc_options_form Compile"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+			</Target>
+			<Target
+				Name="Debug"
+				MenuCaption="&amp;Debug"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveNone"
+				RunFromDir="%rw">
+				<Exec CmdLine='vsdebugio -prog "%o"'/>
+			</Target>
+			<Target
+				Name="Execute"
+				MenuCaption="E&amp;xecute"
+				Dialog="_gnuc_options_form Run/Debug"
+				BuildFirst="1"
+				CaptureOutputWith="ProcessBuffer"
+				Deletable="0"
+				SaveOption="SaveWorkspaceFiles"
+				RunFromDir="%rw">
+				<Exec CmdLine='"%o"'/>
+			</Target>
+			<Target
+				Name="dash"
+				MenuCaption="-"
+				Deletable="0">
+				<Exec/>
+			</Target>
+			<Target
+				Name="GNU C Options"
+				MenuCaption="GNU C &amp;Options..."
+				ShowOnMenu="HideIfNoCmdLine"
+				Deletable="0"
+				SaveOption="SaveNone">
+				<Exec
+					CmdLine="gnucoptions"
+					Type="Slick-C"/>
+			</Target>
+		</Menu>
+		<Rules Name="Compile">
+			<Rule
+				InputExts="*.ada"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
+			</Rule>
+			<Rule
+				InputExts="*.adb"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
+			</Rule>
+			<Rule
+				InputExts="*.f"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gfortran -O -g -o "%bd%n.o" "%f"'/>
+			</Rule>
+			<Rule
+				InputExts="*.f90"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gfortran -O -g -o "%bd%n.o" "%f"'/>
+			</Rule>
+			<Rule
+				InputExts="*.d"
+				OutputExts="*.o"
+				LinkObject="1">
+				<Exec CmdLine='gdc -c -g -o "%bd%n.o" "%f"'/>
+			</Rule>
+		</Rules>
+		<List Name="GNUC Options">
+			<Item
+				Name="LinkerOutputType"
+				Value="Executable"/>
+		</List>
+	</Config>
+	<CustomFolders>
+		<Folder
+			Name="Source Files"
+			Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d;*.m;*.mm;*.go;*.groovy;*.gsh"
+			GUID="{A37A1226-118C-4EBA-26F5-85DBBC8AF5B1}"></Folder>
+		<Folder
+			Name="Header Files"
+			Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.h++;*.inc;*.sh;*.cpy;*.if"
+			GUID="{750C9A63-6290-4649-6800-97EE4165EB89}"></Folder>
+		<Folder
+			Name="Resource Files"
+			Filters="*.ico;*.cur;*.dlg"
+			GUID="{D2F81F85-BB86-4D07-510C-CB47A93F29BF}"/>
+		<Folder
+			Name="Bitmaps"
+			Filters="*.bmp"
+			GUID="{70E1C2BB-B93A-4695-9176-B6D3B122E58E}"/>
+		<Folder
+			Name="Other Files"
+			Filters=""
+			GUID="{00AAA3DF-9E38-4038-1F05-ECFBCCDFEC9A}"/>
+	</CustomFolders>
+	<Files AutoFolders="DirectoryView">
+		<Folder Name="..">
+			<F N="../alumy.c"/>
+			<F N="../CMakeLists.txt"/>
+			<F N="../errno.c"/>
+			<F N="../fifo.c"/>
+			<F N="../log.c"/>
+			<F N="../pool.c"/>
+			<F N="../rbtree.c"/>
+			<F N="../version.c"/>
+		</Folder>
+		<Folder Name="../base64">
+			<F N="../base64/base64.c"/>
+			<F N="../base64/CMakeLists.txt"/>
+		</Folder>
+		<Folder Name="../bcd">
+			<F N="../bcd/bcd.c"/>
+			<F N="../bcd/CMakeLists.txt"/>
+		</Folder>
+		<Folder Name="../cjson">
+			<F N="../cjson/cJSON.c"/>
+			<F N="../cjson/cJSON_Utils.c"/>
+			<F N="../cjson/CMakeLists.txt"/>
+		</Folder>
+		<Folder Name="../cm_backtrace">
+			<Folder Name="fault_handler">
+				<Folder Name="gcc">
+					<F N="../cm_backtrace/fault_handler/gcc/cmb_fault.S"/>
+				</Folder>
+				<Folder Name="iar">
+					<F N="../cm_backtrace/fault_handler/iar/cmb_fault.S"/>
+				</Folder>
+				<Folder Name="keil">
+					<F N="../cm_backtrace/fault_handler/keil/cmb_fault.S"/>
+				</Folder>
+			</Folder>
+			<F N="../cm_backtrace/cm_backtrace.c"/>
+		</Folder>
+		<Folder Name="../cmake">
+			<Folder Name="toolchain">
+				<Folder Name="es32">
+					<F N="../cmake/toolchain/es32/es32.cmake"/>
+				</Folder>
+				<F N="../cmake/toolchain/arm-fsl-linux-gnueabi.cmake"/>
+				<F N="../cmake/toolchain/arm-none-eabi.cmake"/>
+				<F N="../cmake/toolchain/clang.cmake"/>
+				<F N="../cmake/toolchain/es32f0654lt.cmake"/>
+				<F N="../cmake/toolchain/gcc.cmake"/>
+				<F N="../cmake/toolchain/xtensa-esp32.cmake"/>
+			</Folder>
+			<F N="../cmake/generic_check.cmake"/>
+			<F N="../cmake/linux_check.cmake"/>
+			<F N="../cmake/message.cmake"/>
+		</Folder>
+		<Folder Name="../crc">
+			<F N="../crc/CMakeLists.txt"/>
+			<F N="../crc/crc32.c"/>
+			<F N="../crc/mb_crc16.c"/>
+		</Folder>
+		<Folder Name="../cunit">
+			<Folder Name="Automated">
+				<F N="../cunit/Automated/Automated.c"/>
+			</Folder>
+			<Folder Name="Basic">
+				<F N="../cunit/Basic/Basic.c"/>
+			</Folder>
+			<Folder Name="Console">
+				<F N="../cunit/Console/Console.c"/>
+			</Folder>
+			<Folder Name="Curses">
+				<F N="../cunit/Curses/Curses.c"/>
+			</Folder>
+			<Folder Name="Framework">
+				<F N="../cunit/Framework/CUError.c"/>
+				<F N="../cunit/Framework/MyMem.c"/>
+				<F N="../cunit/Framework/TestDB.c"/>
+				<F N="../cunit/Framework/TestRun.c"/>
+				<F N="../cunit/Framework/Util.c"/>
+			</Folder>
+			<Folder Name="Test">
+				<F N="../cunit/Test/test_cunit.c"/>
+				<F N="../cunit/Test/test_cunit.h"/>
+			</Folder>
+			<Folder Name="Win">
+				<F N="../cunit/Win/resource.h"/>
+				<F N="../cunit/Win/Win.c"/>
+				<F N="../cunit/Win/Win.h"/>
+			</Folder>
+			<F N="../cunit/CMakeLists.txt"/>
+		</Folder>
+		<Folder Name="../driver">
+			<Folder Name="eeprom">
+				<F N="../driver/eeprom/bl24cxx.c"/>
+			</Folder>
+			<Folder Name="rtc">
+				<F N="../driver/rtc/bm8563.c"/>
+				<F N="../driver/rtc/sd3078.c"/>
+			</Folder>
+			<F N="../driver/boost.c"/>
+			<F N="../driver/flexible_button.c"/>
+			<F N="../driver/sw_i2c.c"/>
+		</Folder>
+		<Folder Name="../filter">
+			<F N="../filter/CMakeLists.txt"/>
+			<F N="../filter/kalman.c"/>
+		</Folder>
+		<Folder Name="../freemodbus">
+			<Folder Name="modbus">
+				<Folder Name="ascii">
+					<F N="../freemodbus/modbus/ascii/mbascii.c"/>
+				</Folder>
+				<Folder Name="functions">
+					<F N="../freemodbus/modbus/functions/mbfunccoils.c"/>
+					<F N="../freemodbus/modbus/functions/mbfuncdiag.c"/>
+					<F N="../freemodbus/modbus/functions/mbfuncdisc.c"/>
+					<F N="../freemodbus/modbus/functions/mbfuncholding.c"/>
+					<F N="../freemodbus/modbus/functions/mbfuncinput.c"/>
+					<F N="../freemodbus/modbus/functions/mbfuncother.c"/>
+					<F N="../freemodbus/modbus/functions/mbutils.c"/>
+				</Folder>
+				<Folder Name="rtu">
+					<F N="../freemodbus/modbus/rtu/mbcrc.c"/>
+					<F N="../freemodbus/modbus/rtu/mbrtu.c"/>
+				</Folder>
+				<Folder Name="tcp">
+					<F N="../freemodbus/modbus/tcp/mbtcp.c"/>
+				</Folder>
+				<F N="../freemodbus/modbus/mb.c"/>
+			</Folder>
+			<Folder Name="port">
+				<F N="../freemodbus/port/portevent.c"/>
+				<F N="../freemodbus/port/portserial.c"/>
+				<F N="../freemodbus/port/porttimer.c"/>
+			</Folder>
+			<F N="../freemodbus/demo.c"/>
+		</Folder>
+		<Folder Name="../include">
+			<Folder Name="alumy">
+				<Folder Name="arch">
+					<Folder Name="arm">
+						<F N="../include/alumy/arch/arm/bitband.h"/>
+					</Folder>
+					<F N="../include/alumy/arch/arm.h"/>
+				</Folder>
+				<Folder Name="cm_backtrace">
+					<F N="../include/alumy/cm_backtrace/cmb_cfg.h"/>
+					<F N="../include/alumy/cm_backtrace/cmb_def.h"/>
+				</Folder>
+				<Folder Name="cunit">
+					<F N="../include/alumy/cunit/Automated.h"/>
+					<F N="../include/alumy/cunit/Basic.h"/>
+					<F N="../include/alumy/cunit/Console.h"/>
+					<F N="../include/alumy/cunit/CUCurses.h"/>
+					<F N="../include/alumy/cunit/CUError.h"/>
+					<F N="../include/alumy/cunit/CUnit.h"/>
+					<F N="../include/alumy/cunit/CUnit_intl.h"/>
+					<F N="../include/alumy/cunit/MyMem.h"/>
+					<F N="../include/alumy/cunit/TestDB.h"/>
+					<F N="../include/alumy/cunit/TestRun.h"/>
+					<F N="../include/alumy/cunit/Util.h"/>
+					<F N="../include/alumy/cunit/wxWidget.h"/>
+				</Folder>
+				<Folder Name="driver">
+					<Folder Name="eeprom">
+						<F N="../include/alumy/driver/eeprom/bl24c128.h"/>
+					</Folder>
+					<Folder Name="rtc">
+						<F N="../include/alumy/driver/rtc/bm8563.h"/>
+						<F N="../include/alumy/driver/rtc/sd3078.h"/>
+					</Folder>
+					<F N="../include/alumy/driver/boost.h"/>
+					<F N="../include/alumy/driver/eeprom.h"/>
+					<F N="../include/alumy/driver/flexible_button.h"/>
+					<F N="../include/alumy/driver/gpio.h"/>
+					<F N="../include/alumy/driver/i2c.h"/>
+					<F N="../include/alumy/driver/rtc.h"/>
+					<F N="../include/alumy/driver/sw_i2c.h"/>
+				</Folder>
+				<Folder Name="filter">
+					<F N="../include/alumy/filter/kalman.h"/>
+				</Folder>
+				<Folder Name="freemodbus">
+					<Folder Name="ascii">
+						<F N="../include/alumy/freemodbus/ascii/mbascii.h"/>
+					</Folder>
+					<Folder Name="port">
+						<F N="../include/alumy/freemodbus/port/port.h"/>
+					</Folder>
+					<Folder Name="rtu">
+						<F N="../include/alumy/freemodbus/rtu/mbcrc.h"/>
+						<F N="../include/alumy/freemodbus/rtu/mbrtu.h"/>
+					</Folder>
+					<Folder Name="tcp">
+						<F N="../include/alumy/freemodbus/tcp/mbtcp.h"/>
+					</Folder>
+					<F N="../include/alumy/freemodbus/mb.h"/>
+					<F N="../include/alumy/freemodbus/mbconfig.h"/>
+					<F N="../include/alumy/freemodbus/mbframe.h"/>
+					<F N="../include/alumy/freemodbus/mbfunc.h"/>
+					<F N="../include/alumy/freemodbus/mbport.h"/>
+					<F N="../include/alumy/freemodbus/mbproto.h"/>
+					<F N="../include/alumy/freemodbus/mbutils.h"/>
+				</Folder>
+				<Folder Name="lzma">
+					<F N="../include/alumy/lzma/7zTypes.h"/>
+					<F N="../include/alumy/lzma/Alloc.h"/>
+					<F N="../include/alumy/lzma/Compiler.h"/>
+					<F N="../include/alumy/lzma/LzmaDec.h"/>
+					<F N="../include/alumy/lzma/Precomp.h"/>
+				</Folder>
+				<Folder Name="unity">
+					<F N="../include/alumy/unity/unity.h"/>
+					<F N="../include/alumy/unity/unity_config.h"/>
+					<F N="../include/alumy/unity/unity_fixture.h"/>
+					<F N="../include/alumy/unity/unity_fixture_internals.h"/>
+					<F N="../include/alumy/unity/unity_fixture_malloc_overrides.h"/>
+					<F N="../include/alumy/unity/unity_internals.h"/>
+				</Folder>
+				<Folder Name="xyzmodem">
+					<F N="../include/alumy/xyzmodem/ymodem.h"/>
+				</Folder>
+				<F N="../include/alumy/alumyconfig_dft.h"/>
+				<F N="../include/alumy/ascii.h"/>
+				<F N="../include/alumy/base.h"/>
+				<F N="../include/alumy/base64.h"/>
+				<F N="../include/alumy/bcd.h"/>
+				<F N="../include/alumy/bug.h"/>
+				<F N="../include/alumy/byteorder.h"/>
+				<F N="../include/alumy/byteswap.h"/>
+				<F N="../include/alumy/cdefs.h"/>
+				<F N="../include/alumy/cJSON.h"/>
+				<F N="../include/alumy/cJSON_Utils.h"/>
+				<F N="../include/alumy/cm_backtrace.h"/>
+				<F N="../include/alumy/config.h"/>
+				<F N="../include/alumy/crc.h"/>
+				<F N="../include/alumy/driver.h"/>
+				<F N="../include/alumy/errno.h"/>
+				<F N="../include/alumy/fifo.h"/>
+				<F N="../include/alumy/filter.h"/>
+				<F N="../include/alumy/format_color.h"/>
+				<F N="../include/alumy/initialized.h"/>
+				<F N="../include/alumy/list.h"/>
+				<F N="../include/alumy/log.h"/>
+				<F N="../include/alumy/mem.h"/>
+				<F N="../include/alumy/pid.h"/>
+				<F N="../include/alumy/pool.h"/>
+				<F N="../include/alumy/protobuf-c.h"/>
+				<F N="../include/alumy/rbtree.h"/>
+				<F N="../include/alumy/string.h"/>
+				<F N="../include/alumy/test.h"/>
+				<F N="../include/alumy/types.h"/>
+				<F N="../include/alumy/version.h"/>
+				<F N="../include/alumy/xyzmodem.h"/>
+			</Folder>
+			<F N="../include/alumy.h"/>
+		</Folder>
+		<Folder Name="../lzma">
+			<F N="../lzma/Alloc.c"/>
+			<F N="../lzma/LzmaDec.c"/>
+		</Folder>
+		<Folder Name="../mem">
+			<F N="../mem/CMakeLists.txt"/>
+			<F N="../mem/mem.c"/>
+		</Folder>
+		<Folder Name="../pid">
+			<F N="../pid/increment.c"/>
+			<F N="../pid/pid.c"/>
+			<F N="../pid/position.c"/>
+		</Folder>
+		<Folder Name="../protobuf-c">
+			<F N="../protobuf-c/protobuf-c.c"/>
+		</Folder>
+		<Folder Name="../qrcode">
+			<F N="../qrcode/CMakeLists.txt"/>
+			<F N="../qrcode/qrcode.c"/>
+		</Folder>
+		<Folder Name="../string">
+			<F N="../string/CMakeLists.txt"/>
+			<F N="../string/format.c"/>
+			<F N="../string/str_add_null.c"/>
+			<F N="../string/strlcpy.c"/>
+		</Folder>
+		<Folder Name="../sys">
+			<F N="../sys/CMakeLists.txt"/>
+			<F N="../sys/sysinfo.c"/>
+		</Folder>
+		<Folder Name="../test">
+			<Folder Name="bsp">
+				<Folder Name="es32f0654">
+					<Folder Name="bsp">
+						<Folder Name="include">
+							<Folder Name="bsp">
+								<F N="../test/bsp/es32f0654/bsp/include/bsp/uart.h"/>
+							</Folder>
+						</Folder>
+						<F N="../test/bsp/es32f0654/bsp/bsp.c"/>
+						<F N="../test/bsp/es32f0654/bsp/CMakeLists.txt"/>
+						<F N="../test/bsp/es32f0654/bsp/irq.c"/>
+						<F N="../test/bsp/es32f0654/bsp/uart.c"/>
+					</Folder>
+					<Folder Name="Drivers">
+						<Folder Name="ALD">
+							<Folder Name="ES32F065x">
+								<Folder Name="Include">
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_acmp.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_adc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_bkpc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_calc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_can.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_cmu.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_crc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_crypt.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_dbgc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_dma.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_flash.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_gpio.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_i2c.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_iap.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_pis.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_pmu.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_rmu.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_rtc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_smartcard.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_spi.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_syscfg.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_timer.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_trng.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_tsense.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_uart.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_usart.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/ald_wdt.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/type.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Include/utils.h"/>
+								</Folder>
+								<Folder Name="Source">
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_acmp.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_adc.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_bkpc.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_calc.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_can.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_cmu.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_crc.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_crypt.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_dma.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_flash.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_flash_ext.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_gpio.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_i2c.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_iap.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_pis.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_pmu.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_rmu.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_rtc.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_smartcard.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_spi.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_timer.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_trng.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_tsense.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_uart.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_usart.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/ald_wdt.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/ALD/ES32F065x/Source/utils.c"/>
+								</Folder>
+							</Folder>
+						</Folder>
+						<Folder Name="CMSIS">
+							<Folder Name="Device">
+								<Folder Name="EastSoft">
+									<Folder Name="ES32F065x">
+										<Folder Name="Include">
+											<F N="../test/bsp/es32f0654/Drivers/CMSIS/Device/EastSoft/ES32F065x/Include/es32f065x.h"/>
+										</Folder>
+										<Folder Name="Startup">
+											<Folder Name="iar">
+												<F N="../test/bsp/es32f0654/Drivers/CMSIS/Device/EastSoft/ES32F065x/Startup/iar/startup_es32f065x.s"/>
+											</Folder>
+											<Folder Name="keil">
+												<F N="../test/bsp/es32f0654/Drivers/CMSIS/Device/EastSoft/ES32F065x/Startup/keil/startup_es32f065x.s"/>
+											</Folder>
+										</Folder>
+										<Folder Name="System">
+											<F N="../test/bsp/es32f0654/Drivers/CMSIS/Device/EastSoft/ES32F065x/System/system_es32f065x.c"/>
+										</Folder>
+									</Folder>
+								</Folder>
+							</Folder>
+							<Folder Name="Include">
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/arm_common_tables.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/arm_const_structs.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/arm_math.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_armcc.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_armclang.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_compiler.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_gcc.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_iccarm.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/cmsis_version.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_armv8mbl.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_armv8mml.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm0.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm0plus.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm23.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm3.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm33.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm4.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_cm7.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_sc000.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/core_sc300.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/mpu_armv7.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/mpu_armv8.h"/>
+								<F N="../test/bsp/es32f0654/Drivers/CMSIS/Include/tz_context.h"/>
+							</Folder>
+						</Folder>
+						<Folder Name="MD">
+							<Folder Name="ES32F065x">
+								<Folder Name="Include">
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_adc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_cmu.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_crc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_crypt.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_dma.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_flash.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_gpio.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_i2c.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_iwdt.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_msc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_pmu.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_rmu.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_rtc.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_spi.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_syscfg.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_tim.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_trng.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_uart.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_usart.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_utils.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/md_wwdt.h"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Include/type.h"/>
+								</Folder>
+								<Folder Name="Source">
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_adc.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_cmu.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_crc.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_crypt.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_dma.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_flash.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_flash_ext.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_gpio.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_i2c.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_iwdt.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_pmu.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_rmu.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_rtc.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_spi.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_tim.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_trng.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_uart.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_usart.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_utils.c"/>
+									<F N="../test/bsp/es32f0654/Drivers/MD/ES32F065x/Source/md_wwdt.c"/>
+								</Folder>
+							</Folder>
+						</Folder>
+						<F N="../test/bsp/es32f0654/Drivers/CMakeLists.txt"/>
+					</Folder>
+					<Folder Name="inc">
+						<F N="../test/bsp/es32f0654/inc/ald_conf.h"/>
+						<F N="../test/bsp/es32f0654/inc/config.h"/>
+						<F N="../test/bsp/es32f0654/inc/main.h"/>
+						<F N="../test/bsp/es32f0654/inc/md_conf.h"/>
+					</Folder>
+					<Folder Name="startup">
+						<F N="../test/bsp/es32f0654/startup/CMakeLists.txt"/>
+						<F N="../test/bsp/es32f0654/startup/es32f0xx_startup.s"/>
+						<F N="../test/bsp/es32f0654/startup/syscalls.c"/>
+					</Folder>
+					<F N="../test/bsp/es32f0654/CMakeLists.txt"/>
+				</Folder>
+			</Folder>
+			<F N="../test/bitband.c"/>
+			<F N="../test/CMakeLists.txt"/>
+			<F N="../test/filter.c"/>
+			<F N="../test/mem.c"/>
+			<F N="../test/string.c"/>
+			<F N="../test/test.c"/>
+			<F N="../test/test.h"/>
+		</Folder>
+		<Folder Name="../unity">
+			<F N="../unity/CMakeLists.txt"/>
+			<F N="../unity/unity.c"/>
+			<F N="../unity/unity_fixture.c"/>
+		</Folder>
+		<Folder Name="../xyzmodem">
+			<F N="../xyzmodem/ymodem.c"/>
+		</Folder>
+	</Files>
 </Project>

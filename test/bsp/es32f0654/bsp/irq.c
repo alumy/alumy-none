@@ -19,7 +19,7 @@
 #include "ald_dma.h"
 #endif
 #include "ald_uart.h"
-#include "bsp.h"
+#include "bsp/uart.h"
 
 /** @addtogroup Projects_Examples_ALD
   * @{
