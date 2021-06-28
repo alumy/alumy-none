@@ -10,7 +10,10 @@
 
 __BEGIN_DECLS
 
-extern void bsp_init(void);
+__weak void bsp_init(void)
+{
+
+}
 
 static int example_suite_init(void)
 {
@@ -57,7 +60,7 @@ static void add_tests(void)
 
 int main(int argc, char *argv[])
 {
-	bsp_init();
+    bsp_init();
 
 	if (CU_initialize_registry()) {
 		fprintf(stderr, "\nInitialization of Test Registry failed.");

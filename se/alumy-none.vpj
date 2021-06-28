@@ -284,6 +284,7 @@
     <Files AutoFolders="DirectoryView">
         <Folder Name="..">
             <F N="../alumy.c"/>
+            <F N="../CMakeLists.txt"/>
             <F N="../errno.c"/>
             <F N="../fifo.c"/>
             <F N="../log.c"/>
@@ -293,18 +294,38 @@
         </Folder>
         <Folder Name="../base64">
             <F N="../base64/base64.c"/>
+            <F N="../base64/CMakeLists.txt"/>
         </Folder>
         <Folder Name="../bcd">
             <F N="../bcd/bcd.c"/>
+            <F N="../bcd/CMakeLists.txt"/>
         </Folder>
         <Folder Name="../cjson">
             <F N="../cjson/cJSON.c"/>
             <F N="../cjson/cJSON_Utils.c"/>
+            <F N="../cjson/CMakeLists.txt"/>
         </Folder>
         <Folder Name="../cm_backtrace">
             <F N="../cm_backtrace/cm_backtrace.c"/>
         </Folder>
+        <Folder Name="../cmake">
+            <Folder Name="toolchain">
+                <Folder Name="es32">
+                    <F N="../cmake/toolchain/es32/es32.cmake"/>
+                </Folder>
+                <F N="../cmake/toolchain/arm-fsl-linux-gnueabi.cmake"/>
+                <F N="../cmake/toolchain/arm-none-eabi.cmake"/>
+                <F N="../cmake/toolchain/clang.cmake"/>
+                <F N="../cmake/toolchain/es32f0654lt.cmake"/>
+                <F N="../cmake/toolchain/gcc.cmake"/>
+                <F N="../cmake/toolchain/xtensa-esp32.cmake"/>
+            </Folder>
+            <F N="../cmake/generic_check.cmake"/>
+            <F N="../cmake/linux_check.cmake"/>
+            <F N="../cmake/message.cmake"/>
+        </Folder>
         <Folder Name="../crc">
+            <F N="../crc/CMakeLists.txt"/>
             <F N="../crc/crc32.c"/>
             <F N="../crc/mb_crc16.c"/>
         </Folder>
@@ -337,6 +358,7 @@
                 <F N="../cunit/Win/Win.c"/>
                 <F N="../cunit/Win/Win.h"/>
             </Folder>
+            <F N="../cunit/CMakeLists.txt"/>
         </Folder>
         <Folder Name="../driver">
             <Folder Name="eeprom">
@@ -351,6 +373,7 @@
             <F N="../driver/sw_i2c.c"/>
         </Folder>
         <Folder Name="../filter">
+            <F N="../filter/CMakeLists.txt"/>
             <F N="../filter/kalman.c"/>
         </Folder>
         <Folder Name="../freemodbus">
@@ -508,6 +531,7 @@
             <F N="../lzma/LzmaDec.c"/>
         </Folder>
         <Folder Name="../mem">
+            <F N="../mem/CMakeLists.txt"/>
             <F N="../mem/mem.c"/>
         </Folder>
         <Folder Name="../pid">
@@ -519,14 +543,17 @@
             <F N="../protobuf-c/protobuf-c.c"/>
         </Folder>
         <Folder Name="../qrcode">
+            <F N="../qrcode/CMakeLists.txt"/>
             <F N="../qrcode/qrcode.c"/>
         </Folder>
         <Folder Name="../string">
+            <F N="../string/CMakeLists.txt"/>
             <F N="../string/format.c"/>
             <F N="../string/str_add_null.c"/>
             <F N="../string/strlcpy.c"/>
         </Folder>
         <Folder Name="../sys">
+            <F N="../sys/CMakeLists.txt"/>
             <F N="../sys/sysinfo.c"/>
         </Folder>
         <Folder Name="../test">
@@ -540,6 +567,7 @@
                             <F N="../test/bsp/es32f0654/bsp/include/bsp.h"/>
                         </Folder>
                         <F N="../test/bsp/es32f0654/bsp/bsp.c"/>
+                        <F N="../test/bsp/es32f0654/bsp/CMakeLists.txt"/>
                         <F N="../test/bsp/es32f0654/bsp/irq.c"/>
                         <F N="../test/bsp/es32f0654/bsp/uart.c"/>
                     </Folder>
@@ -697,6 +725,7 @@
                                 </Folder>
                             </Folder>
                         </Folder>
+                        <F N="../test/bsp/es32f0654/Drivers/CMakeLists.txt"/>
                     </Folder>
                     <Folder Name="inc">
                         <F N="../test/bsp/es32f0654/inc/ald_conf.h"/>
@@ -705,11 +734,14 @@
                         <F N="../test/bsp/es32f0654/inc/md_conf.h"/>
                     </Folder>
                     <Folder Name="startup">
+                        <F N="../test/bsp/es32f0654/startup/CMakeLists.txt"/>
                         <F N="../test/bsp/es32f0654/startup/syscalls.c"/>
                     </Folder>
+                    <F N="../test/bsp/es32f0654/CMakeLists.txt"/>
                 </Folder>
             </Folder>
             <F N="../test/bitband.c"/>
+            <F N="../test/CMakeLists.txt"/>
             <F N="../test/filter.c"/>
             <F N="../test/mem.c"/>
             <F N="../test/string.c"/>
@@ -717,6 +749,7 @@
             <F N="../test/test.h"/>
         </Folder>
         <Folder Name="../unity">
+            <F N="../unity/CMakeLists.txt"/>
             <F N="../unity/unity.c"/>
             <F N="../unity/unity_fixture.c"/>
         </Folder>
