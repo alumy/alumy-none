@@ -113,6 +113,11 @@ void PendSV_Handler(void)
 	return;
 }
 
+void WWDG_IWDG_Handler()
+{
+	return;
+}
+
 /**
   * @brief  SysTick IRQ handler
   * @retval None
