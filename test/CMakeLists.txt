@@ -4,11 +4,14 @@
 if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 	message(STATUS "Building test for Linux")
 	
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/portal)
+
 	aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
 	add_executable(${PROJECT_NAME}-test ${test_src})
 
-	target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME}-static)
+    target_link_libraries(${PROJECT_NAME}-test PRIVATE portal)
+    target_link_libraries(${PROJECT_NAME}-test PRIVATE ${PROJECT_NAME}-static)
 	
 	add_custom_command(TARGET ${PROJECT_NAME}-test
 			POST_BUILD
@@ -38,12 +41,13 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 	message(STATUS "Building test for Generic")
 	
 	add_subdirectory(${BSP_DIR})
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/portal)
 	
 	aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
 	add_executable(${PROJECT_NAME}-test ${test_src})
 
-	target_link_libraries(${PROJECT_NAME}-test PRIVATE bsp startup)
+	target_link_libraries(${PROJECT_NAME}-test PRIVATE bsp startup portal)
 	target_link_libraries(${PROJECT_NAME}-test PRIVATE ${PROJECT_NAME}-static)
 
 	add_custom_command(TARGET ${PROJECT_NAME}-test

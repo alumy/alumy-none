@@ -7,10 +7,9 @@
 #include "alumy/cunit/Basic.h"
 #include "alumy.h"
 #include "test.h"
+#include "portal.h"
 
 __BEGIN_DECLS
-
-extern int32_t bsp_init(void);
 
 static int example_suite_init(void)
 {
