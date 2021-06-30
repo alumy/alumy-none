@@ -10,7 +10,6 @@ __BEGIN_DECLS
 extern uart_handle_t dbg_uart;
 
 int32_t dbg_uart_init(void);
-void printf_e(const char *fmt, ...);
 
 __END_DECLS
 
