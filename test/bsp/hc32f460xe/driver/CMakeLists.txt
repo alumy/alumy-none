@@ -5,7 +5,7 @@ FILE (GLOB_RECURSE ${target}_src
 
 add_library(${target} STATIC ${${target}_src})
 
-target_link_libraries(${target} PUBLIC mcu)
+target_link_libraries(${target} PUBLIC mcu bsp)
 
 target_include_directories(${target} PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/inc)

@@ -243,17 +243,6 @@ extern "C"
 #include "hc32f460_wdt.h"
 #endif /* DDL_WDT_ENABLE */
 
-/**
- * @brief Include BSP board's header file
- */
-#if (BSP_EV_HC32F460_LQFP100_V2 == BSP_EV_HC32F460)
-    #include "ev_hc32f460_lqfp100_v2.h"
-#endif /* BSP_EV_HC32F460_LQFP100_V2 */
-
-#if (BSP_EV_HC32F460_LQFP100_V1 == BSP_EV_HC32F460)
-    #include "ev_hc32f460_lqfp100_v1.h"
-#endif /* BSP_EV_HC32F460_LQFP100_V1 */
-
 #endif /* USE_DEVICE_DRIVER_LIB */
 
 /*******************************************************************************

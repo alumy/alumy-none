@@ -1,8 +1,7 @@
 set(target mcu)
 
 FILE (GLOB_RECURSE ${target}_src
-	${CMAKE_CURRENT_SOURCE_DIR}/common/*.c
-	${CMAKE_CURRENT_SOURCE_DIR}/GCC/*.c)
+    ${CMAKE_CURRENT_SOURCE_DIR}/common/*.c)
 
 add_library(${target} STATIC ${${target}_src})
 

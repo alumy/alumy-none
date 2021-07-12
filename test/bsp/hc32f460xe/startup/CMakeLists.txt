@@ -1,9 +1,8 @@
 set(target startup)
 
-FILE (GLOB_RECURSE ${target}_src
-	${CMAKE_CURRENT_SOURCE_DIR}/*.s
-	${CMAKE_CURRENT_SOURCE_DIR}/*.S
-	${CMAKE_CURRENT_SOURCE_DIR}/*.c)
+set(${target}_src
+	${CMAKE_CURRENT_SOURCE_DIR}/syscalls.c
+	${CMAKE_CURRENT_SOURCE_DIR}/startup_hc32f460_gcc.S)
 
 add_library(${target} STATIC ${${target}_src})
 
