@@ -23,11 +23,11 @@ extern "C" {
 #endif
 
 #ifndef AL_HAVE_SYS_CDEFS
-#define AL_HAVE_SYS_CDEFS       0
+#define AL_HAVE_SYS_CDEFS       1
 #endif
 
 #ifndef AL_HAVE_SYS_TYPES
-#define AL_HAVE_SYS_TYPES       0
+#define AL_HAVE_SYS_TYPES       1
 #endif
 
 #ifndef AL_DYNAMIC_CRC_TABLE
@@ -35,7 +35,7 @@ extern "C" {
 #endif
 
 #ifndef CMB_CPU_PLATFORM_TYPE
-#define CMB_CPU_PLATFORM_TYPE		CMB_CPU_ARM_CORTEX_M0
+#define CMB_CPU_PLATFORM_TYPE		CMB_CPU_ARM_CORTEX_M4
 #endif
 
 #ifndef FLEX_BTN_SCAN_FREQ_HZ

@@ -9,8 +9,8 @@
 #include <sys/types.h>
 #endif
 
-#ifndef __inline__
-#define __inline__      static inline
+#ifndef __inline
+#define __inline	inline
 #endif
 
 #ifndef UNUSED
