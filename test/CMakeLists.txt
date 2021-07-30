@@ -30,11 +30,13 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 
 	enable_testing()
 
-	add_test(test_alumy alumy-test)
+	add_test(test_alumy ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test)
 	set_tests_properties(test_alumy PROPERTIES PASS_REGULAR_EXPRESSION 0)
 		
-	add_test(test_cov "${CMAKE_CURRENT_BINARY_DIR}/covgen.sh")
+	add_test(test_cov "${CMAKE_BINARY_DIR}/covgen.sh")
 	set_tests_properties (test_cov PROPERTIES PASS_REGULAR_EXPRESSION 0)
+
+	add_custom_target(test COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS alumy-test)
 endif()
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
