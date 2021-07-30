@@ -44,6 +44,38 @@ configure_file(
 	${PROJECT_SOURCE_DIR}/include/alumy/version.h.in
 	${PROJECT_SOURCE_DIR}/include/alumy/version.h)
 
+#######################################################################
+# get svn revision
+#######################################################################
+add_custom_command(
+		OUTPUT ${PROJECT_SOURCE_DIR}/include/alumy/svn_revision.h
+ 		ALL
+		COMMAND ${CMAKE_COMMAND} -D TARGET_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_SOURCE_DIR}/cmake/svn-revision.cmake
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# rebuild svn_revision.h every time
+add_custom_target(get_svn_revision
+		ALL
+		DEPENDS ${PROJECT_SOURCE_DIR}/include/alumy/svn_revision.h
+)
+
+#####################################################################
+# get git hash
+#####################################################################
+add_custom_command(
+		OUTPUT ${PROJECT_SOURCE_DIR}/include/alumy/git_hash.h
+ 		ALL
+		COMMAND ${CMAKE_COMMAND} -D TARGET_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${PROJECT_SOURCE_DIR}/cmake/git-hash.cmake
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# rebuild git_hash.h every time
+add_custom_target(get_git_hash
+		ALL
+		DEPENDS ${PROJECT_SOURCE_DIR}/include/alumy/git_hash.h
+)
+
 add_definitions(-D__STDC_FORMAT_MACROS)
 add_definitions(-DALUMY_USE_DEFAULT_CONFIG)
 
@@ -84,7 +116,10 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 	message(STATUS "Building static library for Linux")
 
 	add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_src} ${objs})
-	
+
+	add_dependencies(${PROJECT_NAME} get_git_hash)
+	add_dependencies(${PROJECT_NAME} get_svn_revision)
+
 	set_target_properties(${PROJECT_NAME} PROPERTIES 
 			VERSION "${PROJECT_VERSION}"
 			SOVERSION "${PROJECT_VERSION_MAJOR}")
@@ -95,6 +130,10 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 endif()
 
 add_library("${PROJECT_NAME}-static" STATIC ${${PROJECT_NAME}_src} ${objs})
+
+add_dependencies("${PROJECT_NAME}-static" get_git_hash)
+add_dependencies("${PROJECT_NAME}-static" get_svn_revision)
+
 # target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR})
 # target_compile_options(<target> [BEFORE] <INTERFACE|PUBLIC|PRIVATE> [items1...] [<INTERFACE|PUBLIC|PRIVATE> [items2...] ...])
 
@@ -125,47 +164,6 @@ set(CPACK_SOURCE_GENERATOR "TGZ")
 
 include(CPack)
 
-#######################################################################
-# get svn revision
-#######################################################################
-add_custom_command(
-		OUTPUT ${PROJECT_SOURCE_DIR}/include/alumy/svn_revision.h
- 		ALL
-		COMMAND ${CMAKE_COMMAND} -D TARGET_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_SOURCE_DIR}/cmake/svn-revision.cmake
-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-)
-
-# rebuild version.hpp every time
-add_custom_target(get_svn_revision
-		ALL
-		DEPENDS ${PROJECT_SOURCE_DIR}/include/alumy/svn_revision.h
-)
-
-# svn_revision.h has to be generated
-# before we start building example
-add_dependencies(${PROJECT_NAME} get_svn_revision)
-add_dependencies(${PROJECT_NAME}-static get_svn_revision)
-
-#####################################################################
-# get git hash
-#####################################################################
-add_custom_command(
-		OUTPUT ${PROJECT_SOURCE_DIR}/include/alumy/git_hash.h
- 		ALL
-		COMMAND ${CMAKE_COMMAND} -D TARGET_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${PROJECT_SOURCE_DIR}/cmake/git-hash.cmake
-		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-)
-
-# rebuild version.hpp every time
-add_custom_target(get_git_hash
-		ALL
-		DEPENDS ${PROJECT_SOURCE_DIR}/include/alumy/git_hash.h
-)
-
-# version.hpp has to be generated
-# before we start building example
-add_dependencies(${PROJECT_NAME} get_git_hash)
-add_dependencies(${PROJECT_NAME}-static get_git_hash)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 
