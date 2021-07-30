@@ -1,0 +1,7 @@
+#ifndef __GIT_HASH_H
+#define __GIT_HASH_H 1
+
+#define GIT_HASH	"@GIT_HASH@"
+
+#endif
+

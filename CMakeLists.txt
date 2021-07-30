@@ -40,15 +40,6 @@ if(CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif(CCACHE_FOUND)
 
-if(EXISTS "${PROJECT_SOURCE_DIR}/.svn/")
-	find_package(Subversion)
-	
-	if(SUBVERSION_FOUND)
-		Subversion_WC_INFO(${PROJECT_SOURCE_DIR} PROJ)
-		set(SVN_VERSION ${PROJ_WC_REVISION})
-	endif(SUBVERSION_FOUND)
-endif(EXISTS "${PROJECT_SOURCE_DIR}/.svn/")
-
 configure_file(
 	${PROJECT_SOURCE_DIR}/include/alumy/version.h.in
 	${PROJECT_SOURCE_DIR}/include/alumy/version.h)
@@ -133,6 +124,48 @@ set(CPACK_SOURCE_IGNORE_FILES
 set(CPACK_SOURCE_GENERATOR "TGZ")
 
 include(CPack)
+
+#######################################################################
+# get svn revision
+#######################################################################
+add_custom_command(
+		OUTPUT ${PROJECT_SOURCE_DIR}/include/alumy/svn_revision.h
+ 		ALL
+		COMMAND ${CMAKE_COMMAND} -D TARGET_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_SOURCE_DIR}/cmake/svn-revision.cmake
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# rebuild version.hpp every time
+add_custom_target(get_svn_revision
+		ALL
+		DEPENDS ${PROJECT_SOURCE_DIR}/include/alumy/svn_revision.h
+)
+
+# svn_revision.h has to be generated
+# before we start building example
+add_dependencies(${PROJECT_NAME} get_svn_revision)
+add_dependencies(${PROJECT_NAME}-static get_svn_revision)
+
+#####################################################################
+# get git hash
+#####################################################################
+add_custom_command(
+		OUTPUT ${PROJECT_SOURCE_DIR}/include/alumy/git_hash.h
+ 		ALL
+		COMMAND ${CMAKE_COMMAND} -D TARGET_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${PROJECT_SOURCE_DIR}/cmake/git-hash.cmake
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+# rebuild version.hpp every time
+add_custom_target(get_git_hash
+		ALL
+		DEPENDS ${PROJECT_SOURCE_DIR}/include/alumy/git_hash.h
+)
+
+# version.hpp has to be generated
+# before we start building example
+add_dependencies(${PROJECT_NAME} get_git_hash)
+add_dependencies(${PROJECT_NAME}-static get_git_hash)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 

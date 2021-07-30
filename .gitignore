@@ -3,3 +3,6 @@ release/
 
 *.vtg
 *.vpwhist
+
+include/alumy/git_hash.h
+include/alumy/svn_revision.h
