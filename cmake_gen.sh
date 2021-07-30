@@ -27,6 +27,7 @@ mkdir build && cd build
 
 # add options '-LAH' if you want see all variables
 $CMAKE \
+	-G "Unix Makefiles" \
 	-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_DIR/$TOOLCHAIN \
 	-DCMAKE_BUILD_TYPE=$BUILD_TYPE \
 	../
