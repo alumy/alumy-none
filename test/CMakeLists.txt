@@ -29,14 +29,19 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 			COMMENT "Copying configurations")
 
 	enable_testing()
-
-	add_test(test_alumy ${CMAKE_BINARY_DIR}/${PROJECT_NAME}-test)
+	
+	add_test(NAME test_alumy COMMAND ${PROJECT_NAME}-test)
+	set_tests_properties(test_alumy PROPERTIES DEPENDS ${PROJECT_NAME}-test>)
 	set_tests_properties(test_alumy PROPERTIES PASS_REGULAR_EXPRESSION 0)
-		
-	add_test(test_cov "${CMAKE_BINARY_DIR}/covgen.sh")
-	set_tests_properties (test_cov PROPERTIES PASS_REGULAR_EXPRESSION 0)
 
+	if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
+		add_test(NAME test_cov COMMAND "${CMAKE_BINARY_DIR}/covgen.sh")
+		set_tests_properties(test_cov PROPERTIES DEPENDS ${PROJECT_NAME}-test>)
+		set_tests_properties (test_cov PROPERTIES PASS_REGULAR_EXPRESSION 0)
+	endif()
+	
 	add_custom_target(test COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS alumy-test)
+
 endif()
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
