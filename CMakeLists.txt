@@ -71,7 +71,6 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/unity)
 add_subdirectory(${PROJECT_SOURCE_DIR}/cunit)
 add_subdirectory(${PROJECT_SOURCE_DIR}/sys)
 add_subdirectory(${PROJECT_SOURCE_DIR}/cjson)
-add_subdirectory(${PROJECT_SOURCE_DIR}/cm_backtrace)
 
 #############################################################################
 # libalumy
@@ -86,8 +85,7 @@ set(objs
 		$<TARGET_OBJECTS:bcd>
 		$<TARGET_OBJECTS:sys>
 		$<TARGET_OBJECTS:base64>
-		$<TARGET_OBJECTS:cjson>
-		$<TARGET_OBJECTS:cm_backtrace>)
+		$<TARGET_OBJECTS:cjson>)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_src)
 
