@@ -11,8 +11,8 @@ This library also can be called mcu-sdk, you can use this library to start easy 
 ### cmake
 cmake_gen.sh is the generator of cmake, the first argument is toolchain file and the second is build type.
 
-build for gcc
-./cmake_gen.sh gcc.cmake Debug
+eg:
+	./cmake_gen.sh gcc.cmake Debug
 
 ## Imporve
 If you found bugs, please send mail to 17096226@qq.com, thanks very much.
