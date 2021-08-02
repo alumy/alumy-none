@@ -7,12 +7,18 @@ alumy-none is an easy-devel library for embedded, it contains the general low le
 
 This library also can be called mcu-sdk, you can use this library to start easy work.
 
-## How To
-### cmake
-cmake_gen.sh is the generator of cmake, the first argument is toolchain file and the second is build type.
-
-eg:
+## Get Started
+* Clone the code
+```shell
+	git clone https://github.com/alumy/alumy-none.git
+```
+*  Generate Makefile for gcc
+```shell
 	./cmake_gen.sh gcc.cmake Debug
-
+```
+* make and execute test
+```shell
+	cd build && make && make test
+```
 ## Imporve
 If you found bugs, please send mail to 17096226@qq.com, thanks very much.
