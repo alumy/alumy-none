@@ -22,6 +22,7 @@
 #include "alumy/config.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
+#include "alumy/log.h"
 
 // ----------- >8 ------------
 
@@ -29,23 +30,23 @@
 
 // Set generic spiffs debug output call.
 #ifndef SPIFFS_DBG
-#define SPIFFS_DBG(_f, ...) //printf(_f, ## __VA_ARGS__)
+#define SPIFFS_DBG(_f, ...) 		AL_DEBUG(AL_LOG_FS, _f, ## __VA_ARGS__)
 #endif
 // Set spiffs debug output call for garbage collecting.
 #ifndef SPIFFS_GC_DBG
-#define SPIFFS_GC_DBG(_f, ...) //printf(_f, ## __VA_ARGS__)
+#define SPIFFS_GC_DBG(_f, ...)		AL_DEBUG(AL_LOG_FS, _f, ## __VA_ARGS__)
 #endif
 // Set spiffs debug output call for caching.
 #ifndef SPIFFS_CACHE_DBG
-#define SPIFFS_CACHE_DBG(_f, ...) //printf(_f, ## __VA_ARGS__)
+#define SPIFFS_CACHE_DBG(_f, ...) 	AL_DEBUG(AL_LOG_FS, _f, ## __VA_ARGS__)
 #endif
 // Set spiffs debug output call for system consistency checks.
 #ifndef SPIFFS_CHECK_DBG
-#define SPIFFS_CHECK_DBG(_f, ...) //printf(_f, ## __VA_ARGS__)
+#define SPIFFS_CHECK_DBG(_f, ...)	AL_DEBUG(AL_LOG_FS, _f, ## __VA_ARGS__)
 #endif
 // Set spiffs debug output call for all api invocations.
 #ifndef SPIFFS_API_DBG
-#define SPIFFS_API_DBG(_f, ...) //printf(_f, ## __VA_ARGS__)
+#define SPIFFS_API_DBG(_f, ...)		AL_DEBUG(AL_LOG_FS, _f, ## __VA_ARGS__)
 #endif
 
 
@@ -180,7 +181,7 @@
 // not on mount point. If not, SPIFFS_format must be called prior to mounting
 // again.
 #ifndef SPIFFS_USE_MAGIC
-#define SPIFFS_USE_MAGIC                (0)
+#define SPIFFS_USE_MAGIC                (1)
 #endif
 
 #if SPIFFS_USE_MAGIC
@@ -190,7 +191,7 @@
 // be accepted for mounting with a configuration defining the filesystem as 2
 // megabytes.
 #ifndef SPIFFS_USE_MAGIC_LENGTH
-#define SPIFFS_USE_MAGIC_LENGTH         (0)
+#define SPIFFS_USE_MAGIC_LENGTH         (1)
 #endif
 #endif
 

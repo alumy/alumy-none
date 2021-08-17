@@ -14,6 +14,10 @@ extern "C" {
 #define AL_LOG                  1
 #endif
 
+#ifndef AL_LOG_FS
+#define AL_LOG_FS				1
+#endif
+
 #ifndef AL_LOG_COLOR
 #define AL_LOG_COLOR            1
 #endif
