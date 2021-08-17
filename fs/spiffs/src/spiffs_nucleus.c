@@ -1,5 +1,5 @@
-#include "spiffs.h"
-#include "spiffs_nucleus.h"
+#include "alumy/fs/spiffs/spiffs.h"
+#include "alumy/fs/spiffs/spiffs_nucleus.h"
 
 static s32_t spiffs_page_data_check(spiffs *fs, spiffs_fd *fd, spiffs_page_ix pix, spiffs_span_ix spix) {
   s32_t res = SPIFFS_OK;

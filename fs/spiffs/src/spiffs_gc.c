@@ -1,5 +1,5 @@
-#include "spiffs.h"
-#include "spiffs_nucleus.h"
+#include "alumy/fs/spiffs/spiffs.h"
+#include "alumy/fs/spiffs/spiffs_nucleus.h"
 
 #if !SPIFFS_READ_ONLY
 
