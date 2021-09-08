@@ -38,7 +38,7 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 		set_tests_properties (test_cov PROPERTIES PASS_REGULAR_EXPRESSION 0)
 	endif()
 	
-	add_custom_target(test COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS alumy-test)
+	add_custom_target(alymy-test COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS alumy-test)
 
 endif()
 

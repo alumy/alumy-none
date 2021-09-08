@@ -6,9 +6,9 @@
 
 __BEGIN_DECLS
 
-#define ALUMY_MAJOR		0
+#define ALUMY_MAJOR		1
 #define ALUMY_MINOR		0
-#define ALUMY_REV		1
+#define ALUMY_REV		2
 #define ALUMY_BUILD		10
 
 #define AL_PREREQ(ma, mi)	\
