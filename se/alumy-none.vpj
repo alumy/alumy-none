@@ -515,6 +515,7 @@
                         <F N="../include/alumy/fs/spiffs/spiffs_config.h"/>
                         <F N="../include/alumy/fs/spiffs/spiffs_nucleus.h"/>
                     </Folder>
+                    <F N="../include/alumy/fs/fs.h"/>
                 </Folder>
                 <Folder Name="lzma">
                     <F N="../include/alumy/lzma/7zTypes.h"/>
