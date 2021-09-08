@@ -166,5 +166,7 @@ set(CPACK_SOURCE_GENERATOR "TGZ")
 
 include(CPack)
 
+enable_testing()
+
 add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 
