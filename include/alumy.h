@@ -41,6 +41,7 @@
 #include "alumy/pid.h"
 #include "alumy/cJSON.h"
 #include "alumy/cJSON_Utils.h"
+#include "alumy/fs.h"
 
 __BEGIN_DECLS
 

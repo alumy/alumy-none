@@ -554,6 +554,7 @@
                 <F N="../include/alumy/fifo.h"/>
                 <F N="../include/alumy/filter.h"/>
                 <F N="../include/alumy/format_color.h"/>
+                <F N="../include/alumy/fs.h"/>
                 <F N="../include/alumy/git_hash.h"/>
                 <F N="../include/alumy/initialized.h"/>
                 <F N="../include/alumy/list.h"/>
