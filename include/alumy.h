@@ -44,8 +44,28 @@
 
 __BEGIN_DECLS
 
+/**
+ * @brief alumy init
+ *
+ * @author jack (2021/9/9)
+ *
+ * @param void
+ *
+ * @return int32_t return 0 on first init success, return 1 on
+ *         already initialized
+ */
 int32_t alumy_init(void);
 
+/**
+ * @brief alumy cleanup
+ *
+ * @author jack (2021/9/9)
+ *
+ * @param void
+ *
+ * @return int32_t return 0 on cleanup success, return 1 on need
+ *         more cleanup, return -1 on not initialized
+ */
 int32_t alumy_cleanup(void);
 
 __END_DECLS

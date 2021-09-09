@@ -13,17 +13,17 @@ int32_t alumy_init(void)
         return 0;
     }
 
-    return 0;
+    return 1;
 }
 
 int32_t alumy_cleanup(void)
 {
     if (!initialized) {
-        return 0;
+        return -1;
     }
 
     if (--initialized) {
-        return 0;
+        return 1;
     }
 
     return 0;
