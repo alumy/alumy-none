@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     if (CU_initialize_registry()) {
         fprintf(stderr, "\nInitialization of Test Registry failed.");
         return -1;
-    }aa
+    }
 
     do_initcalls();
 
