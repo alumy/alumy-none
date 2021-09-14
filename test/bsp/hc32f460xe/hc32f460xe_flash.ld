@@ -49,6 +49,10 @@ SECTIONS
         *(.glue_7t)
         *(.eh_frame)
 
+        __test_suite_init_start = .;
+        KEEP (*(.test_suite_initcall))
+        __test_suite_init_end = .;
+
         KEEP(*(.init))
         KEEP(*(.fini))
         . = ALIGN(4);
