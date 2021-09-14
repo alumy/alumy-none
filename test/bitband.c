@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "alumy/cunit/CUnit.h"
-#include "alumy/cunit/Automated.h"
-#include "alumy/cunit/Basic.h"
+#include "alumy/test_init.h"
 #include "alumy/arch/arm.h"
 #include "alumy.h"
 #include "test.h"
@@ -99,7 +97,7 @@ static void bitband_perh_test(void)
     }
 }
 
-void add_bitband_tests(void)
+static int32_t add_bitband_tests(void)
 {
 	CU_pSuite suite;
 
@@ -107,7 +105,11 @@ void add_bitband_tests(void)
 
     CU_add_test(suite, "bitband_sram_test", bitband_sram_test);
     CU_add_test(suite, "bitband_perh_test", bitband_perh_test);
+
+    return 0;
 }
+
+al_test_suite_init(add_bitband_tests);
 
 __END_DECLS
 

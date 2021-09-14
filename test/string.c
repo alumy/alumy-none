@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "alumy/cunit/CUnit.h"
-#include "alumy/cunit/Automated.h"
-#include "alumy/cunit/Basic.h"
+#include "alumy/test_init.h"
 #include "alumy.h"
 #include "test.h"
 
@@ -71,7 +69,7 @@ static void str_add_null_test(void)
 }
 
 
-void add_string_tests(void)
+static int32_t add_string_tests(void)
 {
 	CU_pSuite suite;
 
@@ -79,7 +77,11 @@ void add_string_tests(void)
 
 	CU_add_test(suite, "strlcpy", strlcpy_test);
 	CU_add_test(suite, "str_add_null", str_add_null_test);
+
+    return 0;
 }
+
+al_test_suite_init(add_string_tests);
 
 __END_DECLS
 

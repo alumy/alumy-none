@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "alumy/cunit/CUnit.h"
-#include "alumy/cunit/Automated.h"
-#include "alumy/cunit/Basic.h"
+#include "alumy/test_init.h"
 #include "alumy.h"
 #include "test.h"
 
@@ -57,14 +55,18 @@ static void al_mem_is_filled_test(void)
 }
 
 
-void add_mem_tests(void)
+static int32_t add_mem_tests(void)
 {
 	CU_pSuite suite;
 
 	suite = CU_add_suite("mem", mem_suite_init, mem_suite_clean);
 
 	CU_add_test(suite, "al_mem_is_filled", al_mem_is_filled_test);
+
+    return 0;
 }
+
+al_test_suite_init(add_mem_tests);
 
 __END_DECLS
 

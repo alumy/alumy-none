@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "alumy/cunit/CUnit.h"
-#include "alumy/cunit/Automated.h"
-#include "alumy/cunit/Basic.h"
+#include "alumy/test_init.h"
 #include "alumy.h"
 #include "test.h"
 #include "portal.h"
 
 __BEGIN_DECLS
+
+extern al_test_suite_initcall_t __test_suite_init_start;
+extern al_test_suite_initcall_t __test_suite_init_end;
 
 static int example_suite_init(void)
 {
@@ -26,31 +27,30 @@ static void example_test(void)
     CU_ASSERT(1);
 }
 
-static void add_example_tests(void)
+static int32_t add_example_tests(void)
 {
     CU_pSuite suite;
 
     suite = CU_add_suite("example", example_suite_init, example_suite_clean);
-    CU_add_test(suite, "example", example_test);
+    if (suite == NULL) {
+        return -1;
+    }
+
+    if (CU_add_test(suite, "example", example_test) == NULL) {
+        return -1;
+    }
+
+    return 0;
 }
 
-static void add_tests(void)
+al_test_suite_init(add_example_tests);
+
+static void do_initcalls(void)
 {
-    void (*add_test_tab[])(void) = {
-        add_example_tests,
-        add_mem_tests,
-        add_string_tests,
-        add_filter_tests,
-        add_bitband_tests,
-    };
+    al_test_suite_initcall_t *init_ptr = &__test_suite_init_start;
 
-    assert(CU_get_registry()!= NULL);
-    assert(!CU_is_test_running());
-
-    for (int32_t i = 0; i < ARRAY_SIZE(add_test_tab); ++i) {
-        if (add_test_tab[i] != NULL) {
-            add_test_tab[i]();
-        }
+    for (; init_ptr < &__test_suite_init_end; init_ptr++) {
+        (*init_ptr)();
     }
 }
 
@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    add_tests();
+    do_initcalls();
 
     CU_set_output_filename("test");
     CU_list_tests_to_file();

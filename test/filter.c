@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "alumy/cunit/CUnit.h"
-#include "alumy/cunit/Automated.h"
-#include "alumy/cunit/Basic.h"
+#include "alumy/test_init.h"
 #include "alumy.h"
 #include "test.h"
 
@@ -25,14 +23,18 @@ static void kalman_filter_succ_test(void)
 
 }
 
-void add_filter_tests(void)
+static int32_t add_filter_tests(void)
 {
 	CU_pSuite suite;
 
 	suite = CU_add_suite("filter", filter_suite_init, filter_suite_clean);
 
 	CU_add_test(suite, "kalman_filter", kalman_filter_succ_test);
+
+    return 0;
 }
+
+al_test_suite_init(add_filter_tests);
 
 __END_DECLS
 

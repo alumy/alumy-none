@@ -515,7 +515,6 @@
                         <F N="../include/alumy/fs/spiffs/spiffs_config.h"/>
                         <F N="../include/alumy/fs/spiffs/spiffs_nucleus.h"/>
                     </Folder>
-                    <F N="../include/alumy/fs/fs.h"/>
                 </Folder>
                 <Folder Name="lzma">
                     <F N="../include/alumy/lzma/7zTypes.h"/>
@@ -567,6 +566,7 @@
                 <F N="../include/alumy/string.h"/>
                 <F N="../include/alumy/svn_revision.h"/>
                 <F N="../include/alumy/test.h"/>
+                <F N="../include/alumy/test_init.h"/>
                 <F N="../include/alumy/types.h"/>
                 <F N="../include/alumy/version.h"/>
                 <F N="../include/alumy/xyzmodem.h"/>
@@ -793,6 +793,7 @@
                         <F N="../test/bsp/es32f0654/startup/syscalls.c"/>
                     </Folder>
                     <F N="../test/bsp/es32f0654/CMakeLists.txt"/>
+                    <F N="../test/bsp/es32f0654/es32f0654lt.ld"/>
                 </Folder>
                 <Folder Name="hc32f460xe">
                     <Folder Name="bsp">
@@ -938,6 +939,10 @@
                                     </Folder>
                                 </Folder>
                             </Folder>
+                            <Folder Name="LinkerScript">
+                                <F N="../test/bsp/hc32f460xe/mcu/GCC/LinkerScript/hc32f460xc_flash.ld"/>
+                                <F N="../test/bsp/hc32f460xe/mcu/GCC/LinkerScript/hc32f460xe_flash.ld"/>
+                            </Folder>
                         </Folder>
                         <F N="../test/bsp/hc32f460xe/mcu/CMakeLists.txt"/>
                     </Folder>
@@ -946,6 +951,7 @@
                         <F N="../test/bsp/hc32f460xe/startup/syscalls.c"/>
                     </Folder>
                     <F N="../test/bsp/hc32f460xe/CMakeLists.txt"/>
+                    <F N="../test/bsp/hc32f460xe/hc32f460xe_flash.ld"/>
                 </Folder>
                 <Folder Name="stm32f103c8tx">
                     <Folder Name="bsp">
@@ -2092,6 +2098,10 @@
                         <F N="../test/bsp/stm32f103c8tx/system/system_stm32f1xx.c"/>
                     </Folder>
                     <F N="../test/bsp/stm32f103c8tx/CMakeLists.txt"/>
+                    <F N="../test/bsp/stm32f103c8tx/STM32F103C8Tx_FLASH.ld"/>
+                </Folder>
+                <Folder Name="x86_64">
+                    <F N="../test/bsp/x86_64/linker.ld"/>
                 </Folder>
             </Folder>
             <Folder Name="portal">
