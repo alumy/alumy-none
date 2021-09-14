@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Please make sure that you already installed the npm in your system
+
 sudo npm install -g commitizen conventional-changelog-cli
 
 npm install --save-dev validate-commit-msg
