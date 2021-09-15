@@ -5,8 +5,8 @@
 # Please execute the next command to install commitizen for global by sudo user
 # sudo npm install -g commitizen conventional-changelog-cli
 
-commitizen init cz-conventional-changelog --force --save --save-exact
+commitizen init cz-conventional-changelog --force
 
-npm install --save validate-commit-msg
-npm install --save ghooks 
+npm install validate-commit-msg
+npm install ghooks 
 
