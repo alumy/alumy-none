@@ -5,7 +5,7 @@
             "pre-push": "./cmake_gen.sh gcc.cmake Debug && cd build && make && make test"
         },
         "commitizen": {
-            "path": "./node_modules/cz-conventional-changelog"
+            "path": "cz-conventional-changelog"
         }
     },
     "scripts": {
