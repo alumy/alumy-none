@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "\nInitialization of Test Registry failed.");
         return -1;
     }
-
+ 
     do_initcalls();
 
     CU_set_output_filename("test");
