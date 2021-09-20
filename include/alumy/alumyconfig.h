@@ -14,6 +14,10 @@ extern "C" {
 #define AL_LOG                  1
 #endif
 
+#ifndef AL_DRV_RTC_LOG
+#define AL_DRV_RTC_LOG          1
+#endif
+
 #ifndef AL_LOG_FS
 #define AL_LOG_FS				1
 #endif

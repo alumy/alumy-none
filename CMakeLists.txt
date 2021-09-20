@@ -95,6 +95,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/cunit)
 add_subdirectory(${PROJECT_SOURCE_DIR}/sys)
 add_subdirectory(${PROJECT_SOURCE_DIR}/cjson)
 add_subdirectory(${PROJECT_SOURCE_DIR}/fs)
+add_subdirectory(${PROJECT_SOURCE_DIR}/driver)
 
 #############################################################################
 # libalumy
@@ -110,6 +111,7 @@ set(objs
 		$<TARGET_OBJECTS:sys>
 		$<TARGET_OBJECTS:base64>
 		$<TARGET_OBJECTS:cjson>
+		$<TARGET_OBJECTS:driver>
 		$<TARGET_OBJECTS:fs>)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_src)

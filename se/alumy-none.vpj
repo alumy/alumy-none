@@ -375,6 +375,7 @@
             </Folder>
             <Folder Name="rtc">
                 <F N="../driver/rtc/bm8563.c"/>
+                <F N="../driver/rtc/ds1302.c"/>
                 <F N="../driver/rtc/sd3078.c"/>
             </Folder>
             <F N="../driver/boost.c"/>
@@ -475,6 +476,7 @@
                     </Folder>
                     <Folder Name="rtc">
                         <F N="../include/alumy/driver/rtc/bm8563.h"/>
+                        <F N="../include/alumy/driver/rtc/ds1302.h"/>
                         <F N="../include/alumy/driver/rtc/sd3078.h"/>
                     </Folder>
                     <F N="../include/alumy/driver/boost.h"/>
