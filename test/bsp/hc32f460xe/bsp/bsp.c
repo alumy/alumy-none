@@ -70,6 +70,7 @@ static void clk_init(void)
 int32_t bsp_init(void)
 {
     clk_init();
+    systick_init();
 
     dbg_uart_init();
 

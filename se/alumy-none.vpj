@@ -800,6 +800,7 @@
                     <Folder Name="bsp">
                         <Folder Name="include">
                             <Folder Name="bsp">
+                                <F N="../test/bsp/hc32f460xe/bsp/include/bsp/systick.h"/>
                                 <F N="../test/bsp/hc32f460xe/bsp/include/bsp/uart.h"/>
                             </Folder>
                             <F N="../test/bsp/hc32f460xe/bsp/include/bsp.h"/>
@@ -808,6 +809,7 @@
                         </Folder>
                         <F N="../test/bsp/hc32f460xe/bsp/bsp.c"/>
                         <F N="../test/bsp/hc32f460xe/bsp/CMakeLists.txt"/>
+                        <F N="../test/bsp/hc32f460xe/bsp/systick.c"/>
                         <F N="../test/bsp/hc32f460xe/bsp/uart.c"/>
                     </Folder>
                     <Folder Name="driver">

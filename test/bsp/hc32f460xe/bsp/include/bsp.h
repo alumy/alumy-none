@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "bsp/uart.h"
+#include "bsp/systick.h"
 
 #endif
 
