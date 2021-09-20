@@ -1,0 +1,10 @@
+# Generate jlink burn command file
+file(WRITE ${jlink_cmd} "")
+file(APPEND ${jlink_cmd} "si SWD\n")
+file(APPEND ${jlink_cmd} "speed 5000\n")
+file(APPEND ${jlink_cmd} "r\n")
+file(APPEND ${jlink_cmd} "h\n")
+file(APPEND ${jlink_cmd} "erase\n")
+file(APPEND ${jlink_cmd} "loadfile ${loadfile}\n")
+file(APPEND ${jlink_cmd} "r\n")
+file(APPEND ${jlink_cmd} "q\n")

@@ -15,6 +15,6 @@ target_include_directories(${target} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 # Compile options for this component
 target_compile_options(${target} PUBLIC -eentry)
 
-debug()
-gdbserver("HC32F460XE")
+# debug()
+# gdbserver("HC32F460XE")
 

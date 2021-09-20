@@ -1,4 +1,4 @@
-# in case Git is not available, we default to "unknown"
+# in case SVN is not available, we default to "unknown"
 set(SVN_REVISION 0)
 
 # find svn revision 
