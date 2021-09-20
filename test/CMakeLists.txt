@@ -48,7 +48,11 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 
     add_executable(${PROJECT_NAME}-test ${test_src})
 
-    target_link_libraries(${PROJECT_NAME}-test PRIVATE bsp startup portal)
+    target_link_libraries(${PROJECT_NAME}-test PRIVATE 
+							-Wl,--whole-archive
+							bsp  portal
+							-Wl,--no-whole-archive)
+
     target_link_libraries(${PROJECT_NAME}-test PRIVATE ${PROJECT_NAME}-static)
 
     add_custom_command(TARGET ${PROJECT_NAME}-test

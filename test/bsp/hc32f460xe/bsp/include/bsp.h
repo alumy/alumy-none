@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#include "bsp/uart.h"
 
 #endif
 

@@ -71,8 +71,7 @@ int32_t bsp_init(void)
 {
     clk_init();
 
-	// dbg_uart_init();
-    // pulse_timer_init();
+    dbg_uart_init();
 
     return 0;
 }

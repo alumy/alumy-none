@@ -56,6 +56,8 @@ static void do_initcalls(void)
 
 int main(int argc, char *argv[])
 {
+    bsp_init();
+
     if (CU_initialize_registry()) {
         fprintf(stderr, "\nInitialization of Test Registry failed.");
         return -1;

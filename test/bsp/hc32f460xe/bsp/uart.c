@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <sys/cdefs.h>
 #include "config.h"
+#include "SEGGER_RTT.h"
 
 __BEGIN_DECLS
 
@@ -26,8 +27,8 @@ PUTCHAR_PROTOTYPE
   /* Place your implementation of fputc here */
   /* e.g. write a character to the USART1 and Loop until the end of transmission */
   uint8_t c = ch;
-
-  return -EOF;
+  
+  return (SEGGER_RTT_Write(0, &c, sizeof(c)) == 1) ? ch : -EOF;
 }
 
 /**
@@ -42,6 +43,12 @@ static void dbg_uart_pin_init(void)
 
 int32_t dbg_uart_init(void)
 {
+    SEGGER_RTT_Init();
+
+	for (int32_t i = 0; i < SEGGER_RTT_MAX_NUM_UP_BUFFERS; ++i) {
+		SEGGER_RTT_ConfigUpBuffer(
+			0, NULL, NULL, 0, SEGGER_RTT_MODE_NO_BLOCK_SKIP);
+	}
 
 	return 0;
 }

@@ -328,6 +328,7 @@
             </Folder>
             <F N="../cmake/generic_check.cmake"/>
             <F N="../cmake/git-hash.cmake"/>
+            <F N="../cmake/jlink_burn_cmd.cmake"/>
             <F N="../cmake/linux_check.cmake"/>
             <F N="../cmake/message.cmake"/>
             <F N="../cmake/svn-revision.cmake"/>
@@ -945,6 +946,21 @@
                             </Folder>
                         </Folder>
                         <F N="../test/bsp/hc32f460xe/mcu/CMakeLists.txt"/>
+                    </Folder>
+                    <Folder Name="segger">
+                        <Folder Name="RTT">
+                            <F N="../test/bsp/hc32f460xe/segger/RTT/SEGGER_RTT.c"/>
+                            <F N="../test/bsp/hc32f460xe/segger/RTT/SEGGER_RTT.h"/>
+                            <F N="../test/bsp/hc32f460xe/segger/RTT/SEGGER_RTT_Conf.h"/>
+                            <F N="../test/bsp/hc32f460xe/segger/RTT/SEGGER_RTT_printf.c"/>
+                        </Folder>
+                        <Folder Name="Syscalls">
+                            <F N="../test/bsp/hc32f460xe/segger/Syscalls/SEGGER_RTT_Syscalls_GCC.c"/>
+                            <F N="../test/bsp/hc32f460xe/segger/Syscalls/SEGGER_RTT_Syscalls_IAR.c"/>
+                            <F N="../test/bsp/hc32f460xe/segger/Syscalls/SEGGER_RTT_Syscalls_KEIL.c"/>
+                            <F N="../test/bsp/hc32f460xe/segger/Syscalls/SEGGER_RTT_Syscalls_SES.c"/>
+                        </Folder>
+                        <F N="../test/bsp/hc32f460xe/segger/CMakeLists.txt"/>
                     </Folder>
                     <Folder Name="startup">
                         <F N="../test/bsp/hc32f460xe/startup/CMakeLists.txt"/>

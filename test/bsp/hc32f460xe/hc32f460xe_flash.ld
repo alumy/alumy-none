@@ -43,6 +43,7 @@ SECTIONS
     .text :
     {
         . = ALIGN(4);
+		_stext = .;
         *(.text)
         *(.text*)
         *(.glue_7)
@@ -55,6 +56,7 @@ SECTIONS
 
         KEEP(*(.init))
         KEEP(*(.fini))
+		_etext = .;
         . = ALIGN(4);
     } >FLASH
 
@@ -160,6 +162,15 @@ SECTIONS
         __bss_end__ = _ebss;
     } >RAM
 
+    .noinit(NOLOAD):
+    {
+        . = ALIGN(4);
+         _noinit_start = .;
+        *(.noinit .noinit.*)
+        . = ALIGN(4) ;
+        _noinit_end = .;
+    } >RAM
+
     .ret_ram_bss :
     {
         . = ALIGN(4);
@@ -173,6 +184,7 @@ SECTIONS
     .heap_stack (COPY) :
     {
         . = ALIGN(8);
+		_sstack = .;
         __end__ = .;
         PROVIDE(end = .);
         PROVIDE(_end = .);
@@ -184,6 +196,7 @@ SECTIONS
         *(.stack*)
         . = ALIGN(8);
         __StackTop = .;
+		_estack = .;
     } >RAM
 
     /DISCARD/ :
