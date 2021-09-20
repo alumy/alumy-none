@@ -12,10 +12,10 @@ __BEGIN_DECLS
 typedef struct ds1302 ds1302_t;
 
 typedef struct ds1302_opt {
-    int32_t (*io_set)(ds1302_t *this, al_gpio_t level);
-    al_gpio_t (*io_get)(ds1302_t *this);
-    int32_t (*io_dir_set)(ds1302_t *this, al_gpio_dir_t dir);
-    int32_t (*sclk_set)(ds1302_t *this, al_gpio_t level);
+    int32_t (*io_set)(ds1302_t * this, al_gpio_t level);
+    al_gpio_t (*io_get)(ds1302_t * this);
+    int32_t (*io_dir_set)(ds1302_t * this, al_gpio_dir_t dir);
+    int32_t (*sclk_set)(ds1302_t * this, al_gpio_t level);
 } ds1302_opt_t;
 
 struct ds1302 {

@@ -14,34 +14,34 @@ __BEGIN_DECLS
 
 int_fast8_t ds1302_init(ds1302_t *this, const ds1302_opt_t *opt)
 {
-
+    return 0;
 }
 
 int_fast8_t ds1302_final(ds1302_t *this)
 {
-
+    return 0;
 }
 
 int_fast8_t ds1302_write_date_time(ds1302_t *this, const struct tm *tm)
 {
-
+    return 0;
 }
 
 int_fast8_t ds1302_read_date_time(ds1302_t *this, struct tm *tm)
 {
-
+    return 0;
 }
 
 int_fast8_t ds1302_read_ram(ds1302_t *this, uint16_t addr,
                             void *buf, size_t size)
 {
-
+    return 0;
 }
 
 int_fast8_t ds1302_write_ram(ds1302_t *this, uint16_t addr,
                              const void *data, size_t len)
 {
-
+    return 0;
 }
 
 
