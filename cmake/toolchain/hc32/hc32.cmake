@@ -57,12 +57,12 @@ endfunction(debug)
 
 function(gdbserver device)
 add_custom_target(gdbserver
-		COMMAND JLinkGDBServerCLExe -JLinkDevicesXMLPath ${PROJECT_SOURCE_DIR}/cmake/toolchain/hc32/jlink/ -device ${device} -if swd -speed auto -ir -vd)
+		COMMAND JLinkGDBServerCLExe -JLinkDevicesXMLPath ${PROJECT_SOURCE_DIR}/cmake/toolchain/jlink/ -device ${device} -if swd -speed auto -ir -vd)
 endfunction(gdbserver)
 
 function(jflash device proj_name)
 add_custom_target(jflash
-		COMMAND JFlash -jlinkdevicesxmlpath${PROJECT_SOURCE_DIR}/cmake/toolchain/hc32/jlink/JLinkDevices.xml
+		COMMAND JFlash -jlinkdevicesxmlpath${PROJECT_SOURCE_DIR}/cmake/toolchain/jlink/JLinkDevices.xml
 						-openprj${PROJECT_SOURCE_DIR}/cmake/toolchain/hc32/${device}.jflash
 						-open${CMAKE_BINARY_DIR}/${proj_name}.hex
 						-auto -min -exit -jflashlog${CMAKE_BINARY_DIR}/jflash.log
