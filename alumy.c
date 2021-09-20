@@ -10,10 +10,10 @@ static uint32_t initialized = 0;
 int32_t alumy_init(void)
 {
     if (initialized++) {
-        return 0;
+        return 1;
     }
 
-    return 1;
+    return 0;
 }
 
 int32_t alumy_cleanup(void)
