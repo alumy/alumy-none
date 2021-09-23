@@ -379,6 +379,7 @@
                 <F N="../driver/rtc/sd3078.c"/>
             </Folder>
             <F N="../driver/boost.c"/>
+            <F N="../driver/CMakeLists.txt"/>
             <F N="../driver/flexible_button.c"/>
             <F N="../driver/sw_i2c.c"/>
         </Folder>
@@ -810,7 +811,6 @@
                             <F N="../test/bsp/hc32f460xe/bsp/include/ddl_config.h"/>
                         </Folder>
                         <F N="../test/bsp/hc32f460xe/bsp/bsp.c"/>
-                        <F N="../test/bsp/hc32f460xe/bsp/CMakeLists.txt"/>
                         <F N="../test/bsp/hc32f460xe/bsp/systick.c"/>
                         <F N="../test/bsp/hc32f460xe/bsp/uart.c"/>
                     </Folder>
@@ -901,12 +901,10 @@
                             <F N="../test/bsp/hc32f460xe/driver/src/hc32f460_utility.c"/>
                             <F N="../test/bsp/hc32f460xe/driver/src/hc32f460_wdt.c"/>
                         </Folder>
-                        <F N="../test/bsp/hc32f460xe/driver/CMakeLists.txt"/>
                     </Folder>
                     <Folder Name="inc">
                         <F N="../test/bsp/hc32f460xe/inc/alumyconfig.h"/>
                         <F N="../test/bsp/hc32f460xe/inc/config.h"/>
-                        <F N="../test/bsp/hc32f460xe/inc/ddl_config.h"/>
                     </Folder>
                     <Folder Name="mcu">
                         <Folder Name="common">
@@ -949,7 +947,6 @@
                                 <F N="../test/bsp/hc32f460xe/mcu/GCC/LinkerScript/hc32f460xe_flash.ld"/>
                             </Folder>
                         </Folder>
-                        <F N="../test/bsp/hc32f460xe/mcu/CMakeLists.txt"/>
                     </Folder>
                     <Folder Name="segger">
                         <Folder Name="RTT">
@@ -964,11 +961,12 @@
                             <F N="../test/bsp/hc32f460xe/segger/Syscalls/SEGGER_RTT_Syscalls_KEIL.c"/>
                             <F N="../test/bsp/hc32f460xe/segger/Syscalls/SEGGER_RTT_Syscalls_SES.c"/>
                         </Folder>
-                        <F N="../test/bsp/hc32f460xe/segger/CMakeLists.txt"/>
                     </Folder>
                     <Folder Name="startup">
-                        <F N="../test/bsp/hc32f460xe/startup/CMakeLists.txt"/>
                         <F N="../test/bsp/hc32f460xe/startup/syscalls.c"/>
+                    </Folder>
+                    <Folder Name="test">
+                        <F N="../test/bsp/hc32f460xe/test/rtc.c"/>
                     </Folder>
                     <F N="../test/bsp/hc32f460xe/CMakeLists.txt"/>
                     <F N="../test/bsp/hc32f460xe/hc32f460xe_flash.ld"/>
