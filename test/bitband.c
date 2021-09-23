@@ -109,7 +109,7 @@ static int32_t add_bitband_tests(void)
     return 0;
 }
 
-// al_test_suite_init(add_bitband_tests);
+al_test_suite_init(add_bitband_tests);
 
 __END_DECLS
 
