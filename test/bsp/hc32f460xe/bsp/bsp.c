@@ -67,10 +67,19 @@ static void clk_init(void)
     SystemCoreClockUpdate();
 }
 
+static void flash_cache_enable(void)
+{
+    EFM_Unlock();
+    EFM_InstructionCacheCmd(Enable);
+    EFM_Lock();
+}
+
 int32_t bsp_init(void)
 {
     clk_init();
     systick_init();
+
+    flash_cache_enable();
 
     dbg_uart_init();
 

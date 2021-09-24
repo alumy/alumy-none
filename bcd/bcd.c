@@ -7,7 +7,8 @@ __BEGIN_DECLS
 
 __attribute_const__ uint8_t bcd2bin(uint8_t bcd)
 {
-    BUG_ON(bcd > 0x99);
+    BUG_ON(((bcd & 0xF0) >> 4) > 0x09);
+    BUG_ON((bcd & 0x0F) > 0x09);
 
     return (bcd & 0x0f) + (bcd >> 4) * 10;
 }

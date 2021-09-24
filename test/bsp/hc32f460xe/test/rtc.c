@@ -89,11 +89,11 @@ static int32_t ds1302_gpio_final(ds1302_t *this)
 
 static void ds1302_delay_us(ds1302_t *this)
 {
-    int32_t delay = SystemCoreClock / 3 * 5;
+    uint32_t delay = SystemCoreClock / 5 / 200000;
 
-    delay = 10000;
-
-    while (delay--);
+    while (delay--) {
+        __asm__ volatile("nop");
+    }
 }
 
 static int rtc_ds1302_suite_init(void)
@@ -129,17 +129,15 @@ static void rtc_ds1302_write_date_time_test(void)
         .tm_hour = 0,
         .tm_mday = 1,
         .tm_mon = 0,
-        .tm_year = 1970 - 1900
+        .tm_year = 2021 - 1900
     };
 
     struct tm tm_rd;
 
-    while (1) {
-        ds1302_write_date_time(&ds1302, &tm_wr);
-        // ds1302_read_date_time(&ds1302, &tm_rd);
+    ds1302_write_date_time(&ds1302, &tm_wr);
+    ds1302_read_date_time(&ds1302, &tm_rd);
 
-        // CU_ASSERT(mktime(&tm_wr) == mktime(&tm_rd));
-    }
+    CU_ASSERT(mktime(&tm_wr) == mktime(&tm_rd));
 }
 
 static void rtc_ds1302_write_ram_test(void)
