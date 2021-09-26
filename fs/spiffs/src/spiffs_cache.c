@@ -5,7 +5,7 @@
  *      Author: petera
  */
 
-#include "spiffs.h"
+#include "alumy/fs/spiffs/spiffs.h"
 #include "spiffs_nucleus.h"
 
 #if SPIFFS_CACHE

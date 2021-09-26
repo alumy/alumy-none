@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-#include "spiffs_config.h"
+#include "alumy/fs/spiffs/spiffs_config.h"
 
 #define SPIFFS_OK                       0
 #define SPIFFS_ERR_NOT_MOUNTED          -10000
