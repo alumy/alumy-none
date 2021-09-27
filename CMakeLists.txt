@@ -77,7 +77,7 @@ add_custom_target(get_git_hash
 )
 
 add_definitions(-D__STDC_FORMAT_MACROS)
-add_definitions(-DALUMY_USE_DEFAULT_CONFIG)
+add_definitions(-DAL_USE_DEFAULT_CONFIG)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
