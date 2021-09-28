@@ -12,7 +12,7 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 
     target_link_libraries(${PROJECT_NAME}-test PRIVATE portal)
     target_link_libraries(${PROJECT_NAME}-test PRIVATE ${PROJECT_NAME}-static)
-	
+
     add_custom_command(TARGET ${PROJECT_NAME}-test
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/tools/covgen.sh ${CMAKE_BINARY_DIR}
@@ -32,7 +32,7 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 	set_tests_properties(test_alumy PROPERTIES PASS_REGULAR_EXPRESSION 0)
 
     if(${CMAKE_BUILD_TYPE} MATCHES Debug)
-        add_test(NAME test_cov COMMAND "${CMAKE_BINARY_DIR}/covgen.sh")
+	add_test(NAME test_cov COMMAND ${CMAKE_BINARY_DIR}/covgen.sh ${CMAKE_BINARY_DIR})
         set_tests_properties (test_cov PROPERTIES PASS_REGULAR_EXPRESSION 0)
     endif()
 

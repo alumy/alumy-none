@@ -144,8 +144,8 @@ add_dependencies("${PROJECT_NAME}-static" get_svn_revision)
 set_target_properties("${PROJECT_NAME}-static" PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
 set_target_properties("${PROJECT_NAME}-static" PROPERTIES PREFIX "lib")
 
-install(TARGETS "${PROJECT_NAME}-static" 
-		DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+install(TARGETS "${PROJECT_NAME}-static"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}")
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"

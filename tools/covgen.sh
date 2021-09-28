@@ -1,2 +1,5 @@
-lcov -c -d . -o app.info
-genhtml app.info -o cc_result
+dir=$1
+
+lcov -c -d $dir -o $dir/app.info
+genhtml $dir/app.info -o $dir/cc_result
+
