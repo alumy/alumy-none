@@ -393,6 +393,12 @@ int32_t spiffs_init(void)
         AL_WARN(1, "%s, SPIFFS_mount failed, errno = %d",
                 __func__, SPIFFS_errno(&fs));
 
+        if (SPIFFS_errno(&fs) != SPIFFS_ERR_NOT_A_FS) {
+            return -1;
+        }
+
+        SPIFFS_unmount(&fs);
+
         if (SPIFFS_format(&fs) != 0) {
             AL_ERROR(1, "%s, SPIFFS_format failed, errno = %d",
                      __func__, SPIFFS_errno(&fs));
