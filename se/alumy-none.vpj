@@ -382,6 +382,7 @@
             <F N="../driver/CMakeLists.txt"/>
             <F N="../driver/flexible_button.c"/>
             <F N="../driver/sw_i2c.c"/>
+            <F N="../driver/sw_spi.c"/>
         </Folder>
         <Folder Name="../filter">
             <F N="../filter/CMakeLists.txt"/>
@@ -487,6 +488,7 @@
                     <F N="../include/alumy/driver/i2c.h"/>
                     <F N="../include/alumy/driver/rtc.h"/>
                     <F N="../include/alumy/driver/sw_i2c.h"/>
+                    <F N="../include/alumy/driver/sw_spi.h"/>
                 </Folder>
                 <Folder Name="filter">
                     <F N="../include/alumy/filter/kalman.h"/>
@@ -967,6 +969,7 @@
                     </Folder>
                     <Folder Name="test">
                         <F N="../test/bsp/hc32f460xe/test/rtc.c"/>
+                        <F N="../test/bsp/hc32f460xe/test/spiffs.c"/>
                     </Folder>
                     <F N="../test/bsp/hc32f460xe/CMakeLists.txt"/>
                     <F N="../test/bsp/hc32f460xe/hc32f460xe_flash.ld"/>
