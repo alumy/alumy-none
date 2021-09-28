@@ -26,6 +26,7 @@
 #include "alumy/errno.h"
 #include "alumy/log.h"
 #include "alumy/list.h"
+#include "alumy/bcd.h"
 #include "alumy/pool.h"
 #include "alumy/filter.h"
 #include "alumy/driver.h"

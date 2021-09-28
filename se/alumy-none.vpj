@@ -2129,6 +2129,7 @@
                 <F N="../test/portal/bsp.c"/>
                 <F N="../test/portal/CMakeLists.txt"/>
             </Folder>
+            <F N="../test/bcd.c"/>
             <F N="../test/bitband.c"/>
             <F N="../test/CMakeLists.txt"/>
             <F N="../test/filter.c"/>
