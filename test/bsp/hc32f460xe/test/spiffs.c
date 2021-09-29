@@ -479,8 +479,6 @@ static int spiffs_suite_init(void)
 {
     spi_flash_init();
 
-    spiffs_init();
-
     return 0;
 }
 
@@ -500,6 +498,36 @@ static void spiffs_info_test(void)
     AL_INFO(1, "spiffs usage, total = %u, used = %u\n", total, used);
 
     CU_ASSERT(used <= total);
+}
+
+static void spiffs_mount_test(void)
+{
+
+}
+
+static void spiffs_unmount_test(void)
+{
+
+}
+
+static void spiffs_open_test(void)
+{
+
+}
+
+static void spiffs_close_test(void)
+{
+
+}
+
+static void spiffs_write_test(void)
+{
+
+}
+
+static void spiffs_read_test(void)
+{
+
 }
 
 __used static void spi_flash_test(void)
@@ -541,6 +569,12 @@ static int32_t add_spiffs_tests(void)
 
     CU_add_test(suite, "spi_flash_test", spi_flash_test);
     CU_add_test(suite, "spiffs_info_test", spiffs_info_test);
+    CU_add_test(suite, "spiffs_mount_test", spiffs_mount_test);
+    CU_add_test(suite, "spiffs_unmount_test", spiffs_unmount_test);
+    CU_add_test(suite, "spiffs_open_test", spiffs_open_test);
+    CU_add_test(suite, "spiffs_close_test", spiffs_close_test);
+    CU_add_test(suite, "spiffs_write_test", spiffs_write_test);
+    CU_add_test(suite, "spiffs_read_test", spiffs_read_test);
 
     return 0;
 }
