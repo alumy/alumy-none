@@ -541,6 +541,7 @@
                     <F N="../include/alumy/xyzmodem/ymodem.h"/>
                 </Folder>
                 <F N="../include/alumy/alumyconfig.h"/>
+                <F N="../include/alumy/alumyconfig_dft.h"/>
                 <F N="../include/alumy/ascii.h"/>
                 <F N="../include/alumy/base.h"/>
                 <F N="../include/alumy/base64.h"/>

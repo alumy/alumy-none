@@ -49,10 +49,10 @@ __BEGIN_DECLS
 #define FLASH_INSTR_ERASE_4KB_SECTOR    (0x20u)
 #define FLASH_INSTR_READ_SR1            (0x05u)
 
-#define SPIFLASH_CFG_PHYS_SZ            0x800000
-#define SPIFLASH_CFG_PHYS_ERASE_SZ      0xFFFF
+#define SPIFLASH_CFG_PHYS_SZ            (0x800000ul)
+#define SPIFLASH_CFG_PHYS_ERASE_SZ      FLASH_SECTOR_SIZE
 #define SPIFLASH_CFG_PHYS_ADDR          0
-#define SPIFLASH_CFG_LOG_PAGE_SZ        0x100
+#define SPIFLASH_CFG_LOG_PAGE_SZ        FLASH_PAGE_SIZE
 #define SPIFLASH_CFG_LOG_BLOCK_SZ       0xFFFF
 
 spiffs fs;
@@ -73,7 +73,7 @@ static void Spi_Config(void)
     PORT_SetFunc(SPI_MISO_PORT, SPI_MISO_PIN, SPI_MISO_FUNC, Disable);
 
     /* Configuration SPI structure */
-    stcSpiInit.enClkDiv = SpiClkDiv8;
+    stcSpiInit.enClkDiv = SpiClkDiv2;
     stcSpiInit.enFrameNumber = SpiFrameNumber1;
     stcSpiInit.enDataLength = SpiDataLengthBit8;
     stcSpiInit.enFirstBitPosition = SpiFirstBitPositionMSB;
@@ -206,6 +206,9 @@ static en_result_t SpiFlash_WritePage(uint32_t u32Addr, const uint8_t pData[], u
     en_result_t enRet = Ok;
     uint16_t u16Index = 0u;
 
+    BUG_ON(!AL_IS_ALIGNED(u32Addr, FLASH_PAGE_SIZE));
+    BUG_ON(len <= FLASH_PAGE_SIZE);
+
     if ((u32Addr > FLASH_MAX_ADDR) || (NULL == pData) || (len > FLASH_PAGE_SIZE))
     {
         enRet = Error;
@@ -295,6 +298,8 @@ static en_result_t SpiFlash_Erase4KbSector(uint32_t u32Addr)
 {
     en_result_t enRet = Ok;
 
+    BUG_ON(!AL_IS_ALIGNED(u32Addr, FLASH_SECTOR_SIZE));
+
     if (u32Addr >= FLASH_MAX_ADDR)
     {
         enRet =  Error;
@@ -328,17 +333,21 @@ static s32_t spi_flash_read(u32_t addr,u32_t len,u8_t *buf)
     return 0;
 }
 
-static s32_t spi_flash_write(u32_t addr, u32_t len,u8_t *buf)
+static s32_t spi_flash_write(u32_t addr, u32_t len, u8_t *data)
 {
-    if (SpiFlash_WritePage(addr, buf, len) != Ok) {
+    if (SpiFlash_WritePage(addr, data, len) != Ok) {
         return -1;
     }
 
     return 0;
 }
 
-static s32_t spi_flash_erase(u32_t addr, u32_t num)
+static s32_t spi_flash_erase(u32_t addr, u32_t size)
 {
+    BUG_ON(!AL_IS_ALIGNED(size, FLASH_SECTOR_SIZE));
+
+    int32_t num = size >> 12;
+
     for (int32_t i = 0; i < num; ++i) {
         if (SpiFlash_Erase4KbSector(addr) != Ok) {
             return -1;

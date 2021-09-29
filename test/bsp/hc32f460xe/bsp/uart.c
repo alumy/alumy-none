@@ -45,11 +45,6 @@ int32_t dbg_uart_init(void)
 {
     SEGGER_RTT_Init();
 
-	for (int32_t i = 0; i < SEGGER_RTT_MAX_NUM_UP_BUFFERS; ++i) {
-		SEGGER_RTT_ConfigUpBuffer(
-			0, NULL, NULL, 0, SEGGER_RTT_MODE_NO_BLOCK_SKIP);
-	}
-
 	return 0;
 }
 
