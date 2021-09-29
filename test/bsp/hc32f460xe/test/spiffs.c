@@ -49,13 +49,33 @@ __BEGIN_DECLS
 #define FLASH_INSTR_ERASE_4KB_SECTOR    (0x20u)
 #define FLASH_INSTR_READ_SR1            (0x05u)
 
-#define SPIFLASH_CFG_PHYS_SZ            (0x800000ul)
-#define SPIFLASH_CFG_PHYS_ERASE_SZ      FLASH_SECTOR_SIZE
+#define SPIFLASH_CFG_CONFIG_PHYS_ADDR               (0x000000ul)
+#define SPIFLASH_CFG_CONFIG_PHYS_SZ                 (0x100000ul)
+
+#define SPIFLASH_CFG_CONFIG_BACKUP_PHYS_ADDR        (0x100000ul)
+#define SPIFLASH_CFG_CONFIG_BACKUP_PHYS_SZ          (0x100000ul)
+
+#define SPIFLASH_CFG_RECORD_PHYS_ADDR               (0x200000ul)
+#define SPIFLASH_CFG_RECORD_PHYS_SZ                 (0x600000ul)
+
 #define SPIFLASH_CFG_PHYS_ADDR          0
+#define SPIFLASH_CFG_PHYS_SZ            (0x800000ul)
+
+#define SPIFLASH_CFG_PHYS_ERASE_SZ      FLASH_SECTOR_SIZE
 #define SPIFLASH_CFG_LOG_PAGE_SZ        FLASH_PAGE_SIZE
 #define SPIFLASH_CFG_LOG_BLOCK_SZ       0xFFFF
 
-spiffs fs;
+typedef struct file_system {
+    char name[16];
+    spiffs fs;
+    u8_t work[SPIFLASH_CFG_LOG_PAGE_SZ * 2];
+    u8_t fd_space[32 * 4];
+    u8_t cache[(SPIFLASH_CFG_LOG_PAGE_SZ + 32)* 4];
+} file_system_t;
+
+file_system_t config_fs;
+file_system_t config_backup_fs;
+file_system_t record_fs;
 
 static void Spi_Config(void)
 {
@@ -412,17 +432,16 @@ static int32_t spi_flash_init(void)
     return 0;
 }
 
-int32_t spiffs_init(void)
+static int32_t file_system_init(file_system_t *fs, const char *name,
+                                uint32_t addr, size_t size)
 {
-    static u8_t work[SPIFLASH_CFG_LOG_PAGE_SZ * 2];
-    static u8_t fd_space[32 * 4];
-    static u8_t cache[(SPIFLASH_CFG_LOG_PAGE_SZ + 32) * 4];
     int32_t ret;
-
     spiffs_config config;
 
-    config.phys_size = SPIFLASH_CFG_PHYS_SZ;
-    config.phys_addr = SPIFLASH_CFG_PHYS_ADDR;
+    strlcpy(fs->name, name, sizeof(fs->name));
+
+    config.phys_addr = addr;
+    config.phys_size = size;
     config.phys_erase_block = SPIFLASH_CFG_PHYS_ERASE_SZ;
     config.log_block_size = SPIFLASH_CFG_LOG_BLOCK_SZ;
     config.log_page_size = SPIFLASH_CFG_LOG_PAGE_SZ;
@@ -431,43 +450,45 @@ int32_t spiffs_init(void)
     config.hal_write_f = spi_flash_write;
     config.hal_erase_f = spi_flash_erase;
 
-    ret = SPIFFS_mount(&fs, &config, work, fd_space, sizeof(fd_space),
-                       cache, sizeof(cache), NULL);
+    ret = SPIFFS_mount(&fs->fs, &config, fs->work,
+        fs->fd_space, sizeof(fs->fd_space),
+        fs->cache, sizeof(fs->cache), NULL);
     if (ret != 0) {
-        AL_WARN(1, "%s, SPIFFS_mount failed, errno = %d",
-                __func__, SPIFFS_errno(&fs));
+        AL_WARN(1, "%s, %s, SPIFFS_mount failed, errno = %d",
+                __func__, fs->name, SPIFFS_errno(&fs->fs));
 
-        if (SPIFFS_errno(&fs) != SPIFFS_ERR_NOT_A_FS) {
+        if (SPIFFS_errno(&fs->fs) != SPIFFS_ERR_NOT_A_FS) {
             return -1;
         }
 
-        SPIFFS_unmount(&fs);
+        SPIFFS_unmount(&fs->fs);
 
-        if (SPIFFS_format(&fs) != 0) {
-            AL_ERROR(1, "%s, SPIFFS_format failed, errno = %d",
-                     __func__, SPIFFS_errno(&fs));
+        if (SPIFFS_format(&fs->fs) != 0) {
+            AL_ERROR(1, "%s, %s, SPIFFS_format failed, errno = %d",
+                     __func__, fs->name, SPIFFS_errno(&fs->fs));
             return -1;
         }
     }
 
-    ret = SPIFFS_mount(&fs, &config, work, fd_space, sizeof(fd_space),
-                       cache, sizeof(cache), NULL);
+    ret = SPIFFS_mount(&fs->fs, &config, fs->work,
+        fs->fd_space, sizeof(fs->fd_space),
+        fs->cache, sizeof(fs->cache), NULL);
 
     if (ret != 0) {
-        AL_ERROR(1, "%s, SPIFFS_mount failed, errno = %d",
-                 __func__, SPIFFS_errno(&fs));
+        AL_WARN(1, "%s, %s, SPIFFS_mount failed, errno = %d",
+                __func__, fs->name, SPIFFS_errno(&fs->fs));
         return -1;
     }
 
     u32_t total, used;
 
-    ret = SPIFFS_info(&fs, &total, &used);
+    ret = SPIFFS_info(&fs->fs, &total, &used);
     if ((ret == 0) && (used > total)) {
         AL_WARN(1, "do spiffs check");
 
-        if (SPIFFS_check(&fs) != 0) {
-            AL_ERROR(1, "%s, SPIFFS_check failed, errno = %d",
-                     __func__, SPIFFS_errno(&fs));
+        if (SPIFFS_check(&fs->fs) != 0) {
+            AL_ERROR(1, "%s, %s, SPIFFS_check failed, errno = %d",
+                     __func__, fs->name, SPIFFS_errno(&fs->fs));
             return -1;
         }
     }
@@ -475,8 +496,17 @@ int32_t spiffs_init(void)
     return 0;
 }
 
+static int32_t file_system_final(file_system_t *fs)
+{
+    SPIFFS_unmount(&fs->fs);
+
+    return 0;
+}
+
 static int spiffs_suite_init(void)
 {
+    printf("\n");
+
     spi_flash_init();
 
     return 0;
@@ -484,50 +514,210 @@ static int spiffs_suite_init(void)
 
 static int spiffs_suite_clean(void)
 {
-    SPIFFS_unmount(&fs);
+    file_system_final(&config_fs);
+    file_system_final(&config_backup_fs);
+    file_system_final(&record_fs);
 
     return 0;
 }
 
-static void spiffs_info_test(void)
+static int32_t spi_flash_write_all(uint8_t byte)
+{
+    uint32_t flashAddr = 0u;
+    uint16_t bufferLen = 0u;
+    char txBuffer[256];
+    char rxBuffer[256];
+
+    /* Get tx buffer length */
+    bufferLen = (uint16_t)sizeof(txBuffer);
+
+    while (flashAddr < FLASH_MAX_ADDR) {
+        memset(txBuffer, byte, sizeof(txBuffer));
+        memset(rxBuffer, 0, sizeof(rxBuffer));
+
+        /* Erase sector */
+        SpiFlash_Erase4KbSector(flashAddr);
+        /* Write data to flash */
+        SpiFlash_WritePage(flashAddr, (uint8_t *)&txBuffer[0], bufferLen);
+        /* Read data from flash */
+        SpiFlash_ReadData(flashAddr, (uint8_t *)&rxBuffer[0], bufferLen);
+
+        /* Compare txBuffer and rxBuffer */
+        if (memcmp(txBuffer, rxBuffer, (uint32_t)bufferLen) != 0) {
+            return -1;
+        }
+
+        /* Flash address offset */
+        flashAddr += FLASH_SECTOR_SIZE;
+    }
+
+    return 0;
+}
+
+static int32_t __file_system_init_test(file_system_t *fs, const char *name,
+                                       uint32_t addr, size_t size)
+{
+    /*
+     * 1. all are 0xFF
+     * 2. all are 0x00
+     * 3. all are random
+     * 4. already format
+     * 5. corrupted
+     */
+
+    AL_DEBUG(1, "test 1: all are 0xFF");
+    CU_ASSERT(spi_flash_write_all(0xFF) == 0);
+    CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
+    SPIFFS_unmount(&fs->fs);
+
+    AL_DEBUG(1, "test 2: all are 0x00");
+    CU_ASSERT(spi_flash_write_all(0x00) == 0);
+    CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
+    SPIFFS_unmount(&fs->fs);
+
+    AL_DEBUG(1, "test 3: all are random");
+    CU_ASSERT(spi_flash_write_all(rand()) == 0);
+    CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
+    SPIFFS_unmount(&fs->fs);
+
+    AL_DEBUG(1, "test4: already format");
+    CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
+    SPIFFS_unmount(&fs->fs);
+    CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
+    SPIFFS_unmount(&fs->fs);
+
+    AL_DEBUG(1, "test5: corrupted");
+    uint8_t data[FLASH_PAGE_SIZE] = { 0 };
+
+    SpiFlash_WritePage(addr, data, sizeof(data));
+    SpiFlash_WritePage(addr + (size / 2), data, sizeof(data));
+    SpiFlash_WritePage(addr + size - FLASH_PAGE_SIZE, data, sizeof(data));
+
+    CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
+
+    return 0;
+}
+
+static void file_system_init_test(void)
+{
+    printf("\n");
+
+    __file_system_init_test(&config_fs, "config",
+                            SPIFLASH_CFG_CONFIG_PHYS_ADDR,
+                            SPIFLASH_CFG_CONFIG_PHYS_SZ);
+
+    __file_system_init_test(&config_backup_fs, "config_backup",
+                            SPIFLASH_CFG_CONFIG_BACKUP_PHYS_ADDR,
+                            SPIFLASH_CFG_CONFIG_BACKUP_PHYS_SZ);
+
+    __file_system_init_test(&record_fs, "record",
+                            SPIFLASH_CFG_RECORD_PHYS_ADDR,
+                            SPIFLASH_CFG_RECORD_PHYS_SZ);
+}
+
+static int32_t __file_system_unmount_test(file_system_t *fs, const char *name,
+                                          uint32_t addr, size_t size)
+{
+    CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
+
+    file_system_final(fs);
+
+    CU_ASSERT(SPIFFS_mounted(&fs->fs) == 0);
+
+    return 0;
+}
+
+static void file_system_unmount_test(void)
+{
+    printf("\n");
+
+    __file_system_unmount_test(&config_fs, "config",
+                            SPIFLASH_CFG_CONFIG_PHYS_ADDR,
+                            SPIFLASH_CFG_CONFIG_PHYS_SZ);
+
+    __file_system_unmount_test(&config_backup_fs, "config_backup",
+                            SPIFLASH_CFG_CONFIG_BACKUP_PHYS_ADDR,
+                            SPIFLASH_CFG_CONFIG_BACKUP_PHYS_SZ);
+
+    __file_system_unmount_test(&record_fs, "record",
+                            SPIFLASH_CFG_RECORD_PHYS_ADDR,
+                            SPIFLASH_CFG_RECORD_PHYS_SZ);
+}
+
+static int32_t __file_system_read_write_test(file_system_t *fs,
+                                             const char *name,
+                                             uint32_t addr, size_t size)
+{
+    uint8_t wr_data[1024], rd_data[1024];
+
+    for (int32_t i = 0; i < sizeof(wr_data); ++i) {
+        wr_data[i] = rand();
+    }
+
+    memset(rd_data, 0, sizeof(rd_data));
+
+    CU_ASSERT(__file_system_init_test(fs, name, addr, size) == 0);
+
+    spiffs_file fd = SPIFFS_open(&fs->fs, "/test",
+                                 SPIFFS_CREAT | SPIFFS_TRUNC | SPIFFS_RDWR, 0);
+    CU_ASSERT(fd >= 0);
+
+    CU_ASSERT(SPIFFS_write(&fs->fs, fd,
+                           wr_data, sizeof(wr_data)) == sizeof(wr_data));
+
+    CU_ASSERT(SPIFFS_fflush(&fs->fs, fd) == 0);
+
+    CU_ASSERT(SPIFFS_read(&fs->fs, fd,
+                          rd_data, sizeof(rd_data)) == sizeof(rd_data));
+
+    CU_ASSERT(SPIFFS_close(&fs->fs, fd) == 0);
+}
+
+static void file_system_read_write_test(void)
+{
+    printf("\n");
+
+    __file_system_read_write_test(&config_fs, "config",
+                                  SPIFLASH_CFG_CONFIG_PHYS_ADDR,
+                                  SPIFLASH_CFG_CONFIG_PHYS_SZ);
+
+    __file_system_read_write_test(&config_backup_fs, "config_backup",
+                                  SPIFLASH_CFG_CONFIG_BACKUP_PHYS_ADDR,
+                                  SPIFLASH_CFG_CONFIG_BACKUP_PHYS_SZ);
+
+    __file_system_read_write_test(&record_fs, "record",
+                                  SPIFLASH_CFG_RECORD_PHYS_ADDR,
+                                  SPIFLASH_CFG_RECORD_PHYS_SZ);
+}
+
+static int32_t __spiffs_info_test(file_system_t *fs, const char *name,
+                                  uint32_t addr, size_t size)
 {
     u32_t total, used;
 
-    CU_ASSERT(SPIFFS_info(&fs, &total, &used) == 0);
+    CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
+    CU_ASSERT(SPIFFS_info(&fs->fs, &total, &used) == 0);
 
-    AL_INFO(1, "spiffs usage, total = %u, used = %u\n", total, used);
+    AL_INFO(1, "spiffs usage, %s, total = %u, used = %u\n", name, total, used);
 
     CU_ASSERT(used <= total);
 }
 
-static void spiffs_mount_test(void)
+static void file_system_usage_test(void)
 {
+    printf("\n");
 
-}
+    __spiffs_info_test(&config_fs, "config",
+                       SPIFLASH_CFG_CONFIG_PHYS_ADDR,
+                       SPIFLASH_CFG_CONFIG_PHYS_SZ);
 
-static void spiffs_unmount_test(void)
-{
+    __spiffs_info_test(&config_backup_fs, "config_backup",
+                       SPIFLASH_CFG_CONFIG_BACKUP_PHYS_ADDR,
+                       SPIFLASH_CFG_CONFIG_BACKUP_PHYS_SZ);
 
-}
-
-static void spiffs_open_test(void)
-{
-
-}
-
-static void spiffs_close_test(void)
-{
-
-}
-
-static void spiffs_write_test(void)
-{
-
-}
-
-static void spiffs_read_test(void)
-{
-
+    __spiffs_info_test(&record_fs, "record",
+                       SPIFLASH_CFG_RECORD_PHYS_ADDR,
+                       SPIFLASH_CFG_RECORD_PHYS_SZ);
 }
 
 __used static void spi_flash_test(void)
@@ -568,13 +758,11 @@ static int32_t add_spiffs_tests(void)
     suite = CU_add_suite("spiffs", spiffs_suite_init, spiffs_suite_clean);
 
     CU_add_test(suite, "spi_flash_test", spi_flash_test);
-    CU_add_test(suite, "spiffs_info_test", spiffs_info_test);
-    CU_add_test(suite, "spiffs_mount_test", spiffs_mount_test);
-    CU_add_test(suite, "spiffs_unmount_test", spiffs_unmount_test);
-    CU_add_test(suite, "spiffs_open_test", spiffs_open_test);
-    CU_add_test(suite, "spiffs_close_test", spiffs_close_test);
-    CU_add_test(suite, "spiffs_write_test", spiffs_write_test);
-    CU_add_test(suite, "spiffs_read_test", spiffs_read_test);
+    CU_add_test(suite, "file_system_init_test", file_system_init_test);
+    CU_add_test(suite, "file_system_unmount_test", file_system_unmount_test);
+    CU_add_test(suite,
+                "file_system_read_write_test", file_system_read_write_test);
+    CU_add_test(suite, "file_system_usage_test", file_system_usage_test);
 
     return 0;
 }
