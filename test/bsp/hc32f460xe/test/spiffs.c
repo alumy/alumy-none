@@ -539,10 +539,7 @@ static int32_t add_spiffs_tests(void)
 
     suite = CU_add_suite("spiffs", spiffs_suite_init, spiffs_suite_clean);
 
-#if 0
     CU_add_test(suite, "spi_flash_test", spi_flash_test);
-#endif
-
     CU_add_test(suite, "spiffs_info_test", spiffs_info_test);
 
     return 0;
