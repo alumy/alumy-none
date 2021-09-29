@@ -497,7 +497,7 @@ static void spiffs_info_test(void)
 
     CU_ASSERT(SPIFFS_info(&fs, &total, &used) == 0);
 
-    printf("total = %u, used, = %u\n", total, used);
+    AL_INFO(1, "spiffs usage, total = %u, used = %u\n", total, used);
 
     CU_ASSERT(used <= total);
 }

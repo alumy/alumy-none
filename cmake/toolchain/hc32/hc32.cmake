@@ -38,7 +38,8 @@ set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g -gdwarf-2" CACHE STRING "" FORCE)
 
 set(CMAKE_ASM_FLAGS "-Wall -fdata-sections -ffunction-sections" CACHE STRING "" FORCE)
 
-set(CMAKE_EXE_LINKER_FLAGS "${MCU} -specs=nano.specs -specs=nosys.specs -T${LINKER_SCRIPT}" CACHE STRING "" FORCE)
+# set(CMAKE_EXE_LINKER_FLAGS "${MCU} --specs=nano.specs --specs=nosys.specs -T${LINKER_SCRIPT}" CACHE STRING "" FORCE)
+set(CMAKE_EXE_LINKER_FLAGS "${MCU} --specs=nosys.specs -T${LINKER_SCRIPT}" CACHE STRING "" FORCE)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map,--cref" CACHE STRING "" FORCE)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -Wl,-print-memory-usage" CACHE STRING "" FORCE)
 
