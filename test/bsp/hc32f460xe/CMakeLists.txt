@@ -8,7 +8,7 @@ FILE(GLOB_RECURSE ${target}_src
 	
 set(${target}_src ${${target}_src} 
 	${CMAKE_CURRENT_SOURCE_DIR}/startup/startup_hc32f460_gcc.S
-	${CMAKE_CURRENT_SOURCE_DIR}/startup/syscalls.c)
+	${CMAKE_CURRENT_SOURCE_DIR}/syscalls/syscalls.c)
 
 set(${target}_src ${${target}_src} 
 	${CMAKE_CURRENT_SOURCE_DIR}/segger/RTT/SEGGER_RTT.c

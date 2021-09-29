@@ -968,6 +968,9 @@
                     <Folder Name="startup">
                         <F N="../test/bsp/hc32f460xe/startup/syscalls.c"/>
                     </Folder>
+                    <Folder Name="syscalls">
+                        <F N="../test/bsp/hc32f460xe/syscalls/syscalls.c"/>
+                    </Folder>
                     <Folder Name="test">
                         <F N="../test/bsp/hc32f460xe/test/rtc.c"/>
                         <F N="../test/bsp/hc32f460xe/test/spiffs.c"/>

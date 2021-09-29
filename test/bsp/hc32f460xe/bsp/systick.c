@@ -14,7 +14,7 @@ static void clock_update(void)
     }
 }
 
-clock_t clock(void)
+clock_t __clock(void)
 {
     return clk;
 }

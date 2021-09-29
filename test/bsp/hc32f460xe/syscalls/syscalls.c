@@ -59,8 +59,14 @@
 extern int errno;
 extern int __io_putchar(int ch) __attribute__((weak));
 extern int __io_getchar(void) __attribute__((weak));
+extern time_t __time(time_t *pt) __attribute__((weak));
+extern clock_t __clock(void) __attribute__((weak));
 
 register char * stack_ptr asm("sp");
+
+char *__env[1] = { 0 };
+char **environ = __env;
+
 
 /* Functions */
 void initialise_monitor_handles()
@@ -93,7 +99,7 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
 		*ptr++ = __io_getchar();
 	}
 
-return len;
+	return len;
 }
 
 __attribute__((weak)) int _write(int file, char *ptr, int len)
@@ -170,10 +176,39 @@ int _unlink(char *name)
 	return -1;
 }
 
-int _times(struct tms *buf)
+int _gettimeofday (struct timeval * tp, void * tzvp)
 {
-	return -1;
+    struct timezone *tzp = tzvp;
+    if (tp)
+    {
+        tp->tv_sec = __time(NULL);
+        tp->tv_usec = 0;
+    }
+
+    /* Return fixed data for the timezone.  */
+    if (tzp)
+    {
+        tzp->tz_minuteswest = 0;
+        tzp->tz_dsttime = 0;
+    }
+
+    return 0;
 }
+
+/* Return a clock that ticks at 100Hz.  */
+clock_t _times (struct tms * tp)
+{
+    clock_t timeval = __clock();
+	
+    if (tp) {
+        tp->tms_utime  = timeval;	/* user time */
+        tp->tms_stime  = 0;	/* system time */
+        tp->tms_cutime = 0;	/* user time, children */
+        tp->tms_cstime = 0;	/* system time, children */
+    }
+	
+    return timeval;
+};
 
 int _stat(char *file, struct stat *st)
 {
