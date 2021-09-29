@@ -563,7 +563,6 @@ static int32_t __file_system_init_test(file_system_t *fs, const char *name,
      * 4. already format
      * 5. corrupted
      */
-
     AL_DEBUG(1, "test 1: all are 0xFF");
     CU_ASSERT(spi_flash_write_all(0xFF) == 0);
     CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
@@ -588,12 +587,10 @@ static int32_t __file_system_init_test(file_system_t *fs, const char *name,
     AL_DEBUG(1, "test5: corrupted");
     uint8_t data[FLASH_PAGE_SIZE] = { 0 };
 
-    CU_ASSERT(SpiFlash_WritePage(addr, data, sizeof(data)) == Ok);
     CU_ASSERT(SpiFlash_WritePage(addr + (size / 2),
                                  data, sizeof(data)) == Ok);
     CU_ASSERT(SpiFlash_WritePage(addr + size - FLASH_PAGE_SIZE,
                                  data, sizeof(data)) == Ok);
-
     CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
 
     return 0;
@@ -763,7 +760,7 @@ static int32_t add_spiffs_tests(void)
 
     suite = CU_add_suite("spiffs", spiffs_suite_init, spiffs_suite_clean);
 
-    CU_add_test(suite, "spi_flash_test", spi_flash_test);
+    // CU_add_test(suite, "spi_flash_test", spi_flash_test);
     CU_add_test(suite, "file_system_init_test", file_system_init_test);
     CU_add_test(suite, "file_system_unmount_test", file_system_unmount_test);
     CU_add_test(suite,
