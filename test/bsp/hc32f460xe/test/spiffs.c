@@ -93,7 +93,7 @@ static void Spi_Config(void)
     PORT_SetFunc(SPI_MISO_PORT, SPI_MISO_PIN, SPI_MISO_FUNC, Disable);
 
     /* Configuration SPI structure */
-    stcSpiInit.enClkDiv = SpiClkDiv2;
+    stcSpiInit.enClkDiv = SpiClkDiv8;
     stcSpiInit.enFrameNumber = SpiFrameNumber1;
     stcSpiInit.enDataLength = SpiDataLengthBit8;
     stcSpiInit.enFirstBitPosition = SpiFirstBitPositionMSB;
@@ -451,42 +451,38 @@ static int32_t file_system_init(file_system_t *fs, const char *name,
     config.hal_erase_f = spi_flash_erase;
 
     ret = SPIFFS_mount(&fs->fs, &config, fs->work,
-        fs->fd_space, sizeof(fs->fd_space),
-        fs->cache, sizeof(fs->cache), NULL);
-    if (ret != 0) {
+                       fs->fd_space, sizeof(fs->fd_space),
+                       fs->cache, sizeof(fs->cache), NULL);
+    if (ret != SPIFFS_OK) {
         AL_WARN(1, "%s, %s, SPIFFS_mount failed, errno = %d",
                 __func__, fs->name, SPIFFS_errno(&fs->fs));
 
-        if (SPIFFS_errno(&fs->fs) != SPIFFS_ERR_NOT_A_FS) {
-            return -1;
-        }
+        AL_WARN(1, "%s, SPIFFS format", fs->name);
 
-        SPIFFS_unmount(&fs->fs);
-
-        if (SPIFFS_format(&fs->fs) != 0) {
+        if (SPIFFS_format(&fs->fs) != SPIFFS_OK) {
             AL_ERROR(1, "%s, %s, SPIFFS_format failed, errno = %d",
                      __func__, fs->name, SPIFFS_errno(&fs->fs));
             return -1;
         }
-    }
 
-    ret = SPIFFS_mount(&fs->fs, &config, fs->work,
-        fs->fd_space, sizeof(fs->fd_space),
-        fs->cache, sizeof(fs->cache), NULL);
+        ret = SPIFFS_mount(&fs->fs, &config, fs->work,
+                           fs->fd_space, sizeof(fs->fd_space),
+                           fs->cache, sizeof(fs->cache), NULL);
 
-    if (ret != 0) {
-        AL_WARN(1, "%s, %s, SPIFFS_mount failed, errno = %d",
-                __func__, fs->name, SPIFFS_errno(&fs->fs));
-        return -1;
+        if (ret != SPIFFS_OK) {
+            AL_WARN(1, "%s, %s, SPIFFS_mount failed, errno = %d",
+                    __func__, fs->name, SPIFFS_errno(&fs->fs));
+            return -1;
+        }
     }
 
     u32_t total, used;
 
     ret = SPIFFS_info(&fs->fs, &total, &used);
-    if ((ret == 0) && (used > total)) {
+    if ((ret == SPIFFS_OK) && (used > total)) {
         AL_WARN(1, "do spiffs check");
 
-        if (SPIFFS_check(&fs->fs) != 0) {
+        if (SPIFFS_check(&fs->fs) != SPIFFS_OK) {
             AL_ERROR(1, "%s, %s, SPIFFS_check failed, errno = %d",
                      __func__, fs->name, SPIFFS_errno(&fs->fs));
             return -1;
@@ -525,8 +521,8 @@ static int32_t spi_flash_write_all(uint8_t byte)
 {
     uint32_t flashAddr = 0u;
     uint16_t bufferLen = 0u;
-    char txBuffer[256];
-    char rxBuffer[256];
+    char txBuffer[FLASH_PAGE_SIZE];
+    char rxBuffer[FLASH_PAGE_SIZE];
 
     /* Get tx buffer length */
     bufferLen = (uint16_t)sizeof(txBuffer);
@@ -537,18 +533,21 @@ static int32_t spi_flash_write_all(uint8_t byte)
 
         /* Erase sector */
         SpiFlash_Erase4KbSector(flashAddr);
-        /* Write data to flash */
-        SpiFlash_WritePage(flashAddr, (uint8_t *)&txBuffer[0], bufferLen);
-        /* Read data from flash */
-        SpiFlash_ReadData(flashAddr, (uint8_t *)&rxBuffer[0], bufferLen);
 
-        /* Compare txBuffer and rxBuffer */
-        if (memcmp(txBuffer, rxBuffer, (uint32_t)bufferLen) != 0) {
-            return -1;
+        for (int32_t i = 0; i < FLASH_SECTOR_SIZE / FLASH_PAGE_SIZE; ++i) {
+            /* Write data to flash */
+            SpiFlash_WritePage(flashAddr, (uint8_t *)&txBuffer[0], bufferLen);
+            /* Read data from flash */
+            SpiFlash_ReadData(flashAddr, (uint8_t *)&rxBuffer[0], bufferLen);
+
+            /* Compare txBuffer and rxBuffer */
+            if (memcmp(txBuffer, rxBuffer, (uint32_t)bufferLen) != 0) {
+                return -1;
+            }
+
+            /* Flash address offset */
+            flashAddr += FLASH_PAGE_SIZE;
         }
-
-        /* Flash address offset */
-        flashAddr += FLASH_SECTOR_SIZE;
     }
 
     return 0;
@@ -589,9 +588,11 @@ static int32_t __file_system_init_test(file_system_t *fs, const char *name,
     AL_DEBUG(1, "test5: corrupted");
     uint8_t data[FLASH_PAGE_SIZE] = { 0 };
 
-    SpiFlash_WritePage(addr, data, sizeof(data));
-    SpiFlash_WritePage(addr + (size / 2), data, sizeof(data));
-    SpiFlash_WritePage(addr + size - FLASH_PAGE_SIZE, data, sizeof(data));
+    CU_ASSERT(SpiFlash_WritePage(addr, data, sizeof(data)) == Ok);
+    CU_ASSERT(SpiFlash_WritePage(addr + (size / 2),
+                                 data, sizeof(data)) == Ok);
+    CU_ASSERT(SpiFlash_WritePage(addr + size - FLASH_PAGE_SIZE,
+                                 data, sizeof(data)) == Ok);
 
     CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
 
@@ -656,7 +657,7 @@ static int32_t __file_system_read_write_test(file_system_t *fs,
 
     memset(rd_data, 0, sizeof(rd_data));
 
-    CU_ASSERT(__file_system_init_test(fs, name, addr, size) == 0);
+    CU_ASSERT(file_system_init(fs, name, addr, size) == 0);
 
     spiffs_file fd = SPIFFS_open(&fs->fs, "/test",
                                  SPIFFS_CREAT | SPIFFS_TRUNC | SPIFFS_RDWR, 0);
@@ -666,9 +667,14 @@ static int32_t __file_system_read_write_test(file_system_t *fs,
                            wr_data, sizeof(wr_data)) == sizeof(wr_data));
 
     CU_ASSERT(SPIFFS_fflush(&fs->fs, fd) == 0);
+    CU_ASSERT(SPIFFS_close(&fs->fs, fd) == 0);
+
+    CU_ASSERT(SPIFFS_open(&fs->fs, "/test", SPIFFS_RDWR, 0) >= 0);
 
     CU_ASSERT(SPIFFS_read(&fs->fs, fd,
                           rd_data, sizeof(rd_data)) == sizeof(rd_data));
+
+    CU_ASSERT(memcmp(wr_data, rd_data, sizeof(wr_data)) == 0);
 
     CU_ASSERT(SPIFFS_close(&fs->fs, fd) == 0);
 }
