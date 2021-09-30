@@ -760,7 +760,7 @@ static int32_t add_spiffs_tests(void)
 
     suite = CU_add_suite("spiffs", spiffs_suite_init, spiffs_suite_clean);
 
-    // CU_add_test(suite, "spi_flash_test", spi_flash_test);
+    CU_add_test(suite, "spi_flash_test", spi_flash_test);
     CU_add_test(suite, "file_system_init_test", file_system_init_test);
     CU_add_test(suite, "file_system_unmount_test", file_system_unmount_test);
     CU_add_test(suite,
