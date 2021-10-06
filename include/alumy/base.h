@@ -19,7 +19,7 @@
   #endif /* __packed */
 
   #ifndef __used
-    #define __used    __attribute_used__
+    #define __used    __attribute__((unused))
   #endif /* __used */
 
   #ifndef __aligned
@@ -59,7 +59,7 @@
   #endif
 
   #ifndef __section
-    #define __section(sec)		__attribute_used__ __attribute__((section(sec)))
+    #define __section(sec)      __attribute__((used, section(sec)))
   #endif
 
   #ifndef __unlikely
