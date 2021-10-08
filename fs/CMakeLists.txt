@@ -11,3 +11,5 @@ set(${target}_src
 
 add_library(${target} OBJECT ${${target}_src})
 
+target_compile_options(${target} PRIVATE -Wno-unused-function)
+
