@@ -666,7 +666,7 @@ static int32_t __file_system_read_write_test(file_system_t *fs,
     CU_ASSERT(SPIFFS_fflush(&fs->fs, fd) == 0);
     CU_ASSERT(SPIFFS_close(&fs->fs, fd) == 0);
 
-    CU_ASSERT(SPIFFS_open(&fs->fs, "/test", SPIFFS_RDWR, 0) >= 0);
+    CU_ASSERT((fd = SPIFFS_open(&fs->fs, "/test", SPIFFS_RDWR, 0)) >= 0);
 
     CU_ASSERT(SPIFFS_read(&fs->fs, fd,
                           rd_data, sizeof(rd_data)) == sizeof(rd_data));
