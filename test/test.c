@@ -54,9 +54,28 @@ static void do_initcalls(void)
     }
 }
 
+static void run_all_test(void)
+{
+    do_initcalls();
+    // RUN_TEST_GROUP(base64);
+    // RUN_TEST_GROUP(laundry);
+}
+
 int main(int argc, char *argv[])
 {
     bsp_init();
+
+    do_initcalls();
+
+    const char *__argv[] = {
+        "alumy",
+    };
+
+    int32_t __argc = ARRAY_SIZE(__argv);
+
+    return UnityMain(__argc, __argv, run_all_test);
+
+#if 0
 
     if (CU_initialize_registry()) {
         fprintf(stderr, "\nInitialization of Test Registry failed.");
@@ -73,6 +92,8 @@ int main(int argc, char *argv[])
     CU_basic_run_tests();
 
     CU_cleanup_registry();
+
+#endif
 
     return 0;
 }

@@ -8,65 +8,66 @@
 
 __BEGIN_DECLS
 
-static int mem_suite_init(void)
+TEST_GROUP(mem);
+
+TEST_SETUP(mem)
 {
-	return 0;
+
 }
 
-static int mem_suite_clean(void)
+TEST_TEAR_DOWN(mem)
 {
-	return 0;
+
 }
 
-static void al_mem_is_filled_test(void)
+TEST(mem, al_mem_is_filled)
 {
-	uint8_t buf[128];
+    uint8_t buf[128];
 
-	memset(buf, 0xAA, sizeof(buf));
-	CU_ASSERT(al_mem_is_filled(buf, 0xAA, sizeof(buf)));
+    memset(buf, 0xAA, sizeof(buf));
+    TEST_ASSERT(al_mem_is_filled(buf, 0xAA, sizeof(buf)));
 
-	memset(buf, 0xAA, sizeof(buf));
-	CU_ASSERT(al_mem_is_filled(buf, 0xAA, sizeof(buf)));
+    memset(buf, 0xAA, sizeof(buf));
+    TEST_ASSERT(al_mem_is_filled(buf, 0xAA, sizeof(buf)));
 
-	memset(buf, 0xAA, sizeof(buf));
-	buf[0] = 0x55;
-	CU_ASSERT(!al_mem_is_filled(buf, 0xAA, sizeof(buf)));
+    memset(buf, 0xAA, sizeof(buf));
+    buf[0] = 0x55;
+    TEST_ASSERT(!al_mem_is_filled(buf, 0xAA, sizeof(buf)));
 
-	memset(buf, 0xAA, sizeof(buf));
-	buf[sizeof(buf) - 1] = 0x55;
-	CU_ASSERT(!al_mem_is_filled(buf, 0xAA, sizeof(buf)));
+    memset(buf, 0xAA, sizeof(buf));
+    buf[sizeof(buf) - 1] = 0x55;
+    TEST_ASSERT(!al_mem_is_filled(buf, 0xAA, sizeof(buf)));
 
-	memset(buf, 0xAA, sizeof(buf));
-	buf[63] = 0x55;
-	CU_ASSERT(!al_mem_is_filled(buf, 0xAA, sizeof(buf)));
+    memset(buf, 0xAA, sizeof(buf));
+    buf[63] = 0x55;
+    TEST_ASSERT(!al_mem_is_filled(buf, 0xAA, sizeof(buf)));
 
-	memset(buf, 0xAA, sizeof(buf));
-	CU_ASSERT(al_mem_is_filled(buf + 1, 0xAA, sizeof(buf) - 1));
+    memset(buf, 0xAA, sizeof(buf));
+    TEST_ASSERT(al_mem_is_filled(buf + 1, 0xAA, sizeof(buf) - 1));
 
-	memset(buf, 0xAA, sizeof(buf));
-	CU_ASSERT(!al_mem_is_filled(buf + 1, 0x55, sizeof(buf) - 1));
+    memset(buf, 0xAA, sizeof(buf));
+    TEST_ASSERT(!al_mem_is_filled(buf + 1, 0x55, sizeof(buf) - 1));
 
-	memset(buf, 0xAA, sizeof(buf));
-	CU_ASSERT(al_mem_is_filled(buf, 0xAA, sizeof(buf) - 3));
+    memset(buf, 0xAA, sizeof(buf));
+    TEST_ASSERT(al_mem_is_filled(buf, 0xAA, sizeof(buf) - 3));
 
-	memset(buf, 0xAA, sizeof(buf));
-	buf[sizeof(buf) - 4] = 0x55;
-	CU_ASSERT(!al_mem_is_filled(buf, 0xAA, sizeof(buf) - 3));
+    memset(buf, 0xAA, sizeof(buf));
+    buf[sizeof(buf) - 4] = 0x55;
+    TEST_ASSERT(!al_mem_is_filled(buf, 0xAA, sizeof(buf) - 3));
 }
 
-
-static int32_t add_mem_tests(void)
+TEST_GROUP_RUNNER(mem)
 {
-	CU_pSuite suite;
+    RUN_TEST_CASE(mem, al_mem_is_filled);
+}
 
-	suite = CU_add_suite("mem", mem_suite_init, mem_suite_clean);
-
-	CU_add_test(suite, "al_mem_is_filled", al_mem_is_filled_test);
-
+static int32_t __add_mem_tests(void)
+{
+    RUN_TEST_GROUP(mem);
     return 0;
 }
 
-al_test_suite_init(add_mem_tests);
+al_test_suite_init(__add_mem_tests);
 
 __END_DECLS
 

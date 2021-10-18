@@ -7,6 +7,8 @@
 #include "alumy/cunit/CUnit.h"
 #include "alumy/cunit/Automated.h"
 #include "alumy/cunit/Basic.h"
+#include "alumy/unity/unity.h"
+#include "alumy/unity/unity_fixture.h"
 
 __BEGIN_DECLS
 
