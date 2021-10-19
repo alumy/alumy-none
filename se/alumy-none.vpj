@@ -566,6 +566,7 @@
                 <F N="../include/alumy/list.h"/>
                 <F N="../include/alumy/log.h"/>
                 <F N="../include/alumy/mem.h"/>
+                <F N="../include/alumy/mock.h"/>
                 <F N="../include/alumy/pid.h"/>
                 <F N="../include/alumy/pool.h"/>
                 <F N="../include/alumy/protobuf-c.h"/>

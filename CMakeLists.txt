@@ -31,6 +31,10 @@ else()
     set(CMAKE_INSTALL_LIBDIR lib)
 endif()
 
+if(UNIT_TEST EQUAL 1)
+	add_definitions(-DAL_UT)
+endif()
+
 include(GNUInstallDirs)
 include(${PROJECT_SOURCE_DIR}/cmake/message.cmake)
 
@@ -168,9 +172,9 @@ set(CPACK_SOURCE_GENERATOR "TGZ")
 
 include(CPack)
 
-include(${PROJECT_SOURCE_DIR}/cmake/cmock.cmake)
+if(UNIT_TEST EQUAL 1)
+    enable_testing()
+	add_subdirectory(${PROJECT_SOURCE_DIR}/test)
+endif()
 
-enable_testing()
-
-add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 
