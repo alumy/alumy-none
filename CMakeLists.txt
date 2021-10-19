@@ -91,6 +91,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/string)
 add_subdirectory(${PROJECT_SOURCE_DIR}/bcd)
 add_subdirectory(${PROJECT_SOURCE_DIR}/base64)
 add_subdirectory(${PROJECT_SOURCE_DIR}/unity)
+add_subdirectory(${PROJECT_SOURCE_DIR}/cmock)
 add_subdirectory(${PROJECT_SOURCE_DIR}/cunit)
 add_subdirectory(${PROJECT_SOURCE_DIR}/sys)
 add_subdirectory(${PROJECT_SOURCE_DIR}/cjson)
@@ -102,7 +103,6 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/driver)
 #############################################################################
 
 set(objs
-		$<TARGET_OBJECTS:unity>
 		$<TARGET_OBJECTS:cunit>
 		$<TARGET_OBJECTS:crc>
 		$<TARGET_OBJECTS:mem>
@@ -133,7 +133,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
             EXPORT "${PROJECT_NAME}")
 endif()
 
-add_library("${PROJECT_NAME}-static" STATIC ${${PROJECT_NAME}_src} ${objs})
+add_library("${PROJECT_NAME}-static" STATIC ${${PROJECT_NAME}_src} ${objs}) 
 
 add_dependencies("${PROJECT_NAME}-static" get_git_hash)
 add_dependencies("${PROJECT_NAME}-static" get_svn_revision)
@@ -167,6 +167,8 @@ set(CPACK_SOURCE_IGNORE_FILES
 set(CPACK_SOURCE_GENERATOR "TGZ")
 
 include(CPack)
+
+include(${PROJECT_SOURCE_DIR}/cmake/cmock.cmake)
 
 enable_testing()
 
