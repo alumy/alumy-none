@@ -8,37 +8,35 @@
 
 __BEGIN_DECLS
 
-#if 0
+TEST_GROUP(filter);
 
-static int filter_suite_init(void)
-{
-	return 0;
-}
-
-static int filter_suite_clean(void)
-{
-	return 0;
-}
-
-static void kalman_filter_succ_test(void)
+TEST_SETUP(filter)
 {
 
 }
 
-static int32_t add_filter_tests(void)
+TEST_TEAR_DOWN(filter)
 {
-	CU_pSuite suite;
 
-	suite = CU_add_suite("filter", filter_suite_init, filter_suite_clean);
+}
 
-	CU_add_test(suite, "kalman_filter", kalman_filter_succ_test);
+TEST(filter, kalman)
+{
 
+}
+
+TEST_GROUP_RUNNER(filter)
+{
+    RUN_TEST_CASE(filter, kalman);
+}
+
+static int32_t __add_filter_tests(void)
+{
+    RUN_TEST_GROUP(filter);
     return 0;
 }
 
-al_test_suite_init(add_filter_tests);
-
-#endif
+al_test_suite_init(__add_filter_tests);
 
 __END_DECLS
 
