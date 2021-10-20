@@ -55,12 +55,12 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
     aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
     add_executable(${PROJECT_NAME}-test ${test_src})
-	add_dependencies(${PROJECT_NAME}-test mock)
+    add_dependencies(${PROJECT_NAME}-test mock)
 
     target_link_libraries(${PROJECT_NAME}-test PRIVATE 
-							-Wl,--whole-archive
-							bsp  portal
-							-Wl,--no-whole-archive)
+                          -Wl,--whole-archive
+                          bsp  portal
+                          -Wl,--no-whole-archive)
 
     target_link_libraries(${PROJECT_NAME}-test PRIVATE ${PROJECT_NAME}-static)
 
