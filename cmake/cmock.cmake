@@ -33,24 +33,24 @@ function(mock)
     # First, environment variable UNITY_DIR is set. This is necessary to prevent unity from looking in its own submodule
     # which doesn't work in our CI yet...
     # The rest is a straight forward call to cmock.rb, consult cmock's documentation for more information.
-	add_custom_command(
-		OUTPUT ${MOCK_GENERATED_SRCS} ${MOCK_GENERATED_HEADERS}
-        DEPENDS ruby_found
+    add_custom_command(
+        OUTPUT ${MOCK_GENERATED_SRCS} ${MOCK_GENERATED_HEADERS}
+	DEPENDS ruby_found
         COMMAND ${CMAKE_COMMAND} -E env "UNITY_DIR=${PROJECT_SOURCE_DIR}/unity/unity"
 			ruby 
 			${CMOCK_DIR}/lib/cmock.rb 
-            -o${PROJECT_SOURCE_DIR}/mock/mock_config.yaml
-            ${__MOCK_HEADER_FILES}
+            		-o${PROJECT_SOURCE_DIR}/mock/mock_config.yaml
+            		${__MOCK_HEADER_FILES}
       )
 
-    add_custom_target(mock
-        DEPENDS ruby_found
-        COMMAND ${CMAKE_COMMAND} -E env "UNITY_DIR=${PROJECT_SOURCE_DIR}/unity/unity"
-			ruby 
-			${CMOCK_DIR}/lib/cmock.rb 
-            -o${PROJECT_SOURCE_DIR}/mock/mock_config.yaml
-            ${__MOCK_HEADER_FILES}
-      )
+#    add_custom_target(mock
+#        DEPENDS ruby_found
+#        COMMAND ${CMAKE_COMMAND} -E env "UNITY_DIR=${PROJECT_SOURCE_DIR}/unity/unity"
+#			ruby 
+#			${CMOCK_DIR}/lib/cmock.rb 
+#            -o${PROJECT_SOURCE_DIR}/mock/mock_config.yaml
+#            ${__MOCK_HEADER_FILES}
+#      )
 endfunction()
 
 #idf_component_mock(INCLUDE_DIRS ${include_dirs}

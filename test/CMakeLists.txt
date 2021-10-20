@@ -4,8 +4,8 @@
 include(${PROJECT_SOURCE_DIR}/cmake/cmock.cmake)
 
 # mock
-mock(INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
-     MOCK_HEADER_FILES ${PROJECT_SOURCE_DIR}/include/alumy/bcd.h)
+# mock(INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include
+#     MOCK_HEADER_FILES ${PROJECT_SOURCE_DIR}/include/alumy/bcd.h)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
     message(STATUS "Building test for Linux")
@@ -15,12 +15,11 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
     aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
     add_executable(${PROJECT_NAME}-test ${test_src} ${mock_src})
-	add_dependencies(${PROJECT_NAME}-test mock)
 
     target_link_libraries(${PROJECT_NAME}-test PRIVATE portal unity cmock)
     target_link_libraries(${PROJECT_NAME}-test PRIVATE ${PROJECT_NAME}-static)
 	
-	target_include_directories(${PROJECT_NAME}-test PUBLIC ${mock_inc})
+    target_include_directories(${PROJECT_NAME}-test PUBLIC ${mock_inc})
  
     add_custom_command(TARGET ${PROJECT_NAME}-test
         POST_BUILD

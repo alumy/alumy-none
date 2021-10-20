@@ -6,7 +6,7 @@
 
 __BEGIN_DECLS
 
-__mock __attribute_const__ uint8_t bcd2bin(uint8_t bcd)
+__attribute_const__ uint8_t bcd2bin(uint8_t bcd)
 {
     BUG_ON(((bcd & 0xF0) >> 4) > 0x09);
     BUG_ON((bcd & 0x0F) > 0x09);
@@ -14,7 +14,7 @@ __mock __attribute_const__ uint8_t bcd2bin(uint8_t bcd)
     return (bcd & 0x0f) + (bcd >> 4) * 10;
 }
 
-__mock __attribute_const__ uint8_t bin2bcd(uint8_t bin)
+__attribute_const__ uint8_t bin2bcd(uint8_t bin)
 {
     BUG_ON(bin > 99);
 

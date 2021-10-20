@@ -4,6 +4,7 @@
 #include "alumy/config.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
+#include "alumy/mock.h"
 #include "alumy/cunit/CUnit.h"
 #include "alumy/cunit/Automated.h"
 #include "alumy/cunit/Basic.h"

@@ -9,17 +9,19 @@
 
 __BEGIN_DECLS
 
-static int bitband_suite_init(void)
+TEST_GROUP(bitband);
+
+TEST_SETUP(bitband)
 {
-	return 0;
+
 }
 
-static int bitband_suite_clean(void)
+TEST_TEAR_DOWN(bitband)
 {
-	return 0;
+
 }
 
-static void bitband_sram_test(void)
+TEST(bitband, sram)
 {
     uint8_t bits;
     uint32_t bitband_addr;
@@ -29,7 +31,7 @@ static void bitband_sram_test(void)
 
     for (uint32_t addr = 0x20000000; addr < 0x200FFFFC; addr += (bits >> 3)) {
         for (uint32_t bit = 0; bit < bits; ++bit) {
-            CU_ASSERT(BITBAND(addr, bit) == bitband_addr);
+            TEST_ASSERT(BITBAND(addr, bit) == bitband_addr);
 
             bitband_addr += 4;
         }
@@ -40,7 +42,7 @@ static void bitband_sram_test(void)
 
     for (uint32_t addr = 0x20000000; addr < 0x200FFFFC; addr += (bits >> 3)) {
         for (uint32_t bit = 0; bit < bits; ++bit) {
-            CU_ASSERT(BITBAND(addr, bit) == bitband_addr);
+            TEST_ASSERT(BITBAND(addr, bit) == bitband_addr);
 
             bitband_addr += 4;
         }
@@ -51,14 +53,14 @@ static void bitband_sram_test(void)
 
     for (uint32_t addr = 0x20000000; addr < 0x200FFFFC; addr += (bits >> 3)) {
         for (uint32_t bit = 0; bit < bits; ++bit) {
-            CU_ASSERT(BITBAND(addr, bit) == bitband_addr);
+            TEST_ASSERT(BITBAND(addr, bit) == bitband_addr);
 
             bitband_addr += 4;
         }
     }
 }
 
-static void bitband_perh_test(void)
+TEST(bitband, perh)
 {
     uint8_t bits;
     uint32_t bitband_addr;
@@ -68,7 +70,7 @@ static void bitband_perh_test(void)
 
     for (uint32_t addr = 0x40000000; addr < 0x400FFFFC; addr += (bits >> 3)) {
         for (uint32_t bit = 0; bit < bits; ++bit) {
-            CU_ASSERT(BITBAND(addr, bit) == bitband_addr);
+            TEST_ASSERT(BITBAND(addr, bit) == bitband_addr);
 
             bitband_addr += 4;
         }
@@ -79,7 +81,7 @@ static void bitband_perh_test(void)
 
     for (uint32_t addr = 0x40000000; addr < 0x400FFFFC; addr += (bits >> 3)) {
         for (uint32_t bit = 0; bit < bits; ++bit) {
-            CU_ASSERT(BITBAND(addr, bit) == bitband_addr);
+            TEST_ASSERT(BITBAND(addr, bit) == bitband_addr);
 
             bitband_addr += 4;
         }
@@ -90,26 +92,26 @@ static void bitband_perh_test(void)
 
     for (uint32_t addr = 0x40000000; addr < 0x400FFFFC; addr += (bits >> 3)) {
         for (uint32_t bit = 0; bit < bits; ++bit) {
-            CU_ASSERT(BITBAND(addr, bit) == bitband_addr);
+            TEST_ASSERT(BITBAND(addr, bit) == bitband_addr);
 
             bitband_addr += 4;
         }
     }
 }
 
-static int32_t add_bitband_tests(void)
+TEST_GROUP_RUNNER(bitband)
 {
-	CU_pSuite suite;
+    RUN_TEST_CASE(bitband, sram);
+    RUN_TEST_CASE(bitband, perh);
+}
 
-    suite = CU_add_suite("bitband", bitband_suite_init, bitband_suite_clean);
-
-    CU_add_test(suite, "bitband_sram_test", bitband_sram_test);
-    CU_add_test(suite, "bitband_perh_test", bitband_perh_test);
-
+static int32_t __add_bitband_tests(void)
+{
+    RUN_TEST_GROUP(bitband);
     return 0;
 }
 
-al_test_suite_init(add_bitband_tests);
+al_test_suite_init(__add_bitband_tests);
 
 __END_DECLS
 

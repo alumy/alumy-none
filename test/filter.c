@@ -8,6 +8,8 @@
 
 __BEGIN_DECLS
 
+#if 0
+
 static int filter_suite_init(void)
 {
 	return 0;
@@ -35,6 +37,8 @@ static int32_t add_filter_tests(void)
 }
 
 al_test_suite_init(add_filter_tests);
+
+#endif
 
 __END_DECLS
 
