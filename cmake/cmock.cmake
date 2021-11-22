@@ -2,7 +2,7 @@ function(mock)
     set(options)
     set(single_value)
     set(multi_value MOCK_HEADER_FILES INCLUDE_DIRS REQUIRES)
-	
+
     cmake_parse_arguments(_ "${options}" "${single_value}" "${multi_value}" ${ARGN})
 
     set(MOCK_GENERATED_HEADERS "")
@@ -20,15 +20,15 @@ function(mock)
 
     file(MAKE_DIRECTORY "${MOCK_GEN_DIR}/mocks")
 	
-	set(mock_src ${MOCK_GENERATED_SRCS} CACHE STRING "")
-	set(mock_inc ${__INCLUDE_DIRS} CACHE STRING "")
+    set(mock_src ${MOCK_GENERATED_SRCS} CACHE STRING "")
+    set(mock_inc ${__INCLUDE_DIRS} CACHE STRING "")
 
     add_custom_command(
         OUTPUT ruby_found SYMBOLIC
         COMMAND "ruby" "-v"
         COMMENT "Try to find ruby. If this fails, you need to install ruby"
     )
-	
+
     # This command builds the mocks.
     # First, environment variable UNITY_DIR is set. This is necessary to prevent unity from looking in its own submodule
     # which doesn't work in our CI yet...
@@ -42,20 +42,5 @@ function(mock)
                 -o${PROJECT_SOURCE_DIR}/mock/mock_config.yaml
                 ${__MOCK_HEADER_FILES}
       )
-
-#    add_custom_target(mock
-#        DEPENDS ruby_found
-#        COMMAND ${CMAKE_COMMAND} -E env "UNITY_DIR=${PROJECT_SOURCE_DIR}/unity/unity"
-#			ruby 
-#			${CMOCK_DIR}/lib/cmock.rb 
-#            -o${PROJECT_SOURCE_DIR}/mock/mock_config.yaml
-#            ${__MOCK_HEADER_FILES}
-#      )
 endfunction()
 
-#idf_component_mock(INCLUDE_DIRS ${include_dirs}
-#    REQUIRES esp_common
-#    MOCK_HEADER_FILES
-#    ${original_spi_flash_dir}/include/esp_partition.h
-#    ${original_spi_flash_dir}/include/esp_flash.h
-#    ${original_spi_flash_dir}/include/esp_spi_flash.h)
