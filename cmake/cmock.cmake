@@ -35,12 +35,12 @@ function(mock)
     # The rest is a straight forward call to cmock.rb, consult cmock's documentation for more information.
     add_custom_command(
         OUTPUT ${MOCK_GENERATED_SRCS} ${MOCK_GENERATED_HEADERS}
-	DEPENDS ruby_found
+        DEPENDS ruby_found
         COMMAND ${CMAKE_COMMAND} -E env "UNITY_DIR=${PROJECT_SOURCE_DIR}/unity/unity"
-			ruby 
-			${CMOCK_DIR}/lib/cmock.rb 
-            		-o${PROJECT_SOURCE_DIR}/mock/mock_config.yaml
-            		${__MOCK_HEADER_FILES}
+        ruby
+        ${CMOCK_DIR}/lib/cmock.rb
+                -o${PROJECT_SOURCE_DIR}/mock/mock_config.yaml
+                ${__MOCK_HEADER_FILES}
       )
 
 #    add_custom_target(mock
