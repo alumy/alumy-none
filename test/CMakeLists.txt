@@ -54,15 +54,14 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 
     aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
-    add_executable(${PROJECT_NAME}-test ${test_src})
-    add_dependencies(${PROJECT_NAME}-test mock)
+    add_executable(${PROJECT_NAME}-test ${test_src} ${mock_src})
+    target_link_libraries(${PROJECT_NAME}-test PRIVATE portal unity cmock)
+    target_link_libraries(${PROJECT_NAME}-test PRIVATE ${PROJECT_NAME}-static)
 
     target_link_libraries(${PROJECT_NAME}-test PRIVATE 
                           -Wl,--whole-archive
                           bsp  portal
                           -Wl,--no-whole-archive)
-
-    target_link_libraries(${PROJECT_NAME}-test PRIVATE ${PROJECT_NAME}-static)
 
     add_custom_command(TARGET ${PROJECT_NAME}-test
         POST_BUILD

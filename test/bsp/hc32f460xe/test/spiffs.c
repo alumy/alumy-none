@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include "hc32_ddl.h"
 #include "alumy/test_init.h"
 #include "alumy.h"
-#include "hc32_ddl.h"
 
 __BEGIN_DECLS
+
+#if 0
 
 #if AL_TEST_DRIVER
 
@@ -771,6 +773,8 @@ static int32_t add_spiffs_tests(void)
 }
 
 al_test_suite_init(add_spiffs_tests);
+
+#endif
 
 #endif
 

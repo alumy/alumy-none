@@ -18,6 +18,7 @@ add_definitions(-DXTAL_VALUE=12000000ul)
 add_definitions(-DAL_TEST_DRIVER=1)
 
 add_library(${target} STATIC ${${target}_src})
+target_link_libraries(${target} PRIVATE unity cmock)
 
 target_include_directories(${target} PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/segger/RTT
