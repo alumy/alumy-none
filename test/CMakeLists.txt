@@ -39,10 +39,10 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 	add_test(NAME test_alumy COMMAND ${PROJECT_NAME}-test)
 	set_tests_properties(test_alumy PROPERTIES PASS_REGULAR_EXPRESSION 0)
 
-    if(${CMAKE_BUILD_TYPE} MATCHES Debug)
-	add_test(NAME test_cov COMMAND ${CMAKE_BINARY_DIR}/covgen.sh ${CMAKE_BINARY_DIR})
-        set_tests_properties (test_cov PROPERTIES PASS_REGULAR_EXPRESSION 0)
-    endif()
+#    if(${CMAKE_BUILD_TYPE} MATCHES Debug)
+#	add_test(NAME test_cov COMMAND ${CMAKE_BINARY_DIR}/covgen.sh ${CMAKE_BINARY_DIR})
+#       set_tests_properties (test_cov PROPERTIES PASS_REGULAR_EXPRESSION 0)
+#    endif()
 
 endif()
 
