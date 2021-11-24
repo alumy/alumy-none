@@ -14,7 +14,7 @@ extern "C" {
 #define AL_HAVE_SYS_CDEFS       0
 #define AL_HAVE_SYS_TYPES       0
 
-#define AL_DYNAMIC_CRC_TABLE
+#define AL_DYNAMIC_CRC_TABLE	0
 
 #ifndef CMB_CPU_PLATFORM_TYPE
 #define CMB_CPU_PLATFORM_TYPE		CMB_CPU_ARM_CORTEX_M0

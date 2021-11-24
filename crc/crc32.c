@@ -10,7 +10,7 @@
 
 #define tole(x) cpu_to_le32(x)
 
-#ifdef AL_DYNAMIC_CRC_TABLE
+#if AL_DYNAMIC_CRC_TABLE
 
 static int crc_table_empty = 1;
 static uint32_t crc_table[256];
@@ -141,7 +141,7 @@ tole(0xb40bbe37L), tole(0xc30c8ea1L), tole(0x5a05df1bL), tole(0x2d02ef8dL)
  */
 const uint32_t *al_get_crc_table()
 {
-#ifdef AL_DYNAMIC_CRC_TABLE
+#if AL_DYNAMIC_CRC_TABLE
   if (crc_table_empty)
       make_crc_table();
 #endif
@@ -166,7 +166,7 @@ uint32_t al_crc32_no_comp(uint32_t crc, const void *buf, uint32_t len)
     const uint32_t *tab = crc_table;
     const uint32_t *b =(const uint32_t *)buf;
     size_t rem_len;
-#ifdef AL_DYNAMIC_CRC_TABLE
+#if AL_DYNAMIC_CRC_TABLE
     if (crc_table_empty)
       make_crc_table();
 #endif

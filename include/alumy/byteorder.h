@@ -4,6 +4,11 @@
 #undef __LITTLE_ENDIAN
 #undef __BIG_ENDIAN
 
+#ifdef __GNUC__
+	#define __LITTLE_ENDIAN		__ORDER_LITTLE_ENDIAN__
+	#define __BIG_ENDIAN		__ORDER_BIG_ENDIAN__
+#endif /* __GNUC__ */
+
 #ifndef __LITTLE_ENDIAN
     #define __LITTLE_ENDIAN 1234
 #endif

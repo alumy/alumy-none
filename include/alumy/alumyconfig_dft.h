@@ -39,7 +39,7 @@ extern "C" {
 #endif
 
 #ifndef AL_DYNAMIC_CRC_TABLE
-#define AL_DYNAMIC_CRC_TABLE
+#define AL_DYNAMIC_CRC_TABLE	0
 #endif
 
 #ifndef CMB_CPU_PLATFORM_TYPE

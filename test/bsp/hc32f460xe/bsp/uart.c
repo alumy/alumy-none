@@ -37,7 +37,6 @@ PUTCHAR_PROTOTYPE
   */
 static void dbg_uart_pin_init(void)
 {
-
 	return;
 }
 
