@@ -1431,8 +1431,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>TMR6_HTSSR1</name>
-                    <description>desc TMR6_HTSSR1</description>
+                    <name>TMR6_HTSSR0</name>
+                    <description>desc TMR6_HTSSR0</description>
                     <addressOffset>0x38</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -1456,8 +1456,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>TMR6_HTSSR2</name>
-                    <description>desc TMR6_HTSSR2</description>
+                    <name>TMR6_HTSSR1</name>
+                    <description>desc TMR6_HTSSR1</description>
                     <addressOffset>0x3C</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -1506,8 +1506,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>PORT_PEVNTTRGSR12</name>
-                    <description>desc PORT_PEVNTTRGSR12</description>
+                    <name>PEVNTTRGSR12</name>
+                    <description>desc PEVNTTRGSR12</description>
                     <addressOffset>0x44</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -1531,8 +1531,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>PORT_PEVNTTRGSR34</name>
-                    <description>desc PORT_PEVNTTRGSR34</description>
+                    <name>PEVNTTRGSR34</name>
+                    <description>desc PEVNTTRGSR34</description>
                     <addressOffset>0x48</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -5380,7 +5380,7 @@
                     <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
-                    <resetMask>0xFF</resetMask>
+                    <resetMask>0xDF</resetMask>
                     <fields>
                         <field>
                             <name>TSA</name>
@@ -5418,13 +5418,6 @@
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>STBY</name>
-                            <description>desc STBY</description>
-                            <msb>5</msb>
-                            <lsb>5</lsb>
-                            <access>read-write</access>
-                        </field>
-                        <field>
                             <name>LOM</name>
                             <description>desc LOM</description>
                             <msb>6</msb>
@@ -5445,7 +5438,7 @@
                     <description>desc TCTRL</description>
                     <addressOffset>0xA2</addressOffset>
                     <size>8</size>
-                    <access>read-only</access>
+                    <access>read-write</access>
                     <resetValue>0x90</resetValue>
                     <resetMask>0x73</resetMask>
                     <fields>
@@ -5457,8 +5450,8 @@
                             <access>read-only</access>
                         </field>
                         <field>
-                            <name>TTBM</name>
-                            <description>desc TTBM</description>
+                            <name>TTTBM</name>
+                            <description>desc TTTBM</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
                             <access>read-write</access>
@@ -5484,13 +5477,13 @@
                     <description>desc RCTRL</description>
                     <addressOffset>0xA3</addressOffset>
                     <size>8</size>
-                    <access>read-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFB</resetMask>
                     <fields>
                         <field>
-                            <name>RSSTAT</name>
-                            <description>desc RSSTAT</description>
+                            <name>RSTAT</name>
+                            <description>desc RSTAT</description>
                             <msb>1</msb>
                             <lsb>0</lsb>
                             <access>read-only</access>
@@ -5537,7 +5530,7 @@
                     <description>desc RTIE</description>
                     <addressOffset>0xA4</addressOffset>
                     <size>8</size>
-                    <access>read-only</access>
+                    <access>read-write</access>
                     <resetValue>0xFE</resetValue>
                     <resetMask>0xFF</resetMask>
                     <fields>
@@ -6242,8 +6235,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>MON</name>
-                    <description>desc MON</description>
+                    <name>OUTMON</name>
+                    <description>desc OUTMON</description>
                     <addressOffset>0x4</addressOffset>
                     <size>16</size>
                     <access>read-only</access>
@@ -6488,8 +6481,24 @@
                     <addressOffset>0x4</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
-                    <resetValue>0x7800</resetValue>
+                    <resetValue>0x0</resetValue>
                     <resetMask>0xFFFFFFFF</resetMask>
+                    <fields>
+                        <field>
+                            <name>CRC_REG</name>
+                            <description>desc CRC_REG</description>
+                            <msb>15</msb>
+                            <lsb>0</lsb>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>CRCFLAG_16</name>
+                            <description>desc CRCFLAG_16</description>
+                            <msb>16</msb>
+                            <lsb>16</lsb>
+                            <access>read-only</access>
+                        </field>
+                    </fields>
                 </register>
                 <register>
                     <name>FLG</name>
@@ -7651,6 +7660,31 @@
                     </fields>
                 </register>
                 <register>
+                    <name>REQSTAT</name>
+                    <description>desc REQSTAT</description>
+                    <addressOffset>0x20</addressOffset>
+                    <size>32</size>
+                    <access>read-only</access>
+                    <resetValue>0x0</resetValue>
+                    <resetMask>0x800F</resetMask>
+                    <fields>
+                        <field>
+                            <name>CHREQ</name>
+                            <description>desc CHREQ</description>
+                            <msb>3</msb>
+                            <lsb>0</lsb>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>RCFGREQ</name>
+                            <description>desc RCFGREQ</description>
+                            <msb>15</msb>
+                            <lsb>15</lsb>
+                            <access>read-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <register>
                     <name>CHSTAT</name>
                     <description>desc CHSTAT</description>
                     <addressOffset>0x24</addressOffset>
@@ -7947,8 +7981,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>CH0CTL</name>
-                    <description>desc CH0CTL</description>
+                    <name>CHCTL0</name>
+                    <description>desc CHCTL0</description>
                     <addressOffset>0x5C</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -8357,8 +8391,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>CH1CTL</name>
-                    <description>desc CH1CTL</description>
+                    <name>CHCTL1</name>
+                    <description>desc CHCTL1</description>
                     <addressOffset>0x9C</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -8767,8 +8801,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>CH2CTL</name>
-                    <description>desc CH2CTL</description>
+                    <name>CHCTL2</name>
+                    <description>desc CHCTL2</description>
                     <addressOffset>0xDC</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -9177,8 +9211,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>CH3CTL</name>
-                    <description>desc CH3CTL</description>
+                    <name>CHCTL3</name>
+                    <description>desc CHCTL3</description>
                     <addressOffset>0x11C</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -9818,8 +9852,8 @@
                     </fields>
                 </register>
                 <register>
-                    <name>EFM_FRANDS</name>
-                    <description>desc EFM_FRANDS</description>
+                    <name>FRANDS</name>
+                    <description>desc FRANDS</description>
                     <addressOffset>0x204</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -10873,6 +10907,24 @@
                             <description>desc FACKEN</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <register>
+                    <name>CR4</name>
+                    <description>desc CR4</description>
+                    <addressOffset>0xC</addressOffset>
+                    <size>32</size>
+                    <access>read-write</access>
+                    <resetValue>0x300307</resetValue>
+                    <resetMask>0x400</resetMask>
+                    <fields>
+                        <field>
+                            <name>BUSWAIT</name>
+                            <description>desc BUSWAIT</description>
+                            <msb>10</msb>
+                            <lsb>10</lsb>
                             <access>read-write</access>
                         </field>
                     </fields>
@@ -19879,15 +19931,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG0SIZE</name>
-                            <description>desc MPURG0SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG0ADDR</name>
-                            <description>desc MPURG0ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -19904,15 +19956,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG1SIZE</name>
-                            <description>desc MPURG1SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG1ADDR</name>
-                            <description>desc MPURG1ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -19929,15 +19981,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG2SIZE</name>
-                            <description>desc MPURG2SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG2ADDR</name>
-                            <description>desc MPURG2ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -19954,15 +20006,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG3SIZE</name>
-                            <description>desc MPURG3SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG3ADDR</name>
-                            <description>desc MPURG3ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -19979,15 +20031,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG4SIZE</name>
-                            <description>desc MPURG4SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG4ADDR</name>
-                            <description>desc MPURG4ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20004,15 +20056,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG5SIZE</name>
-                            <description>desc MPURG5SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG5ADDR</name>
-                            <description>desc MPURG5ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20029,15 +20081,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG6SIZE</name>
-                            <description>desc MPURG6SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG6ADDR</name>
-                            <description>desc MPURG6ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20054,15 +20106,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG7SIZE</name>
-                            <description>desc MPURG7SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG7ADDR</name>
-                            <description>desc MPURG7ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20079,15 +20131,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG8SIZE</name>
-                            <description>desc MPURG8SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG8ADDR</name>
-                            <description>desc MPURG8ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20104,15 +20156,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG9SIZE</name>
-                            <description>desc MPURG9SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG9ADDR</name>
-                            <description>desc MPURG9ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20129,15 +20181,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG10SIZE</name>
-                            <description>desc MPURG10SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG10ADDR</name>
-                            <description>desc MPURG10ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20154,15 +20206,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG11SIZE</name>
-                            <description>desc MPURG11SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG11ADDR</name>
-                            <description>desc MPURG11ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20179,15 +20231,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG12SIZE</name>
-                            <description>desc MPURG12SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG12ADDR</name>
-                            <description>desc MPURG12ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20204,15 +20256,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG13SIZE</name>
-                            <description>desc MPURG13SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG13ADDR</name>
-                            <description>desc MPURG13ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20229,15 +20281,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG14SIZE</name>
-                            <description>desc MPURG14SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG14ADDR</name>
-                            <description>desc MPURG14ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -20254,15 +20306,15 @@
                     <resetMask>0xFFFFFFFF</resetMask>
                     <fields>
                         <field>
-                            <name>MPURG15SIZE</name>
-                            <description>desc MPURG15SIZE</description>
+                            <name>MPURGSIZE</name>
+                            <description>desc MPURGSIZE</description>
                             <msb>4</msb>
                             <lsb>0</lsb>
                             <access>read-write</access>
                         </field>
                         <field>
-                            <name>MPURG15ADDR</name>
-                            <description>desc MPURG15ADDR</description>
+                            <name>MPURGADDR</name>
+                            <description>desc MPURGADDR</description>
                             <msb>31</msb>
                             <lsb>5</lsb>
                             <access>read-write</access>
@@ -22489,7 +22541,7 @@
                     <description>desc POSRA</description>
                     <addressOffset>0x8</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -22498,112 +22550,112 @@
                             <description>desc POS00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS01</name>
                             <description>desc POS01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS02</name>
                             <description>desc POS02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS03</name>
                             <description>desc POS03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS04</name>
                             <description>desc POS04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS05</name>
                             <description>desc POS05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS06</name>
                             <description>desc POS06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS07</name>
                             <description>desc POS07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS08</name>
                             <description>desc POS08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS09</name>
                             <description>desc POS09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS10</name>
                             <description>desc POS10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS11</name>
                             <description>desc POS11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS12</name>
                             <description>desc POS12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS13</name>
                             <description>desc POS13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS14</name>
                             <description>desc POS14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS15</name>
                             <description>desc POS15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -22612,7 +22664,7 @@
                     <description>desc PORRA</description>
                     <addressOffset>0xA</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -22621,112 +22673,112 @@
                             <description>desc POR00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR01</name>
                             <description>desc POR01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR02</name>
                             <description>desc POR02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR03</name>
                             <description>desc POR03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR04</name>
                             <description>desc POR04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR05</name>
                             <description>desc POR05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR06</name>
                             <description>desc POR06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR07</name>
                             <description>desc POR07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR08</name>
                             <description>desc POR08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR09</name>
                             <description>desc POR09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR10</name>
                             <description>desc POR10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR11</name>
                             <description>desc POR11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR12</name>
                             <description>desc POR12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR13</name>
                             <description>desc POR13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR14</name>
                             <description>desc POR14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR15</name>
                             <description>desc POR15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -22735,7 +22787,7 @@
                     <description>desc POTRA</description>
                     <addressOffset>0xC</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -22744,112 +22796,112 @@
                             <description>desc POT00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT01</name>
                             <description>desc POT01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT02</name>
                             <description>desc POT02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT03</name>
                             <description>desc POT03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT04</name>
                             <description>desc POT04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT05</name>
                             <description>desc POT05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT06</name>
                             <description>desc POT06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT07</name>
                             <description>desc POT07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT08</name>
                             <description>desc POT08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT09</name>
                             <description>desc POT09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT10</name>
                             <description>desc POT10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT11</name>
                             <description>desc POT11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT12</name>
                             <description>desc POT12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT13</name>
                             <description>desc POT13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT14</name>
                             <description>desc POT14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT15</name>
                             <description>desc POT15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -23227,7 +23279,7 @@
                     <description>desc POSRB</description>
                     <addressOffset>0x18</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -23236,112 +23288,112 @@
                             <description>desc POS00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS01</name>
                             <description>desc POS01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS02</name>
                             <description>desc POS02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS03</name>
                             <description>desc POS03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS04</name>
                             <description>desc POS04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS05</name>
                             <description>desc POS05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS06</name>
                             <description>desc POS06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS07</name>
                             <description>desc POS07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS08</name>
                             <description>desc POS08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS09</name>
                             <description>desc POS09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS10</name>
                             <description>desc POS10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS11</name>
                             <description>desc POS11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS12</name>
                             <description>desc POS12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS13</name>
                             <description>desc POS13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS14</name>
                             <description>desc POS14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS15</name>
                             <description>desc POS15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -23350,7 +23402,7 @@
                     <description>desc PORRB</description>
                     <addressOffset>0x1A</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -23359,112 +23411,112 @@
                             <description>desc POR00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR01</name>
                             <description>desc POR01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR02</name>
                             <description>desc POR02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR03</name>
                             <description>desc POR03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR04</name>
                             <description>desc POR04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR05</name>
                             <description>desc POR05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR06</name>
                             <description>desc POR06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR07</name>
                             <description>desc POR07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR08</name>
                             <description>desc POR08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR09</name>
                             <description>desc POR09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR10</name>
                             <description>desc POR10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR11</name>
                             <description>desc POR11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR12</name>
                             <description>desc POR12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR13</name>
                             <description>desc POR13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR14</name>
                             <description>desc POR14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR15</name>
                             <description>desc POR15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -23473,7 +23525,7 @@
                     <description>desc POTRB</description>
                     <addressOffset>0x1C</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -23482,112 +23534,112 @@
                             <description>desc POT00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT01</name>
                             <description>desc POT01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT02</name>
                             <description>desc POT02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT03</name>
                             <description>desc POT03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT04</name>
                             <description>desc POT04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT05</name>
                             <description>desc POT05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT06</name>
                             <description>desc POT06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT07</name>
                             <description>desc POT07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT08</name>
                             <description>desc POT08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT09</name>
                             <description>desc POT09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT10</name>
                             <description>desc POT10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT11</name>
                             <description>desc POT11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT12</name>
                             <description>desc POT12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT13</name>
                             <description>desc POT13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT14</name>
                             <description>desc POT14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT15</name>
                             <description>desc POT15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -23965,7 +24017,7 @@
                     <description>desc POSRC</description>
                     <addressOffset>0x28</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -23974,112 +24026,112 @@
                             <description>desc POS00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS01</name>
                             <description>desc POS01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS02</name>
                             <description>desc POS02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS03</name>
                             <description>desc POS03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS04</name>
                             <description>desc POS04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS05</name>
                             <description>desc POS05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS06</name>
                             <description>desc POS06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS07</name>
                             <description>desc POS07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS08</name>
                             <description>desc POS08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS09</name>
                             <description>desc POS09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS10</name>
                             <description>desc POS10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS11</name>
                             <description>desc POS11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS12</name>
                             <description>desc POS12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS13</name>
                             <description>desc POS13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS14</name>
                             <description>desc POS14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS15</name>
                             <description>desc POS15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -24088,7 +24140,7 @@
                     <description>desc PORRC</description>
                     <addressOffset>0x2A</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -24097,112 +24149,112 @@
                             <description>desc POR00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR01</name>
                             <description>desc POR01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR02</name>
                             <description>desc POR02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR03</name>
                             <description>desc POR03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR04</name>
                             <description>desc POR04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR05</name>
                             <description>desc POR05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR06</name>
                             <description>desc POR06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR07</name>
                             <description>desc POR07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR08</name>
                             <description>desc POR08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR09</name>
                             <description>desc POR09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR10</name>
                             <description>desc POR10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR11</name>
                             <description>desc POR11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR12</name>
                             <description>desc POR12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR13</name>
                             <description>desc POR13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR14</name>
                             <description>desc POR14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR15</name>
                             <description>desc POR15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -24211,7 +24263,7 @@
                     <description>desc POTRC</description>
                     <addressOffset>0x2C</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -24220,112 +24272,112 @@
                             <description>desc POT00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT01</name>
                             <description>desc POT01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT02</name>
                             <description>desc POT02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT03</name>
                             <description>desc POT03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT04</name>
                             <description>desc POT04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT05</name>
                             <description>desc POT05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT06</name>
                             <description>desc POT06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT07</name>
                             <description>desc POT07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT08</name>
                             <description>desc POT08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT09</name>
                             <description>desc POT09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT10</name>
                             <description>desc POT10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT11</name>
                             <description>desc POT11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT12</name>
                             <description>desc POT12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT13</name>
                             <description>desc POT13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT14</name>
                             <description>desc POT14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT15</name>
                             <description>desc POT15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -24703,7 +24755,7 @@
                     <description>desc POSRD</description>
                     <addressOffset>0x38</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -24712,112 +24764,112 @@
                             <description>desc POS00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS01</name>
                             <description>desc POS01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS02</name>
                             <description>desc POS02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS03</name>
                             <description>desc POS03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS04</name>
                             <description>desc POS04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS05</name>
                             <description>desc POS05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS06</name>
                             <description>desc POS06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS07</name>
                             <description>desc POS07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS08</name>
                             <description>desc POS08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS09</name>
                             <description>desc POS09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS10</name>
                             <description>desc POS10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS11</name>
                             <description>desc POS11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS12</name>
                             <description>desc POS12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS13</name>
                             <description>desc POS13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS14</name>
                             <description>desc POS14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS15</name>
                             <description>desc POS15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -24826,7 +24878,7 @@
                     <description>desc PORRD</description>
                     <addressOffset>0x3A</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -24835,112 +24887,112 @@
                             <description>desc POR00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR01</name>
                             <description>desc POR01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR02</name>
                             <description>desc POR02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR03</name>
                             <description>desc POR03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR04</name>
                             <description>desc POR04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR05</name>
                             <description>desc POR05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR06</name>
                             <description>desc POR06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR07</name>
                             <description>desc POR07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR08</name>
                             <description>desc POR08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR09</name>
                             <description>desc POR09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR10</name>
                             <description>desc POR10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR11</name>
                             <description>desc POR11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR12</name>
                             <description>desc POR12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR13</name>
                             <description>desc POR13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR14</name>
                             <description>desc POR14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR15</name>
                             <description>desc POR15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -24949,7 +25001,7 @@
                     <description>desc POTRD</description>
                     <addressOffset>0x3C</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -24958,112 +25010,112 @@
                             <description>desc POT00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT01</name>
                             <description>desc POT01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT02</name>
                             <description>desc POT02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT03</name>
                             <description>desc POT03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT04</name>
                             <description>desc POT04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT05</name>
                             <description>desc POT05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT06</name>
                             <description>desc POT06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT07</name>
                             <description>desc POT07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT08</name>
                             <description>desc POT08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT09</name>
                             <description>desc POT09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT10</name>
                             <description>desc POT10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT11</name>
                             <description>desc POT11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT12</name>
                             <description>desc POT12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT13</name>
                             <description>desc POT13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT14</name>
                             <description>desc POT14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT15</name>
                             <description>desc POT15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -25441,7 +25493,7 @@
                     <description>desc POSRE</description>
                     <addressOffset>0x48</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -25450,112 +25502,112 @@
                             <description>desc POS00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS01</name>
                             <description>desc POS01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS02</name>
                             <description>desc POS02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS03</name>
                             <description>desc POS03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS04</name>
                             <description>desc POS04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS05</name>
                             <description>desc POS05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS06</name>
                             <description>desc POS06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS07</name>
                             <description>desc POS07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS08</name>
                             <description>desc POS08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS09</name>
                             <description>desc POS09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS10</name>
                             <description>desc POS10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS11</name>
                             <description>desc POS11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS12</name>
                             <description>desc POS12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS13</name>
                             <description>desc POS13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS14</name>
                             <description>desc POS14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS15</name>
                             <description>desc POS15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -25564,7 +25616,7 @@
                     <description>desc PORRE</description>
                     <addressOffset>0x4A</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -25573,112 +25625,112 @@
                             <description>desc POR00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR01</name>
                             <description>desc POR01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR02</name>
                             <description>desc POR02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR03</name>
                             <description>desc POR03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR04</name>
                             <description>desc POR04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR05</name>
                             <description>desc POR05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR06</name>
                             <description>desc POR06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR07</name>
                             <description>desc POR07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR08</name>
                             <description>desc POR08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR09</name>
                             <description>desc POR09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR10</name>
                             <description>desc POR10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR11</name>
                             <description>desc POR11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR12</name>
                             <description>desc POR12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR13</name>
                             <description>desc POR13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR14</name>
                             <description>desc POR14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR15</name>
                             <description>desc POR15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -25687,7 +25739,7 @@
                     <description>desc POTRE</description>
                     <addressOffset>0x4C</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -25696,112 +25748,112 @@
                             <description>desc POT00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT01</name>
                             <description>desc POT01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT02</name>
                             <description>desc POT02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT03</name>
                             <description>desc POT03</description>
                             <msb>3</msb>
                             <lsb>3</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT04</name>
                             <description>desc POT04</description>
                             <msb>4</msb>
                             <lsb>4</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT05</name>
                             <description>desc POT05</description>
                             <msb>5</msb>
                             <lsb>5</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT06</name>
                             <description>desc POT06</description>
                             <msb>6</msb>
                             <lsb>6</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT07</name>
                             <description>desc POT07</description>
                             <msb>7</msb>
                             <lsb>7</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT08</name>
                             <description>desc POT08</description>
                             <msb>8</msb>
                             <lsb>8</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT09</name>
                             <description>desc POT09</description>
                             <msb>9</msb>
                             <lsb>9</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT10</name>
                             <description>desc POT10</description>
                             <msb>10</msb>
                             <lsb>10</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT11</name>
                             <description>desc POT11</description>
                             <msb>11</msb>
                             <lsb>11</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT12</name>
                             <description>desc POT12</description>
                             <msb>12</msb>
                             <lsb>12</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT13</name>
                             <description>desc POT13</description>
                             <msb>13</msb>
                             <lsb>13</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT14</name>
                             <description>desc POT14</description>
                             <msb>14</msb>
                             <lsb>14</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT15</name>
                             <description>desc POT15</description>
                             <msb>15</msb>
                             <lsb>15</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -25906,7 +25958,7 @@
                     <description>desc POSRH</description>
                     <addressOffset>0x58</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7</resetMask>
                     <fields>
@@ -25915,21 +25967,21 @@
                             <description>desc POS00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS01</name>
                             <description>desc POS01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POS02</name>
                             <description>desc POS02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -25938,7 +25990,7 @@
                     <description>desc PORRH</description>
                     <addressOffset>0x5A</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7</resetMask>
                     <fields>
@@ -25947,21 +25999,21 @@
                             <description>desc POR00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR01</name>
                             <description>desc POR01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POR02</name>
                             <description>desc POR02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -25970,7 +26022,7 @@
                     <description>desc POTRH</description>
                     <addressOffset>0x5C</addressOffset>
                     <size>16</size>
-                    <access>write-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7</resetMask>
                     <fields>
@@ -25979,21 +26031,21 @@
                             <description>desc POT00</description>
                             <msb>0</msb>
                             <lsb>0</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT01</name>
                             <description>desc POT01</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                         <field>
                             <name>POT02</name>
                             <description>desc POT02</description>
                             <msb>2</msb>
                             <lsb>2</lsb>
-                            <access>write-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -35216,7 +35268,7 @@
                     <name>CR0</name>
                     <description>desc CR0</description>
                     <addressOffset>0x0</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x1</resetMask>
@@ -35234,7 +35286,7 @@
                     <name>CR1</name>
                     <description>desc CR1</description>
                     <addressOffset>0x4</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFF</resetMask>
@@ -35287,7 +35339,7 @@
                     <name>CR2</name>
                     <description>desc CR2</description>
                     <addressOffset>0x8</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xEB</resetMask>
@@ -35340,7 +35392,7 @@
                     <name>CR3</name>
                     <description>desc CR3</description>
                     <addressOffset>0xC</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x90</resetMask>
@@ -35365,7 +35417,7 @@
                     <name>SEC</name>
                     <description>desc SEC</description>
                     <addressOffset>0x10</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7F</resetMask>
@@ -35390,7 +35442,7 @@
                     <name>MIN</name>
                     <description>desc MIN</description>
                     <addressOffset>0x14</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7F</resetMask>
@@ -35415,7 +35467,7 @@
                     <name>HOUR</name>
                     <description>desc HOUR</description>
                     <addressOffset>0x18</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x12</resetValue>
                     <resetMask>0x3F</resetMask>
@@ -35440,7 +35492,7 @@
                     <name>WEEK</name>
                     <description>desc WEEK</description>
                     <addressOffset>0x1C</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7</resetMask>
@@ -35458,7 +35510,7 @@
                     <name>DAY</name>
                     <description>desc DAY</description>
                     <addressOffset>0x20</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x3F</resetMask>
@@ -35483,7 +35535,7 @@
                     <name>MON</name>
                     <description>desc MON</description>
                     <addressOffset>0x24</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x1F</resetMask>
@@ -35501,7 +35553,7 @@
                     <name>YEAR</name>
                     <description>desc YEAR</description>
                     <addressOffset>0x28</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFF</resetMask>
@@ -35526,7 +35578,7 @@
                     <name>ALMMIN</name>
                     <description>desc ALMMIN</description>
                     <addressOffset>0x2C</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x12</resetValue>
                     <resetMask>0x7F</resetMask>
@@ -35551,7 +35603,7 @@
                     <name>ALMHOUR</name>
                     <description>desc ALMHOUR</description>
                     <addressOffset>0x30</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x3F</resetMask>
@@ -35576,7 +35628,7 @@
                     <name>ALMWEEK</name>
                     <description>desc ALMWEEK</description>
                     <addressOffset>0x34</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7F</resetMask>
@@ -35594,7 +35646,7 @@
                     <name>ERRCRH</name>
                     <description>desc ERRCRH</description>
                     <addressOffset>0x38</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x81</resetMask>
@@ -35619,7 +35671,7 @@
                     <name>ERRCRL</name>
                     <description>desc ERRCRL</description>
                     <addressOffset>0x3C</addressOffset>
-                    <size>32</size>
+                    <size>8</size>
                     <access>read-write</access>
                     <resetValue>0x20</resetValue>
                     <resetMask>0xFF</resetMask>
@@ -36980,7 +37032,7 @@
                             <description>desc IDLNF</description>
                             <msb>1</msb>
                             <lsb>1</lsb>
-                            <access>read-write</access>
+                            <access>read-only</access>
                         </field>
                         <field>
                             <name>MODFERF</name>
@@ -37025,7 +37077,7 @@
                     <addressOffset>0x18</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
-                    <resetValue>0x31D</resetValue>
+                    <resetValue>0xF1D</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
                         <field>
@@ -37342,7 +37394,7 @@
                     <description>desc SR</description>
                     <addressOffset>0x4</addressOffset>
                     <size>32</size>
-                    <access>read-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x3FFFF</resetMask>
                     <fields>
@@ -37374,7 +37426,7 @@
                     <description>desc RR</description>
                     <addressOffset>0x8</addressOffset>
                     <size>32</size>
-                    <access>read-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -37383,7 +37435,7 @@
                             <description>desc RF</description>
                             <msb>15</msb>
                             <lsb>0</lsb>
-                            <access>read-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>
@@ -37395,7 +37447,7 @@
             <baseAddress>0x40054000</baseAddress>
             <addressBlock>
                 <offset>0x0</offset>
-                <size>0xE2</size>
+                <size>0x42C</size>
             </addressBlock>
             <registers>
                 <register>
@@ -43768,7 +43820,7 @@
                     <name>CNTER</name>
                     <description>desc CNTER</description>
                     <addressOffset>0x0</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43786,7 +43838,7 @@
                     <name>PERAR</name>
                     <description>desc PERAR</description>
                     <addressOffset>0x4</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0xFFFF</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43804,7 +43856,7 @@
                     <name>CMPAR1</name>
                     <description>desc CMPAR1</description>
                     <addressOffset>0x40</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0xFFFF</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43822,7 +43874,7 @@
                     <name>CMPAR2</name>
                     <description>desc CMPAR2</description>
                     <addressOffset>0x44</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0xFFFF</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43840,7 +43892,7 @@
                     <name>CMPAR3</name>
                     <description>desc CMPAR3</description>
                     <addressOffset>0x48</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0xFFFF</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43858,7 +43910,7 @@
                     <name>CMPAR4</name>
                     <description>desc CMPAR4</description>
                     <addressOffset>0x4C</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0xFFFF</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43876,7 +43928,7 @@
                     <name>CMPAR5</name>
                     <description>desc CMPAR5</description>
                     <addressOffset>0x50</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0xFFFF</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43894,7 +43946,7 @@
                     <name>CMPAR6</name>
                     <description>desc CMPAR6</description>
                     <addressOffset>0x54</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0xFFFF</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43912,7 +43964,7 @@
                     <name>CMPAR7</name>
                     <description>desc CMPAR7</description>
                     <addressOffset>0x58</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0xFFFF</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43930,7 +43982,7 @@
                     <name>CMPAR8</name>
                     <description>desc CMPAR8</description>
                     <addressOffset>0x5C</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0xFFFF</resetValue>
                     <resetMask>0xFFFF</resetMask>
@@ -43948,7 +44000,7 @@
                     <name>BCSTR</name>
                     <description>desc BCSTR</description>
                     <addressOffset>0x80</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x2</resetValue>
                     <resetMask>0xF0FF</resetMask>
@@ -44022,7 +44074,7 @@
                     <name>HCONR</name>
                     <description>desc HCONR</description>
                     <addressOffset>0x84</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xF777</resetMask>
@@ -44124,7 +44176,7 @@
                     <name>HCUPR</name>
                     <description>desc HCUPR</description>
                     <addressOffset>0x88</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x1FFF</resetMask>
@@ -44226,7 +44278,7 @@
                     <name>HCDOR</name>
                     <description>desc HCDOR</description>
                     <addressOffset>0x8C</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x1FFF</resetMask>
@@ -44328,7 +44380,7 @@
                     <name>ICONR</name>
                     <description>desc ICONR</description>
                     <addressOffset>0x90</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFF</resetMask>
@@ -44395,7 +44447,7 @@
                     <name>ECONR</name>
                     <description>desc ECONR</description>
                     <addressOffset>0x94</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFF</resetMask>
@@ -44462,7 +44514,7 @@
                     <name>FCONR</name>
                     <description>desc FCONR</description>
                     <addressOffset>0x98</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7707</resetMask>
@@ -44515,7 +44567,7 @@
                     <name>STFLR</name>
                     <description>desc STFLR</description>
                     <addressOffset>0x9C</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFF</resetMask>
@@ -44582,7 +44634,7 @@
                     <name>BCONR1</name>
                     <description>desc BCONR1</description>
                     <addressOffset>0xC0</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7</resetMask>
@@ -44614,7 +44666,7 @@
                     <name>BCONR2</name>
                     <description>desc BCONR2</description>
                     <addressOffset>0xC8</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7</resetMask>
@@ -44646,7 +44698,7 @@
                     <name>BCONR3</name>
                     <description>desc BCONR3</description>
                     <addressOffset>0xD0</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7</resetMask>
@@ -44678,7 +44730,7 @@
                     <name>BCONR4</name>
                     <description>desc BCONR4</description>
                     <addressOffset>0xD8</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7</resetMask>
@@ -44710,7 +44762,7 @@
                     <name>CCONR1</name>
                     <description>desc CCONR1</description>
                     <addressOffset>0x100</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7371</resetMask>
@@ -44777,7 +44829,7 @@
                     <name>CCONR2</name>
                     <description>desc CCONR2</description>
                     <addressOffset>0x104</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7371</resetMask>
@@ -44844,7 +44896,7 @@
                     <name>CCONR3</name>
                     <description>desc CCONR3</description>
                     <addressOffset>0x108</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7371</resetMask>
@@ -44911,7 +44963,7 @@
                     <name>CCONR4</name>
                     <description>desc CCONR4</description>
                     <addressOffset>0x10C</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7371</resetMask>
@@ -44978,7 +45030,7 @@
                     <name>CCONR5</name>
                     <description>desc CCONR5</description>
                     <addressOffset>0x110</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7371</resetMask>
@@ -45045,7 +45097,7 @@
                     <name>CCONR6</name>
                     <description>desc CCONR6</description>
                     <addressOffset>0x114</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7371</resetMask>
@@ -45112,7 +45164,7 @@
                     <name>CCONR7</name>
                     <description>desc CCONR7</description>
                     <addressOffset>0x118</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7371</resetMask>
@@ -45179,7 +45231,7 @@
                     <name>CCONR8</name>
                     <description>desc CCONR8</description>
                     <addressOffset>0x11C</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x7371</resetMask>
@@ -45246,7 +45298,7 @@
                     <name>PCONR1</name>
                     <description>desc PCONR1</description>
                     <addressOffset>0x140</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x13FF</resetMask>
@@ -45299,7 +45351,7 @@
                     <name>PCONR2</name>
                     <description>desc PCONR2</description>
                     <addressOffset>0x144</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x13FF</resetMask>
@@ -45352,7 +45404,7 @@
                     <name>PCONR3</name>
                     <description>desc PCONR3</description>
                     <addressOffset>0x148</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x13FF</resetMask>
@@ -45405,7 +45457,7 @@
                     <name>PCONR4</name>
                     <description>desc PCONR4</description>
                     <addressOffset>0x14C</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x13FF</resetMask>
@@ -45458,7 +45510,7 @@
                     <name>PCONR5</name>
                     <description>desc PCONR5</description>
                     <addressOffset>0x150</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x13FF</resetMask>
@@ -45511,7 +45563,7 @@
                     <name>PCONR6</name>
                     <description>desc PCONR6</description>
                     <addressOffset>0x154</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x13FF</resetMask>
@@ -45564,7 +45616,7 @@
                     <name>PCONR7</name>
                     <description>desc PCONR7</description>
                     <addressOffset>0x158</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x13FF</resetMask>
@@ -45617,7 +45669,7 @@
                     <name>PCONR8</name>
                     <description>desc PCONR8</description>
                     <addressOffset>0x15C</addressOffset>
-                    <size>32</size>
+                    <size>16</size>
                     <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x13FF</resetMask>
@@ -45798,7 +45850,7 @@
             <baseAddress>0x4001D000</baseAddress>
             <addressBlock>
                 <offset>0x0</offset>
-                <size>0x10</size>
+                <size>0x1C</size>
             </addressBlock>
             <registers>
                 <register>
@@ -46173,7 +46225,7 @@
             <baseAddress>0x4001D400</baseAddress>
             <addressBlock>
                 <offset>0x0</offset>
-                <size>0x10</size>
+                <size>0x1C</size>
             </addressBlock>
         </peripheral>
         <peripheral derivedFrom="USART1">
@@ -46182,7 +46234,7 @@
             <baseAddress>0x40021000</baseAddress>
             <addressBlock>
                 <offset>0x0</offset>
-                <size>0x10</size>
+                <size>0x1C</size>
             </addressBlock>
         </peripheral>
         <peripheral derivedFrom="USART1">
@@ -46191,7 +46243,7 @@
             <baseAddress>0x40021400</baseAddress>
             <addressBlock>
                 <offset>0x0</offset>
-                <size>0x10</size>
+                <size>0x1C</size>
             </addressBlock>
         </peripheral>
         <peripheral>
@@ -46204,8 +46256,8 @@
             </addressBlock>
             <registers>
                 <register>
-                    <name>USBFS_GVBUSCFG</name>
-                    <description>desc USBFS_GVBUSCFG</description>
+                    <name>GVBUSCFG</name>
+                    <description>desc GVBUSCFG</description>
                     <addressOffset>0x0</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -53135,7 +53187,7 @@
                     <description>desc SR</description>
                     <addressOffset>0x4</addressOffset>
                     <size>32</size>
-                    <access>read-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0x3FFFF</resetMask>
                     <fields>
@@ -53167,7 +53219,7 @@
                     <description>desc RR</description>
                     <addressOffset>0x8</addressOffset>
                     <size>32</size>
-                    <access>read-only</access>
+                    <access>read-write</access>
                     <resetValue>0x0</resetValue>
                     <resetMask>0xFFFF</resetMask>
                     <fields>
@@ -53176,7 +53228,7 @@
                             <description>desc RF</description>
                             <msb>15</msb>
                             <lsb>0</lsb>
-                            <access>read-only</access>
+                            <access>read-write</access>
                         </field>
                     </fields>
                 </register>

@@ -160,6 +160,19 @@
 (   ((N) == AdcPgaNegative_VSSA)                ||                              \
     ((N) == AdcPgaNegative_PGAVSS))
 
+/*! Parameter validity check for ADC PGA channel. */
+#define IS_ADC_PGA_CH(ch)                                                       \
+(   ((ch) == PGA_CH_NONE)                       ||                              \
+    ((ch) == PGA_CH0)                           ||                              \
+    ((ch) == PGA_CH1)                           ||                              \
+    ((ch) == PGA_CH2)                           ||                              \
+    ((ch) == PGA_CH3)                           ||                              \
+    ((ch) == PGA_CH4)                           ||                              \
+    ((ch) == PGA_CH5)                           ||                              \
+    ((ch) == PGA_CH6)                           ||                              \
+    ((ch) == PGA_CH7)                           ||                              \
+    ((ch) == PGA_CH8))
+
 /*! Parameter validity check for ADC trigger source event . */
 #define IS_ADC_TRIG_SRC_EVENT(x)                                                \
 (   ((x) == EVT_PORT_EIRQ0)                                         ||          \
@@ -271,6 +284,9 @@ en_result_t ADC_Init(M4_ADC_TypeDef *ADCx, const stc_adc_init_t *pstcInit)
  ******************************************************************************/
 en_result_t ADC_DeInit(M4_ADC_TypeDef *ADCx)
 {
+    uint8_t i;
+    uint8_t u8SstrNum;
+    uint32_t u32SSTRAddr;
     en_result_t enRet = ErrorInvalidParameter;
 
     if (NULL != ADCx)
@@ -285,16 +301,6 @@ en_result_t ADC_DeInit(M4_ADC_TypeDef *ADCx)
         ADCx->CHSELRA0  = 0u;
         ADCx->CHSELRB0  = 0u;
         ADCx->AVCHSELR0 = 0u;
-        ADCx->AWDCHSR0  = 0u;
-        ADCx->SSTR0     = (uint8_t)0x0B;
-        ADCx->SSTR1     = (uint8_t)0x0B;
-        ADCx->SSTR2     = (uint8_t)0x0B;
-        ADCx->SSTR3     = (uint8_t)0x0B;
-        ADCx->SSTR4     = (uint8_t)0x0B;
-        ADCx->SSTR5     = (uint8_t)0x0B;
-        ADCx->SSTR6     = (uint8_t)0x0B;
-        ADCx->SSTR7     = (uint8_t)0x0B;
-        ADCx->SSTR8     = (uint8_t)0x0B;
         ADCx->CHMUXR0   = (uint16_t)0x3210;
         ADCx->CHMUXR1   = (uint16_t)0x7654;
         ADCx->ISR       = 0u;
@@ -305,6 +311,7 @@ en_result_t ADC_DeInit(M4_ADC_TypeDef *ADCx)
         ADCx->AWDCHSR0  = 0u;
         ADCx->AWDSR0    = 0u;
 
+        u32SSTRAddr = (uint32_t)&ADCx->SSTR0;
         if (M4_ADC1 == ADCx)
         {
             ADCx->CHSELRA1  = 0u;
@@ -319,6 +326,18 @@ en_result_t ADC_DeInit(M4_ADC_TypeDef *ADCx)
             ADCx->PGAGSR    = 0u;
             ADCx->PGAINSR0  = 0u;
             ADCx->PGAINSR1  = 0u;
+            ADCx->SSTRL     = 0x0Bu;
+            u8SstrNum = 16u;
+        }
+        else
+        {
+            u8SstrNum = 9u;
+        }
+
+        for (i=0u; i<u8SstrNum; i++)
+        {
+            *(__IO uint8_t *)u32SSTRAddr = 0x0Bu;
+            u32SSTRAddr++;
         }
 
         enRet = Ok;
@@ -638,7 +657,8 @@ en_result_t ADC_AddAdcChannel(M4_ADC_TypeDef *ADCx, const stc_adc_ch_cfg_t *pstc
  ** \arg M4_ADC2                        ADC unit 2 instance register base.
  **
  ** \param [in] u32Channel              The channel(s) you want to delete.
- ** \arg ADC1_CH0 ~ ADC1_CH16
+ ** \arg ADC1_CH0 ~ ADC1_CH16           Channels of ADC unit 1.
+ ** \arg ADC2_CH0 ~ ADC2_CH8            Channels of ADC unit 2.
  **
  ** \retval ErrorInvalidParameter       Parameter error.
  ** \retval Ok                          No error occurred.
@@ -1075,9 +1095,9 @@ void ADC_PgaCmd(en_functional_state_t enState)
 
 /**
  *******************************************************************************
- ** \brief Add PGA channel(s).
+ ** \brief Select PGA channel.
  **
- ** \param[in] u32Channel               The channel(s), which you want to gain.
+ ** \param[in] u16Channel               The channel, which you want to gain.
  **
  ** \retval None.
  **
@@ -1086,23 +1106,10 @@ void ADC_PgaCmd(en_functional_state_t enState)
  **                                     by function ADC_AddAdcChannel
  **
  ******************************************************************************/
-void ADC_AddPgaChannel(uint32_t u32Channel)
+void ADC_PgaSelChannel(uint16_t u16Channel)
 {
-    M4_ADC1->PGAINSR0 |= ((uint16_t)(u32Channel & PGA_CH_ALL));
-}
-
-/**
- *******************************************************************************
- ** \brief Delete PGA channel(s).
- **
- ** \param[in] u32Channel               The PGA channel(s) which will be deleted.
- **
- ** \retval None.
- **
- ******************************************************************************/
-void ADC_DelPgaChannel(uint32_t u32Channel)
-{
-    M4_ADC1->PGAINSR0 &= (uint16_t)(~u32Channel);
+    DDL_ASSERT(IS_ADC_PGA_CH(u16Channel));
+    M4_ADC1->PGAINSR0 = u16Channel;
 }
 
 /**
@@ -1332,7 +1339,7 @@ en_result_t ADC_PollingSa(M4_ADC_TypeDef *ADCx,
             }
             else
             {
-                u32Channel = (uint32_t)M4_ADC1->CHSELRA0;
+                u32Channel = (uint32_t)M4_ADC2->CHSELRA0;
             }
         }
 
@@ -1633,7 +1640,7 @@ en_result_t ADC_ChannelRemap(M4_ADC_TypeDef *ADCx,
         }
         else
         {
-            if ((u16AdcPin > ADC12_IN4) && (u16AdcPin < ADC12_IN11))
+            if ((u16AdcPin >= ADC12_IN4) && (u16AdcPin <= ADC12_IN11))
             {
                 u16AdcPin -= 4u;
                 u32DestChannel &= ADC2_PIN_MASK_ALL;

@@ -350,42 +350,12 @@ void UsageFault_Handler(void)
 
 /**
  *******************************************************************************
- ** \brief SVCall IRQ handler
- **
- ******************************************************************************/
-void SVC_Handler(void)
-{
-    SVC_IrqHandler();
-}
-
-/**
- *******************************************************************************
  ** \brief DebugMon IRQ handler
  **
  ******************************************************************************/
 void DebugMon_Handler(void)
 {
     DebugMon_IrqHandler();
-}
-
-/**
- *******************************************************************************
- ** \brief PendSV IRQ handler
- **
- ******************************************************************************/
-void PendSV_Handler(void)
-{
-    PendSV_IrqHandler();
-}
-
-/**
- *******************************************************************************
- ** \brief Systick IRQ handler
- **
- ******************************************************************************/
-void SysTick_Handler(void)
-{
-    SysTick_IrqHandler();
 }
 
 /**
@@ -2156,7 +2126,7 @@ void IRQ129_Handler(void)
     uint32_t u32Tmp1 = 0ul;
     uint32_t u32Tmp2 = 0ul;
 
-    if (1ul == bM4_DMA1_CH0CTL_IE)
+    if (1ul == bM4_DMA1_CHCTL0_IE)
     {
         /* DMA1 ch.0 Tx completed */
         if (0ul == bM4_DMA1_INTMASK1_MSKTC0)
@@ -2182,7 +2152,7 @@ void IRQ129_Handler(void)
             Dma1Err0_IrqHandler();
         }
     }
-    if (1ul == bM4_DMA1_CH1CTL_IE)
+    if (1ul == bM4_DMA1_CHCTL1_IE)
     {
         /* DMA1 ch.1 Tx completed */
         if (0ul == bM4_DMA1_INTMASK1_MSKTC1)
@@ -2208,7 +2178,7 @@ void IRQ129_Handler(void)
             Dma1Err1_IrqHandler();
         }
     }
-    if (1ul == bM4_DMA1_CH2CTL_IE)
+    if (1ul == bM4_DMA1_CHCTL2_IE)
     {
         /* DMA1 ch.2 Tx completed */
         if (0ul == bM4_DMA1_INTMASK1_MSKTC2)
@@ -2234,7 +2204,7 @@ void IRQ129_Handler(void)
             Dma1Err2_IrqHandler();
         }
     }
-    if (1ul == bM4_DMA1_CH3CTL_IE)
+    if (1ul == bM4_DMA1_CHCTL3_IE)
     {
         /* DMA1 ch.3 Tx completed */
         if (0ul == bM4_DMA1_INTMASK1_MSKTC3)
@@ -2260,7 +2230,7 @@ void IRQ129_Handler(void)
             Dma1Err3_IrqHandler();
         }
     }
-    if (1ul == bM4_DMA2_CH0CTL_IE)
+    if (1ul == bM4_DMA2_CHCTL0_IE)
     {
         /* DMA2 ch.0 Tx completed */
         if (0ul == bM4_DMA2_INTMASK1_MSKTC0)
@@ -2286,7 +2256,7 @@ void IRQ129_Handler(void)
             Dma2Err0_IrqHandler();
         }
     }
-    if (1ul == bM4_DMA2_CH1CTL_IE)
+    if (1ul == bM4_DMA2_CHCTL1_IE)
     {
         /* DMA2 ch.1 Tx completed */
         if (0ul == bM4_DMA2_INTMASK1_MSKTC1)
@@ -2312,7 +2282,7 @@ void IRQ129_Handler(void)
             Dma2Err1_IrqHandler();
         }
     }
-    if (1ul == bM4_DMA2_CH2CTL_IE)
+    if (1ul == bM4_DMA2_CHCTL2_IE)
     {
         /* DMA2 ch.2 Tx completed */
         if (0ul == bM4_DMA2_INTMASK1_MSKTC2)
@@ -2338,7 +2308,7 @@ void IRQ129_Handler(void)
             Dma2Err2_IrqHandler();
         }
     }
-    if (1ul == bM4_DMA2_CH3CTL_IE)
+    if (1ul == bM4_DMA2_CHCTL3_IE)
     {
         /* DMA2 ch.3 Tx completed */
         if (0ul == bM4_DMA2_INTMASK1_MSKTC3)

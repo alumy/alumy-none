@@ -458,7 +458,6 @@ void SDIOC_IrqHandler(M4_SDIOC_TypeDef *SDIOCx)
 
         if (1u == SDIOCx->NORINTST_f.CINT)  /* Card interrupt */
         {
-            SDIOCx->NORINTST_f.CINT = 1u;  /* Clear interrupt flag */
             if (NULL != pstcSdiocInternData->stcNormalIrqCb.pfnCardIrqCb)
             {
                 pstcSdiocInternData->stcNormalIrqCb.pfnCardIrqCb();

@@ -176,7 +176,7 @@ en_result_t TIMER4_CNT_Init(M4_TMR4_TypeDef *TMR4x,
         CVPR_f.PIM = (uint16_t)(pstcInitCfg->enPeakIntMsk);
 
         /* Set Timer4 register */
-        TMR4x->CVPR_f = CVPR_f;
+        TMR4x->CVPR = *(uint16_t *)(&CVPR_f);
         TMR4x->CCSR_f = CCSR_f;
         TMR4x->CPSR = pstcInitCfg->u16Cycle;
         enRet = Ok;

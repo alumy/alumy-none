@@ -139,7 +139,7 @@ typedef enum en_result
     #define __UNUSED                    __attribute__((unused))
   #endif /* __UNUSED */
   #ifndef __RAM_FUNC
-    #define __RAM_FUNC                  __attribute__((long_call, section(".ramfunc")))
+    #define __RAM_FUNC                  __attribute__((section(".ramfunc")))
     /* Usage: void __RAM_FUNC foo(void) */
   #endif /* __RAM_FUNC */
 #elif defined (__ICCARM__)                ///< IAR Compiler
@@ -169,7 +169,7 @@ typedef enum en_result
 
 /*! Memory clear */
 #define MEM_ZERO_STRUCT(x)              do {                                   \
-                                        memset((void*)&(x), 0l, (sizeof(x)));  \
+                                        memset((void*)&(x), 0L, (sizeof(x)));  \
                                         }while(0)
 
 /*! Decimal to BCD */
@@ -196,7 +196,7 @@ typedef enum en_result
 
 #define BIT_READ(value,bit)             ((value) & (bit))
 
-#define BIT_VALUE(index)                (1ul << (index))
+#define BIT_VALUE(index)                (1UL << (index))
 
 /*******************************************************************************
  * Global variable definitions ('extern')

@@ -124,7 +124,6 @@ typedef enum
     CanErrorPassiveIrqEn    = 0x00200000,   ///< Error passive mode active enable
     CanArbiLostIrqEn        = 0x00080000,   ///< Arbitration lost interrupt enable
     CanBusErrorIrqEn        = 0x00020000,   ///< Bus error interrupt enable
-
 }en_can_irq_type_t;
 
 /**
@@ -389,6 +388,9 @@ typedef struct stc_can_init_config
     en_can_stb_mode_t       enCanSTBMode;       ///< @ref en_can_stb_mode_t
     stc_can_bt_t            stcCanBt;           ///< @ref stc_can_bt_t
     stc_can_warning_limit_t stcWarningLimit;    ///< @ref stc_can_warning_limit_t
+    stc_can_filter_t        *pstcFilter;        ///< @ref stc_can_filter_t Pointer to a stc_can_filter_t type array that \
+                                                ///<  contains the configuration informations of the acceptance filters.
+    uint8_t                 u8FilterCount;      ///< Number of filters that to to initialized.
 }stc_can_init_config_t;
 
 /**
@@ -473,7 +475,7 @@ typedef struct stc_can_ttcan_trigger_config
 /*******************************************************************************
  * Global function prototypes (definition in C source)
  ******************************************************************************/
-void CAN_Init(stc_can_init_config_t *pstcCanInitCfg);
+void CAN_Init(const stc_can_init_config_t *pstcCanInitCfg);
 void CAN_DeInit(void);
 void CAN_IrqCmd(en_can_irq_type_t enCanIrqType, en_functional_state_t enNewState);
 bool CAN_IrqFlgGet(en_can_irq_flag_type_t enCanIrqFlgType);
@@ -482,7 +484,9 @@ void CAN_ModeConfig(en_can_mode_t enMode, en_functional_state_t enNewState);
 en_can_error_t CAN_ErrorStatusGet(void);
 bool CAN_StatusGet(en_can_status_t enCanStatus);
 
-void CAN_FilterConfig(const stc_can_filter_t *pstcFilter, en_functional_state_t enNewState);
+void CAN_FilterConfig(const stc_can_filter_t pstcFilter[], uint8_t u8FilterCount);
+void CAN_FilterCmd(en_can_filter_sel_t enFilter, en_functional_state_t enNewState);
+
 void CAN_SetFrame(stc_can_txframe_t *pstcTxFrame);
 en_can_tx_buf_status_t CAN_TransmitCmd(en_can_tx_cmd_t enTxCmd);
 en_can_rx_buf_status_t CAN_Receive(stc_can_rxframe_t *pstcRxFrame);

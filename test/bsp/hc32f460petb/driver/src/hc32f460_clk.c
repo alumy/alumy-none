@@ -379,8 +379,7 @@ void CLK_XtalStpConfig(const stc_clk_xtal_stp_cfg_t *pstcXtalStpCfg)
  ******************************************************************************/
 en_result_t CLK_XtalCmd(en_functional_state_t enNewState)
 {
-    __IO uint32_t timeout = 0u;
-    en_flag_status_t status;
+    __IO uint32_t timeout = 0ul;
     en_result_t enRet = Ok;
 
     DDL_ASSERT(IS_FUNCTIONAL_STATE(enNewState));
@@ -413,12 +412,17 @@ en_result_t CLK_XtalCmd(en_functional_state_t enNewState)
     }
     else
     {
-         M4_SYSREG->CMU_XTALCR_f.XTALSTP = 0u;
-         do
+        M4_SYSREG->CMU_XTALCR_f.XTALSTP = 0u;
+        enRet = ErrorTimeout;
+        while (timeout < CLK_XTAL_TIMEOUT)
         {
-            status = CLK_GetFlagStatus(ClkFlagXTALRdy);
+            if (Set == CLK_GetFlagStatus(ClkFlagXTALRdy))
+            {
+                enRet = Ok;
+                break;
+            }
             timeout++;
-        }while((timeout < CLK_XTAL_TIMEOUT) && (status != Set));
+        }
     }
 
     DISABLE_CLOCK_REG_WRITE();
@@ -538,7 +542,6 @@ void CLK_HrcTrim(int8_t trimValue)
 en_result_t CLK_HrcCmd(en_functional_state_t enNewState)
 {
     __IO uint32_t timeout = 0ul;
-    en_flag_status_t status;
     en_result_t enRet = Ok;
 
     ENABLE_CLOCK_REG_WRITE();
@@ -569,11 +572,16 @@ en_result_t CLK_HrcCmd(en_functional_state_t enNewState)
     else
     {
         M4_SYSREG->CMU_HRCCR_f.HRCSTP = 0u;
-        do
+        enRet = ErrorTimeout;
+        while (timeout < CLK_HRC_TIMEOUT)
         {
-            status = CLK_GetFlagStatus(ClkFlagHRCRdy);
+            if (Set == CLK_GetFlagStatus(ClkFlagHRCRdy))
+            {
+                enRet = Ok;
+                break;
+            }
             timeout++;
-        }while((timeout < CLK_HRC_TIMEOUT) && (status != Set));
+        }
     }
 
     DISABLE_CLOCK_REG_WRITE();
@@ -808,7 +816,6 @@ void CLK_MpllConfig(const stc_clk_mpll_cfg_t *pstcMpllCfg)
 en_result_t CLK_MpllCmd(en_functional_state_t enNewState)
 {
     __IO uint32_t timeout = 0ul;
-    en_flag_status_t status;
     en_result_t enRet = Ok;
 
     DDL_ASSERT(IS_FUNCTIONAL_STATE(enNewState));
@@ -829,11 +836,16 @@ en_result_t CLK_MpllCmd(en_functional_state_t enNewState)
     else
     {
         M4_SYSREG->CMU_PLLCR_f.MPLLOFF = 0u;
-        do
+        enRet = ErrorTimeout;
+        while (timeout < CLK_MPLL_TIMEOUT)
         {
-            status = CLK_GetFlagStatus(ClkFlagMPLLRdy);
+            if (Set == CLK_GetFlagStatus(ClkFlagMPLLRdy))
+            {
+                enRet = Ok;
+                break;
+            }
             timeout++;
-        }while((timeout < CLK_MPLL_TIMEOUT) && (status != Set));
+        }
     }
 
     DISABLE_CLOCK_REG_WRITE();
@@ -909,8 +921,7 @@ void CLK_UpllConfig(const stc_clk_upll_cfg_t *pstcUpllCfg)
  ******************************************************************************/
 en_result_t CLK_UpllCmd(en_functional_state_t enNewState)
 {
-    __IO uint32_t timeout = 0ul;
-    en_flag_status_t status;
+    __IO uint32_t timeout;
 
     DDL_ASSERT(IS_FUNCTIONAL_STATE(enNewState));
 
@@ -920,11 +931,30 @@ en_result_t CLK_UpllCmd(en_functional_state_t enNewState)
 
     DISABLE_CLOCK_REG_WRITE();
 
-    do
+    if (Disable == enNewState)
     {
-        status = CLK_GetFlagStatus(ClkFlagUPLLRdy);
-        timeout++;
-    }while((timeout < CLK_UPLL_TIMEOUT) && (status != ((Enable == enNewState) ? Set : Reset)));
+        timeout = 0ul;
+        while (Reset != CLK_GetFlagStatus(ClkFlagUPLLRdy))
+        {
+            timeout++;
+            if (timeout > CLK_UPLL_TIMEOUT)
+            {
+                return ErrorTimeout;
+            }
+        }
+    }
+    else
+    {
+        timeout = 0ul;
+        while (Set != CLK_GetFlagStatus(ClkFlagUPLLRdy))
+        {
+            timeout++;
+            if (timeout > CLK_UPLL_TIMEOUT)
+            {
+                return ErrorTimeout;
+            }
+        }
+    }
 
     return Ok;
 }
