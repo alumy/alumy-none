@@ -28,7 +28,7 @@ target_include_directories(${target} PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/mcu/GCC/CMSIS/Core/Include)
 
 debug(${PROJECT_NAME}-test)
-gdbserver("HC32F460XE")
-jflash("HC32F460XE" ${PROJECT_NAME}-test)
-flash("HC32F460XE" ${PROJECT_NAME}-test)
+gdbserver("HC32F460PETB")
+jflash("HC32F460PETB" ${PROJECT_NAME}-test)
+flash("HC32F460PETB" ${PROJECT_NAME}-test)
 
