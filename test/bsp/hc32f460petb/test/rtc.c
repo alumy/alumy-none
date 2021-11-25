@@ -8,8 +8,6 @@
 
 __BEGIN_DECLS
 
-#if 0
-
 #if AL_TEST_DRIVER
 
 #define DS1302_SCLK_PORT        PortD
@@ -20,6 +18,19 @@ __BEGIN_DECLS
 #define DS1302_RST_PIN          Pin13
 
 static ds1302_t ds1302;
+
+TEST_GROUP(rtc);
+
+TEST_SETUP(rtc)
+{
+
+}
+
+TEST_TEAR_DOWN(rtc)
+{
+
+}
+
 
 static int32_t ds1302_io_set(ds1302_t *this, al_gpio_t level)
 {
@@ -123,7 +134,7 @@ static int rtc_ds1302_suite_clean(void)
     return 0;
 }
 
-static void rtc_ds1302_write_date_time_test(void)
+TEST(rtc, ds1302_write_date_time_test)
 {
     struct tm tm_wr = {
         .tm_sec = 0,
@@ -139,10 +150,10 @@ static void rtc_ds1302_write_date_time_test(void)
     ds1302_write_date_time(&ds1302, &tm_wr);
     ds1302_read_date_time(&ds1302, &tm_rd);
 
-    CU_ASSERT(mktime(&tm_wr) == mktime(&tm_rd));
+    TEST_ASSERT(mktime(&tm_wr) == mktime(&tm_rd));
 }
 
-static void rtc_ds1302_write_ram_test(void)
+TEST(rtc, ds1302_write_ram_test)
 {
     uint8_t ram_wr[31], ram_rd[31];
 
@@ -155,29 +166,23 @@ static void rtc_ds1302_write_ram_test(void)
     ds1302_write_ram(&ds1302, 0x00, ram_wr, sizeof(ram_wr));
     ds1302_read_ram(&ds1302, 0x00, ram_rd, sizeof(ram_rd));
 
-    CU_ASSERT(memcmp(ram_wr, ram_rd, sizeof(ram_wr)) == 0);
+    TEST_ASSERT(memcmp(ram_wr, ram_rd, sizeof(ram_wr)) == 0);
 }
 
-
-static int32_t add_rtc_ds1302_tests(void)
+TEST_GROUP_RUNNER(rtc)
 {
-    CU_pSuite suite;
+    RUN_TEST_CASE(rtc, ds1302_write_date_time_test);
+    RUN_TEST_CASE(rtc, ds1302_write_ram_test);
+}
 
-    suite = CU_add_suite("rtc_ds1302",
-                         rtc_ds1302_suite_init, rtc_ds1302_suite_clean);
-
-    CU_add_test(suite, "rtc_ds1302_write_date_time_test",
-                rtc_ds1302_write_date_time_test);
-
-    CU_add_test(suite, "rtc_ds1302_write_ram_test",
-                rtc_ds1302_write_ram_test);
-
+static int32_t __add_rtc_tests(void)
+{
+    printf("run rtc\n");
+    RUN_TEST_GROUP(rtc);
     return 0;
 }
 
-al_test_suite_init(add_rtc_ds1302_tests);
-
-#endif
+al_test_suite_init(__add_rtc_tests);
 
 #endif
 

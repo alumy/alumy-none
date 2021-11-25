@@ -1,7 +1,7 @@
 set(target bsp)
 
 FILE(GLOB_RECURSE ${target}_src 
-	${CMAKE_CURRENT_SOURCE_DIR}/bsp/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/bsp/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/test/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/driver/src/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/mcu/common/*.c)
@@ -18,7 +18,7 @@ add_definitions(-DXTAL_VALUE=12000000ul)
 add_definitions(-DAL_TEST_DRIVER=1)
 
 add_library(${target} STATIC ${${target}_src})
-target_link_libraries(${target} PRIVATE unity cmock)
+target_link_libraries(${target} PRIVATE ${PROJECT_NAME}-static unity cmock)
 
 target_include_directories(${target} PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/segger/RTT
