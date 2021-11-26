@@ -1267,6 +1267,13 @@
                                     </Folder>
                                 </Folder>
                             </Folder>
+                            <Folder Name="LinkerScript">
+                                <F N="../test/bsp/hc32f460petb/mcu/GCC/LinkerScript/hc32f460xc_flash.ld"/>
+                                <F N="../test/bsp/hc32f460petb/mcu/GCC/LinkerScript/hc32f460xe_flash.ld"/>
+                            </Folder>
+                            <Folder Name="Startup">
+                                <F N="../test/bsp/hc32f460petb/mcu/GCC/Startup/startup_hc32f460.S"/>
+                            </Folder>
                         </Folder>
                     </Folder>
                     <Folder Name="segger">
@@ -1283,6 +1290,10 @@
                             <F N="../test/bsp/hc32f460petb/segger/Syscalls/SEGGER_RTT_Syscalls_SES.c"/>
                         </Folder>
                     </Folder>
+                    <Folder Name="startup">
+                        <F N="../test/bsp/hc32f460petb/startup/startup_hc32f460_armcc.s"/>
+                        <F N="../test/bsp/hc32f460petb/startup/startup_hc32f460_gcc.S"/>
+                    </Folder>
                     <Folder Name="syscalls">
                         <F N="../test/bsp/hc32f460petb/syscalls/syscalls.c"/>
                     </Folder>
@@ -1291,6 +1302,7 @@
                         <F N="../test/bsp/hc32f460petb/test/spiffs.c"/>
                     </Folder>
                     <F N="../test/bsp/hc32f460petb/CMakeLists.txt"/>
+                    <F N="../test/bsp/hc32f460petb/hc32f460xe_flash.ld"/>
                 </Folder>
                 <Folder Name="stm32f103c8tx">
                     <Folder Name="bsp">

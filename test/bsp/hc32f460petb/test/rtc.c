@@ -21,17 +21,6 @@ static ds1302_t ds1302;
 
 TEST_GROUP(rtc);
 
-TEST_SETUP(rtc)
-{
-
-}
-
-TEST_TEAR_DOWN(rtc)
-{
-
-}
-
-
 static int32_t ds1302_io_set(ds1302_t *this, al_gpio_t level)
 {
     if (level == AL_GPIO_HIGH) {
@@ -109,7 +98,7 @@ static void ds1302_delay_us(ds1302_t *this)
     }
 }
 
-static int rtc_ds1302_suite_init(void)
+TEST_SETUP(rtc)
 {
     ds1302_opt_t opt = {
         .delay_us = ds1302_delay_us,
@@ -123,15 +112,11 @@ static int rtc_ds1302_suite_init(void)
     };
 
     ds1302_init(&ds1302, &opt);
-
-    return 0;
 }
 
-static int rtc_ds1302_suite_clean(void)
+TEST_TEAR_DOWN(rtc)
 {
     ds1302_final(&ds1302);
-
-    return 0;
 }
 
 TEST(rtc, ds1302_write_date_time_test)
