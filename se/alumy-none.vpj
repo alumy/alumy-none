@@ -693,6 +693,9 @@
                 <F N="../driver/rtc/ds1302.c"/>
                 <F N="../driver/rtc/sd3078.c"/>
             </Folder>
+            <Folder Name="usb">
+                <F N="../driver/usb/ch376.c"/>
+            </Folder>
             <F N="../driver/boost.c"/>
             <F N="../driver/CMakeLists.txt"/>
             <F N="../driver/flexible_button.c"/>
@@ -807,6 +810,9 @@
                         <F N="../include/alumy/driver/rtc/bm8563.h"/>
                         <F N="../include/alumy/driver/rtc/ds1302.h"/>
                         <F N="../include/alumy/driver/rtc/sd3078.h"/>
+                    </Folder>
+                    <Folder Name="usb">
+                        <F N="../include/alumy/driver/usb/ch376.h"/>
                     </Folder>
                     <F N="../include/alumy/driver/boost.h"/>
                     <F N="../include/alumy/driver/eeprom.h"/>

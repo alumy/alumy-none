@@ -101,6 +101,9 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/sys)
 add_subdirectory(${PROJECT_SOURCE_DIR}/cjson)
 add_subdirectory(${PROJECT_SOURCE_DIR}/fs)
 add_subdirectory(${PROJECT_SOURCE_DIR}/driver)
+add_subdirectory(${PROJECT_SOURCE_DIR}/protobuf-c)
+add_subdirectory(${PROJECT_SOURCE_DIR}/pid)
+add_subdirectory(${PROJECT_SOURCE_DIR}/lzma)
 
 #############################################################################
 # libalumy
@@ -116,7 +119,10 @@ set(objs
 		$<TARGET_OBJECTS:base64>
 		$<TARGET_OBJECTS:cjson>
 		$<TARGET_OBJECTS:driver>
-		$<TARGET_OBJECTS:fs>)
+		$<TARGET_OBJECTS:fs>
+		$<TARGET_OBJECTS:protobuf-c>
+		$<TARGET_OBJECTS:pid>
+		$<TARGET_OBJECTS:lzma>)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_src)
 
