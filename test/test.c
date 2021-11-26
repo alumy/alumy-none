@@ -30,6 +30,12 @@ int main(int argc, char *argv[])
 {
     bsp_init();
 
+    extern int ch376_test(void);
+
+    for (;;) {
+        ch376_test();
+    }
+
     const char *__argv[] = {
         "alumy",
     };

@@ -9,6 +9,12 @@
 __BEGIN_DECLS
 
 
+typedef struct ch376_opt {
+    int32_t (*gpio_init)(void);
+    int32_t (*spi_init)(void);
+} ch376_opt_t;
+
+
 __END_DECLS
 
 #endif

@@ -812,6 +812,9 @@
                         <F N="../include/alumy/driver/rtc/sd3078.h"/>
                     </Folder>
                     <Folder Name="usb">
+                        <Folder Name="ch376">
+                            <F N="../include/alumy/driver/usb/ch376/cmd.h"/>
+                        </Folder>
                         <F N="../include/alumy/driver/usb/ch376.h"/>
                     </Folder>
                     <F N="../include/alumy/driver/boost.h"/>
@@ -910,6 +913,7 @@
         </Folder>
         <Folder Name="../lzma">
             <F N="../lzma/Alloc.c"/>
+            <F N="../lzma/CMakeLists.txt"/>
             <F N="../lzma/LzmaDec.c"/>
         </Folder>
         <Folder Name="../mem">
@@ -917,11 +921,13 @@
             <F N="../mem/mem.c"/>
         </Folder>
         <Folder Name="../pid">
+            <F N="../pid/CMakeLists.txt"/>
             <F N="../pid/increment.c"/>
             <F N="../pid/pid.c"/>
             <F N="../pid/position.c"/>
         </Folder>
         <Folder Name="../protobuf-c">
+            <F N="../protobuf-c/CMakeLists.txt"/>
             <F N="../protobuf-c/protobuf-c.c"/>
         </Folder>
         <Folder Name="../qrcode">
@@ -1304,6 +1310,12 @@
                         <F N="../test/bsp/hc32f460petb/syscalls/syscalls.c"/>
                     </Folder>
                     <Folder Name="test">
+                        <F N="../test/bsp/hc32f460petb/test/bsp_ch376_spi.c"/>
+                        <F N="../test/bsp/hc32f460petb/test/bsp_ch376_spi.h"/>
+                        <F N="../test/bsp/hc32f460petb/test/ch376.c"/>
+                        <F N="../test/bsp/hc32f460petb/test/ch376inc.h"/>
+                        <F N="../test/bsp/hc32f460petb/test/file_sys.c"/>
+                        <F N="../test/bsp/hc32f460petb/test/file_sys.h"/>
                         <F N="../test/bsp/hc32f460petb/test/rtc.c"/>
                         <F N="../test/bsp/hc32f460petb/test/spiffs.c"/>
                     </Folder>
