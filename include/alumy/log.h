@@ -93,37 +93,37 @@ __BEGIN_DECLS
 
 #define AL_BIN_I(type, data, len)   do {                        \
     if ((type)) {                                               \
-        al_log_bin(AL_LOG_DEBUG, AL_LOG_LINE, (data), (len));   \
+        al_log_bin(AL_LOG_INFO, AL_LOG_LINE, (data), (len));    \
     }                                                           \
 } while(0)
 
 #define AL_BIN_N(type, data, len)   do {                        \
     if ((type)) {                                               \
-        al_log_bin(AL_LOG_DEBUG, AL_LOG_LINE, (data), (len));   \
+        al_log_bin(AL_LOG_NOTICE, AL_LOG_LINE, (data), (len));  \
     }                                                           \
 } while(0)
 
 #define AL_BIN_W(type, data, len)   do {                        \
     if ((type)) {                                               \
-        al_log_bin(AL_LOG_DEBUG, AL_LOG_LINE, (data), (len));   \
+        al_log_bin(AL_LOG_WARN, AL_LOG_LINE, (data), (len));    \
     }                                                           \
 } while(0)
 
 #define AL_BIN_E(type, data, len)   do {                        \
     if ((type)) {                                               \
-        al_log_bin(AL_LOG_DEBUG, AL_LOG_LINE, (data), (len));   \
+        al_log_bin(AL_LOG_ERR, AL_LOG_LINE, (data), (len));     \
     }                                                           \
 } while(0)
 
 #define AL_BIN_C(type, data, len)   do {                        \
     if ((type)) {                                               \
-        al_log_bin(AL_LOG_DEBUG, AL_LOG_LINE, (data), (len));   \
+        al_log_bin(AL_LOG_CRIT, AL_LOG_LINE, (data), (len));    \
     }                                                           \
 } while(0)
 
 #define AL_BIN_A(type, data, len)   do {                        \
     if ((type)) {                                               \
-        al_log_bin(AL_LOG_DEBUG, AL_LOG_LINE, (data), (len));   \
+        al_log_bin(AL_LOG_ALERT, AL_LOG_LINE, (data), (len));   \
     }                                                           \
 } while(0)
 
