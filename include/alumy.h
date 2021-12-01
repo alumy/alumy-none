@@ -44,6 +44,7 @@
 #include "alumy/cJSON.h"
 #include "alumy/cJSON_Utils.h"
 #include "alumy/fs.h"
+#include "alumy/csv.h"
 
 __BEGIN_DECLS
 
