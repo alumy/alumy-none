@@ -50,6 +50,18 @@ extern "C" {
 #define FLEX_BTN_SCAN_FREQ_HZ 100 // How often flex_button_scan () is called
 #endif
 
+// SPIFFS_LOCK and SPIFFS_UNLOCK protects spiffs from reentrancy on api level
+// These should be defined on a multithreaded system
+
+// define this to enter a mutex if you're running on a multithreaded system
+#ifndef SPIFFS_LOCK
+#define SPIFFS_LOCK(fs)
+#endif
+// define this to exit a mutex if you're running on a multithreaded system
+#ifndef SPIFFS_UNLOCK
+#define SPIFFS_UNLOCK(fs)
+#endif
+
 #ifdef __cplusplus
 extern }
 #endif
