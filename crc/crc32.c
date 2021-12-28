@@ -215,7 +215,7 @@ uint32_t al_crc32(uint32_t crc, const void *p, uint32_t len)
 uint32_t al_crc32_wd(uint32_t crc, const uint8_t *buf, uint32_t len,
 					 uint32_t chunk_sz)
 {
-#if defined(CONFIG_HW_WATCHDOG) || defined(CONFIG_WATCHDOG)
+#if (AL_CONFIG_HW_WATCHDOG) || (AL_CONFIG_WATCHDOG)
 	const unsigned char *end, *curr;
 	int chunk;
 
@@ -227,7 +227,7 @@ uint32_t al_crc32_wd(uint32_t crc, const uint8_t *buf, uint32_t len,
 			chunk = chunk_sz;
 		crc = al_crc32(crc, curr, chunk);
 		curr += chunk;
-		WATCHDOG_RESET ();
+		AL_WATCHDOG_RESET();
 	}
 #else
 	crc = al_crc32(crc, buf, len);

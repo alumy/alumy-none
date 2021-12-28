@@ -42,6 +42,18 @@ extern "C" {
 #define AL_DYNAMIC_CRC_TABLE	0
 #endif
 
+#ifndef AL_CONFIG_HW_WATCHDOG
+#define AL_CONFIG_HW_WATCHDOG		0		/* Hardware watchdog */
+#endif
+
+#ifndef AL_CONFIG_WATCHDOG
+#define AL_CONFIG_WATCHDOG			0		/* Maybe a software watchdog */
+#endif
+
+#ifndef AL_WATCHDOG_RESET
+#define AL_WATCHDOG_RESET()			(void)(0)
+#endif
+
 #ifndef CMB_CPU_PLATFORM_TYPE
 #define CMB_CPU_PLATFORM_TYPE		CMB_CPU_ARM_CORTEX_M4
 #endif
