@@ -13,6 +13,10 @@
 #define __inline	inline
 #endif
 
+#ifndef __inline__
+#define __inline__	__inline
+#endif
+
 #ifndef UNUSED
 #define UNUSED(v)	(void)(v)
 #endif

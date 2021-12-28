@@ -41,7 +41,7 @@ __BEGIN_DECLS
 	 (((x) & 0x00ff0000) >>  8) | \
 	 (((x) & 0x0000ff00) <<  8) | \
 	 (((x) & 0x000000ff) << 24))
-#define _al_swap_64(x, sfx) \
+#define al_swap_64(x, sfx) \
 	((((x) & 0xff00000000000000##sfx) >> 56) | \
 	 (((x) & 0x00ff000000000000##sfx) >> 40) | \
 	 (((x) & 0x0000ff0000000000##sfx) >> 24) | \
@@ -51,9 +51,9 @@ __BEGIN_DECLS
 	 (((x) & 0x000000000000ff00##sfx) << 40) | \
 	 (((x) & 0x00000000000000ff##sfx) << 56))
 #if defined(__GNUC__)
-# define uswap_64(x) _al_swap_64(x, ull)
+# define uswap_64(x) al_swap_64(x, ull)
 #else
-# define uswap_64(x) _al_swap_64(x, )
+# define uswap_64(x) al_swap_64(x, )
 #endif
 
 __inline__ void al_split_write_two(void *_addr, uint16_t two, bool le)

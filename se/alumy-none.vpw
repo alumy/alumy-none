@@ -2,5 +2,6 @@
 <Workspace Version="10.0" VendorName="SlickEdit">
 	<Projects>
 		<Project File="alumy-none.vpj"/>
+		<Project File="../../crazyflie-firmware/se/crazyflie.vpj"/>
 	</Projects>
 </Workspace>

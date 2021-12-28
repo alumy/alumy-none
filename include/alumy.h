@@ -22,6 +22,7 @@
 #include "alumy/byteorder.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
+#include "alumy/bit.h"
 #include "alumy/version.h"
 #include "alumy/errno.h"
 #include "alumy/log.h"
