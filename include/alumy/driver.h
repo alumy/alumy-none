@@ -8,5 +8,6 @@
 #include "alumy/driver/eeprom.h"
 #include "alumy/driver/boost.h"
 #include "alumy/driver/flexible_button.h"
+#include "alumy/driver/light.h"
 
 #endif

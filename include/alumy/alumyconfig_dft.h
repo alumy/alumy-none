@@ -54,6 +54,10 @@ extern "C" {
 #define AL_WATCHDOG_RESET()			(void)(0)
 #endif
 
+#ifndef AL_LIGHT_UPDATE_FREQ_HZ
+#define AL_LIGHT_UPDATE_FREQ_HZ 100 // How often al_light_routine() is called
+#endif
+
 #ifndef CMB_CPU_PLATFORM_TYPE
 #define CMB_CPU_PLATFORM_TYPE		CMB_CPU_ARM_CORTEX_M4
 #endif
