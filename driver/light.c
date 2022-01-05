@@ -53,12 +53,17 @@ int32_t al_light_set(al_light_t *this, uint8_t id, int32_t value, int32_t intv)
         set_errno(EINVAL);
         return -1;
     }
+    
+    if(value == item->value) {
+        return 0;
+    }
 
     this->value &= ~(1 << item->id);
-    item->intv = intv;
-    item->tick = intv;
+    item->value = value;
+    item->intv = 0;
+    item->tick = 0;
 
-    switch (value) {
+    switch (item->value) {
         case AL_LIGHT_OFF:
             item->set(item->user_data, false);
             break;
@@ -68,6 +73,8 @@ int32_t al_light_set(al_light_t *this, uint8_t id, int32_t value, int32_t intv)
             break;
 
         case AL_LIGHT_FLASH:
+            item->intv = intv;
+            item->tick = intv;
             break;
 
         default:
