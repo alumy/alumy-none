@@ -13,15 +13,15 @@ __BEGIN_DECLS
 #endif
 
 #ifndef set_bit
-#define set_bit(reg, bit)		((reg) | = (bit))
+#define set_bit(reg, bit)       ((reg) |= (1ul << (bit)))
 #endif
 
-#if clear_bit
-#define clear_bit(reg, bit)		((reg) & = ~(bit))
+#ifndef clear_bit
+#define clear_bit(reg, bit)     ((reg) &= ~(1ul << (bit)))
 #endif
 
-#if get_bit
-#define get_bit(reg, bit)		((reg) & (bit))
+#ifndef get_bit
+#define get_bit(reg, bit)       ((reg) & (1ul << (bit)))
 #endif
 
 __END_DECLS
