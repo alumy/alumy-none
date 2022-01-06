@@ -1,0 +1,8 @@
+//  Gnu C/C++ (version 2.95.3 or later), -si4 -sp4, 
+//  Standard lint options
+
+co-gcc-include.lnt
+co-gcc.lnt
+
+options.lnt  -si4 -sp4
+

@@ -1,0 +1,2 @@
+lint-nt +v -fff -i"%rp..\lint" std.lnt %f
+%rw

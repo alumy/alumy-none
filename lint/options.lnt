@@ -1,0 +1,20 @@
+// Please note -- this is a representative set of error suppression
+//                options.  Please adjust to suit your own policies
+//                See  manual (chapter LIVING WITH LINT)
+//                for further details.
+
+-e459
+-e641
+-e123
+-e830
+-e10
+-e160
+-e40
+-e26
+-e63
+-e52
+-e1013
+-emacro(30, ARRAY_SIZE)
++rw(typeof)
+-w1
+
