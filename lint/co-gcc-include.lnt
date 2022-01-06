@@ -1,3 +1,8 @@
 -i"C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2021.10\arm-none-eabi\include"
 -i"C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2021.10\lib\gcc\arm-none-eabi\10.3.1\include"
+-i"C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2021.10\lib\gcc\arm-none-eabi\10.3.1\include-fixed"
+-i"C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2021.10\lib\gcc\arm-none-eabi\10.3.1\install-tools\include"
 -i"../include"
+-i"../unity/unity/src"
+-i"../unity/unity/extras/fixture/src"
+-i"../unity/unity/extras/memory/src"
