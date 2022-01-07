@@ -140,9 +140,9 @@ typedef struct flex_button
     uint16_t long_hold_start_tick;
 
     uint8_t id;
-    uint8_t pressed_logic_level : 1;
-    uint8_t event               : 4;
-    uint8_t status              : 3;
+    uint8_t pressed_logic_level : 1;	/*lint !e46 */
+    uint8_t event               : 4;	/*lint !e46 */
+    uint8_t status              : 3;	/*lint !e46 */
 } flex_button_t;
 
 #ifdef __cplusplus
