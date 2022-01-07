@@ -17,4 +17,4 @@
 -emacro(30, ARRAY_SIZE)
 +rw(typeof)
 -w1
-
+-dAL_USE_DEFAULT_CONFIG
