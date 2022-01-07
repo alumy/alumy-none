@@ -55,6 +55,7 @@ int32_t al_light_set(al_light_t *this, uint8_t id, int32_t value, int32_t intv)
     }
     
     if(value == item->value) {
+		set_errno(0);
         return 0;
     }
 
@@ -81,6 +82,7 @@ int32_t al_light_set(al_light_t *this, uint8_t id, int32_t value, int32_t intv)
             break;
     }
 
+	set_errno(0);
     return 0;
 }
 
