@@ -60,6 +60,19 @@ char *proc_gen_format(const char *name, int more, FILE *fh, ...);
  */
 const char *al_strerror(int32_t errnum);
 
+/**
+ *
+ *
+ * @author jack (2022/1/8)
+ *
+ * @param t
+ * @param tmstr
+ * @param size
+ *
+ * @return const char*
+ */
+const char *gen_time_str(time_t t, char *tmstr, size_t size);
+
 __END_DECLS
 
 #endif
