@@ -23,7 +23,7 @@
   #endif /* __used */
 
   #ifndef __aligned
-    #define __aligned(x)    __attribute_aligned__(x)
+    #define __aligned(x)    __attribute__((aligned(x)))
   #endif
 
   #ifndef __attribute_const__
