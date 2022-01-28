@@ -56,7 +56,7 @@ __BEGIN_DECLS
 # define uswap_64(x) al_swap_64(x, )
 #endif
 
-__inline__ void al_split_write_two(void *_addr, uint16_t two, bool le)
+__static_inline__ void al_split_write_two(void *_addr, uint16_t two, bool le)
 {
 	uint8_t *addr = (uint8_t *)_addr;
 
@@ -69,7 +69,7 @@ __inline__ void al_split_write_two(void *_addr, uint16_t two, bool le)
 	}
 }
 
-__inline__ uint16_t al_split_read_two(const void *_addr, bool le)
+__static_inline__ uint16_t al_split_read_two(const void *_addr, bool le)
 {
 	uint16_t ret;
 	const uint8_t *two = (const uint8_t *)_addr;
@@ -84,7 +84,7 @@ __inline__ uint16_t al_split_read_two(const void *_addr, bool le)
 }
 
 
-__inline__ void al_split_write_four(void *_addr, uint32_t four, bool le)
+__static_inline__ void al_split_write_four(void *_addr, uint32_t four, bool le)
 {
 	uint8_t *addr = (uint8_t *)_addr;
 
@@ -101,7 +101,7 @@ __inline__ void al_split_write_four(void *_addr, uint32_t four, bool le)
 	}
 }
 
-__inline__ uint32_t al_split_read_four(const void *addr, bool le)
+__static_inline__ uint32_t al_split_read_four(const void *addr, bool le)
 {
 	uint32_t ret;
 	const uint8_t *four = (const uint8_t *)addr;
@@ -115,7 +115,8 @@ __inline__ uint32_t al_split_read_four(const void *addr, bool le)
 	return ret;
 }
 
-__inline__ void al_split_write_eight(void *_addr, uint64_t eight, bool le)
+__static_inline__
+void al_split_write_eight(void *_addr, uint64_t eight, bool le)
 {
 	uint8_t *addr = (uint8_t *)_addr;
 
@@ -140,7 +141,7 @@ __inline__ void al_split_write_eight(void *_addr, uint64_t eight, bool le)
 	}
 }
 
-__inline__ uint64_t al_split_read_eight(const void *addr, bool le)
+__static_inline__ uint64_t al_split_read_eight(const void *addr, bool le)
 {
 	uint64_t ret;
 	const uint8_t *eight = (const uint8_t *)addr;

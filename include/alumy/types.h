@@ -10,11 +10,15 @@
 #endif
 
 #ifndef __inline
-#define __inline    inline
+#define __inline		inline
 #endif
 
 #ifndef __inline__
-#define __inline__  static __inline
+#define __inline__		__inline
+#endif
+
+#ifndef __static_inline__
+#define __static_inline__		static __inline
 #endif
 
 #ifndef UNUSED
