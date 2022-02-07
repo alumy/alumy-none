@@ -22,6 +22,7 @@ int_fast8_t bm8563_init(bm8563_t *this, const bm8563_opt_t *opt, void *i2c,
     this->opt.i2c_mem_write = opt->i2c_mem_write;
     this->devaddr = devaddr;
     this->i2c = i2c;
+	this->vl = false;
 
     set_errno(0);
 	return 0;
@@ -53,8 +54,8 @@ int_fast8_t bm8563_write_date_time(bm8563_t *this, const struct tm *tm)
     data[4] = bin2bcd(tm->tm_hour);
     data[5] = bin2bcd(tm->tm_mday);
     data[6] = bin2bcd(tm->tm_wday);
-    data[7] = bin2bcd(tm->tm_mon + 1);
-    data[8] = (tm->tm_year >= 100 ? 0x80 : 0x00) | bin2bcd(tm->tm_year % 100);
+    data[7] = (tm->tm_year >= 100 ? 0x00 : 0x80) | bin2bcd(tm->tm_mon + 1);
+    data[8] = bin2bcd(tm->tm_year % 100);
 
     AL_DEBUG(AL_DRV_RTC_LOG, "bm8563 write:");
     AL_BIN_D(AL_DRV_RTC_LOG, data, sizeof(data));
@@ -87,8 +88,8 @@ int_fast8_t bm8563_read_date_time(bm8563_t *this, struct tm *tm)
     tm->tm_hour = bcd2bin(data[2] & 0x3F);
     tm->tm_mday = bcd2bin(data[3] & 0x3F);
     tm->tm_wday = bcd2bin(data[4]& 0x07);
-    tm->tm_mon = bcd2bin(data[5] & 0x1f) - 1;
-    tm->tm_year = ((data[5] & 0x80) ? 100 : 0) + bcd2bin(data[6]);
+    tm->tm_mon = bcd2bin(data[5] & 0x1F) - 1;
+    tm->tm_year = ((data[5] & 0x80) ? 0 : 100) + bcd2bin(data[6] & 0x7F);
 
     BUG_ON(!(tm->tm_sec >= 0 && tm->tm_sec <= 59));
     BUG_ON(!(tm->tm_min >= 0 && tm->tm_min <= 59));
