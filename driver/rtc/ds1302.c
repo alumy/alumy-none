@@ -173,13 +173,13 @@ int_fast8_t ds1302_read_date_time(ds1302_t *this, struct tm *tm)
     BUG_ON(this == NULL);
     BUG_ON(tm == NULL);
 
-    tm->tm_sec = bcd2bin(ds1302_read(this, 0x81) & 0x7F);
-    tm->tm_min = bcd2bin(ds1302_read(this, 0x83));
-    tm->tm_hour = bcd2bin(ds1302_read(this, 0x85) & 0x3F);
-    tm->tm_mday = bcd2bin(ds1302_read(this, 0x87));
-    tm->tm_mon = bcd2bin(ds1302_read(this, 0x89)) - 1;
-    tm->tm_wday = bcd2bin(ds1302_read(this, 0x8B));
-    tm->tm_year = bcd2bin(ds1302_read(this, 0x8D)) + 2000 - 1900;
+    tm->tm_sec = bcd2bin(ds1302_read(this, 0x81) & 0x59);
+    tm->tm_min = bcd2bin(ds1302_read(this, 0x83) & 0x59);
+    tm->tm_hour = bcd2bin(ds1302_read(this, 0x85) & 0x29);
+    tm->tm_mday = bcd2bin(ds1302_read(this, 0x87) & 0x31);
+    tm->tm_mon = bcd2bin(ds1302_read(this, 0x89) & 0x12) - 1;
+    tm->tm_wday = bcd2bin(ds1302_read(this, 0x8B) & 0x07);
+    tm->tm_year = bcd2bin(ds1302_read(this, 0x8D) & 0x99) + 2000 - 1900;
 
     if (((tm->tm_sec < 0) || (tm->tm_sec > 60)) ||
         ((tm->tm_min < 0) || (tm->tm_min > 59)) ||

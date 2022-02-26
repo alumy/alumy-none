@@ -64,7 +64,7 @@ typedef int WRes;
 #endif
 
 typedef unsigned char Byte;
-typedef short Int16;
+/* typedef short Int16; */
 typedef unsigned short UInt16;
 
 #ifdef _LZMA_UINT32_IS_ULONG
