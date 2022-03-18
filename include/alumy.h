@@ -39,6 +39,7 @@
 #include "alumy/fifo.h"
 #include "alumy/crc.h"
 #include "alumy/bug.h"
+#include "alumy/check.h"
 #include "alumy/xyzmodem.h"
 #include "alumy/initialized.h"
 #include "alumy/pid.h"
