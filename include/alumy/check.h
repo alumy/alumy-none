@@ -15,7 +15,7 @@ __BEGIN_DECLS
         set_errno((__errno));                           \
         return (ret);                                   \
     }                                                   \
-}
+} while(0)
 #endif
 
 #ifndef AL_CHECK
@@ -25,7 +25,7 @@ __BEGIN_DECLS
         set_errno((__errno));                           \
         return;                                         \
     }                                                   \
-}
+} while(0)
 #endif
 
 __END_DECLS
