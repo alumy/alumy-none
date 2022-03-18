@@ -16,6 +16,7 @@ __BEGIN_DECLS
         return (ret);                                   \
     }                                                   \
 }
+#endif
 
 #ifndef AL_CHECK
 #define AL_CHECK(exp, __errno)     do {                 \
@@ -25,6 +26,7 @@ __BEGIN_DECLS
         return;                                         \
     }                                                   \
 }
+#endif
 
 __END_DECLS
 
