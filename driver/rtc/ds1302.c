@@ -140,11 +140,13 @@ int_fast8_t ds1302_write_date_time(ds1302_t *this, const struct tm *tm)
     BUG_ON(this == NULL);
     BUG_ON(tm == NULL);
 
-    BUG_ON((tm->tm_sec < 0) || (tm->tm_sec > 60));
-    BUG_ON((tm->tm_min < 0) || (tm->tm_min > 59));
-    BUG_ON((tm->tm_hour < 0) || (tm->tm_hour > 23));
-    BUG_ON((tm->tm_mday < 1) || (tm->tm_mday > 31));
-    BUG_ON((tm->tm_mon < 0) || (tm->tm_mon > 11));
+    if (((tm->tm_sec < 0) || (tm->tm_sec > 60)) ||
+        ((tm->tm_min < 0) || (tm->tm_min > 59)) ||
+        (tm->tm_hour < 0) || (tm->tm_hour > 23) ||
+        (tm->tm_mday < 1) || (tm->tm_mday > 31) ||
+        (tm->tm_mon < 0) || (tm->tm_mon > 11)) {
+        return -1;
+    }
 
     AL_DEBUG(AL_DRV_RTC_LOG, "%s, %04d-%02d-%02d %02d:%02d:%02d",
              __func__,
