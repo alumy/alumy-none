@@ -6,6 +6,7 @@
 #include "alumy/config.h"
 #include "alumy/base.h"
 #include "alumy/types.h"
+#include "alumy/driver.h"
 
 __BEGIN_DECLS
 
@@ -52,6 +53,7 @@ typedef struct al_ymodem_opt {
     int32_t (*getc)(void);
     ssize_t (*recv)(void *buf, size_t size);
     int32_t (*recv_clear)(void);
+    void (*set_dir)(al_rs485_dir_t dir);
     time_t (*uptime)(void);
     void (*delay_ms)(int32_t ms);
 } al_ymodem_opt_t;

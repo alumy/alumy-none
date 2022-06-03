@@ -20,3 +20,4 @@ typedef enum al_gpio_dir {
 __END_DECLS
 
 #endif
+

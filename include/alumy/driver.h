@@ -9,5 +9,7 @@
 #include "alumy/driver/boost.h"
 #include "alumy/driver/flexible_button.h"
 #include "alumy/driver/light.h"
+#include "alumy/driver/uart.h"
+#include "alumy/driver/gpio.h"
 
 #endif
