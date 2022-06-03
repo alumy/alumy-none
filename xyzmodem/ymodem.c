@@ -16,20 +16,6 @@
 
 __BEGIN_DECLS
 
-#define YMODEM_HEADER_SIZE      3
-#define YMODEM_END_SIZE         2
-
-#define YMODEM_PACKET_SIZE_128      (128)
-#define YMODEM_PACKET_SIZE_1K       (1024)
-
-#define YMODEM_TOTAL_LEN(pack_size)     \
-    ((pack_size) + YMODEM_HEADER_SIZE + YMODEM_END_SIZE)
-
-#define YMODEM_HEADER       0
-#define YMODEM_SEQ          1
-#define YMODEM_SEQ_COMP     2
-#define YMODEM_CRC(pack_size)       (YMODEM_HEADER_SIZE + (pack_size))
-
 enum {
     YMODEM_STATUS_IDLE,
     YMODEM_STATUS_RECV_HEADER,
@@ -45,11 +31,10 @@ enum {
     YMODEM_RECV_STATUS_DATA,
 };
 
-static uint16_t ymodem_crc16(const void *data, uint32_t len)
+static uint16_t ymodem_crc16(uint16_t crc, const void *data, uint32_t len)
 {
     const uint8_t *p = (const uint8_t *)data;
-    uint16_t crc = 0;
-    int i;
+    int32_t i;
 
     while (len--) {
         crc = crc ^ *p++ << 8;
@@ -181,7 +166,7 @@ static int32_t ymodem_check_pkg(const void *__data, size_t len, int32_t __seq)
         packet_size = YMODEM_PACKET_SIZE_1K;
     }
 
-    uint16_t crc = ymodem_crc16(data + YMODEM_HEADER_SIZE, packet_size);
+    uint16_t crc = ymodem_crc16(0, data + YMODEM_HEADER_SIZE, packet_size);
 
     pkg_crc = al_split_read_two(&data[YMODEM_CRC(packet_size)], false);
 
@@ -194,6 +179,7 @@ static int32_t ymodem_check_pkg(const void *__data, size_t len, int32_t __seq)
 
 int32_t al_ymodem_init(al_ymodem_t *ym,
                        uint8_t *recv_buf, size_t recv_bufsz, time_t timeout,
+                       uint8_t *send_buf, size_t send_bufsz,
                        al_ymodem_opt_t *opt, al_ymodem_callback_t *cb)
 {
     memset(ym, 0, sizeof(al_ymodem_t));
@@ -207,9 +193,12 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     BUG_ON(opt->getc == NULL);
     BUG_ON(opt->recv == NULL);
     BUG_ON(opt->uptime == NULL);
+    BUG_ON(opt->delay_ms == NULL);
 
     ym->recv_buf = recv_buf;
     ym->recv_bufsz = recv_bufsz;
+    ym->send_buf = send_buf;
+    ym->send_bufsz = send_bufsz;
     ym->timeout = timeout;
     ym->opt = opt;
     ym->callback = cb;
@@ -482,6 +471,247 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
     }
 
     return res;
+}
+
+static int32_t al_ymodem_send_check_ack(al_ymodem_t *ym,
+                                        uint8_t expect, int32_t ms)
+{
+    int32_t c;
+
+    ym->opt->delay_ms(ms);
+
+    c = ym->opt->getc();
+
+    if (c == expect) {
+        return 0;
+    }
+
+    return -1;
+}
+
+static ssize_t __al_ymodem_send_packet(al_ymodem_t *ym,
+                    uint8_t header, uint8_t seq, uint8_t fill,
+                    const void *data, size_t len)
+{
+    ssize_t n = len;
+    ssize_t cal_len;
+    uint16_t crc = 0;
+    ssize_t total_len = 0;
+    const uint8_t *p;
+
+    if (ym == NULL) {
+        set_errno(EINVAL);
+        return -1;
+    }
+
+    BUG_ON(!YMODEM_IS_HEADER(header));
+    BUG_ON(!YMODEM_IS_FILL(fill));
+
+    if (header == STX) {
+        cal_len = YMODEM_PACKET_SIZE_1K;
+    } else {
+        cal_len = YMODEM_PACKET_SIZE_128;
+    }
+
+    if (len > cal_len) {
+        set_errno(EINVAL);
+        return -1;
+    }
+
+    ym->opt->putc(header);
+    ym->opt->putc(seq);
+    ym->opt->putc(~seq);
+
+    total_len += 3;
+    
+    p = (const uint8_t *)data;
+
+    while ((n--) > 0) {
+        ym->opt->putc(*p);
+        crc = ymodem_crc16(crc, p, 1);
+
+        p++;
+        total_len++;
+    }
+
+    n = cal_len - len;
+
+    while ((n--) > 0) {
+        ym->opt->putc(fill);
+        crc = ymodem_crc16(crc, &fill, 1);
+
+        total_len++;
+    }
+
+    ym->opt->putc((crc & 0xFF00) >> 8);
+    ym->opt->putc(crc & 0x00FF);
+
+    total_len += 2;
+
+    return total_len;
+}
+
+static int32_t al_ymodem_send_packet(al_ymodem_t *ym,
+                                     uint8_t header, uint8_t seq, uint8_t fill,
+                                     const void *data, size_t len)
+{
+    int32_t i = 0;
+
+    for (i = 0; i < YMODEM_RETRANS_CNT; ++i) {
+        AL_BIN_D(1, data, len);
+
+        if (__al_ymodem_send_packet(ym, header, seq, fill, data, len) <= 0) {
+            return -1;
+        }
+
+        if (al_ymodem_send_check_ack(ym, ACK, 300) == 0) {
+            ym->send_seq++;
+
+            break;
+        }
+    }
+
+    if (i >= YMODEM_RETRANS_CNT) {
+        return -1;
+    }
+
+    return 0;
+}
+
+static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
+                                        const char *file_name,
+                                        const void *data, size_t file_size)
+{
+    ssize_t len;
+    uint8_t header;
+    int32_t ret;
+    ssize_t remain = file_size;
+    const uint8_t *p = (const uint8_t *)data;
+
+    while (remain >= YMODEM_PACKET_SIZE_1K) {
+        ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
+                                    ym->send_seq, 0x1A,
+                                    p, YMODEM_PACKET_SIZE_1K);
+        if (ret < 0) {
+            return -1;
+        }
+
+        remain -= YMODEM_PACKET_SIZE_1K;
+        p += YMODEM_PACKET_SIZE_1K;
+    }
+
+    while (remain >= YMODEM_PACKET_SIZE_128) {
+        ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
+                                    ym->send_seq, 0x1A,
+                                    p, YMODEM_PACKET_SIZE_128);
+        if (ret != 0) {
+            return -1;
+        }
+
+        remain -= YMODEM_PACKET_SIZE_128;
+        p += YMODEM_PACKET_SIZE_128;
+    }
+
+    ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
+                                ym->send_seq, 0x1A,
+                                p, remain);
+    if (ret != 0) {
+        return -1;
+    }
+
+    remain -= YMODEM_PACKET_SIZE_128;
+    p += YMODEM_PACKET_SIZE_128;
+
+    return 0;
+}
+
+int32_t al_ymodem_wait_send(al_ymodem_t *ym)
+{
+    if (ym->opt->getc() != 'C') {
+        return -1;
+    }
+
+    return 0;
+}
+
+int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
+                            const void *data, size_t file_size)
+{
+    ssize_t len;
+    ssize_t ret;
+    ssize_t remain;
+    size_t send_len;
+
+    ym->opt->recv_clear();
+
+    len = snprintf((char *)ym->send_buf, YMODEM_PACKET_SIZE_128,
+                   "%s", file_name);
+
+    if ((len <= 0) || (len >= YMODEM_PACKET_SIZE_128)) {
+        set_errno(EINVAL);
+        return -1;
+    }
+
+    send_len = len + 1;
+    remain = YMODEM_PACKET_SIZE_128 - (len + 1);
+
+    len = snprintf((char *)ym->send_buf + (len + 1), remain, "%u", file_size);
+
+    if ((len <= 0) || (len >= remain)) {
+        set_errno(EINVAL);
+        return -1;
+    }
+
+    send_len = send_len + len + 1;
+
+    ym->send_seq = 0;
+
+    ret = al_ymodem_send_packet(ym, SOH, ym->send_seq, 0x00,
+                                ym->send_buf, send_len);
+    if (ret < 0) {
+        return -1;
+    }
+
+    if (al_ymodem_send_check_ack(ym, 'C', 100) != 0) {
+        AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
+                 __FILE__, __LINE__);
+        return -1;
+    }
+
+    al_ymodem_send_file_data(ym, file_name, data, file_size);
+
+    ym->opt->putc(EOT);
+
+    if (al_ymodem_send_check_ack(ym, NAK, 100) != 0) {
+        AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
+                 __FILE__, __LINE__);
+        return -1;
+    }
+
+    ym->opt->putc(EOT);
+
+    if (al_ymodem_send_check_ack(ym, ACK, 100) != 0) {
+        AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
+                 __FILE__, __LINE__);
+        return -1;
+    }
+
+    if (al_ymodem_send_check_ack(ym, 'C', 100) != 0) {
+        AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
+                 __FILE__, __LINE__);
+        return -1;
+    }
+
+    ym->send_seq = 0;
+
+    memset(ym->send_buf, 0, YMODEM_PACKET_SIZE_128);
+    ret = al_ymodem_send_packet(ym, SOH, ym->send_seq, 0x00,
+                                ym->send_buf, YMODEM_PACKET_SIZE_128);
+    if (ret < 0) {
+        return -1;
+    }
+
+    return 0;
 }
 
 __END_DECLS
