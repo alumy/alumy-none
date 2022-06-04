@@ -237,7 +237,7 @@ static int32_t al_ymodem_header_parse(al_ymodem_t *ym,
         return -1;
     }
 
-    if (*endptr != 0x20) {
+    if (*endptr != 0x20 && *endptr != 0x00) {
         return -1;
     }
 
