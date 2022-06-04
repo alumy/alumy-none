@@ -593,6 +593,7 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
     const uint8_t *p = (const uint8_t *)data;
 
     while (remain >= YMODEM_PACKET_SIZE_1K) {
+        len = YMODEM_PACKET_SIZE_1K;
         ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
                                     ym->send_seq, 0x1A,
                                     p, YMODEM_PACKET_SIZE_1K);
@@ -605,6 +606,7 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
     }
 
     while (remain >= YMODEM_PACKET_SIZE_128) {
+        len = YMODEM_PACKET_SIZE_128;
         ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
                                     ym->send_seq, 0x1A,
                                     p, YMODEM_PACKET_SIZE_128);
@@ -616,6 +618,7 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
         p += YMODEM_PACKET_SIZE_128;
     }
 
+    len = remain;
     ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
                                 ym->send_seq, 0x1A,
                                 p, remain);
