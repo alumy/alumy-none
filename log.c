@@ -11,6 +11,7 @@
 #include "alumy/types.h"
 #include "alumy/base.h"
 #include "alumy/log.h"
+#include "alumy/time.h"
 
 __BEGIN_DECLS
 
@@ -36,19 +37,24 @@ __weak void al_vlog(int32_t pri, const char *fmt, va_list ap)
 
 __weak const char *al_log_timestamp(void)
 {
-    static char tmstr[32];
-    struct tm tm;
-    time_t now = time(NULL);
+    static char buf[32];
+    al_tick_t tick;
 
-    localtime_r(&now, &tm);
-    strftime(tmstr, sizeof(tmstr), "%F %T", &tm);
+    al_tick_get(&tick);
 
-    return tmstr;
+    snprintf(buf, sizeof(buf), "[%5"PRId32".%03"PRIu32"]",
+             tick.tv_sec / 1000, tick.tv_msec % 1000);
+
+    return buf;
 }
 
 void al_log(int32_t pri, const char *file, int32_t line, const char *func,
 			const char *fmt, ...)
 {
+	UNUSED(file);
+	UNUSED(line);
+	UNUSED(func);
+	
 	if (pri & ~(AL_LOG_PRIMASK)) {
 		/* unknown prio mask */
 		pri &= AL_LOG_PRIMASK;
@@ -111,7 +117,7 @@ static ssize_t hex_raw_fmt_line(char *buf, size_t bufsz, intptr_t addr,
 								const void *data, size_t len)
 {
 	size_t line_size = 8 + 2 + 16 * 3 + 2 + 16 + 1 + 1;
-	int32_t i;
+	size_t i;
 
 	if ((len > BIN_LINE_SIZE) || (bufsz < line_size)) {
 		return -1;
@@ -141,7 +147,7 @@ static ssize_t hex_raw_fmt_line(char *buf, size_t bufsz, intptr_t addr,
 		*h_wp++ = ' ';
 
 #if defined (__GNUC__)
-        *c_wp++ = isprint(*rp) ? *rp : '.';
+        *c_wp++ = isprint(*rp) ? (char)*rp : '.';
 #elif defined (__CC_ARM)
         *c_wp++ = ((*rp <= 0x7F) && isprint(*rp)) ? *rp : '.';
 #else
@@ -160,15 +166,15 @@ static ssize_t hex_raw_fmt_line(char *buf, size_t bufsz, intptr_t addr,
 
 	_buf[77] = 0;
 
-	return line_size - 1;
+	return (ssize_t)line_size - 1;
 }
 
 void al_log_bin(int32_t pri,
 				const char *file, int32_t line, const char *func,
 				const void *data, size_t len)
 {
-	int_fast32_t nline = len >> 4;
-	int_fast32_t remain = len & 0x0F;
+	int32_t nline = len >> 4;
+	int32_t remain = len & 0x0F;
 
 	intptr_t addr = 0;
 	const uint8_t *rp = (const uint8_t *)data;
@@ -183,11 +189,10 @@ void al_log_bin(int32_t pri,
 
 	if (remain > 0) {
         char buf[128];
-        hex_raw_fmt_line(buf, sizeof(buf), addr, rp + addr, remain);
+        hex_raw_fmt_line(buf, sizeof(buf), addr, rp + addr, (size_t)remain);
 
         al_log(pri, file, line, func, "%s\n", buf);
 	}
-
 }
 
 int32_t al_log_set_mask(int32_t mask)
@@ -202,4 +207,3 @@ int32_t al_log_set_mask(int32_t mask)
 }
 
 __END_DECLS
-
