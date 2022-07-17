@@ -13,9 +13,7 @@ __BEGIN_DECLS
 
 uint32_t al_uptime(void)
 {
-    al_tick_t *tick = al_tick_get(NULL);
-
-    return tick->tv_sec;
+    return al_tick_get(NULL)->tv_sec;
 }
 
 __END_DECLS
