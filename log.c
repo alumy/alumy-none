@@ -43,7 +43,7 @@ __weak const char *al_log_timestamp(void)
     al_tick_get(&tick);
 
     snprintf(buf, sizeof(buf), "[%5"PRId32".%03"PRIu32"]",
-             tick.tv_sec / 1000, tick.tv_msec % 1000);
+             tick.tv_sec, tick.tv_msec);
 
     return buf;
 }
