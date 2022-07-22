@@ -20,6 +20,7 @@ __BEGIN_DECLS
 static const char hex[] = "0123456789ABCDEF";
 
 static int32_t logmask = 0xFF;
+static char logbuf[128];
 
 __weak void al_vlog(int32_t pri, const char *fmt, va_list ap)
 {
@@ -37,15 +38,14 @@ __weak void al_vlog(int32_t pri, const char *fmt, va_list ap)
 
 __weak const char *al_log_timestamp(void)
 {
-    static char buf[32];
     al_tick_t tick;
 
     al_tick_get(&tick);
 
-    snprintf(buf, sizeof(buf), "[%5"PRId32".%03"PRIu32"]",
+    snprintf(logbuf, sizeof(logbuf), "[%5"PRId32".%03"PRIu32"]",
              tick.tv_sec, tick.tv_msec);
 
-    return buf;
+    return logbuf;
 }
 
 void al_log(int32_t pri, const char *file, int32_t line, const char *func,
@@ -179,19 +179,19 @@ void al_log_bin(int32_t pri,
 	intptr_t addr = 0;
 	const uint8_t *rp = (const uint8_t *)data;
 
-	while (nline--) {
-        char buf[128];
-        hex_raw_fmt_line(buf, sizeof(buf), addr, rp + addr, BIN_LINE_SIZE);
+    while (nline--) {
+        hex_raw_fmt_line(logbuf, sizeof(logbuf),
+                         addr, rp + addr, BIN_LINE_SIZE);
         addr += BIN_LINE_SIZE;
 
-        al_log(pri, file, line, func, "%s\n", buf);
+        al_log(pri, file, line, func, "%s\n", logbuf);
 	}
 
-	if (remain > 0) {
-        char buf[128];
-        hex_raw_fmt_line(buf, sizeof(buf), addr, rp + addr, (size_t)remain);
+    if (remain > 0) {
+        hex_raw_fmt_line(logbuf, sizeof(logbuf),
+                         addr, rp + addr, (size_t)remain);
 
-        al_log(pri, file, line, func, "%s\n", buf);
+        al_log(pri, file, line, func, "%s\n", logbuf);
 	}
 }
 
