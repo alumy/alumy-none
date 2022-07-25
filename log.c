@@ -20,7 +20,6 @@ __BEGIN_DECLS
 static const char hex[] = "0123456789ABCDEF";
 
 static int32_t logmask = 0xFF;
-static char logbuf[128];
 
 __weak void al_vlog(int32_t pri, const char *fmt, va_list ap)
 {
@@ -38,14 +37,15 @@ __weak void al_vlog(int32_t pri, const char *fmt, va_list ap)
 
 __weak const char *al_log_timestamp(void)
 {
+    static char str[16];
     al_tick_t tick;
 
     al_tick_get(&tick);
 
-    snprintf(logbuf, sizeof(logbuf), "[%5"PRId32".%03"PRIu32"]",
+    snprintf(str, sizeof(str), "[%5"PRId32".%03"PRIu32"]",
              tick.tv_sec, tick.tv_msec);
 
-    return logbuf;
+    return str;
 }
 
 void al_log(int32_t pri, const char *file, int32_t line, const char *func,
@@ -116,14 +116,12 @@ static size_t hex_addr_fmt(char buf[8], intptr_t addr)
 static ssize_t hex_raw_fmt_line(char *buf, size_t bufsz, intptr_t addr,
 								const void *data, size_t len)
 {
-	size_t line_size = 8 + 2 + 16 * 3 + 2 + 16 + 1 + 1;
-	size_t i;
+    size_t line_size = 8 + 2 + 16 * 3 + 2 + 16 + 1;
+    size_t i;
 
-	if ((len > BIN_LINE_SIZE) || (bufsz < line_size)) {
-		return -1;
-	}
-
-    memset(buf, 0, bufsz);
+    if ((len > BIN_LINE_SIZE) || (bufsz < line_size)) {
+        return -1;
+    }
 
 	char *_buf = buf;
 
@@ -142,7 +140,7 @@ static ssize_t hex_raw_fmt_line(char *buf, size_t bufsz, intptr_t addr,
 	const uint8_t *rp = (const uint8_t *)data;
 
 	for (i = 0; i < len; ++i) {
-		*h_wp++ = hex[*rp >> 4 & 0x0F];
+        *h_wp++ = hex[(*rp >> 4) & 0x0F];
 		*h_wp++ = hex[*rp & 0x0F];
 		*h_wp++ = ' ';
 
@@ -164,7 +162,7 @@ static ssize_t hex_raw_fmt_line(char *buf, size_t bufsz, intptr_t addr,
 		*c_wp++ = ' ';
 	}
 
-	_buf[77] = 0;
+    _buf[76] = 0;
 
 	return (ssize_t)line_size - 1;
 }
@@ -173,26 +171,28 @@ void al_log_bin(int32_t pri,
 				const char *file, int32_t line, const char *func,
 				const void *data, size_t len)
 {
-	int32_t nline = len >> 4;
-	int32_t remain = len & 0x0F;
+    char buf[80];
 
-	intptr_t addr = 0;
-	const uint8_t *rp = (const uint8_t *)data;
+    int32_t nline = len >> 4;
+    int32_t remain = len & 0x0F;
+
+    intptr_t addr = 0;
+    const uint8_t *rp = (const uint8_t *)data;
 
     while (nline--) {
-        hex_raw_fmt_line(logbuf, sizeof(logbuf),
+        hex_raw_fmt_line(buf, sizeof(buf),
                          addr, rp + addr, BIN_LINE_SIZE);
         addr += BIN_LINE_SIZE;
 
-        al_log(pri, file, line, func, "%s\n", logbuf);
-	}
+        al_log(pri, file, line, func, "%s\r\n", buf);
+    }
 
     if (remain > 0) {
-        hex_raw_fmt_line(logbuf, sizeof(logbuf),
+        hex_raw_fmt_line(buf, sizeof(buf),
                          addr, rp + addr, (size_t)remain);
 
-        al_log(pri, file, line, func, "%s\n", logbuf);
-	}
+        al_log(pri, file, line, func, "%s\r\n", buf);
+    }
 }
 
 int32_t al_log_set_mask(int32_t mask)

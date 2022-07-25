@@ -43,7 +43,7 @@ __BEGIN_DECLS
 #define AL_LOG_LINE     __FILE__, __LINE__, __func__
 
 #define AL_LOG_FMT(letter, fmt)     \
-	AL_LOG_COLOR_ ## letter fmt AL_PRI_RESET_COLOR "\n"
+    AL_LOG_COLOR_ ## letter fmt AL_PRI_RESET_COLOR "\r\n"
 
 #define AL_DEBUG(type, fmt, ...)    do {                                    \
     if ((type))                                                               \
