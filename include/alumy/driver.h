@@ -11,5 +11,6 @@
 #include "alumy/driver/light.h"
 #include "alumy/driver/uart.h"
 #include "alumy/driver/gpio.h"
+#include "alumy/driver/flash_header.h"
 
 #endif
