@@ -20,25 +20,19 @@ struct al_pid {
     float sum;      /* position summary */
 
     double target;   /* target */
-
-    double (*adjust)(al_pid_t *pid, double out);
 };
 
-int32_t al_pid_init(al_pid_t *pid, float kp, float ki, float kd, double target,
-                    double (*adjust)(al_pid_t *pid, double out));
+void al_pid_init(al_pid_t *pid, float kp, float ki, float kd, double target);
 
-int32_t al_pid_set_target(al_pid_t *pid, double target);
+void al_pid_set_target(al_pid_t *pid, double target);
 
-int32_t al_pid_get_target(al_pid_t *pid, double *target);
+double al_pid_get_target(al_pid_t *pid);
 
-int32_t al_pid_set_adjust(al_pid_t *pid,
-                          double (*adjust)(al_pid_t *pid, double out));
+void al_pid_set_param(al_pid_t *pid, float kp, float ki, float kd);
 
-int32_t al_pid_set_param(al_pid_t *pid, float kp, float ki, float kd);
+double al_pid_pos_cal(al_pid_t *pid, double actual);
 
-int32_t al_pid_pos_cal(al_pid_t *pid, double actual, double *pos);
-
-int32_t al_pid_inc_cal(al_pid_t *pid, double actual, double *inc);
+double al_pid_inc_cal(al_pid_t *pid, double actual);
 
 __END_DECLS
 

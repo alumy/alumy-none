@@ -8,17 +8,10 @@
 
 __BEGIN_DECLS
 
-int32_t al_pid_pos_cal(al_pid_t *pid, double actual, double *pos)
+double al_pid_pos_cal(al_pid_t *pid, double actual)
 {
     /* position */
     double p;
-
-    BUG_ON(pid == NULL || pos == NULL);
-
-    if (pid == NULL || pos == NULL) {
-        set_errno(EINVAL);
-        return -1;
-    }
 
     pid->e = pid->target - actual;
 
@@ -29,14 +22,7 @@ int32_t al_pid_pos_cal(al_pid_t *pid, double actual, double *pos)
 
     pid->e1 = pid->e;
 
-    if (pid->adjust) {
-        p = pid->adjust(pid, p);
-    }
-
-    *pos = p;
-
-    set_errno(0);
-    return 0;
+    return p;
 }
 
 __END_DECLS

@@ -8,17 +8,10 @@
 
 __BEGIN_DECLS
 
-int32_t al_pid_inc_cal(al_pid_t *pid, double actual, double *inc)
+double al_pid_inc_cal(al_pid_t *pid, double actual)
 {
     double e;
     double __inc;
-
-    BUG_ON(pid == NULL || inc == NULL);
-
-    if (pid == NULL || inc == NULL) {
-        set_errno(EINVAL);
-        return -1;
-    }
 
     e = pid->target - actual;
 
@@ -27,14 +20,7 @@ int32_t al_pid_inc_cal(al_pid_t *pid, double actual, double *inc)
     pid->e1 = pid->e;
     pid->e = e;
 
-    if (pid->adjust) {
-        __inc = pid->adjust(pid, __inc);
-    }
-
-    *inc = __inc;
-
-    set_errno(0);
-    return 0;
+    return __inc;
 }
 
 __END_DECLS
