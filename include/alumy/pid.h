@@ -24,6 +24,8 @@ struct al_pid {
 
 void al_pid_init(al_pid_t *pid, float kp, float ki, float kd, double target);
 
+void al_pid_reset(al_pid_t *pid);
+
 void al_pid_set_target(al_pid_t *pid, double target);
 
 double al_pid_get_target(al_pid_t *pid);

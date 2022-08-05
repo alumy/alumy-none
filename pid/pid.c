@@ -21,6 +21,13 @@ void al_pid_init(al_pid_t *pid, float kp, float ki, float kd, double target)
     pid->sum = 0;
 }
 
+void al_pid_reset(al_pid_t *pid)
+{
+    pid->e = 0;
+    pid->e1 = 0;
+    pid->sum = 0;
+}
+
 void al_pid_set_target(al_pid_t *pid, double target)
 {
     pid->target = target;
