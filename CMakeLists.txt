@@ -105,6 +105,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/libcsv)
 add_subdirectory(${PROJECT_SOURCE_DIR}/protobuf-c)
 add_subdirectory(${PROJECT_SOURCE_DIR}/pid)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lzma)
+add_subdirectory(${PROJECT_SOURCE_DIR}/crypto)
 
 #############################################################################
 # libalumy
@@ -124,7 +125,8 @@ set(objs
 		$<TARGET_OBJECTS:fs>
 		$<TARGET_OBJECTS:protobuf-c>
 		$<TARGET_OBJECTS:pid>
-		$<TARGET_OBJECTS:lzma>)
+		$<TARGET_OBJECTS:lzma>
+		$<TARGET_OBJECTS:crypto>)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_src)
 
