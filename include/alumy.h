@@ -48,6 +48,7 @@
 #include "alumy/fs.h"
 #include "alumy/csv.h"
 #include "alumy/time.h"
+#include "alumy/crypto.h"
 
 __BEGIN_DECLS
 
