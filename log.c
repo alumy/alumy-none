@@ -141,8 +141,8 @@ static ssize_t hex_raw_fmt_line(char *buf, size_t bufsz, intptr_t addr,
 
 	for (i = 0; i < len; ++i) {
         *h_wp++ = hex[(*rp >> 4) & 0x0F];
-		*h_wp++ = hex[*rp & 0x0F];
-		*h_wp++ = ' ';
+        *h_wp++ = hex[*rp & 0x0F];
+        *h_wp++ = ' ';
 
 #if defined (__GNUC__)
         *c_wp++ = isprint(*rp) ? (char)*rp : '.';
@@ -152,7 +152,7 @@ static ssize_t hex_raw_fmt_line(char *buf, size_t bufsz, intptr_t addr,
         *c_wp++ = ((*rp <= 0x7F) && isprint(*rp)) ? *rp : '.';
 #endif
 
-		++rp;
+        ++rp;
     }
 
 	for (i = len; i < BIN_LINE_SIZE; ++i) {
