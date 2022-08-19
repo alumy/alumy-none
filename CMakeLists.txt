@@ -106,6 +106,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/protobuf-c)
 add_subdirectory(${PROJECT_SOURCE_DIR}/pid)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lzma)
 add_subdirectory(${PROJECT_SOURCE_DIR}/crypto)
+add_subdirectory(${PROJECT_SOURCE_DIR}/3rd-party)
 
 #############################################################################
 # libalumy
@@ -126,6 +127,7 @@ set(objs
 		$<TARGET_OBJECTS:protobuf-c>
 		$<TARGET_OBJECTS:pid>
 		$<TARGET_OBJECTS:lzma>
+		$<TARGET_OBJECTS:3rd-party>
 		$<TARGET_OBJECTS:crypto>)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_src)
@@ -147,7 +149,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
             EXPORT "${PROJECT_NAME}")
 endif()
 
-add_library("${PROJECT_NAME}-static" STATIC ${${PROJECT_NAME}_src} ${objs}) 
+add_library("${PROJECT_NAME}-static" STATIC ${${PROJECT_NAME}_src} ${objs})
 
 add_dependencies("${PROJECT_NAME}-static" get_git_hash)
 add_dependencies("${PROJECT_NAME}-static" get_svn_revision)

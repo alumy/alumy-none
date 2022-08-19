@@ -23,9 +23,9 @@ int32_t al_flash_check_hcrc(const al_flash_header_t *hdr)
 
 int32_t al_flash_check_dcrc(const al_flash_header_t *hdr)
 {
-    uint32_t data = al_flash_get_data(hdr);
+    uintptr_t data = al_flash_get_data(hdr);
     uint32_t len = al_flash_get_data_size(hdr);
-    uint32_t dcrc = al_crc32(0, (const uint8_t *)data, len);
+    uint32_t dcrc = al_crc32(0, (const void *)data, len);
 
     return (dcrc == al_flash_get_dcrc(hdr));
 }

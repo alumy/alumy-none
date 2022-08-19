@@ -45,20 +45,22 @@ int32_t al_boost_set_target(al_boost_t *boost, float target)
 
     boost->target = target;
 
-    return al_pid_set_target(boost->pid, boost->target);
+    al_pid_set_target(boost->pid, boost->target);
+
+    return 0;
 }
 
 int32_t al_boost_open(al_boost_t *boost)
 {
     BUG_ON(boost == NULL);
 
-    BUG_ON(al_pid_set_target(boost->pid, 0) != 0);
+    al_pid_set_target(boost->pid, 0);
 
     if (boost->opt.open) {
         boost->opt.open();
     }
 
-    BUG_ON(al_pid_set_target(boost->pid, boost->target) != 0);
+    al_pid_set_target(boost->pid, boost->target);
 
     return 0;
 }
@@ -67,7 +69,7 @@ int32_t al_boost_close(al_boost_t *boost)
 {
     BUG_ON(boost == NULL);
 
-    BUG_ON(al_pid_set_target(boost->pid, 0) != 0);
+    al_pid_set_target(boost->pid, 0);
 
     if (boost->opt.close) {
         return boost->opt.close();
@@ -86,9 +88,7 @@ int32_t al_boost_adjust(al_boost_t *boost)
 
     float vk = al_kalman1_filter(boost->kalman, v);
 
-    if(al_pid_pos_cal(boost->pid, vk, &out) != 0) {
-        return -1;
-    }
+    out = al_pid_pos_cal(boost->pid, vk);
 
     float duty = boost->opt.u_to_duty(vk, out);
 

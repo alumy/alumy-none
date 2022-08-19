@@ -320,6 +320,571 @@
             <F N="../rbtree.c"/>
             <F N="../version.c"/>
         </Folder>
+        <Folder Name="../3rd-party">
+            <Folder Name="letter-shell-3.1.2">
+                <Folder Name="demo">
+                    <Folder Name="esp-idf">
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/esp-idf/shell_cfg.h"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/esp-idf/shell_port.c"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/esp-idf/shell_port.h"/>
+                    </Folder>
+                    <Folder Name="stm32-freertos">
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/stm32-freertos/shell_cfg.h"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/stm32-freertos/shell_port.c"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/stm32-freertos/shell_port.h"/>
+                    </Folder>
+                    <Folder Name="x86-gcc">
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/x86-gcc/CMakeLists.txt"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/x86-gcc/main.c"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/x86-gcc/shell_cfg.h"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/x86-gcc/shell_port.c"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/demo/x86-gcc/shell_port.h"/>
+                    </Folder>
+                </Folder>
+                <Folder Name="extensions">
+                    <Folder Name="cpp_support">
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/cpp_support/shell_cpp.h"/>
+                    </Folder>
+                    <Folder Name="fs_support">
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/fs_support/shell_fs.c"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/fs_support/shell_fs.h"/>
+                    </Folder>
+                    <Folder Name="game">
+                        <Folder Name="2048">
+                            <F N="../3rd-party/letter-shell-3.1.2/extensions/game/2048/2048.c"/>
+                        </Folder>
+                        <Folder Name="pushbox">
+                            <F N="../3rd-party/letter-shell-3.1.2/extensions/game/pushbox/pushbox.c"/>
+                        </Folder>
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/game/game.c"/>
+                    </Folder>
+                    <Folder Name="log">
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/log/log.c"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/log/log.h"/>
+                    </Folder>
+                    <Folder Name="shell_enhance">
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/shell_enhance/shell_cmd_group.c"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/shell_enhance/shell_cmd_group.h"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/shell_enhance/shell_passthrough.c"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/shell_enhance/shell_passthrough.h"/>
+                    </Folder>
+                    <Folder Name="telnet">
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/telnet/telnetd.c"/>
+                        <F N="../3rd-party/letter-shell-3.1.2/extensions/telnet/telnetd.h"/>
+                    </Folder>
+                </Folder>
+                <Folder Name="src">
+                    <F N="../3rd-party/letter-shell-3.1.2/src/shell.c"/>
+                    <F N="../3rd-party/letter-shell-3.1.2/src/shell.h"/>
+                    <F N="../3rd-party/letter-shell-3.1.2/src/shell_cfg.h"/>
+                    <F N="../3rd-party/letter-shell-3.1.2/src/shell_cmd_list.c"/>
+                    <F N="../3rd-party/letter-shell-3.1.2/src/shell_companion.c"/>
+                    <F N="../3rd-party/letter-shell-3.1.2/src/shell_ext.c"/>
+                    <F N="../3rd-party/letter-shell-3.1.2/src/shell_ext.h"/>
+                </Folder>
+            </Folder>
+            <Folder Name="mbedtls-3.2.1">
+                <Folder Name="3rdparty">
+                    <Folder Name="everest">
+                        <Folder Name="include">
+                            <Folder Name="everest">
+                                <Folder Name="kremlib">
+                                    <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlib/FStar_UInt128.h"/>
+                                    <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlib/FStar_UInt64_FStar_UInt32_FStar_UInt16_FStar_UInt8.h"/>
+                                </Folder>
+                                <Folder Name="kremlin">
+                                    <Folder Name="internal">
+                                        <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlin/internal/builtin.h"/>
+                                        <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlin/internal/callconv.h"/>
+                                        <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlin/internal/compat.h"/>
+                                        <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlin/internal/debug.h"/>
+                                        <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlin/internal/target.h"/>
+                                        <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlin/internal/types.h"/>
+                                        <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlin/internal/wasmsupport.h"/>
+                                    </Folder>
+                                    <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlin/c_endianness.h"/>
+                                </Folder>
+                                <Folder Name="vs2010">
+                                    <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/vs2010/Hacl_Curve25519.h"/>
+                                    <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/vs2010/inttypes.h"/>
+                                    <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/vs2010/stdbool.h"/>
+                                </Folder>
+                                <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/everest.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/Hacl_Curve25519.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/kremlib.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/include/everest/x25519.h"/>
+                            </Folder>
+                        </Folder>
+                        <Folder Name="library">
+                            <Folder Name="kremlib">
+                                <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/library/kremlib/FStar_UInt128_extracted.c"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/library/kremlib/FStar_UInt64_FStar_UInt32_FStar_UInt16_FStar_UInt8.c"/>
+                            </Folder>
+                            <Folder Name="legacy">
+                                <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/library/legacy/Hacl_Curve25519.c"/>
+                            </Folder>
+                            <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/library/everest.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/library/Hacl_Curve25519.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/library/Hacl_Curve25519_joined.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/library/x25519.c"/>
+                        </Folder>
+                        <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/CMakeLists.txt"/>
+                    </Folder>
+                    <F N="../3rd-party/mbedtls-3.2.1/3rdparty/CMakeLists.txt"/>
+                </Folder>
+                <Folder Name="configs">
+                    <F N="../3rd-party/mbedtls-3.2.1/configs/config-ccm-psk-dtls1_2.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/configs/config-ccm-psk-tls1_2.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/configs/config-no-entropy.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/configs/config-suite-b.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/configs/config-symmetric-only.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/configs/config-thread.h"/>
+                </Folder>
+                <Folder Name="doxygen">
+                    <Folder Name="input">
+                        <F N="../3rd-party/mbedtls-3.2.1/doxygen/input/doc_encdec.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/doxygen/input/doc_hashing.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/doxygen/input/doc_mainpage.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/doxygen/input/doc_rng.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/doxygen/input/doc_ssltls.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/doxygen/input/doc_tcpip.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/doxygen/input/doc_x509.h"/>
+                    </Folder>
+                </Folder>
+                <Folder Name="include">
+                    <Folder Name="mbedtls">
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/aes.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/aria.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/asn1.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/asn1write.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/base64.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/bignum.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/build_info.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/camellia.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ccm.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/chacha20.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/chachapoly.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/check_config.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/cipher.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/cmac.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/compat-2.x.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/config_psa.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/constant_time.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ctr_drbg.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/debug.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/des.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/dhm.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ecdh.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ecdsa.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ecjpake.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ecp.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/entropy.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/error.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/gcm.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/hkdf.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/hmac_drbg.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/mbedtls_config.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/md.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/md5.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/memory_buffer_alloc.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/net_sockets.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/nist_kw.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/oid.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/pem.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/pk.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/pkcs12.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/pkcs5.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/platform.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/platform_time.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/platform_util.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/poly1305.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/private_access.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/psa_util.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ripemd160.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/rsa.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/sha1.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/sha256.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/sha512.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ssl.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ssl_cache.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ssl_ciphersuites.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ssl_cookie.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/ssl_ticket.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/threading.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/timing.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/version.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/x509.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/x509_crl.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/x509_crt.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/mbedtls/x509_csr.h"/>
+                    </Folder>
+                    <Folder Name="psa">
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_builtin_composites.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_builtin_primitives.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_compat.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_config.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_driver_common.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_driver_contexts_composites.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_driver_contexts_primitives.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_extra.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_platform.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_se_driver.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_sizes.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_struct.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_types.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/include/psa/crypto_values.h"/>
+                    </Folder>
+                    <F N="../3rd-party/mbedtls-3.2.1/include/CMakeLists.txt"/>
+                </Folder>
+                <Folder Name="library">
+                    <F N="../3rd-party/mbedtls-3.2.1/library/aes.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/aesni.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/aesni.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/aria.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/asn1parse.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/asn1write.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/base64.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/bignum.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/bignum_internal.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/bn_mul.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/camellia.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ccm.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/chacha20.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/chachapoly.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/check_crypto_config.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/cipher.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/cipher_wrap.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/cipher_wrap.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/cmac.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/CMakeLists.txt"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/common.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/constant_time.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/constant_time_internal.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/constant_time_invasive.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ctr_drbg.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/debug.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/des.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/dhm.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ecdh.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ecdsa.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ecjpake.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ecp.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ecp_curves.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ecp_internal_alt.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ecp_invasive.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/entropy.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/entropy_poll.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/entropy_poll.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/error.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/gcm.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/hkdf.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/hmac_drbg.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/md.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/md5.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/md_wrap.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/memory_buffer_alloc.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/mps_common.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/mps_error.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/mps_reader.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/mps_reader.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/mps_trace.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/mps_trace.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/net_sockets.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/nist_kw.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/oid.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/padlock.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/padlock.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/pem.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/pk.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/pk_wrap.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/pk_wrap.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/pkcs12.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/pkcs5.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/pkparse.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/pkwrite.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/pkwrite.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/platform.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/platform_util.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/poly1305.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_aead.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_aead.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_cipher.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_cipher.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_client.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_core.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_driver_wrappers.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_driver_wrappers.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_ecp.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_ecp.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_hash.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_hash.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_invasive.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_its.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_mac.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_mac.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_random_impl.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_rsa.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_rsa.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_se.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_se.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_slot_management.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_slot_management.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_storage.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_crypto_storage.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/psa_its_file.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ripemd160.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/rsa.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/rsa_alt_helpers.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/rsa_alt_helpers.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/sha1.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/sha256.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/sha512.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_cache.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_ciphersuites.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_client.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_client.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_cookie.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_debug_helpers.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_debug_helpers_generated.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_misc.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_msg.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_ticket.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_tls.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_tls12_client.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_tls12_server.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_tls13_client.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_tls13_generic.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_tls13_invasive.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_tls13_keys.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_tls13_keys.h"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/ssl_tls13_server.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/threading.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/timing.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/version.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/version_features.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/x509.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/x509_create.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/x509_crl.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/x509_crt.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/x509_csr.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/x509write_crt.c"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/library/x509write_csr.c"/>
+                </Folder>
+                <Folder Name="programs">
+                    <Folder Name="aes">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/aes/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/aes/crypt_and_hash.c"/>
+                    </Folder>
+                    <Folder Name="cipher">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/cipher/cipher_aead_demo.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/cipher/CMakeLists.txt"/>
+                    </Folder>
+                    <Folder Name="fuzz">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/common.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/common.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/fuzz_client.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/fuzz_dtlsclient.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/fuzz_dtlsserver.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/fuzz_privkey.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/fuzz_pubkey.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/fuzz_server.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/fuzz_x509crl.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/fuzz_x509crt.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/fuzz_x509csr.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/fuzz/onefile.c"/>
+                    </Folder>
+                    <Folder Name="hash">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/hash/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/hash/generic_sum.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/hash/hello.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/hash/md_hmac_demo.c"/>
+                    </Folder>
+                    <Folder Name="pkey">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/dh_client.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/dh_genprime.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/dh_server.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/ecdh_curve25519.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/ecdsa.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/gen_key.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/key_app.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/key_app_writer.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/mpi_demo.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/pk_decrypt.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/pk_encrypt.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/pk_sign.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/pk_verify.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/rsa_decrypt.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/rsa_encrypt.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/rsa_genkey.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/rsa_sign.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/rsa_sign_pss.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/rsa_verify.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/pkey/rsa_verify_pss.c"/>
+                    </Folder>
+                    <Folder Name="psa">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/psa/aead_demo.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/psa/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/psa/crypto_examples.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/psa/hmac_demo.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/psa/key_ladder_demo.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/psa/psa_constant_names.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/psa/psa_constant_names_generated.c"/>
+                    </Folder>
+                    <Folder Name="random">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/random/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/random/gen_entropy.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/random/gen_random_ctr_drbg.c"/>
+                    </Folder>
+                    <Folder Name="ssl">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/dtls_client.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/dtls_server.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/mini_client.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_client1.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_client2.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_context_info.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_fork_server.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_mail_client.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_pthread_server.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_server.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_server2.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_test_common_source.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_test_lib.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/ssl/ssl_test_lib.h"/>
+                    </Folder>
+                    <Folder Name="test">
+                        <Folder Name="cmake_package">
+                            <F N="../3rd-party/mbedtls-3.2.1/programs/test/cmake_package/cmake_package.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/programs/test/cmake_package/CMakeLists.txt"/>
+                        </Folder>
+                        <Folder Name="cmake_package_install">
+                            <F N="../3rd-party/mbedtls-3.2.1/programs/test/cmake_package_install/cmake_package_install.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/programs/test/cmake_package_install/CMakeLists.txt"/>
+                        </Folder>
+                        <Folder Name="cmake_subproject">
+                            <F N="../3rd-party/mbedtls-3.2.1/programs/test/cmake_subproject/cmake_subproject.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/programs/test/cmake_subproject/CMakeLists.txt"/>
+                        </Folder>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/test/benchmark.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/test/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/test/dlopen.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/test/query_compile_time_config.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/test/query_config.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/test/query_config.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/test/selftest.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/test/udp_proxy.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/test/zeroize.c"/>
+                    </Folder>
+                    <Folder Name="util">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/util/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/util/pem2der.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/util/strerror.c"/>
+                    </Folder>
+                    <Folder Name="x509">
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/x509/cert_app.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/x509/cert_req.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/x509/cert_write.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/x509/CMakeLists.txt"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/x509/crl_app.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/x509/load_roots.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/programs/x509/req_app.c"/>
+                    </Folder>
+                    <F N="../3rd-party/mbedtls-3.2.1/programs/CMakeLists.txt"/>
+                    <F N="../3rd-party/mbedtls-3.2.1/programs/wince_main.c"/>
+                </Folder>
+                <Folder Name="tests">
+                    <Folder Name="configs">
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/configs/config-wrapper-malloc-0-null.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/configs/tls13-only.h"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/configs/user-config-for-test.h"/>
+                    </Folder>
+                    <Folder Name="include">
+                        <Folder Name="alt-dummy">
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/aes_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/aria_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/camellia_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/ccm_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/chacha20_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/chachapoly_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/cmac_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/des_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/dhm_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/ecjpake_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/ecp_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/gcm_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/md5_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/nist_kw_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/platform_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/poly1305_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/ripemd160_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/rsa_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/sha1_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/sha256_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/sha512_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/threading_alt.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/alt-dummy/timing_alt.h"/>
+                        </Folder>
+                        <Folder Name="baremetal-override">
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/baremetal-override/time.h"/>
+                        </Folder>
+                        <Folder Name="spe">
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/spe/crypto_spe.h"/>
+                        </Folder>
+                        <Folder Name="test">
+                            <Folder Name="drivers">
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/aead.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/asymmetric_encryption.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/cipher.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/config_test_driver.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/crypto_config_test_driver_extension.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/hash.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/key_management.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/mac.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/signature.h"/>
+                                <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/drivers/test_driver.h"/>
+                            </Folder>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/asn1_helpers.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/certs.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/constant_flow.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/fake_external_rng_for_test.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/helpers.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/macros.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/psa_crypto_helpers.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/psa_exercise_key.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/psa_helpers.h"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/include/test/random.h"/>
+                        </Folder>
+                    </Folder>
+                    <Folder Name="src">
+                        <Folder Name="drivers">
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/src/drivers/hash.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/src/drivers/platform_builtin_keys.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/src/drivers/test_driver_aead.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/src/drivers/test_driver_asymmetric_encryption.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/src/drivers/test_driver_cipher.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/src/drivers/test_driver_key_management.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/src/drivers/test_driver_mac.c"/>
+                            <F N="../3rd-party/mbedtls-3.2.1/tests/src/drivers/test_driver_signature.c"/>
+                        </Folder>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/src/asn1_helpers.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/src/certs.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/src/fake_external_rng_for_test.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/src/helpers.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/src/psa_crypto_helpers.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/src/psa_exercise_key.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/src/random.c"/>
+                        <F N="../3rd-party/mbedtls-3.2.1/tests/src/threading_helpers.c"/>
+                    </Folder>
+                    <F N="../3rd-party/mbedtls-3.2.1/tests/CMakeLists.txt"/>
+                </Folder>
+                <F N="../3rd-party/mbedtls-3.2.1/CMakeLists.txt"/>
+            </Folder>
+            <F N="../3rd-party/CMakeLists.txt"/>
+        </Folder>
         <Folder Name="../base64">
             <F N="../base64/base64.c"/>
             <F N="../base64/CMakeLists.txt"/>
@@ -678,8 +1243,13 @@
         </Folder>
         <Folder Name="../crc">
             <F N="../crc/CMakeLists.txt"/>
+            <F N="../crc/crc16.c"/>
             <F N="../crc/crc32.c"/>
             <F N="../crc/mb_crc16.c"/>
+        </Folder>
+        <Folder Name="../crypto">
+            <F N="../crypto/aes.c"/>
+            <F N="../crypto/CMakeLists.txt"/>
         </Folder>
         <Folder Name="../cunit">
             <Folder Name="Automated">
@@ -726,6 +1296,7 @@
             </Folder>
             <F N="../driver/boost.c"/>
             <F N="../driver/CMakeLists.txt"/>
+            <F N="../driver/flash_header.c"/>
             <F N="../driver/flexible_button.c"/>
             <F N="../driver/light.c"/>
             <F N="../driver/sw_i2c.c"/>
@@ -848,6 +1419,7 @@
                     </Folder>
                     <F N="../include/alumy/driver/boost.h"/>
                     <F N="../include/alumy/driver/eeprom.h"/>
+                    <F N="../include/alumy/driver/flash_header.h"/>
                     <F N="../include/alumy/driver/flexible_button.h"/>
                     <F N="../include/alumy/driver/gpio.h"/>
                     <F N="../include/alumy/driver/i2c.h"/>
@@ -855,6 +1427,7 @@
                     <F N="../include/alumy/driver/rtc.h"/>
                     <F N="../include/alumy/driver/sw_i2c.h"/>
                     <F N="../include/alumy/driver/sw_spi.h"/>
+                    <F N="../include/alumy/driver/uart.h"/>
                 </Folder>
                 <Folder Name="filter">
                     <F N="../include/alumy/filter/kalman.h"/>
@@ -916,11 +1489,13 @@
                 <F N="../include/alumy/byteorder.h"/>
                 <F N="../include/alumy/byteswap.h"/>
                 <F N="../include/alumy/cdefs.h"/>
+                <F N="../include/alumy/check.h"/>
                 <F N="../include/alumy/cJSON.h"/>
                 <F N="../include/alumy/cJSON_Utils.h"/>
                 <F N="../include/alumy/cm_backtrace.h"/>
                 <F N="../include/alumy/config.h"/>
                 <F N="../include/alumy/crc.h"/>
+                <F N="../include/alumy/crypto.h"/>
                 <F N="../include/alumy/csv.h"/>
                 <F N="../include/alumy/driver.h"/>
                 <F N="../include/alumy/errno.h"/>
@@ -928,7 +1503,6 @@
                 <F N="../include/alumy/filter.h"/>
                 <F N="../include/alumy/format_color.h"/>
                 <F N="../include/alumy/fs.h"/>
-                <F N="../include/alumy/git_hash.h"/>
                 <F N="../include/alumy/initialized.h"/>
                 <F N="../include/alumy/list.h"/>
                 <F N="../include/alumy/log.h"/>
@@ -947,6 +1521,7 @@
                 <F N="../include/alumy/xyzmodem.h"/>
             </Folder>
             <F N="../include/alumy.h"/>
+            <F N="../include/config-no-entropy.h"/>
         </Folder>
         <Folder Name="../libcsv">
             <F N="../libcsv/CMakeLists.txt"/>
@@ -984,6 +1559,7 @@
         <Folder Name="../string">
             <F N="../string/CMakeLists.txt"/>
             <F N="../string/format.c"/>
+            <F N="../string/get_time_str.c"/>
             <F N="../string/str_add_null.c"/>
             <F N="../string/strlcpy.c"/>
         </Folder>
