@@ -7,6 +7,12 @@ alumy-none is an easy-devel library for embedded, it contains the general low le
 
 This library also can be called mcu-sdk, you can use this library to start easy work.
 
+## Prepare
+* Ubuntu
+ ```
+ sudo apt-get -y install gcc-multilib
+ ```
+
 ## Get Started
 * Clone the code
 ```shell
