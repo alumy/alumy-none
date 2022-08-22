@@ -7,13 +7,13 @@
 #include "alumy/base.h"
 #include "alumy/mem.h"
 #include "alumy/log.h"
+#include "alumy/bug.h"
 #include "alumy/errno.h"
 #include "alumy/base64.h"
-// #include "mbedtls/aes.h"
+#include "alumy/check.h"
+#include "mbedtls/aes.h"
 
 __BEGIN_DECLS
-
-#if 0
 
 ssize_t aes_cbc_enc(void *out, size_t outsz, const void *in, size_t len,
                     const void *key, size_t keylen,
@@ -24,22 +24,12 @@ ssize_t aes_cbc_enc(void *out, size_t outsz, const void *in, size_t len,
     size_t padlen = AL_IS_ALIGNED(len, 16) ? 16 : AL_ALIGN(len, 16) - len;
     size_t outlen = len + padlen;
 
-    AL_ASSERT((keylen == 16) || (keylen == 24) || (keylen == 32));
-    AL_ASSERT(__iv_len == 16);
+    AL_CHECK_RET((keylen == 16) || (keylen == 24) || (keylen == 32),
+                 EINVAL, -1);
 
-    if (!((keylen == 16) || (keylen == 24) || (keylen == 32))) {
-        return -EINVAL;
-    }
+    AL_CHECK_RET(__iv_len == 16, EINVAL, -1);
 
-    if (__iv_len != 16) {
-        return -EINVAL;
-    }
-
-    AL_ASSERT(outlen <= outsz);
-
-    if (outlen > outsz) {
-        return -ENOBUFS;
-    }
+    AL_CHECK_RET(outlen <= outsz, ENOBUFS, -1);
 
     uint8_t *in_pad = (uint8_t *)malloc(outlen);
     if (in_pad == NULL) {
@@ -127,22 +117,12 @@ ssize_t aes_cbc_dec(void *out, size_t outsz, const void *in, size_t len,
     int32_t ret;
     ssize_t rv;
 
-    AL_ASSERT((keylen == 16) || (keylen == 24) || (keylen == 32));
-    AL_ASSERT(__iv_len == 16);
+    AL_CHECK_RET((keylen == 16) || (keylen == 24) || (keylen == 32),
+                 EINVAL, -1);
 
-    if (!((keylen == 16) || (keylen == 24) || (keylen == 32))) {
-        return -EINVAL;
-    }
+    AL_CHECK_RET(__iv_len == 16, EINVAL, -1);
 
-    if (__iv_len != 16) {
-        return -EINVAL;
-    }
-
-    AL_ASSERT(len <= outsz);
-
-    if (len > outsz) {
-        return -ENOBUFS;
-    }
+    AL_CHECK_RET(len <= outsz, ENOBUFS, -1);
 
     unsigned char iv[16] = { 0 };
     mbedtls_aes_context aes_ctx;
@@ -225,7 +205,6 @@ ssize_t aes_cbc_dec_base64(void *out, size_t outsz, const char *b64,
 
     return rv;
 }
-#endif
 
 __END_DECLS
 
