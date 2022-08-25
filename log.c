@@ -42,8 +42,7 @@ __weak const char *al_log_timestamp(void)
 
     al_tick_get(&tick);
 
-    snprintf(str, sizeof(str), "[%5ld.%03d]",
-             tick.tv_sec, tick.tv_msec);
+    snprintf(str, sizeof(str), "[%5ld.%03d]", (long)tick.tv_sec, tick.tv_msec);
 
     return str;
 }
