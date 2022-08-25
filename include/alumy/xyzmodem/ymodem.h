@@ -72,6 +72,7 @@ typedef struct al_ymodem {
     uint8_t send_seq;
     time_t last_time;
     time_t timeout;
+    int32_t timeout_cnt;
     al_ymodem_finish_reason_t finish_reason;
     al_ymodem_callback_t *callback;
     al_ymodem_opt_t *opt;

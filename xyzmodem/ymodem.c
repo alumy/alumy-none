@@ -274,6 +274,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                                                   ym->recv_wp, 0);
                 if (header == 0) {
                     ym->last_time = ym->opt->uptime();
+                    ym->timeout_cnt = 0;
 
                     char *filename = NULL;
                     size_t filesize = 0;
@@ -313,6 +314,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                 int32_t ret;
 
                 ym->last_time = ym->opt->uptime();
+                ym->timeout_cnt = 0;
 
                 ret = ymodem_check_pkg(ym->recv_buf, ym->recv_wp, ym->seq);
                 switch (ret) {
@@ -347,8 +349,15 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
             }
 
             if ((ym->opt->uptime() - ym->last_time) > ym->timeout) {
-                ym->status = YMODEM_STATUS_RECV_ERR;
-                ym->finish_reason = AL_YM_FINISH_TIMEOUT;
+                ym->opt->putc(NAK);
+                ym->last_time = ym->opt->uptime();
+                ymodem_recv_status_reset(ym);
+
+                if (ym->timeout_cnt++ > 3) {
+                    ym->status = YMODEM_STATUS_RECV_ERR;
+                    ym->finish_reason = AL_YM_FINISH_TIMEOUT;
+                }
+
                 break;
             }
 
@@ -359,6 +368,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
         {
             if (ymodem_recv_pkg(ym) > 0) {
                 ym->last_time = ym->opt->uptime();
+                ym->timeout_cnt = 0;
 
                 int32_t ret = ymodem_check_pkg(ym->recv_buf, ym->recv_wp, 0);
                 switch (ret) {
@@ -381,8 +391,15 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
             }
 
             if ((ym->opt->uptime() - ym->last_time) > ym->timeout) {
-                ym->status = YMODEM_STATUS_RECV_ERR;
-                ym->finish_reason = AL_YM_FINISH_TIMEOUT;
+                ym->opt->putc(NAK);
+                ym->last_time = ym->opt->uptime();
+                ymodem_recv_status_reset(ym);
+
+                if (ym->timeout_cnt++ > 3) {
+                    ym->status = YMODEM_STATUS_RECV_ERR;
+                    ym->finish_reason = AL_YM_FINISH_TIMEOUT;
+                }
+
                 break;
             }
 
@@ -393,6 +410,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
         {
             if (ymodem_recv_pkg(ym) > 0) {
                 ym->last_time = ym->opt->uptime();
+                ym->timeout_cnt = 0;
 
                 int32_t ret = ymodem_check_pkg(ym->recv_buf, ym->recv_wp, 0);
 
@@ -441,8 +459,15 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
             }
 
             if ((ym->opt->uptime() - ym->last_time) > ym->timeout) {
-                ym->status = YMODEM_STATUS_RECV_ERR;
-                ym->finish_reason = AL_YM_FINISH_TIMEOUT;
+                ym->opt->putc(NAK);
+                ym->last_time = ym->opt->uptime();
+                ymodem_recv_status_reset(ym);
+
+                if (ym->timeout_cnt++ > 3) {
+                    ym->status = YMODEM_STATUS_RECV_ERR;
+                    ym->finish_reason = AL_YM_FINISH_TIMEOUT;
+                }
+
                 break;
             }
 
