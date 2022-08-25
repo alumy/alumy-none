@@ -84,6 +84,8 @@ add_definitions(-D__STDC_FORMAT_MACROS)
 add_definitions(-DAL_USE_DEFAULT_CONFIG)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/mbedtls-3.2.1/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/letter-shell-3.1.2/src)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
     link_libraries(rt)
