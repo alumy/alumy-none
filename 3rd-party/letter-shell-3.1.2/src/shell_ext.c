@@ -18,7 +18,7 @@ extern ShellCommand* shellSeekCommand(Shell *shell,
                                       const char *cmd,
                                       ShellCommand *base,
                                       unsigned short compareLength);
-extern int shellGetVarValue(Shell *shell, ShellCommand *command);
+extern long shellGetVarValue(Shell *shell, ShellCommand *command);
 
 /**
  * @brief 判断数字进制
@@ -268,7 +268,7 @@ static unsigned int shellExtParseVar(Shell *shell, char *var)
  * @param string 参数
  * @return unsigned int 解析结果
  */
-unsigned int shellExtParsePara(Shell *shell, char *string)
+unsigned long shellExtParsePara(Shell *shell, char *string)
 {
     if (*string == '\'' && *(string + 1))
     {
@@ -284,7 +284,7 @@ unsigned int shellExtParsePara(Shell *shell, char *string)
     }
     else if (*string)
     {
-        return (unsigned int)shellExtParseString(string);
+        return (unsigned long)shellExtParseString(string);
     }
     return 0;
 }

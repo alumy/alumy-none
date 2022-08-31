@@ -33,13 +33,13 @@ SHELL_USED const ShellCommand shellUserDefault SHELL_SECTION("shellCommand") =
 
 #if SHELL_USING_CMD_EXPORT == 1
     #if defined(__CC_ARM) || (defined(__ARMCC_VERSION) && __ARMCC_VERSION >= 6000000)
-        extern const unsigned int shellCommand$$Base;
-        extern const unsigned int shellCommand$$Limit;
+        extern const unsigned long shellCommand$$Base;
+        extern const unsigned long shellCommand$$Limit;
     #elif defined(__ICCARM__) || defined(__ICCRX__)
         #pragma section="shellCommand"
     #elif defined(__GNUC__)
-        extern const unsigned int _shell_command_start;
-        extern const unsigned int _shell_command_end;
+        extern const unsigned long _shell_command_start;
+        extern const unsigned long _shell_command_end;
     #endif
 #else
     extern const ShellCommand shellCommandList[];
@@ -199,8 +199,8 @@ void shellInit(Shell *shell, char *buffer, unsigned short size)
                                 / sizeof(ShellCommand);
     #elif defined(__GNUC__)
         shell->commandList.base = (ShellCommand *)(&_shell_command_start);
-        shell->commandList.count = ((unsigned int)(&_shell_command_end)
-                                - (unsigned int)(&_shell_command_start))
+        shell->commandList.count = ((unsigned long)(&_shell_command_end)
+                                - (unsigned long)(&_shell_command_start))
                                 / sizeof(ShellCommand);
     #else
         #error not supported compiler, please use command table mode
@@ -972,7 +972,7 @@ ShellCommand* shellSeekCommand(Shell *shell,
 {
     const char *name;
     unsigned short count = shell->commandList.count -
-        ((int)base - (int)shell->commandList.base) / sizeof(ShellCommand);
+        ((long)base - (long)shell->commandList.base) / sizeof(ShellCommand);
     for (unsigned short i = 0; i < count; i++)
     {
         if (base[i].attr.attrs.type == SHELL_TYPE_KEY
@@ -1007,9 +1007,9 @@ ShellCommand* shellSeekCommand(Shell *shell,
  * @param command 命令
  * @return int 变量值
  */
-int shellGetVarValue(Shell *shell, ShellCommand *command)
+long shellGetVarValue(Shell *shell, ShellCommand *command)
 {
-    int value = 0;
+    long value = 0;
     switch (command->attr.attrs.type)
     {
     case SHELL_TYPE_VAR_INT:
@@ -1023,7 +1023,7 @@ int shellGetVarValue(Shell *shell, ShellCommand *command)
         break;
     case SHELL_TYPE_VAR_STRING:
     case SHELL_TYPE_VAR_POINT:
-        value = (int)(command->data.var.value);
+        value = (long)(command->data.var.value);
         break;
     case SHELL_TYPE_VAR_NODE:
         value = ((ShellNodeVarAttr *)command->data.var.value)->get ?
@@ -1045,7 +1045,7 @@ int shellGetVarValue(Shell *shell, ShellCommand *command)
  * @param value 值
  * @return int 返回变量值
  */
-int shellSetVarValue(Shell *shell, ShellCommand *command, int value)
+int shellSetVarValue(Shell *shell, ShellCommand *command, long value)
 {
     if (command->attr.attrs.readOnly)
     {
@@ -1102,7 +1102,7 @@ int shellSetVarValue(Shell *shell, ShellCommand *command, int value)
 static int shellShowVar(Shell *shell, ShellCommand *command)
 {
     char buffer[12] = "00000000000";
-    int value = shellGetVarValue(shell, command);
+    long value = shellGetVarValue(shell, command);
     
     shellWriteString(shell, command->data.var.name);
     shellWriteString(shell, " = ");
