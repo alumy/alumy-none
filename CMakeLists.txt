@@ -82,6 +82,7 @@ add_custom_target(get_git_hash
 
 add_definitions(-D__STDC_FORMAT_MACROS)
 add_definitions(-DAL_USE_DEFAULT_CONFIG)
+add_definitions(-DMBEDTLS_CONFIG_FILE=<config-no-entropy.h>)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/mbedtls-3.2.1/include)
