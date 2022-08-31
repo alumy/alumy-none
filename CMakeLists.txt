@@ -168,6 +168,14 @@ install(TARGETS "${PROJECT_NAME}-static"
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
         FILES_MATCHING PATTERN "*.h")
+		
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/letter-shell-3.1.2/src/
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/letter-shell"
+        FILES_MATCHING PATTERN "*.h")
+		
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/mbedtls-3.2.1/include/
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/mbedtls"
+        FILES_MATCHING PATTERN "*.h")
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_PACKAGE_VENDOR alumy)
