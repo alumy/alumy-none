@@ -82,11 +82,13 @@ add_custom_target(get_git_hash
 
 add_definitions(-D__STDC_FORMAT_MACROS)
 add_definitions(-DAL_USE_DEFAULT_CONFIG)
-add_definitions(-DMBEDTLS_CONFIG_FILE=<config-no-entropy.h>)
+add_definitions(-DMBEDTLS_CONFIG_FILE=<mbedtls_config.h>)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/mbedtls-3.2.1/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/letter-shell-3.1.2/src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/lwip-2.1.3/src/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/port/include)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
     link_libraries(rt)
@@ -178,6 +180,14 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/letter-shell-3.1.2/src/
 		
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/mbedtls-3.2.1/include/
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/mbedtls"
+        FILES_MATCHING PATTERN "*.h")
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/lwip-2.1.3/src/include/
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/lwip"
+        FILES_MATCHING PATTERN "*.h")
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/port/include/
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
         FILES_MATCHING PATTERN "*.h")
 
 include(InstallRequiredSystemLibraries)
