@@ -6,15 +6,37 @@
 
 __BEGIN_DECLS
 
-enum {
-    SOH = 0x01,
-    STX = 0x02,
-    ETX = 0x03,
-    EOT = 0x04,
-    ACK = 0x06,
-    NAK = 0x15,
-    CAN = 0x18,
-};
+#ifndef SOH
+#define SOH		0x01
+#endif
+
+#ifndef STX
+#define STX		0x02
+#endif
+
+#ifndef ETX
+#define ETX		0x03
+#endif
+
+#ifndef EOT
+#define EOT		0x04
+#endif
+
+#ifndef ACK
+#define ACK		0x06
+#endif
+
+#ifndef NAK
+#define NAK		0x15
+#endif
+
+#ifndef CAN
+#define CAN		0x18
+#endif
+
+#ifndef EOF
+#define EOF		(-1)
+#endif
 
 __END_DECLS
 

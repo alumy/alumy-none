@@ -109,6 +109,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/protobuf-c)
 add_subdirectory(${PROJECT_SOURCE_DIR}/pid)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lzma)
 add_subdirectory(${PROJECT_SOURCE_DIR}/crypto)
+add_subdirectory(${PROJECT_SOURCE_DIR}/xyzmodem)
 add_subdirectory(${PROJECT_SOURCE_DIR}/3rd-party)
 
 #############################################################################
@@ -130,6 +131,7 @@ set(objs
 		$<TARGET_OBJECTS:protobuf-c>
 		$<TARGET_OBJECTS:pid>
 		$<TARGET_OBJECTS:lzma>
+		$<TARGET_OBJECTS:xyzmodem>
 		$<TARGET_OBJECTS:3rd-party>
 		$<TARGET_OBJECTS:crypto>)
 
