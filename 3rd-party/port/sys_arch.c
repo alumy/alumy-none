@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2003 Swedish Institute of Computer Science.
+ * Copyright (c) 2017 Simon Goldschmidt
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -26,7 +26,7 @@
  *
  * This file is part of the lwIP TCP/IP stack.
  *
- * Author: Adam Dunkels <adam@sics.se>
+ * Author: Simon Goldschmidt <goldsimon@gmx.de>
  *
  */
 
@@ -36,236 +36,175 @@
 #include "lwip/sys.h"
 #include "lwip/mem.h"
 #include "lwip/stats.h"
+#include "lwip/err.h"
 #include "alumy.h"
 
-#if !NO_SYS
+#if (!NO_SYS)
 
-#if defined(LWIP_PROVIDE_ERRNO)
-int errno;
-#endif
-
-/*-----------------------------------------------------------------------------------*/
-//  Creates an empty mailbox.
-__weak err_t sys_mbox_new(sys_mbox_t *mbox, int size)
-{
-  return ERR_OK;
-}
-
-/*-----------------------------------------------------------------------------------*/
-/*
-  Deallocates a mailbox. If there are messages still present in the
-  mailbox when the mailbox is deallocated, it is an indication of a
-  programming error in lwIP and the developer should be notified.
-*/
-__weak void sys_mbox_free(sys_mbox_t *mbox)
-{
-}
-
-/*-----------------------------------------------------------------------------------*/
-//   Posts the "msg" to the mailbox.
-__weak void sys_mbox_post(sys_mbox_t *mbox, void *data)
-{
-}
-
-
-/*-----------------------------------------------------------------------------------*/
-//   Try to post the "msg" to the mailbox.
-__weak err_t sys_mbox_trypost(sys_mbox_t *mbox, void *msg)
-{
-  return ERR_OK;
-}
-
-
-/*-----------------------------------------------------------------------------------*/
-//   Try to post the "msg" to the mailbox.
-__weak err_t sys_mbox_trypost_fromisr(sys_mbox_t *mbox, void *msg)
-{
-  return ERR_OK;
-}
-
-/*-----------------------------------------------------------------------------------*/
-/*
-  Blocks the thread until a message arrives in the mailbox, but does
-  not block the thread longer than "timeout" milliseconds (similar to
-  the sys_arch_sem_wait() function). The "msg" argument is a result
-  parameter that is set by the function (i.e., by doing "*msg =
-  ptr"). The "msg" parameter maybe NULL to indicate that the message
-  should be dropped.
-
-  The return values are the same as for the sys_arch_sem_wait() function:
-  Number of milliseconds spent waiting or SYS_ARCH_TIMEOUT if there was a
-  timeout.
-
-  Note that a function with a similar name, sys_mbox_fetch(), is
-  implemented by lwIP.
-*/
-__weak u32_t sys_arch_mbox_fetch(sys_mbox_t *mbox, void **msg, u32_t timeout)
-{
-	return ERR_OK;
-}
-
-/*-----------------------------------------------------------------------------------*/
-/*
-  Similar to sys_arch_mbox_fetch, but if message is not ready immediately, we'll
-  return with SYS_MBOX_EMPTY.  On success, 0 is returned.
-*/
-__weak u32_t sys_arch_mbox_tryfetch(sys_mbox_t *mbox, void **msg)
-{
-	return ERR_OK;
-}
-/*----------------------------------------------------------------------------------*/
-__weak int sys_mbox_valid(sys_mbox_t *mbox)
-{
-  if (*mbox == SYS_MBOX_NULL)
-    return 0;
-  else
-    return 1;
-}
-/*-----------------------------------------------------------------------------------*/
-__weak void sys_mbox_set_invalid(sys_mbox_t *mbox)
-{
-  *mbox = SYS_MBOX_NULL;
-}
-
-/*-----------------------------------------------------------------------------------*/
-//  Creates a new semaphore. The "count" argument specifies
-//  the initial state of the semaphore.
-__weak err_t sys_sem_new(sys_sem_t *sem, u8_t count)
-{
-  return ERR_OK;
-}
-
-/*-----------------------------------------------------------------------------------*/
-/*
-  Blocks the thread while waiting for the semaphore to be
-  signaled. If the "timeout" argument is non-zero, the thread should
-  only be blocked for the specified time (measured in
-  milliseconds).
-
-  If the timeout argument is non-zero, the return value is the number of
-  milliseconds spent waiting for the semaphore to be signaled. If the
-  semaphore wasn't signaled within the specified time, the return value is
-  SYS_ARCH_TIMEOUT. If the thread didn't have to wait for the semaphore
-  (i.e., it was already signaled), the function may return zero.
-
-  Notice that lwIP implements a function with a similar name,
-  sys_sem_wait(), that uses the sys_arch_sem_wait() function.
-*/
-__weak u32_t sys_arch_sem_wait(sys_sem_t *sem, u32_t timeout)
-{
-	return ERR_OK;
-}
-
-/*-----------------------------------------------------------------------------------*/
-// Signals a semaphore
-__weak void sys_sem_signal(sys_sem_t *sem)
-{
-  UNUSED(sem);
-}
-
-/*-----------------------------------------------------------------------------------*/
-// Deallocates a semaphore
-__weak void sys_sem_free(sys_sem_t *sem)
-{
-}
-/*-----------------------------------------------------------------------------------*/
-__weak int sys_sem_valid(sys_sem_t *sem)
-{
-  if (*sem == SYS_SEM_NULL)
-    return 0;
-  else
-    return 1;
-}
-
-/*-----------------------------------------------------------------------------------*/
-__weak void sys_sem_set_invalid(sys_sem_t *sem)
-{
-  *sem = SYS_SEM_NULL;
-}
-
-/*-----------------------------------------------------------------------------------*/
-// Initialize sys arch
+/* Initialize this module (see description in sys.h) */
 __weak void sys_init(void)
 {
 
 }
-/*-----------------------------------------------------------------------------------*/
-                                      /* Mutexes*/
-/*-----------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------------------------------*/
-#if LWIP_COMPAT_MUTEX == 0
+
+__weak u32_t sys_now(void)
+{
+  return 0;
+}
+
+__weak u32_t sys_jiffies(void)
+{
+  return 0;
+}
+
+#if SYS_LIGHTWEIGHT_PROT
+
+__weak sys_prot_t sys_arch_protect(void)
+{
+  return 1;
+}
+
+__weak void sys_arch_unprotect(sys_prot_t pval)
+{
+  LWIP_UNUSED_ARG(pval);
+}
+
+#endif /* SYS_LIGHTWEIGHT_PROT */
+
+__weak void sys_arch_msleep(u32_t delay_ms)
+{
+	LWIP_UNUSED_ARG(delay_ms);
+}
+
+#if !LWIP_COMPAT_MUTEX
+
 /* Create a new mutex*/
 __weak err_t sys_mutex_new(sys_mutex_t *mutex)
 {
   return ERR_OK;
 }
-/*-----------------------------------------------------------------------------------*/
-/* Deallocate a mutex*/
-__weak void sys_mutex_free(sys_mutex_t *mutex)
-{
-}
-/*-----------------------------------------------------------------------------------*/
-/* Lock a mutex*/
+
 __weak void sys_mutex_lock(sys_mutex_t *mutex)
 {
 
 }
 
-/*-----------------------------------------------------------------------------------*/
-/* Unlock a mutex*/
 __weak void sys_mutex_unlock(sys_mutex_t *mutex)
 {
 
 }
-#endif /*LWIP_COMPAT_MUTEX*/
-/*-----------------------------------------------------------------------------------*/
-// TODO
-/*-----------------------------------------------------------------------------------*/
-/*
-  Starts a new thread with priority "prio" that will begin its execution in the
-  function "thread()". The "arg" argument will be passed as an argument to the
-  thread() function. The id of the new thread is returned. Both the id and
-  the priority are system dependent.
-*/
-__weak sys_thread_t sys_thread_new(const char *name, lwip_thread_fn thread , void *arg, int stacksize, int prio)
+
+__weak void sys_mutex_free(sys_mutex_t *mutex)
 {
-	return NULL;
+
 }
 
-/*
-  This optional function does a "fast" critical region protection and returns
-  the previous protection level. This function is only called during very short
-  critical regions. An embedded system which supports ISR-based drivers might
-  want to implement this function by disabling interrupts. Task-based systems
-  might want to implement this by using a mutex or disabling tasking. This
-  function should support recursive calls from the same task or interrupt. In
-  other words, sys_arch_protect() could be called while already protected. In
-  that case the return value indicates that it is already protected.
+#endif /* !LWIP_COMPAT_MUTEX */
 
-  sys_arch_protect() is only required if your port is supporting an operating
-  system.
-
-  Note: This function is based on FreeRTOS API, because no equivalent CMSIS-RTOS
-        API is available
-*/
-__weak sys_prot_t sys_arch_protect(void)
+__weak err_t sys_sem_new(sys_sem_t *sem, u8_t initial_count)
 {
-  return (sys_prot_t)1;
+  return ERR_OK;
 }
 
-
-/*
-  This optional function does a "fast" set of critical region protection to the
-  value specified by pval. See the documentation for sys_arch_protect() for
-  more information. This function is only required if your port is supporting
-  an operating system.
-
-  Note: This function is based on FreeRTOS API, because no equivalent CMSIS-RTOS
-        API is available
-*/
-__weak void sys_arch_unprotect(sys_prot_t pval)
+__weak void sys_sem_signal(sys_sem_t *sem)
 {
-  ( void ) pval;
+
 }
 
-#endif /* !NO_SYS */
+__weak u32_t sys_arch_sem_wait(sys_sem_t *sem, u32_t timeout_ms)
+{
+  return 1;
+}
+
+__weak void sys_sem_free(sys_sem_t *sem)
+{
+
+}
+
+__weak err_t sys_mbox_new(sys_mbox_t *mbox, int size)
+{
+  return ERR_OK;
+}
+
+__weak void sys_mbox_post(sys_mbox_t *mbox, void *msg)
+{
+
+}
+
+__weak err_t sys_mbox_trypost(sys_mbox_t *mbox, void *msg)
+{
+  return ERR_OK;
+}
+
+__weak err_t sys_mbox_trypost_fromisr(sys_mbox_t *mbox, void *msg)
+{
+  return ERR_OK;
+}
+
+__weak u32_t sys_arch_mbox_fetch(sys_mbox_t *mbox, void **msg, u32_t timeout_ms)
+{
+  return 1;
+}
+
+__weak u32_t sys_arch_mbox_tryfetch(sys_mbox_t *mbox, void **msg)
+{
+  return 1;
+}
+
+__weak void sys_mbox_free(sys_mbox_t *mbox)
+{
+}
+
+__weak sys_thread_t
+sys_thread_new(const char *name, lwip_thread_fn thread, void *arg, int stacksize, int prio)
+{
+	sys_thread_t dummy = { 0 };
+
+	return dummy;
+}
+
+#if LWIP_NETCONN_SEM_PER_THREAD
+
+__weak sys_sem_t *sys_arch_netconn_sem_get(void)
+{
+  return NULL;
+}
+
+__weak void sys_arch_netconn_sem_alloc(void)
+{
+  return NULL;
+}
+
+__weak void sys_arch_netconn_sem_free(void)
+{
+
+}
+
+#endif /* LWIP_NETCONN_SEM_PER_THREAD */
+
+#if LWIP_TCPIP_CORE_LOCKING
+
+__weak void sys_lock_tcpip_core(void)
+{
+
+}
+
+__weak void sys_unlock_tcpip_core(void)
+{
+
+}
+
+#endif /* LWIP_TCPIP_CORE_LOCKING */
+
+__weak void sys_mark_tcpip_thread(void)
+{
+
+}
+
+__weak void sys_check_core_locking(void)
+{
+
+}
+
+#endif
+
