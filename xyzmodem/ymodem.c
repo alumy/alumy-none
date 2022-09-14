@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
+#include <inttypes.h>
 #include "alumy/config.h"
 #include "alumy/byteorder.h"
 #include "alumy/base.h"
@@ -63,7 +64,7 @@ static ssize_t ymodem_recv_pkg(al_ymodem_t *ym)
         {
             ym->recv_wp = 0;
 
-            int32_t c = ym->opt->getc();
+            int32_t c = ym->opt->ym_getc();
             switch (c) {
                 case EOF:
                     break;
@@ -189,8 +190,8 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     BUG_ON(cb->recv_header == NULL);
     BUG_ON(cb->recv_packet == NULL);
     BUG_ON(cb->recv_finish == NULL);
-    BUG_ON(opt->putc == NULL);
-    BUG_ON(opt->getc == NULL);
+    BUG_ON(opt->ym_putc == NULL);
+    BUG_ON(opt->ym_getc == NULL);
     BUG_ON(opt->recv == NULL);
     BUG_ON(opt->uptime == NULL);
     BUG_ON(opt->delay_ms == NULL);
@@ -257,7 +258,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                 ym->opt->recv_clear();
             }
 
-            ym->opt->putc('C');
+            ym->opt->ym_putc('C');
             ym->status = YMODEM_STATUS_RECV_HEADER;
             ym->last_time = ym->opt->uptime();
             ym->seq = 0;
@@ -287,8 +288,8 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                     }
 
                     if (ym->callback->recv_header(filename, filesize) == 0) {
-                        ym->opt->putc(ACK);
-                        ym->opt->putc('C');
+                        ym->opt->ym_putc(ACK);
+                        ym->opt->ym_putc('C');
 
                         ym->seq++;
                         ym->status = YMODEM_STATUS_RECV_DATA;
@@ -320,7 +321,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                 switch (ret) {
                     case EOT:
                         ym->status = YMODEM_STATUS_RECV_EOT_CONFIRM;
-                        ym->opt->putc(NAK);
+                        ym->opt->ym_putc(NAK);
                         break;
 
                     case CAN:
@@ -333,7 +334,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                                 ym->recv_buf + YMODEM_HEADER_SIZE,
                                 ym->packet_size) == 0) {
                             ym->seq++;
-                            ym->opt->putc(ACK);
+                            ym->opt->ym_putc(ACK);
                         } else {
                             ym->status = YMODEM_STATUS_RECV_ERR;
                             ym->finish_reason = AL_YM_FINISH_PACKET_PROC_ERR;
@@ -342,14 +343,14 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                         break;
 
                     default:
-                        ym->opt->putc(NAK);
+                        ym->opt->ym_putc(NAK);
                         ymodem_recv_status_reset(ym);
                         break;
                 }
             }
 
             if ((ym->opt->uptime() - ym->last_time) > ym->timeout) {
-                ym->opt->putc(NAK);
+                ym->opt->ym_putc(NAK);
                 ym->last_time = ym->opt->uptime();
                 ymodem_recv_status_reset(ym);
 
@@ -374,8 +375,8 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                 switch (ret) {
                     case EOT:
                         ym->status = YMODEM_STATUS_RECV_FINISH;
-                        ym->opt->putc(ACK);
-                        ym->opt->putc('C');
+                        ym->opt->ym_putc(ACK);
+                        ym->opt->ym_putc('C');
                         break;
 
                     case CAN:
@@ -384,14 +385,14 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                         break;
 
                     default:
-                        ym->opt->putc(NAK);
+                        ym->opt->ym_putc(NAK);
                         ymodem_recv_status_reset(ym);
                         break;
                 }
             }
 
             if ((ym->opt->uptime() - ym->last_time) > ym->timeout) {
-                ym->opt->putc(NAK);
+                ym->opt->ym_putc(NAK);
                 ym->last_time = ym->opt->uptime();
                 ymodem_recv_status_reset(ym);
 
@@ -428,7 +429,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                         bool more = (packet[0] != 0);   /* more files */
 
                         if (zero || !(more)) {
-                            ym->opt->putc(ACK);
+                            ym->opt->ym_putc(ACK);
 
                             ym->session = false;
                             ym->status = YMODEM_STATUS_IDLE;
@@ -459,7 +460,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
             }
 
             if ((ym->opt->uptime() - ym->last_time) > ym->timeout) {
-                ym->opt->putc(NAK);
+                ym->opt->ym_putc(NAK);
                 ym->last_time = ym->opt->uptime();
                 ymodem_recv_status_reset(ym);
 
@@ -476,11 +477,11 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
 
         case YMODEM_STATUS_RECV_TERM:
         case YMODEM_STATUS_RECV_ERR:
-            ym->opt->putc(CAN);
-            ym->opt->putc(CAN);
-            ym->opt->putc(CAN);
-            ym->opt->putc(CAN);
-            ym->opt->putc(CAN);
+            ym->opt->ym_putc(CAN);
+            ym->opt->ym_putc(CAN);
+            ym->opt->ym_putc(CAN);
+            ym->opt->ym_putc(CAN);
+            ym->opt->ym_putc(CAN);
 
             ym->callback->recv_finish(ym->finish_reason);
 
@@ -505,7 +506,7 @@ static int32_t al_ymodem_send_check_ack(al_ymodem_t *ym,
 
     ym->opt->delay_ms(ms);
 
-    c = ym->opt->getc();
+    c = ym->opt->ym_getc();
 
     if (c == expect) {
         return 0;
@@ -545,16 +546,16 @@ static ssize_t __al_ymodem_send_packet(al_ymodem_t *ym,
 
     ym->opt->set_dir(AL_RS485_OUT);
 
-    ym->opt->putc(header);
-    ym->opt->putc(seq);
-    ym->opt->putc(~seq);
+    ym->opt->ym_putc(header);
+    ym->opt->ym_putc(seq);
+    ym->opt->ym_putc(~seq);
 
     total_len += 3;
     
     p = (const uint8_t *)data;
 
     while ((n--) > 0) {
-        ym->opt->putc(*p);
+        ym->opt->ym_putc(*p);
         crc = ymodem_crc16(crc, p, 1);
 
         p++;
@@ -564,14 +565,14 @@ static ssize_t __al_ymodem_send_packet(al_ymodem_t *ym,
     n = cal_len - len;
 
     while ((n--) > 0) {
-        ym->opt->putc(fill);
+        ym->opt->ym_putc(fill);
         crc = ymodem_crc16(crc, &fill, 1);
 
         total_len++;
     }
 
-    ym->opt->putc((crc & 0xFF00) >> 8);
-    ym->opt->putc(crc & 0x00FF);
+    ym->opt->ym_putc((crc & 0xFF00) >> 8);
+    ym->opt->ym_putc(crc & 0x00FF);
 
     ym->opt->set_dir(AL_RS485_IN);
 
@@ -612,7 +613,6 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
                                         const void *data, size_t file_size)
 {
     ssize_t len;
-    uint8_t header;
     int32_t ret;
     ssize_t remain = file_size;
     const uint8_t *p = (const uint8_t *)data;
@@ -659,7 +659,7 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
 
 int32_t al_ymodem_wait_send(al_ymodem_t *ym)
 {
-    if (ym->opt->getc() != 'C') {
+    if (ym->opt->ym_getc() != 'C') {
         return -1;
     }
 
@@ -685,9 +685,10 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
     }
 
     send_len = len + 1;
-    remain = YMODEM_PACKET_SIZE_128 - (len + 1);
+	remain = YMODEM_PACKET_SIZE_128 - (len + 1);
 
-    len = snprintf((char *)ym->send_buf + (len + 1), remain, "%u", file_size);
+    len = snprintf((char *)ym->send_buf + (len + 1), remain,
+				   "%"PRIuPTR, file_size);
 
     if ((len <= 0) || (len >= remain)) {
         set_errno(EINVAL);
@@ -713,7 +714,7 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
     al_ymodem_send_file_data(ym, file_name, data, file_size);
 
     ym->opt->set_dir(AL_RS485_OUT);
-    ym->opt->putc(EOT);
+    ym->opt->ym_putc(EOT);
     ym->opt->set_dir(AL_RS485_IN);
 
     if (al_ymodem_send_check_ack(ym, NAK, 100) != 0) {
@@ -723,7 +724,7 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
     }
 
     ym->opt->set_dir(AL_RS485_OUT);
-    ym->opt->putc(EOT);
+    ym->opt->ym_putc(EOT);
     ym->opt->set_dir(AL_RS485_IN);
 
     if (al_ymodem_send_check_ack(ym, ACK, 100) != 0) {
