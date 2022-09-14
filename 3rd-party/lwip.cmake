@@ -212,4 +212,26 @@ set(lwipallapps_SRCS
     ${lwipmbedtls_SRCS}
 )
 
+set(lwipcontribapps_SRCS
+    ${LWIP_CONTRIB_DIR}/apps/httpserver/httpserver-netconn.c
+    ${LWIP_CONTRIB_DIR}/apps/chargen/chargen.c
+    ${LWIP_CONTRIB_DIR}/apps/udpecho/udpecho.c
+    ${LWIP_CONTRIB_DIR}/apps/tcpecho/tcpecho.c
+    ${LWIP_CONTRIB_DIR}/apps/shell/shell.c
+    ${LWIP_CONTRIB_DIR}/apps/udpecho_raw/udpecho_raw.c
+    ${LWIP_CONTRIB_DIR}/apps/tcpecho_raw/tcpecho_raw.c
+    ${LWIP_CONTRIB_DIR}/apps/netio/netio.c
+    ${LWIP_CONTRIB_DIR}/apps/ping/ping.c
+    ${LWIP_CONTRIB_DIR}/apps/socket_examples/socket_examples.c
+    ${LWIP_CONTRIB_DIR}/apps/rtp/rtp.c
+)
+	
+set(lwipcontribaddons_SRCS
+    ${LWIP_CONTRIB_DIR}/addons/tcp_isn/tcp_isn.c
+    ${LWIP_CONTRIB_DIR}/addons/ipv6_static_routing/ip6_route_table.c
+#    ${LWIP_CONTRIB_DIR}/addons/netconn/external_resolve/dnssd.c
+#    ${LWIP_CONTRIB_DIR}/addons/tcp_md5/tcp_md5.c
+)
+
 set(lwipsrc ${lwipnoapps_SRCS} ${lwipallapps_SRCS})
+set(lwipcontribsrc ${lwipcontribaddons_SRCS} ${lwipcontribapps_SRCS})

@@ -1,6 +1,7 @@
 set(target 3rd-party)
 
 set(LWIP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lwip-2.1.3)
+set(LWIP_CONTRIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/contrib-2.1.0)
 include(${CMAKE_CURRENT_SOURCE_DIR}/lwip.cmake)
 
 FILE (GLOB_RECURSE ${target}_src
@@ -12,7 +13,7 @@ FILE (GLOB_RECURSE ${target}_src
 #	${CMAKE_CURRENT_SOURCE_DIR}/lwip-2.1.3/src/netif/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/port/*.c)
 
-add_library(${target} OBJECT ${${target}_src} ${lwipsrc})
+add_library(${target} OBJECT ${${target}_src} ${lwipsrc} ${lwipcontribsrc})
 
 target_include_directories(${target}
 	PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/letter-shell-3.1.2/src
