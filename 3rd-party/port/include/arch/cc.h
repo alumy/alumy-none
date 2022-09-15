@@ -88,8 +88,10 @@ typedef int sys_prot_t;
 
 #endif
 
+#ifndef LWIP_PLATFORM_ASSERT
 #define LWIP_PLATFORM_ASSERT(x) do {printf("Assertion \"%s\" failed at line %d in %s\n", \
                                      x, __LINE__, __FILE__); } while(0)
+#endif
 
 /* Define random number generator function */
 #define LWIP_RAND() ((u32_t)rand())
