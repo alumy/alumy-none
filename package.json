@@ -2,7 +2,7 @@
     "config": {
         "ghooks": {
             "commit-msg": "validate-commit-msg",
-            "pre-push": "./cmake_gen.sh gcc.cmake Debug 1 ./build/release && cd build && make && make test"
+            "pre-push": "./pre_push.sh"
         },
         "commitizen": {
             "path": "cz-conventional-changelog"
