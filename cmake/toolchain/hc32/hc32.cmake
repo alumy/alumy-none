@@ -42,8 +42,10 @@ set(CMAKE_EXE_LINKER_FLAGS "${MCU} --specs=nano.specs -T${LINKER_SCRIPT}" CACHE 
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map,--cref" CACHE STRING "" FORCE)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -Wl,-print-memory-usage" CACHE STRING "" FORCE)
 
+if(${CMAKE_INSTALL_PREFIX} STREQUAL "")
 # Let empty for root directory /
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/release" CACHE STRING "" FORCE)
+endif()
 
 link_libraries(m c nosys)
 
