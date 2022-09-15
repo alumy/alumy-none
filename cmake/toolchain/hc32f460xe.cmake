@@ -13,7 +13,7 @@ add_definitions(-DHC32F460)
 add_definitions(-DCMB_CPU_PLATFORM_TYPE=CMB_CPU_ARM_CORTEX_M4)
 add_definitions(-DAL_HAVE_SYS_CDEFS=1)
 add_definitions(-DAL_HAVE_SYS_TYPES=1)
-add_definitions(-DAL_USE_ERRNO=0)
+add_definitions(-DAL_PROVIDE_ERRNO=0)
 
 include(${CMAKE_CURRENT_LIST_DIR}/hc32/hc32.cmake)
 

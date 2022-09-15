@@ -35,13 +35,19 @@
 #include "cpu.h"
 #include <stdlib.h>
 #include <stdio.h>
-#if defined (__GNUC__) & !defined (__CC_ARM)
-#include <errno.h>
-#endif
 
 typedef int sys_prot_t;
 
+#if defined (__GNUC__) & !defined (__CC_ARM)
+
+#define LWIP_ERRNO_INCLUDE <errno.h>
+#define LWIP_ERRNO_STDINCLUDE	1
+
+#else
+
 #define LWIP_PROVIDE_ERRNO
+
+#endif
 
 #if defined (__GNUC__) & !defined (__CC_ARM)
 

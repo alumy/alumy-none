@@ -35,7 +35,7 @@ defined in armcc/errno.h
 #define ERRNO_BASE    0
 #endif
 
-#if AL_USE_ERRNO
+#if AL_PROVIDE_ERRNO
 
 #define EPERM            (ERRNO_BASE + 1)
 #define ENOENT           (ERRNO_BASE + 2)

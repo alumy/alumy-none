@@ -30,8 +30,8 @@ extern "C" {
 #define AL_LOG_COLOR            1
 #endif
 
-#ifndef AL_USE_ERRNO
-#define AL_USE_ERRNO            0
+#ifndef AL_PROVIDE_ERRNO
+#define AL_PROVIDE_ERRNO		0
 #endif
 
 #ifndef AL_HAVE_SYS_CDEFS
