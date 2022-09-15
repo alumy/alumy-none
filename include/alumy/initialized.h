@@ -21,7 +21,7 @@ __static_inline__ bool al_initialized_init(uint32_t *initialized)
     return true;
 }
 
-__static_inline__ bool al_initialized_final(uint32_t *initialized)
+__static_inline__ bool al_initialized_cleanup(uint32_t *initialized)
 {
     if (!(*initialized)) {
         return false;
