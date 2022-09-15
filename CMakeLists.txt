@@ -185,8 +185,17 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/mbedtls-3.2.1/include/
         FILES_MATCHING PATTERN "*.h")
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/lwip-2.1.3/src/include/
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/lwip"
         FILES_MATCHING PATTERN "*.h")
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/contrib-2.1.0/
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/contrib"
+        FILES_MATCHING
+		PATTERN "*.h"
+		PATTERN "ports" EXCLUDE
+		PATTERN "examples" EXCLUDE
+		PATTERN "Coverity" EXCLUDE
+		PATTERN "apps/LwipMibCompiler" EXCLUDE)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/port/include/
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/port"
