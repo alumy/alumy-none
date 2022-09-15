@@ -189,7 +189,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/lwip-2.1.3/src/include/
         FILES_MATCHING PATTERN "*.h")
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/port/include/
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/port"
         FILES_MATCHING PATTERN "*.h")
 
 include(InstallRequiredSystemLibraries)
