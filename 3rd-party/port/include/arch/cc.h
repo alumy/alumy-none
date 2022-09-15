@@ -35,6 +35,9 @@
 #include "cpu.h"
 #include <stdlib.h>
 #include <stdio.h>
+#if defined (__GNUC__) & !defined (__CC_ARM)
+#include <errno.h>
+#endif
 
 typedef int sys_prot_t;
 

@@ -22,7 +22,7 @@
 
 /* MEM_SIZE: the size of the heap memory. If the application will send
 a lot of data that needs to be copied, this should be set high. */
-#define MEM_SIZE                (10*1024)
+#define MEM_SIZE                (10240)
 
 /* MEMP_NUM_PBUF: the number of memp struct pbufs. If the application
    sends a lot of data out of ROM (or other static memory), this
@@ -50,7 +50,7 @@ a lot of data that needs to be copied, this should be set high. */
 #define PBUF_POOL_SIZE          8
 
 /* PBUF_POOL_BUFSIZE: the size of each pbuf in the pbuf pool. */
-#define PBUF_POOL_BUFSIZE       512
+#define PBUF_POOL_BUFSIZE       1524
 
 /* ---------- TCP options ---------- */
 #define LWIP_TCP                1
@@ -89,7 +89,7 @@ a lot of data that needs to be copied, this should be set high. */
 
 
 /* ---------- Statistics options ---------- */
-#define LWIP_STATS 0
+#define LWIP_STATS	0
 
 /* ---------- link callback options ---------- */
 /* LWIP_NETIF_LINK_CALLBACK==1: Support a callback function from an interface
@@ -110,7 +110,7 @@ The STM32F4xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
  - To use this feature let the following define uncommented.
  - To disable it and process by CPU comment the  the checksum.
 */
-#define CHECKSUM_BY_HARDWARE
+/* #define CHECKSUM_BY_HARDWARE */
 
 
 #ifdef CHECKSUM_BY_HARDWARE
@@ -154,7 +154,7 @@ The STM32F4xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
 /**
  * LWIP_NETCONN==1: Enable Netconn API (require to use api_lib.c)
  */
-#define LWIP_NETCONN                    0
+#define LWIP_NETCONN                    1
 
 /*
    ------------------------------------
@@ -165,6 +165,18 @@ The STM32F4xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
  * LWIP_SOCKET==1: Enable Socket API (require to use sockets.c)
  */
 #define LWIP_SOCKET                     0
+
+
+#define DEFAULT_UDP_RECVMBOX_SIZE       10
+#define DEFAULT_TCP_RECVMBOX_SIZE       10
+#define DEFAULT_ACCEPTMBOX_SIZE         10
+#define DEFAULT_THREAD_STACKSIZE        1024
+
+#define TCPIP_THREAD_NAME              "lwip"
+#define TCPIP_THREAD_STACKSIZE          512
+#define TCPIP_MBOX_SIZE                 8
+#define TCPIP_THREAD_PRIO               31
+
 
 #endif /* __LWIPOPTS_H__ */
 
