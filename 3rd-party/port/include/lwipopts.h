@@ -177,6 +177,8 @@ The STM32F4xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
 #define TCPIP_MBOX_SIZE                 8
 #define TCPIP_THREAD_PRIO               31
 
+#define SLIPIF_THREAD_STACKSIZE			512
+
 
 #endif /* __LWIPOPTS_H__ */
 
