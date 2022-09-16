@@ -99,6 +99,10 @@ a lot of data that needs to be copied, this should be set high. */
 #define LWIP_NETIF_STATUS_CALLBACK      1
 #define LWIP_NETIF_EXT_STATUS_CALLBACK  1
 
+#define LWIP_HAVE_LOOPIF           1
+#define LWIP_NETIF_LOOPBACK        1
+#define LWIP_LOOPBACK_MAX_PBUFS    10
+
 /*
    --------------------------------------
    ---------- Checksum options ----------
@@ -178,11 +182,11 @@ The STM32F4xx allows computing and verifying the IP, UDP, TCP and ICMP checksums
 #define TCPIP_THREAD_PRIO				28
 
 #define SLIPIF_THREAD_STACKSIZE			512
+#define SLIPIF_THREAD_PRIO				28
 
 #define LWIP_COMPAT_MUTEX				1
 #define LWIP_COMPAT_MUTEX_ALLOWED
 /* #define LWIP_SKIP_CONST_CHECK */
-
 
 #endif /* __LWIPOPTS_H__ */
 
