@@ -89,8 +89,8 @@ a lot of data that needs to be copied, this should be set high. */
 
 
 /* ---------- Statistics options ---------- */
-#define LWIP_STATS              0
-#define LWIP_STATS_DISPLAY      0
+#define LWIP_STATS              1
+#define LWIP_STATS_DISPLAY      1
 
 #if LWIP_STATS
 #define LINK_STATS              1
@@ -117,6 +117,8 @@ a lot of data that needs to be copied, this should be set high. */
 #define LWIP_HAVE_LOOPIF           1
 #define LWIP_NETIF_LOOPBACK        1
 #define LWIP_LOOPBACK_MAX_PBUFS    10
+
+/* #define LWIP_DEBUG */
 
 #ifdef LWIP_DEBUG
 
