@@ -89,7 +89,22 @@ a lot of data that needs to be copied, this should be set high. */
 
 
 /* ---------- Statistics options ---------- */
-#define LWIP_STATS	0
+#define LWIP_STATS              0
+#define LWIP_STATS_DISPLAY      0
+
+#if LWIP_STATS
+#define LINK_STATS              1
+#define IP_STATS                1
+#define ICMP_STATS              1
+#define IGMP_STATS              1
+#define IPFRAG_STATS            1
+#define UDP_STATS               1
+#define TCP_STATS               1
+#define MEM_STATS               1
+#define MEMP_STATS              1
+#define PBUF_STATS              1
+#define SYS_STATS               1
+#endif /* LWIP_STATS */
 
 /* ---------- link callback options ---------- */
 /* LWIP_NETIF_LINK_CALLBACK==1: Support a callback function from an interface
