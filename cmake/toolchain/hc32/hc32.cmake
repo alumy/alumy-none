@@ -67,6 +67,7 @@ string(CONCAT LINKER_FLAGS
   "-Wl,-print-memory-usage "
   "-Wl,-lc,-lm "
   "-static "
+  "--specs=nano.specs "
   "--specs=nosys.specs "
   "-Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map,--cref"
 )
@@ -88,6 +89,8 @@ set(CMAKE_ASM_FLAGS "${ASM_FLAGS}" CACHE STRING "" FORCE)
 set(CMAKE_EXE_LINKER_FLAGS_INIT ${LINKER_FLAGS} CACHE STRING "" FORCE)
 set(CMAKE_MODULE_LINKER_FLAGS_INIT ${LINKER_FLAGS} CACHE STRING "" FORCE)
 set(CMAKE_SHARED_LINKER_FLAGS_INIT ${LINKER_FLAGS} CACHE STRING "" FORCE)
+
+link_libraries(m c)
 
 set(jlink_cmd ${CMAKE_BINARY_DIR}/burn.jlink)
 
