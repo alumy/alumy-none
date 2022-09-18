@@ -43,7 +43,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -specs=nano.specs -u _prin
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map,--cref" CACHE STRING "" FORCE)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -Wl,-print-memory-usage" CACHE STRING "" FORCE)
 
-link_libraries(m c nosys)
+link_libraries(m c)
 
 set(jlink_cmd ${CMAKE_BINARY_DIR}/burn.jlink)
 
