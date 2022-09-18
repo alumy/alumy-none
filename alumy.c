@@ -11,9 +11,6 @@ static uint32_t initialized = 0;
 
 __static_inline__ int32_t __al_init(void)
 {
-	/* must be call for printf rewrite */
-	setvbuf(stdout, NULL, _IONBF, 0);
-
 	al_tick_init();
 
 	return 0;
