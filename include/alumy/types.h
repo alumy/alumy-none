@@ -80,12 +80,16 @@ typedef long int off_t;
 #endif
 
 #if defined(__GNUC__)
-        #if !(defined(__ssize_t_defined) || \
-              defined(_SSIZE_T_DECLARED) || \
-              defined(_SSIZE_T_DEFINED))
-	typedef long ssize_t;
-	#define __ssize_t_defined
-	#endif
+    #if !(defined(__ssize_t_defined) || \
+          defined(_SSIZE_T_DECLARED) || \
+          defined(_SSIZE_T_DEFINED))
+        typedef long ssize_t;
+        #define __ssize_t_defined
+        
+        #ifndef SSIZE_MAX
+            #define SSIZE_MAX INT_MAX
+        #endif
+    #endif
 #endif
 
 #endif	/* end of _TYPES_H */

@@ -35,6 +35,7 @@
 #include "cpu.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "alumy.h"
 
 typedef int sys_prot_t;
 
@@ -49,10 +50,17 @@ typedef int sys_prot_t;
 
 #endif
 
+#if defined (__GNUC__) && defined (__clang__)
+#define LWIP_NO_UNISTD_H        1
+#endif
+
+
 #if defined (__GNUC__) & !defined (__CC_ARM)
 
+#if !defined(__clang__)
 #define LWIP_TIMEVAL_PRIVATE 0
 #include <sys/time.h>
+#endif
 
 #endif
 
