@@ -19,7 +19,8 @@ add_definitions(-DAL_TEST_DRIVER=1)
 
 add_library(${target} STATIC ${${target}_src})
 target_link_libraries(${target} PRIVATE ${PROJECT_NAME}-static unity cmock)
-target_compile_options(${target} PRIVATE -Wno-comment)
+target_compile_options(${target} PRIVATE
+	-Wno-comment -Wno-format -Wno-strict-aliasing -Wno-unused-but-set-variable)
 
 target_include_directories(${target} PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/segger/RTT
