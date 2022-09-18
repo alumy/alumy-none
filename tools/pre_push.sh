@@ -14,5 +14,5 @@ echo "checking for hc32f460petb"
 cd $ROOTDIR
 ./cmake_gen.sh hc32f460petb.cmake Debug 1 $ROOTDIR/build/release
 cd $ROOTDIR/build
-make  && make all test && make install
+make  && make -j32 test && make install
 
