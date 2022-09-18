@@ -28,6 +28,8 @@ static int32_t ds1302_io_set(ds1302_t *this, al_gpio_t level)
     } else {
         PORT_ResetBits(DS1302_IO_PORT, DS1302_IO_PIN);
     }
+
+    return 0;
 }
 
 static al_gpio_t ds1302_io_get(ds1302_t *this)
@@ -63,6 +65,8 @@ static int32_t ds1302_rst_set(ds1302_t *this, al_gpio_t level)
     } else {
         PORT_ResetBits(DS1302_RST_PORT, DS1302_RST_PIN);
     }
+
+    return 0;
 }
 
 static int32_t ds1302_gpio_init(ds1302_t *this)
@@ -82,6 +86,8 @@ static int32_t ds1302_gpio_init(ds1302_t *this)
     PORT_Init(DS1302_IO_PORT, DS1302_IO_PIN, &stcPortInit);
     /* RESET */
     PORT_Init(DS1302_RST_PORT, DS1302_RST_PIN, &stcPortInit);
+
+    return 0;
 }
 
 static int32_t ds1302_gpio_final(ds1302_t *this)

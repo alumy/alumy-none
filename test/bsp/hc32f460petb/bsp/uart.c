@@ -35,7 +35,7 @@ PUTCHAR_PROTOTYPE
   * @brief  Initializate pin of uart module.
   * @retval None
   */
-static void dbg_uart_pin_init(void)
+__used static void dbg_uart_pin_init(void)
 {
 	return;
 }

@@ -20,30 +20,74 @@ set(CMAKE_C_COMPILER_WORKS 1)
 set(CMAKE_CXX_COMPILER_WORKS 1)
 set(CMAKE_ASM_COMPILER_WORKS 1)
 
-set(CMAKE_C_FLAGS "-std=gnu99" CACHE STRING "" FORCE)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MCU}" CACHE STRING "" FORCE)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections" CACHE STRING "" FORCE)
+string(CONCAT C_FLAGS
+  "${MCU} "
+  "-std=gnu11 "
+  "-fno-builtin "
+  "-Wall "
+  "-Werror "
+  "-Wfatal-errors "
+  "-ffunction-sections "
+  "-fdata-sections "
+  "-fno-exceptions "
+  "-fstack-usage "
+  "-fomit-frame-pointer "
+  "-fno-unroll-loops "
+  "-ffast-math "
+  "-ftree-vectorize "
+)
+
+string(CONCAT CXX_FLAGS
+  "${MCU} "
+  "-fno-builtin "
+  "-Wall "
+  "-Werror "
+  "-Wfatal-errors "
+  "-ffunction-sections "
+  "-fdata-sections "
+  "-fno-exceptions "
+  "-fno-rtti "
+  "-fno-threadsafe-statics "
+  "-fno-use-cxa-atexit "
+  "-fstack-usage "
+  "-fomit-frame-pointer "
+  "-fno-unroll-loops "
+  "-ffast-math "
+  "-ftree-vectorize "
+)
+
+string(CONCAT ASM_FLAGS
+  "${MCU} "
+  "-x assembler-with-cpp "
+)
+
+string(CONCAT LINKER_FLAGS
+  "${MCU} -T${LINKER_SCRIPT} "
+  "-Wl,--gc-sections "
+  "-Wl,-print-memory-usage "
+  "-Wl,-lc,-lm "
+  "-static "
+  "--specs=nosys.specs "
+  "-Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map,--cref"
+)
+
+set(CMAKE_C_FLAGS "${C_FLAGS}" CACHE STRING "" FORCE)
 set(CMAKE_C_FLAGS_DEBUG "-g3 -gdwarf-2" CACHE STRING "" FORCE)
 set(CMAKE_C_FLAGS_MINSIZEREL "-Os -DNDEBUG" CACHE STRING "" FORCE)
 set(CMAKE_C_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "" FORCE)
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g -gdwarf-2" CACHE STRING "" FORCE)
 
-set(CMAKE_CXX_FLAGS "" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MCU}" CACHE STRING "" FORCE)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections" CACHE STRING "" FORCE)
+set(CMAKE_CXX_FLAGS "${CXX_FLAGS}" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -gdwarf-2" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "" FORCE)
 set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g -gdwarf-2" CACHE STRING "" FORCE)
 
-set(CMAKE_ASM_FLAGS "-Wall -fdata-sections -ffunction-sections" CACHE STRING "" FORCE)
+set(CMAKE_ASM_FLAGS "${ASM_FLAGS}" CACHE STRING "" FORCE)
 
-set(CMAKE_EXE_LINKER_FLAGS "${MCU} -T${LINKER_SCRIPT}" CACHE STRING "" FORCE)
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -specs=nano.specs -u _printf_float" CACHE STRING "" FORCE)
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map,--cref" CACHE STRING "" FORCE)
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -Wl,-print-memory-usage" CACHE STRING "" FORCE)
-
-link_libraries(m c)
+set(CMAKE_EXE_LINKER_FLAGS_INIT ${LINKER_FLAGS} CACHE STRING "" FORCE)
+set(CMAKE_MODULE_LINKER_FLAGS_INIT ${LINKER_FLAGS} CACHE STRING "" FORCE)
+set(CMAKE_SHARED_LINKER_FLAGS_INIT ${LINKER_FLAGS} CACHE STRING "" FORCE)
 
 set(jlink_cmd ${CMAKE_BINARY_DIR}/burn.jlink)
 
