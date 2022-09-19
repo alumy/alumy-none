@@ -26,37 +26,20 @@ set(CMAKE_ASM_COMPILER_WORKS 1)
 string(CONCAT C_FLAGS
   "${MCU} "
   "-std=gnu11 "
-  "-fno-builtin "
   "-Wall "
   "-Werror "
   "-Wfatal-errors "
   "-ffunction-sections "
   "-fdata-sections "
-  "-fno-exceptions "
-  "-fstack-usage "
-  "-fomit-frame-pointer "
-  "-fno-unroll-loops "
-  "-ffast-math "
-  "-ftree-vectorize "
 )
 
 string(CONCAT CXX_FLAGS
   "${MCU} "
-  "-fno-builtin "
   "-Wall "
   "-Werror "
   "-Wfatal-errors "
   "-ffunction-sections "
   "-fdata-sections "
-  "-fno-exceptions "
-  "-fno-rtti "
-  "-fno-threadsafe-statics "
-  "-fno-use-cxa-atexit "
-  "-fstack-usage "
-  "-fomit-frame-pointer "
-  "-fno-unroll-loops "
-  "-ffast-math "
-  "-ftree-vectorize "
 )
 
 string(CONCAT ASM_FLAGS
@@ -66,7 +49,7 @@ string(CONCAT ASM_FLAGS
 
 string(CONCAT LINKER_FLAGS
   "${MCU} -T${LINKER_SCRIPT} "
-  "--specs=nano.specs "
+#  "--specs=nano.specs "
   "--specs=nosys.specs "
   "-u _printf_float -u _scanf_float "
   "-Wl,--gc-sections "
@@ -93,7 +76,7 @@ set(CMAKE_EXE_LINKER_FLAGS_INIT ${LINKER_FLAGS} CACHE STRING "" FORCE)
 set(CMAKE_MODULE_LINKER_FLAGS_INIT ${LINKER_FLAGS} CACHE STRING "" FORCE)
 set(CMAKE_SHARED_LINKER_FLAGS_INIT ${LINKER_FLAGS} CACHE STRING "" FORCE)
 
-link_libraries(m c)
+link_libraries(m c nosys)
 
 set(jlink_cmd ${CMAKE_BINARY_DIR}/burn.jlink)
 
