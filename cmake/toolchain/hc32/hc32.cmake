@@ -68,6 +68,7 @@ string(CONCAT LINKER_FLAGS
   "${MCU} -T${LINKER_SCRIPT} "
   "--specs=nano.specs "
   "--specs=nosys.specs "
+  "-u _printf_float -u _scanf_float "
   "-Wl,--gc-sections "
   "-Wl,-print-memory-usage "
   "-static "

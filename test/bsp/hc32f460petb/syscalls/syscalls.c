@@ -57,7 +57,18 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
 	return len;
 }
 
-__attribute__((weak)) int _write(int file, char *ptr, int len)
+__attribute__((used)) int _write(int file, char *ptr, int len)
+{
+	int DataIdx;
+
+	for (DataIdx = 0; DataIdx < len; DataIdx++)
+	{
+		__io_putchar(*ptr++);
+	}
+	return len;
+}
+
+__attribute__((weak)) int _write_r(int file, char *ptr, int len)
 {
 	int DataIdx;
 
@@ -136,7 +147,7 @@ int _execve(char *name, char **argv, char **env)
  _sbrk
  Increase program data space. Malloc and related functions depend on this
 **/
-caddr_t _sbrk(int incr)
+__attribute__((weak)) caddr_t _sbrk(int incr)
 {
 	extern char end asm("end");
 	static char *heap_end;
