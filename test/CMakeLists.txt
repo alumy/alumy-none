@@ -58,7 +58,7 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 
     target_link_libraries(${PROJECT_NAME}-test PRIVATE 
                           -Wl,--whole-archive
-                          ${PROJECT_NAME}-static bsp portal unity cmock
+                          ${PROJECT_NAME}-static bsp portal unity cmock syscalls
                           -Wl,--no-whole-archive)
 
     add_custom_command(TARGET ${PROJECT_NAME}-test

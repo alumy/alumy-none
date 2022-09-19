@@ -1,5 +1,7 @@
 set(target bsp)
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/syscalls)
+
 FILE(GLOB_RECURSE ${target}_src 
     ${CMAKE_CURRENT_SOURCE_DIR}/bsp/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/test/*.c
@@ -7,8 +9,7 @@ FILE(GLOB_RECURSE ${target}_src
 	${CMAKE_CURRENT_SOURCE_DIR}/mcu/common/*.c)
 	
 set(${target}_src ${${target}_src} 
-	${CMAKE_CURRENT_SOURCE_DIR}/startup/startup_hc32f460_gcc.S
-	${CMAKE_CURRENT_SOURCE_DIR}/syscalls/syscalls.c)
+	${CMAKE_CURRENT_SOURCE_DIR}/startup/startup_hc32f460_gcc.S)
 
 set(${target}_src ${${target}_src} 
 	${CMAKE_CURRENT_SOURCE_DIR}/segger/RTT/SEGGER_RTT.c
