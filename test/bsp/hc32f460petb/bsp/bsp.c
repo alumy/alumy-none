@@ -2,7 +2,7 @@
 #include "hc32_ddl.h"
 #include "core_cm4.h"
 
-extern int main(void);
+extern int main(int argc, char *argv[]);
 
 static void clk_init(void)
 {
@@ -88,7 +88,10 @@ int32_t bsp_init(void)
 
 int entry(void)
 {
+	char *argv[] = { "alumy_test" };
+
 	bsp_init();
-	return main();
+
+	return main(ARRAY_SIZE(argv), argv);
 }
 

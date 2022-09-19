@@ -4,9 +4,12 @@ set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
+set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY CACHE STRING "" FORCE)
 set(CMAKE_C_COMPILER "arm-none-eabi-gcc" CACHE STRING "" FORCE)
 set(CMAKE_CXX_COMPILER "arm-none-eabi-g++" CACHE STRING "" FORCE)
-set(CMAKE_AR "arm-none-eabi-ar" CACHE STRING "" FORCE)
+set(CMAKE_ASM_COMPILER "arm-none-eabi-gcc" CACHE STRING "" FORCE)
+set(CMAKE_AR "arm-none-eabi-gcc-ar" CACHE STRING "" FORCE)
+set(CMAKE_RANLIB "arm-none-eabi-gcc-ranlib" CACHE STRING "" FORCE)
 set(CMAKE_OBJCOPY "arm-none-eabi-objcopy" CACHE STRING "" FORCE)
 set(CMAKE_SIZE "arm-none-eabi-size" CACHE STRING "" FORCE)
 set(CMAKE_DEBUGGER "arm-none-eabi-gdb" CACHE STRING "" FORCE)
@@ -63,12 +66,11 @@ string(CONCAT ASM_FLAGS
 
 string(CONCAT LINKER_FLAGS
   "${MCU} -T${LINKER_SCRIPT} "
-  "-Wl,--gc-sections "
-  "-Wl,-print-memory-usage "
-  "-Wl,-lc,-lm "
-  "-static "
   "--specs=nano.specs "
   "--specs=nosys.specs "
+  "-Wl,--gc-sections "
+  "-Wl,-print-memory-usage "
+  "-static "
   "-Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map,--cref"
 )
 
