@@ -11,23 +11,23 @@ extern "C" {
 
 /* Verbose log */
 #ifndef AL_LOG
-#define AL_LOG                  1
+#define AL_LOG					1
 #endif
 
 #ifndef AL_DRV_RTC_LOG
-#define AL_DRV_RTC_LOG          0
+#define AL_DRV_RTC_LOG			0
 #endif
 
 #ifndef AL_LOG_FS
-#define AL_LOG_FS               0
+#define AL_LOG_FS				0
 #endif
 
 #ifndef AL_LOG_CRYPTO
-#define AL_LOG_CRYPTO           1
+#define AL_LOG_CRYPTO			1
 #endif
 
 #ifndef AL_LOG_COLOR
-#define AL_LOG_COLOR            1
+#define AL_LOG_COLOR			1
 #endif
 
 #ifndef AL_PROVIDE_ERRNO
@@ -35,11 +35,23 @@ extern "C" {
 #endif
 
 #ifndef AL_HAVE_SYS_CDEFS
-#define AL_HAVE_SYS_CDEFS       1
+#define AL_HAVE_SYS_CDEFS		1
 #endif
 
 #ifndef AL_HAVE_SYS_TYPES
-#define AL_HAVE_SYS_TYPES       1
+#define AL_HAVE_SYS_TYPES		1
+#endif
+
+#ifndef AL_HAVE_STDINT
+#define AL_HAVE_STDINT			1
+#endif
+
+#ifndef AL_HAVE_STDBOOL
+#define AL_HAVE_STDBOOL			1
+#endif
+
+#ifndef AL_HAVE_STDDEF
+#define AL_HAVE_STDDEF			1
 #endif
 
 #ifndef AL_DYNAMIC_CRC_TABLE

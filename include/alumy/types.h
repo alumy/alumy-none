@@ -1,9 +1,17 @@
 #ifndef __AL_TYPES_H
 #define __AL_TYPES_H 1
 
+#if AL_HAVE_STDINT
 #include <stdint.h>
+#endif
+
+#if AL_HAVE_STDBOOL
 #include <stdbool.h>
+#endif
+
+#if AL_HAVE_STDDEF
 #include <stddef.h>
+#endif
 
 #if AL_HAVE_SYS_TYPES
 #include <sys/types.h>
@@ -73,6 +81,13 @@ typedef long int off_t;
 #endif
 
 #if defined(__CC_ARM)
+	#ifndef __ssize_t_defined
+	typedef long ssize_t;
+	#define __ssize_t_defined
+	#endif
+#endif
+
+#if defined(__ICCRL78__)
 	#ifndef __ssize_t_defined
 	typedef long ssize_t;
 	#define __ssize_t_defined

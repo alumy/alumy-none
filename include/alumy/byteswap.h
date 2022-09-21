@@ -111,9 +111,11 @@ __static_inline__ uint32_t al_split_read_four(const void *addr, bool le)
 	const uint8_t *four = (const uint8_t *)addr;
 
 	if (le) {
-		ret = four[0] | (four[1] << 8) | (four[2] << 16) | (four[3] << 24);
+		ret = (((uint32_t)four[3] << 24) | ((uint32_t)four[2] << 16) |
+			   ((uint32_t)four[1] << 8) | (uint32_t)four[0]);
 	} else {
-		ret = four[3] | (four[2] << 8) | (four[1] << 16) | (four[0] << 24);
+		ret = (((uint32_t)four[0] << 24) | ((uint32_t)four[1] << 16) |
+			   ((uint32_t)four[2] << 8) | (uint32_t)four[3]);
 	}
 
 	return ret;

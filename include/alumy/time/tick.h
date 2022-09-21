@@ -1,7 +1,6 @@
 #ifndef __AL_TIME_TICK_H
 #define __AL_TIME_TICK_H 1
 
-#include <stdatomic.h>
 #include <time.h>
 #include "alumy/config.h"
 #include "alumy/types.h"
