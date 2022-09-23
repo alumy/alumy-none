@@ -85,12 +85,32 @@ typedef long int off_t;
 	typedef long ssize_t;
 	#define __ssize_t_defined
 	#endif
+
+	#ifndef __int_t_defined
+	typedef signed int int_t;
+	#define __int_t_defined
+	#endif
+
+	#ifndef __uint_t_defined
+	typedef unsigned int uint_t;
+	#define __uint_t_defined
+	#endif
 #endif
 
 #if defined(__ICCRL78__)
 	#ifndef __ssize_t_defined
-	typedef long ssize_t;
+	typedef short ssize_t;
 	#define __ssize_t_defined
+	#endif
+
+	#ifndef __int_t_defined
+	typedef signed int int_t;
+	#define __int_t_defined
+	#endif
+
+	#ifndef __uint_t_defined
+	typedef unsigned int uint_t;
+	#define __uint_t_defined
 	#endif
 #endif
 
@@ -105,6 +125,16 @@ typedef long int off_t;
             #define SSIZE_MAX INT_MAX
         #endif
     #endif
+
+	#ifndef __int_t_defined
+	typedef signed int int_t;
+	#define __int_t_defined
+	#endif
+
+	#ifndef __uint_t_defined
+	typedef unsigned int uint_t;
+	#define __uint_t_defined
+	#endif
 #endif
 
 #endif	/* end of _TYPES_H */
