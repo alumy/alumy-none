@@ -172,7 +172,7 @@ static uint8_t flex_button_process(void)
         if (target->status > FLEX_BTN_STAGE_DEFAULT)
         {
             target->scan_cnt ++;
-            if (target->scan_cnt >= ((1 << (sizeof(target->scan_cnt) * 8)) - 1))
+            if (target->scan_cnt >= ((1ul << (sizeof(target->scan_cnt) * 8)) - 1))
             {
                 target->scan_cnt = target->long_hold_start_tick;
             }

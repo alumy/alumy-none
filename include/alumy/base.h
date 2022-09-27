@@ -111,6 +111,12 @@
   #endif
 #endif /* __CC_ARM */
 
+#if defined (__ICCRL78__)
+  #ifndef __attribute_const__
+    #define __attribute_const__
+  #endif
+#endif /* __ICCRL78__ */
+
 #ifndef __STRING
 #define __STRING(x) #x
 #endif

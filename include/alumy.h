@@ -34,6 +34,7 @@
 #include "alumy/driver.h"
 #include "alumy/mem.h"
 #include "alumy/string.h"
+#include "alumy/ascii.h"
 #include "alumy/base64.h"
 #include "alumy/byteswap.h"
 #include "alumy/fifo.h"
