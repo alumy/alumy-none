@@ -34,9 +34,9 @@
 #endif
 
 #ifndef container_of
-#define container_of(ptr, type, member) ({		\
-	const typeof(((type *)0)->member) * __mptr = (ptr);		\
-	(type *)((uintptr_t)__mptr - offsetof(type, member)); })
+#define container_of(ptr, type, member) ({					\
+    const typeof(((type *)0)->member) *__mptr = (ptr);		\
+    (type *)((void *)__mptr - offsetof(type, member)); })
 #endif
 
 #ifndef min

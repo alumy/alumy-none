@@ -71,7 +71,7 @@ extern "C" {
 #endif
 
 #ifndef AL_LIGHT_UPDATE_FREQ_HZ
-#define AL_LIGHT_UPDATE_FREQ_HZ 100 // How often al_light_routine() is called
+#define AL_LIGHT_UPDATE_FREQ_HZ	10 // How often al_light_routine() is called
 #endif
 
 #ifndef CMB_CPU_PLATFORM_TYPE

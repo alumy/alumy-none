@@ -34,7 +34,7 @@ struct al_light_item {
     uint8_t value;
     uint16_t intv;
     uint16_t tick;
-    int32_t (*set)(void *arg, bool on);
+    int_t (*set)(al_light_item_t *item, bool on);
     void *user_data;
 };
 
@@ -43,12 +43,11 @@ typedef struct al_light {
     uint32_t value;
 } al_light_t;
 
-int32_t al_light_init(al_light_t *this);
-int32_t al_light_register(al_light_t *this, al_light_item_t *item);
+int_t al_light_init(al_light_t *this);
+int_t al_light_register(al_light_t *this, al_light_item_t *item);
 al_light_item_t *al_light_search(al_light_t *this, uint8_t id);
-int32_t al_light_set(al_light_t *this, uint8_t id,
-                     int32_t value, int32_t intv);
-int32_t al_light_routine(al_light_t *this);
+int_t al_light_set(al_light_t *this, uint8_t id, int_t value, uint16_t intv);
+int_t al_light_routine(al_light_t *this);
 
 __END_DECLS
 

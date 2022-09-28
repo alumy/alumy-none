@@ -1,21 +1,32 @@
-#include "alumy/driver/light.h"
-#include "alumy/errno.h"
+#include "alumy/config.h"
+#include "alumy/byteorder.h"
+#include "alumy/types.h"
+#include "alumy/base.h"
 #include "alumy/bug.h"
+#include "alumy/check.h"
+#include "alumy/errno.h"
+#include "alumy/driver/light.h"
 
 __BEGIN_DECLS
 
-int32_t al_light_init(al_light_t *this)
+int_t al_light_init(al_light_t *light)
 {
-    INIT_LIST_HEAD(&this->ls);
-    this->value = 0;
+	AL_CHECK_RET(light != NULL, EINVAL, -1);
+
+	INIT_LIST_HEAD(&light->ls);
+    light->value = 0;
+
+	set_errno(0);
     return 0;
 }
 
-al_light_item_t *al_light_search(al_light_t *this, uint8_t id)
+al_light_item_t *al_light_search(al_light_t *light, uint8_t id)
 {
     list_head_t *pos, *n;
 
-    list_for_each_safe(pos, n, &this->ls) {
+	AL_CHECK_RET(light != NULL, EINVAL, NULL);
+
+    list_for_each_safe(pos, n, &light->ls) {
         al_light_item_t *item = list_entry(pos, al_light_item_t, link);
 
         if (item->id == id) {
@@ -23,32 +34,38 @@ al_light_item_t *al_light_search(al_light_t *this, uint8_t id)
         }
     }
 
+	set_errno(0);
     return NULL;
 }
 
-int32_t al_light_register(al_light_t *this, al_light_item_t *item)
+int_t al_light_register(al_light_t *light, al_light_item_t *item)
 {
-    if (al_light_search(this, item->id) != NULL) {
+	AL_CHECK_RET(light != NULL, EINVAL, -1);
+
+    if (al_light_search(light, item->id) != NULL) {
         set_errno(EEXIST);
         return -1;
     }
 
-    if (item->id > (sizeof(this->value) << 3)) {
+    if (item->id > (sizeof(light->value) << 3)) {
+		set_errno(EINVAL);
         return -1;
     }
 
     INIT_LIST_HEAD(&item->link);
     item->tick = item->intv;
 
-    list_add_tail(&item->link, &this->ls);
+    list_add_tail(&item->link, &light->ls);
 
     set_errno(0);
     return 0;
 }
 
-int32_t al_light_set(al_light_t *this, uint8_t id, int32_t value, int32_t intv)
+int_t al_light_set(al_light_t *light, uint8_t id, int_t value, uint16_t intv)
 {
-    al_light_item_t *item = al_light_search(this, id);
+	AL_CHECK_RET(light != NULL, NULL, -1);
+
+    al_light_item_t *item = al_light_search(light, id);
     if (item == NULL) {
         set_errno(EINVAL);
         return -1;
@@ -59,7 +76,7 @@ int32_t al_light_set(al_light_t *this, uint8_t id, int32_t value, int32_t intv)
         return 0;
     }
 
-    this->value &= ~(1 << item->id);
+    light->value &= ~(1 << item->id);
     item->value = value;
     item->intv = 0;
     item->tick = 0;
@@ -86,22 +103,24 @@ int32_t al_light_set(al_light_t *this, uint8_t id, int32_t value, int32_t intv)
     return 0;
 }
 
-int32_t al_light_routine(al_light_t *this)
+int_t al_light_routine(al_light_t *light)
 {
     int32_t cnt = 0;
     list_head_t *pos, *n;
 
-    list_for_each_safe(pos, n, &this->ls) {
+	AL_CHECK_RET(light != NULL, NULL, -1);
+
+    list_for_each_safe(pos, n, &light->ls) {
         al_light_item_t *item = list_entry(pos, al_light_item_t, link);
 
         if (item->intv > 0) {
             if ((--item->tick) == 0) {
-                bool on = this->value & (1 << item->id) ? true : false;
+                bool on = light->value & (1 << item->id) ? true : false;
 
-                item->set(item->user_data, on);
+                item->set(item, on);
                 item->tick = item->intv;
 
-                this->value ^= (1 << item->id);
+                light->value ^= (1 << item->id);
             }
         }
 

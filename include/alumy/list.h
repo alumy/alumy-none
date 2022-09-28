@@ -254,8 +254,7 @@ static inline void list_splice_tail_init(struct list_head *list,
  * @member:	the name of the list_struct within the struct.
  */
 #define list_entry(ptr, type, member) \
-    ((type *)((uintptr_t)(ptr) - offsetof(type, member)))
-
+    ((type *)((uint8_t *)(ptr) - offsetof(type, member)))
 
 
 /**
