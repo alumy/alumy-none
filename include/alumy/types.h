@@ -99,7 +99,7 @@ typedef long int off_t;
 
 #if defined(__ICCRL78__)
 	#ifndef __ssize_t_defined
-	typedef short ssize_t;
+	typedef signed short ssize_t;
 	#define __ssize_t_defined
 	#endif
 

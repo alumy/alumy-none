@@ -83,11 +83,11 @@ int_t al_light_set(al_light_t *light, uint8_t id, int_t value, uint16_t intv)
 
     switch (item->value) {
         case AL_LIGHT_OFF:
-            item->set(item->user_data, false);
+            item->set(item, false);
             break;
 
         case AL_LIGHT_ON:
-            item->set(item->user_data, true);
+            item->set(item, true);
             break;
 
         case AL_LIGHT_FLASH:

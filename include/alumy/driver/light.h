@@ -14,8 +14,8 @@ __BEGIN_DECLS
 #define AL_LIGHT_UPDATE_FREQ_HZ     100
 #endif
 
-#define AL_LIGHT_INIT(id, intv, set, user_data)     \
-    { { 0 }, (id), 0, AL_LIGHT_MS_TO_TICKS((intv)), 0, (set), (user_data) }
+#define AL_LIGHT_INIT(id, intv, set)     \
+    { { 0 }, (id), 0, AL_LIGHT_MS_TO_TICKS((intv)), 0, (set) }
 
 #define AL_LIGHT_MS_TO_TICKS(ms)    ((ms) / (1000 / AL_LIGHT_UPDATE_FREQ_HZ))
 
@@ -35,7 +35,6 @@ struct al_light_item {
     uint16_t intv;
     uint16_t tick;
     int_t (*set)(al_light_item_t *item, bool on);
-    void *user_data;
 };
 
 typedef struct al_light {
