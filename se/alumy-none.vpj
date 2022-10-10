@@ -2081,6 +2081,7 @@
                     <F N="../include/alumy/cunit/CUCurses.h"/>
                     <F N="../include/alumy/cunit/CUError.h"/>
                     <F N="../include/alumy/cunit/CUnit.h"/>
+                    <F N="../include/alumy/cunit/CUnit.h.in"/>
                     <F N="../include/alumy/cunit/CUnit_intl.h"/>
                     <F N="../include/alumy/cunit/MyMem.h"/>
                     <F N="../include/alumy/cunit/TestDB.h"/>
@@ -2190,6 +2191,7 @@
                 <F N="../include/alumy/format_color.h"/>
                 <F N="../include/alumy/fs.h"/>
                 <F N="../include/alumy/git_hash.h"/>
+                <F N="../include/alumy/git_hash.h.in"/>
                 <F N="../include/alumy/initialized.h"/>
                 <F N="../include/alumy/list.h"/>
                 <F N="../include/alumy/log.h"/>
@@ -2201,10 +2203,12 @@
                 <F N="../include/alumy/rbtree.h"/>
                 <F N="../include/alumy/string.h"/>
                 <F N="../include/alumy/svn_revision.h"/>
+                <F N="../include/alumy/svn_revision.h.in"/>
                 <F N="../include/alumy/test_init.h"/>
                 <F N="../include/alumy/time.h"/>
                 <F N="../include/alumy/types.h"/>
                 <F N="../include/alumy/version.h"/>
+                <F N="../include/alumy/version.h.in"/>
                 <F N="../include/alumy/xyzmodem.h"/>
             </Folder>
             <F N="../include/alumy.h"/>
