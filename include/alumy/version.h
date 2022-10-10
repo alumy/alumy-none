@@ -1,8 +1,6 @@
 #ifndef __AL_VERSION_H
 #define __AL_VERSION_H
 
-#include "alumy/config.h"
-#include "alumy/byteorder.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
 

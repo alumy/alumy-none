@@ -1,6 +1,6 @@
-#include "bsp.h"
 #include "hc32_ddl.h"
 #include "core_cm4.h"
+#include "bsp.h"
 
 extern int main(int argc, char *argv[]);
 
