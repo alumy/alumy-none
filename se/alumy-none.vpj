@@ -312,6 +312,7 @@
     <Files AutoFolders="DirectoryView">
         <Folder Name="..">
             <F N="../alumy.c"/>
+            <F N="../ascii.c"/>
             <F N="../CMakeLists.txt"/>
             <F N="../errno.c"/>
             <F N="../fifo.c"/>
@@ -2080,6 +2081,7 @@
                     <F N="../include/alumy/cunit/CUCurses.h"/>
                     <F N="../include/alumy/cunit/CUError.h"/>
                     <F N="../include/alumy/cunit/CUnit.h"/>
+                    <F N="../include/alumy/cunit/CUnit.h.in"/>
                     <F N="../include/alumy/cunit/CUnit_intl.h"/>
                     <F N="../include/alumy/cunit/MyMem.h"/>
                     <F N="../include/alumy/cunit/TestDB.h"/>
@@ -2189,6 +2191,7 @@
                 <F N="../include/alumy/format_color.h"/>
                 <F N="../include/alumy/fs.h"/>
                 <F N="../include/alumy/git_hash.h"/>
+                <F N="../include/alumy/git_hash.h.in"/>
                 <F N="../include/alumy/initialized.h"/>
                 <F N="../include/alumy/list.h"/>
                 <F N="../include/alumy/log.h"/>
@@ -2200,10 +2203,12 @@
                 <F N="../include/alumy/rbtree.h"/>
                 <F N="../include/alumy/string.h"/>
                 <F N="../include/alumy/svn_revision.h"/>
+                <F N="../include/alumy/svn_revision.h.in"/>
                 <F N="../include/alumy/test_init.h"/>
                 <F N="../include/alumy/time.h"/>
                 <F N="../include/alumy/types.h"/>
                 <F N="../include/alumy/version.h"/>
+                <F N="../include/alumy/version.h.in"/>
                 <F N="../include/alumy/xyzmodem.h"/>
             </Folder>
             <F N="../include/alumy.h"/>
@@ -2240,245 +2245,6 @@
         <Folder Name="../qrcode">
             <F N="../qrcode/CMakeLists.txt"/>
             <F N="../qrcode/qrcode.c"/>
-        </Folder>
-        <Folder Name="../release">
-            <Folder Name="include">
-                <Folder Name="alumy">
-                    <Folder Name="arch">
-                        <Folder Name="arm">
-                            <F N="../release/include/alumy/arch/arm/bitband.h"/>
-                        </Folder>
-                        <F N="../release/include/alumy/arch/arm.h"/>
-                    </Folder>
-                    <Folder Name="cm_backtrace">
-                        <F N="../release/include/alumy/cm_backtrace/cmb_cfg.h"/>
-                        <F N="../release/include/alumy/cm_backtrace/cmb_def.h"/>
-                    </Folder>
-                    <Folder Name="cunit">
-                        <F N="../release/include/alumy/cunit/Automated.h"/>
-                        <F N="../release/include/alumy/cunit/Basic.h"/>
-                        <F N="../release/include/alumy/cunit/Console.h"/>
-                        <F N="../release/include/alumy/cunit/CUCurses.h"/>
-                        <F N="../release/include/alumy/cunit/CUError.h"/>
-                        <F N="../release/include/alumy/cunit/CUnit.h"/>
-                        <F N="../release/include/alumy/cunit/CUnit_intl.h"/>
-                        <F N="../release/include/alumy/cunit/MyMem.h"/>
-                        <F N="../release/include/alumy/cunit/TestDB.h"/>
-                        <F N="../release/include/alumy/cunit/TestRun.h"/>
-                        <F N="../release/include/alumy/cunit/Util.h"/>
-                        <F N="../release/include/alumy/cunit/wxWidget.h"/>
-                    </Folder>
-                    <Folder Name="driver">
-                        <Folder Name="eeprom">
-                            <F N="../release/include/alumy/driver/eeprom/bl24c128.h"/>
-                        </Folder>
-                        <Folder Name="rtc">
-                            <F N="../release/include/alumy/driver/rtc/bm8563.h"/>
-                            <F N="../release/include/alumy/driver/rtc/ds1302.h"/>
-                            <F N="../release/include/alumy/driver/rtc/sd3078.h"/>
-                        </Folder>
-                        <Folder Name="usb">
-                            <Folder Name="ch376">
-                                <F N="../release/include/alumy/driver/usb/ch376/cmd.h"/>
-                            </Folder>
-                            <F N="../release/include/alumy/driver/usb/ch376.h"/>
-                        </Folder>
-                        <F N="../release/include/alumy/driver/boost.h"/>
-                        <F N="../release/include/alumy/driver/eeprom.h"/>
-                        <F N="../release/include/alumy/driver/flash_header.h"/>
-                        <F N="../release/include/alumy/driver/flexible_button.h"/>
-                        <F N="../release/include/alumy/driver/gpio.h"/>
-                        <F N="../release/include/alumy/driver/i2c.h"/>
-                        <F N="../release/include/alumy/driver/light.h"/>
-                        <F N="../release/include/alumy/driver/rtc.h"/>
-                        <F N="../release/include/alumy/driver/sw_i2c.h"/>
-                        <F N="../release/include/alumy/driver/sw_spi.h"/>
-                        <F N="../release/include/alumy/driver/uart.h"/>
-                    </Folder>
-                    <Folder Name="filter">
-                        <F N="../release/include/alumy/filter/kalman.h"/>
-                    </Folder>
-                    <Folder Name="freemodbus">
-                        <Folder Name="ascii">
-                            <F N="../release/include/alumy/freemodbus/ascii/mbascii.h"/>
-                        </Folder>
-                        <Folder Name="port">
-                            <F N="../release/include/alumy/freemodbus/port/port.h"/>
-                        </Folder>
-                        <Folder Name="rtu">
-                            <F N="../release/include/alumy/freemodbus/rtu/mbcrc.h"/>
-                            <F N="../release/include/alumy/freemodbus/rtu/mbrtu.h"/>
-                        </Folder>
-                        <Folder Name="tcp">
-                            <F N="../release/include/alumy/freemodbus/tcp/mbtcp.h"/>
-                        </Folder>
-                        <F N="../release/include/alumy/freemodbus/mb.h"/>
-                        <F N="../release/include/alumy/freemodbus/mbconfig.h"/>
-                        <F N="../release/include/alumy/freemodbus/mbframe.h"/>
-                        <F N="../release/include/alumy/freemodbus/mbfunc.h"/>
-                        <F N="../release/include/alumy/freemodbus/mbport.h"/>
-                        <F N="../release/include/alumy/freemodbus/mbproto.h"/>
-                        <F N="../release/include/alumy/freemodbus/mbutils.h"/>
-                    </Folder>
-                    <Folder Name="fs">
-                        <Folder Name="littlefs">
-                            <F N="../release/include/alumy/fs/littlefs/lfs.h"/>
-                            <F N="../release/include/alumy/fs/littlefs/lfs_util.h"/>
-                        </Folder>
-                        <Folder Name="spiffs">
-                            <F N="../release/include/alumy/fs/spiffs/spiffs.h"/>
-                            <F N="../release/include/alumy/fs/spiffs/spiffs_config.h"/>
-                            <F N="../release/include/alumy/fs/spiffs/spiffs_nucleus.h"/>
-                        </Folder>
-                    </Folder>
-                    <Folder Name="lzma">
-                        <F N="../release/include/alumy/lzma/7zTypes.h"/>
-                        <F N="../release/include/alumy/lzma/Alloc.h"/>
-                        <F N="../release/include/alumy/lzma/Compiler.h"/>
-                        <F N="../release/include/alumy/lzma/LzmaDec.h"/>
-                        <F N="../release/include/alumy/lzma/Precomp.h"/>
-                    </Folder>
-                    <Folder Name="time">
-                        <F N="../release/include/alumy/time/tick.h"/>
-                        <F N="../release/include/alumy/time/uptime.h"/>
-                    </Folder>
-                    <Folder Name="xyzmodem">
-                        <F N="../release/include/alumy/xyzmodem/ymodem.h"/>
-                    </Folder>
-                    <F N="../release/include/alumy/alumyconfig_dft.h"/>
-                    <F N="../release/include/alumy/ascii.h"/>
-                    <F N="../release/include/alumy/base.h"/>
-                    <F N="../release/include/alumy/base64.h"/>
-                    <F N="../release/include/alumy/bcd.h"/>
-                    <F N="../release/include/alumy/bit.h"/>
-                    <F N="../release/include/alumy/bug.h"/>
-                    <F N="../release/include/alumy/byteorder.h"/>
-                    <F N="../release/include/alumy/byteswap.h"/>
-                    <F N="../release/include/alumy/cdefs.h"/>
-                    <F N="../release/include/alumy/check.h"/>
-                    <F N="../release/include/alumy/cJSON.h"/>
-                    <F N="../release/include/alumy/cJSON_Utils.h"/>
-                    <F N="../release/include/alumy/cm_backtrace.h"/>
-                    <F N="../release/include/alumy/config.h"/>
-                    <F N="../release/include/alumy/crc.h"/>
-                    <F N="../release/include/alumy/crypto.h"/>
-                    <F N="../release/include/alumy/csv.h"/>
-                    <F N="../release/include/alumy/driver.h"/>
-                    <F N="../release/include/alumy/errno.h"/>
-                    <F N="../release/include/alumy/fifo.h"/>
-                    <F N="../release/include/alumy/filter.h"/>
-                    <F N="../release/include/alumy/format_color.h"/>
-                    <F N="../release/include/alumy/fs.h"/>
-                    <F N="../release/include/alumy/git_hash.h"/>
-                    <F N="../release/include/alumy/initialized.h"/>
-                    <F N="../release/include/alumy/list.h"/>
-                    <F N="../release/include/alumy/log.h"/>
-                    <F N="../release/include/alumy/mem.h"/>
-                    <F N="../release/include/alumy/mock.h"/>
-                    <F N="../release/include/alumy/pid.h"/>
-                    <F N="../release/include/alumy/pool.h"/>
-                    <F N="../release/include/alumy/protobuf-c.h"/>
-                    <F N="../release/include/alumy/rbtree.h"/>
-                    <F N="../release/include/alumy/string.h"/>
-                    <F N="../release/include/alumy/svn_revision.h"/>
-                    <F N="../release/include/alumy/test_init.h"/>
-                    <F N="../release/include/alumy/time.h"/>
-                    <F N="../release/include/alumy/types.h"/>
-                    <F N="../release/include/alumy/version.h"/>
-                    <F N="../release/include/alumy/xyzmodem.h"/>
-                </Folder>
-                <Folder Name="letter-shell">
-                    <F N="../release/include/letter-shell/shell.h"/>
-                    <F N="../release/include/letter-shell/shell_cfg.h"/>
-                    <F N="../release/include/letter-shell/shell_ext.h"/>
-                </Folder>
-                <Folder Name="mbedtls">
-                    <Folder Name="mbedtls">
-                        <F N="../release/include/mbedtls/mbedtls/aes.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/aria.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/asn1.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/asn1write.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/base64.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/bignum.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/build_info.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/camellia.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ccm.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/chacha20.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/chachapoly.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/check_config.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/cipher.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/cmac.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/compat-2.x.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/config_psa.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/constant_time.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ctr_drbg.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/debug.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/des.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/dhm.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ecdh.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ecdsa.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ecjpake.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ecp.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/entropy.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/error.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/gcm.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/hkdf.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/hmac_drbg.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/mbedtls_config.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/md.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/md5.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/memory_buffer_alloc.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/net_sockets.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/nist_kw.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/oid.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/pem.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/pk.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/pkcs12.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/pkcs5.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/platform.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/platform_time.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/platform_util.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/poly1305.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/private_access.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/psa_util.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ripemd160.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/rsa.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/sha1.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/sha256.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/sha512.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ssl.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ssl_cache.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ssl_ciphersuites.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ssl_cookie.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/ssl_ticket.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/threading.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/timing.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/version.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/x509.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/x509_crl.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/x509_crt.h"/>
-                        <F N="../release/include/mbedtls/mbedtls/x509_csr.h"/>
-                    </Folder>
-                    <Folder Name="psa">
-                        <F N="../release/include/mbedtls/psa/crypto.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_builtin_composites.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_builtin_primitives.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_compat.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_config.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_driver_common.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_driver_contexts_composites.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_driver_contexts_primitives.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_extra.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_platform.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_se_driver.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_sizes.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_struct.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_types.h"/>
-                        <F N="../release/include/mbedtls/psa/crypto_values.h"/>
-                    </Folder>
-                </Folder>
-                <F N="../release/include/alumy.h"/>
-            </Folder>
         </Folder>
         <Folder Name="../string">
             <F N="../string/CMakeLists.txt"/>
