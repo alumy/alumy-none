@@ -20,9 +20,11 @@
   linux/lib/rbtree.c
 */
 
-#include "alumy/rbtree.h"
+#include "alumy/config.h"
+#include "alumy/byteorder.h"
+#include "alumy/byteswap.h"
 #include "alumy/types.h"
-#include "alumy/base.h"
+#include "alumy/rbtree.h"
 
 __BEGIN_DECLS
 
@@ -415,7 +417,7 @@ void *rbtree_search_dft(rbtree_t *rb, const void *key, off_t offset)
 
 int32_t rbtree_insert_dft(rbtree_t *rb, void *key, off_t offset)
 {
-	int_fast32_t ret;
+	int_t ret;
 	struct rb_node **new, *parent, *node;
 
 	new = &(rb->root.rb_node);

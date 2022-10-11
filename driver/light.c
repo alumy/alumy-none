@@ -63,7 +63,7 @@ int_t al_light_register(al_light_t *light, al_light_item_t *item)
 
 int_t al_light_set(al_light_t *light, uint8_t id, int_t value, uint16_t intv)
 {
-	AL_CHECK_RET(light != NULL, NULL, -1);
+	AL_CHECK_RET(light != NULL, EINVAL, -1);
 
     al_light_item_t *item = al_light_search(light, id);
     if (item == NULL) {
@@ -108,7 +108,7 @@ int_t al_light_routine(al_light_t *light)
     int32_t cnt = 0;
     list_head_t *pos, *n;
 
-	AL_CHECK_RET(light != NULL, NULL, -1);
+	AL_CHECK_RET(light != NULL, EINVAL, -1);
 
     list_for_each_safe(pos, n, &light->ls) {
         al_light_item_t *item = list_entry(pos, al_light_item_t, link);

@@ -24,6 +24,17 @@ __BEGIN_DECLS
 #define get_bit(reg, bit)       ((reg) & (1ul << (bit)))
 #endif
 
+__static_inline__ uint32_t al_popcount(uint32_t a)
+{
+#if (defined(__GNUC__) || defined(__CC_ARM))
+    return __builtin_popcount(a);
+#else
+    a = a - ((a >> 1) & 0x55555555);
+    a = (a & 0x33333333) + ((a >> 2) & 0x33333333);
+    return (((a + (a >> 4)) & 0xf0f0f0f) * 0x1010101) >> 24;
+#endif
+}
+
 __END_DECLS
 
 #endif
