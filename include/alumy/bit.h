@@ -8,6 +8,10 @@
 
 __BEGIN_DECLS
 
+#ifndef BIT_COUNT
+#define BIT_COUNT(x)			((x) << 3)
+#endif
+
 #ifndef BIT
 #define BIT(x)					(1u << (x))
 #endif
