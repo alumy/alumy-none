@@ -52,9 +52,9 @@ static uint16_t __mb_get_crc16(uint16_t crc, const uint8_t *buffer, size_t len)
     return crc;
 }
 
-uint16_t mb_get_crc16(const uint8_t *buffer, size_t len)
+uint16_t mb_get_crc16(const void *data, size_t len)
 {
-    return __mb_get_crc16(0xFFFF, buffer, len);
+    return __mb_get_crc16(0xFFFF, (const uint8_t *)data, len);
 }
 
 __END_DECLS

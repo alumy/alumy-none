@@ -38,12 +38,7 @@ __BEGIN_DECLS
 #define EOF		(-1)
 #endif
 
-extern const char al_hex_asc_tab[];
-
-__static_inline__ __attribute_const__ uint8_t al_hex2asc(uint8_t value)
-{
-	return al_hex_asc_tab[value & 0x0F];
-}
+extern uint8_t al_hex2asc(uint8_t value);
 
 __END_DECLS
 

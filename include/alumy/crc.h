@@ -65,7 +65,7 @@ void al_crc32_wd_buf(const uint8_t *input, uint32_t ilen,
 /* crc/crc32c.c */
 
 /* crc/mb_crc16.c */
-uint16_t mb_get_crc16(const uint8_t *buffer, size_t len);
+uint16_t mb_get_crc16(const void *data, size_t len);
 /* crc/mb_crc16.c */
 
 uint16_t crc16_poly(uint16_t crc, uint16_t poly, const void *data, size_t len);

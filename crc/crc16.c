@@ -3,6 +3,8 @@
 #include "alumy/base.h"
 #include "alumy/crc.h"
 
+__BEGIN_DECLS
+
 uint16_t crc16_poly(uint16_t crc, uint16_t poly, const void *data, size_t len)
 {
     const uint8_t *p = (const uint8_t *)data;
@@ -22,3 +24,6 @@ uint16_t crc16_poly(uint16_t crc, uint16_t poly, const void *data, size_t len)
 
     return crc;
 }
+
+__END_DECLS
+
