@@ -50,7 +50,7 @@
 #include "alumy/csv.h"
 #include "alumy/time.h"
 #include "alumy/crypto.h"
-#include "alumy/math.h"
+#include "alumy/net.h"
 
 __BEGIN_DECLS
 
