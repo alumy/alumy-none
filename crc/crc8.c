@@ -85,7 +85,7 @@ uint8_t crc8_maxim(const void *data, size_t len)
 
 		for (i = 0; i < 8; i++) {
 			if (crc & 0x01)
-				crc = (crc >> 1) ^ 0x31;
+				crc = (crc >> 1) ^ 0x8C;
 			else
 				crc >>= 1;
 		}

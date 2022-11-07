@@ -167,6 +167,14 @@ __static_inline__ uint64_t al_split_read_eight(const void *addr, bool le)
 	return ret;
 }
 
+__static_inline__ uint8_t al_byte_reverse(uint8_t b)
+{
+	b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
+	b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
+	b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
+
+	return b;
+}
 
 __END_DECLS
 
