@@ -151,6 +151,8 @@ void crc8_populate_msb(uint8_t table[CRC8_TABLE_SIZE], uint8_t polynomial);
 uint8_t crc8(const uint8_t table[CRC8_TABLE_SIZE],
 			 uint8_t *pdata, size_t nbytes, uint8_t crc);
 
+uint8_t crc8_maxim(const void *data, size_t len);
+
 __END_DECLS
 
 #endif

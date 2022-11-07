@@ -64,5 +64,35 @@ uint8_t crc8(const uint8_t table[CRC8_TABLE_SIZE],
     return crc;
 }
 
+/**
+ * crc8_maxim - poly 0x31, init value 0x00, msb
+ *
+ * @author jack (2022/11/7)
+ *
+ * @param data
+ * @param len
+ *
+ * @return uint8_t
+ */
+uint8_t crc8_maxim(const void *data, size_t len)
+{
+	size_t i = 0;
+	uint8_t crc = 0x00;
+	const uint8_t *p = (const uint8_t *)data;
+
+	while (len--) {
+		crc ^= *p++;
+
+		for (i = 0; i < 8; i++) {
+			if (crc & 0x01)
+				crc = (crc >> 1) ^ 0x31;
+			else
+				crc >>= 1;
+		}
+	}
+
+	return crc;
+}
+
 __END_DECLS
 
