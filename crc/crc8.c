@@ -132,7 +132,6 @@ uint8_t crc8_maxim_calc(const void *data, size_t len)
 uint8_t crc8_maxim(const void *data, size_t len)
 {
 	return crc8(crc8_maxim_tab, (uint8_t *)data, len, 0);
-
 }
 
 __END_DECLS
