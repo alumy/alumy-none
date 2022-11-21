@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+# cmake_minimum_required(VERSION 2.8)
 
 set(LINKER_SCRIPT ${PROJECT_SOURCE_DIR}/test/bsp/x86_64/linker.ld CACHE STRING "" FORCE)
 

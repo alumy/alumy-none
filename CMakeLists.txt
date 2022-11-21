@@ -113,6 +113,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/lzma)
 add_subdirectory(${PROJECT_SOURCE_DIR}/crypto)
 add_subdirectory(${PROJECT_SOURCE_DIR}/xyzmodem)
 add_subdirectory(${PROJECT_SOURCE_DIR}/time)
+add_subdirectory(${PROJECT_SOURCE_DIR}/net)
 add_subdirectory(${PROJECT_SOURCE_DIR}/3rd-party)
 
 #############################################################################
@@ -137,6 +138,7 @@ set(objs
 		$<TARGET_OBJECTS:xyzmodem>
 		$<TARGET_OBJECTS:time>
 		$<TARGET_OBJECTS:3rd-party>
+		$<TARGET_OBJECTS:net>
 		$<TARGET_OBJECTS:crypto>)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_src)
