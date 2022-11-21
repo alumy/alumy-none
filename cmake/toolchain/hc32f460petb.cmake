@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+# cmake_minimum_required(VERSION 2.8)
 
 set(CPU "-mcpu=cortex-m4" CACHE STRING "" FORCE)
 set(FPU "-mfpu=fpv4-sp-d16" CACHE STRING "" FORCE)
