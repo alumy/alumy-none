@@ -139,12 +139,14 @@ __static_inline__ size_t al_slip_recv_byte(al_slip_t *slip, int_t c)
 size_t al_slip_recv(al_slip_t *slip)
 {
 	int_t c;
-	size_t len;
+	size_t len = 0;
 
-	do {
-		c = slip->opt.sl_getc();
+	while (((c = slip->opt.sl_getc()) != EOF)) {
 		len = al_slip_recv_byte(slip, c);
-	} while ((c != EOF) && (len == 0));
+		if (len != 0) {
+			break;
+		}
+	}
 
 	return len;
 }
