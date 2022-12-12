@@ -490,12 +490,15 @@
                     </Folder>
                     <Folder Name="unix">
                         <Folder Name="check">
+                            <F N="../3rd-party/contrib-2.1.0/ports/unix/check/CMakeLists.txt"/>
                             <F N="../3rd-party/contrib-2.1.0/ports/unix/check/config.h"/>
                         </Folder>
                         <Folder Name="example_app">
+                            <F N="../3rd-party/contrib-2.1.0/ports/unix/example_app/CMakeLists.txt"/>
                             <F N="../3rd-party/contrib-2.1.0/ports/unix/example_app/default_netif.c"/>
                         </Folder>
                         <Folder Name="lib">
+                            <F N="../3rd-party/contrib-2.1.0/ports/unix/lib/CMakeLists.txt"/>
                             <F N="../3rd-party/contrib-2.1.0/ports/unix/lib/lwipopts.h"/>
                         </Folder>
                         <Folder Name="port">
@@ -523,6 +526,7 @@
                             <F N="../3rd-party/contrib-2.1.0/ports/unix/port/perf.c"/>
                             <F N="../3rd-party/contrib-2.1.0/ports/unix/port/sys_arch.c"/>
                         </Folder>
+                        <F N="../3rd-party/contrib-2.1.0/ports/unix/Filelists.cmake"/>
                     </Folder>
                     <Folder Name="win32">
                         <Folder Name="check">
@@ -536,6 +540,7 @@
                             <F N="../3rd-party/contrib-2.1.0/ports/win32/check/unistd.h"/>
                         </Folder>
                         <Folder Name="example_app">
+                            <F N="../3rd-party/contrib-2.1.0/ports/win32/example_app/CMakeLists.txt"/>
                             <F N="../3rd-party/contrib-2.1.0/ports/win32/example_app/default_netif.c"/>
                         </Folder>
                         <Folder Name="include">
@@ -547,6 +552,7 @@
                                 <F N="../3rd-party/contrib-2.1.0/ports/win32/include/arch/sys_arch.h"/>
                             </Folder>
                         </Folder>
+                        <F N="../3rd-party/contrib-2.1.0/ports/win32/Filelists.cmake"/>
                         <F N="../3rd-party/contrib-2.1.0/ports/win32/pcapif.c"/>
                         <F N="../3rd-party/contrib-2.1.0/ports/win32/pcapif.h"/>
                         <F N="../3rd-party/contrib-2.1.0/ports/win32/pcapif_helper.c"/>
@@ -554,7 +560,9 @@
                         <F N="../3rd-party/contrib-2.1.0/ports/win32/sio.c"/>
                         <F N="../3rd-party/contrib-2.1.0/ports/win32/sys_arch.c"/>
                     </Folder>
+                    <F N="../3rd-party/contrib-2.1.0/ports/CMakeCommon.cmake"/>
                 </Folder>
+                <F N="../3rd-party/contrib-2.1.0/Filelists.cmake"/>
             </Folder>
             <Folder Name="letter-shell-3.1.2">
                 <Folder Name="demo">
@@ -980,6 +988,7 @@
                         <F N="../3rd-party/lwip-2.1.3/src/netif/slipif.c"/>
                         <F N="../3rd-party/lwip-2.1.3/src/netif/zepif.c"/>
                     </Folder>
+                    <F N="../3rd-party/lwip-2.1.3/src/Filelists.cmake"/>
                 </Folder>
                 <Folder Name="test">
                     <Folder Name="fuzz">
@@ -1048,11 +1057,13 @@
                             <F N="../3rd-party/lwip-2.1.3/test/unit/udp/test_udp.c"/>
                             <F N="../3rd-party/lwip-2.1.3/test/unit/udp/test_udp.h"/>
                         </Folder>
+                        <F N="../3rd-party/lwip-2.1.3/test/unit/Filelists.cmake"/>
                         <F N="../3rd-party/lwip-2.1.3/test/unit/lwip_check.h"/>
                         <F N="../3rd-party/lwip-2.1.3/test/unit/lwip_unittests.c"/>
                         <F N="../3rd-party/lwip-2.1.3/test/unit/lwipopts.h"/>
                     </Folder>
                 </Folder>
+                <F N="../3rd-party/lwip-2.1.3/CMakeLists.txt"/>
             </Folder>
             <Folder Name="mbedtls-3.2.1">
                 <Folder Name="3rdparty">
@@ -1570,6 +1581,7 @@
                 <F N="../3rd-party/port/sys_arch.c"/>
             </Folder>
             <F N="../3rd-party/CMakeLists.txt"/>
+            <F N="../3rd-party/lwip.cmake"/>
         </Folder>
         <Folder Name="../base64">
             <F N="../base64/base64.c"/>
@@ -1931,6 +1943,7 @@
             <F N="../crc/CMakeLists.txt"/>
             <F N="../crc/crc16.c"/>
             <F N="../crc/crc32.c"/>
+            <F N="../crc/crc8.c"/>
             <F N="../crc/mb_crc16.c"/>
         </Folder>
         <Folder Name="../crypto">
@@ -2074,6 +2087,9 @@
                     <F N="../include/alumy/cm_backtrace/cmb_cfg.h"/>
                     <F N="../include/alumy/cm_backtrace/cmb_def.h"/>
                 </Folder>
+                <Folder Name="crc">
+                    <F N="../include/alumy/crc/crc8.h"/>
+                </Folder>
                 <Folder Name="cunit">
                     <F N="../include/alumy/cunit/Automated.h"/>
                     <F N="../include/alumy/cunit/Basic.h"/>
@@ -2159,6 +2175,9 @@
                     <F N="../include/alumy/lzma/LzmaDec.h"/>
                     <F N="../include/alumy/lzma/Precomp.h"/>
                 </Folder>
+                <Folder Name="net">
+                    <F N="../include/alumy/net/slip.h"/>
+                </Folder>
                 <Folder Name="time">
                     <F N="../include/alumy/time/tick.h"/>
                     <F N="../include/alumy/time/uptime.h"/>
@@ -2195,8 +2214,10 @@
                 <F N="../include/alumy/initialized.h"/>
                 <F N="../include/alumy/list.h"/>
                 <F N="../include/alumy/log.h"/>
+                <F N="../include/alumy/math.h"/>
                 <F N="../include/alumy/mem.h"/>
                 <F N="../include/alumy/mock.h"/>
+                <F N="../include/alumy/net.h"/>
                 <F N="../include/alumy/pid.h"/>
                 <F N="../include/alumy/pool.h"/>
                 <F N="../include/alumy/protobuf-c.h"/>
@@ -2231,6 +2252,10 @@
         <Folder Name="../mem">
             <F N="../mem/CMakeLists.txt"/>
             <F N="../mem/mem.c"/>
+        </Folder>
+        <Folder Name="../net">
+            <F N="../net/CMakeLists.txt"/>
+            <F N="../net/slip.c"/>
         </Folder>
         <Folder Name="../pid">
             <F N="../pid/CMakeLists.txt"/>
@@ -2620,6 +2645,7 @@
                         <F N="../test/bsp/hc32f460petb/startup/startup_hc32f460_gcc.S"/>
                     </Folder>
                     <Folder Name="syscalls">
+                        <F N="../test/bsp/hc32f460petb/syscalls/CMakeLists.txt"/>
                         <F N="../test/bsp/hc32f460petb/syscalls/syscalls.c"/>
                     </Folder>
                     <Folder Name="test">
@@ -3797,6 +3823,7 @@
             <F N="../test/test.h"/>
         </Folder>
         <Folder Name="../time">
+            <F N="../time/CMakeLists.txt"/>
             <F N="../time/tick.c"/>
             <F N="../time/uptime.c"/>
         </Folder>
@@ -3955,6 +3982,7 @@
             <F N="../unity/CMakeLists.txt"/>
         </Folder>
         <Folder Name="../xyzmodem">
+            <F N="../xyzmodem/CMakeLists.txt"/>
             <F N="../xyzmodem/ymodem.c"/>
         </Folder>
     </Files>
