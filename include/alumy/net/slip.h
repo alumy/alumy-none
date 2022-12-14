@@ -33,8 +33,6 @@ size_t al_slip_recv(al_slip_t *slip);
 
 void *al_slip_get_recv(al_slip_t *slip);
 
-size_t al_slip_get_recv_len(al_slip_t *slip);
-
 __END_DECLS
 
 #endif

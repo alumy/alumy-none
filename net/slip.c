@@ -156,10 +156,5 @@ void *al_slip_get_recv(al_slip_t *slip)
 	return slip->recv_buf;
 }
 
-size_t al_slip_get_recv_len(al_slip_t *slip)
-{
-	return slip->recv_len;
-}
-
 __END_DECLS
 
