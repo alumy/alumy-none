@@ -63,11 +63,11 @@
   #endif
 
   #ifndef __unlikely
-    #define __unlikely(cond)	__glibc_unlikely(cond)
+    #define __unlikely(x)		__builtin_expect((x), 0)
   #endif
 
   #ifndef __likely
-    #define __likely(cond)		__glibc_likely(cond)
+    #define __likely(x)			__builtin_expect((x), 1)
   #endif
 
 #endif /* __GNUC__ */
