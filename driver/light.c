@@ -83,11 +83,11 @@ int_t al_light_set(al_light_t *light, uint8_t id, int_t value, uint16_t intv)
 
     switch (item->value) {
         case AL_LIGHT_OFF:
-            item->set(item->user_data, false);
+            item->set(item, false);
             break;
 
         case AL_LIGHT_ON:
-            item->set(item->user_data, true);
+            item->set(item, true);
             break;
 
         case AL_LIGHT_FLASH:
@@ -117,7 +117,7 @@ int_t al_light_routine(al_light_t *light)
             if ((--item->tick) == 0) {
                 bool on = light->value & (1 << item->id) ? true : false;
 
-                item->set(item->user_data, on);
+                item->set(item, on);
                 item->tick = item->intv;
 
                 light->value ^= (1 << item->id);

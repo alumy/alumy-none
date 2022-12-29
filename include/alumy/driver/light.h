@@ -34,7 +34,7 @@ struct al_light_item {
     uint8_t value;
     uint16_t intv;
     uint16_t tick;
-    int32_t (*set)(void *arg, bool on);
+    int_t (*set)(al_light_item_t *item, bool on);
     void *user_data;
 };
 
