@@ -25,7 +25,7 @@ __BEGIN_DECLS
 #endif
 
 #ifndef get_bit
-#define get_bit(reg, bit)       ((reg) & (1ul << (bit)))
+#define get_bit(reg, bit)       (!!((reg) & (1ul << (bit))))
 #endif
 
 __static_inline__ uint32_t al_popcount(uint32_t a)
