@@ -28,6 +28,10 @@ __BEGIN_DECLS
 #define get_bit(reg, bit)       (!!((reg) & (1ul << (bit))))
 #endif
 
+#ifndef toggle_bit
+#define toggle_bit(reg, bit)	((reg) ^= (1ul << (bit)))
+#endif
+
 __static_inline__ uint32_t al_popcount(uint32_t a)
 {
 #if (defined(__GNUC__) || defined(__CC_ARM))
