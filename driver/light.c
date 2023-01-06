@@ -6,6 +6,7 @@
 #include "alumy/check.h"
 #include "alumy/errno.h"
 #include "alumy/driver/light.h"
+#include "alumy/bit.h"
 
 __BEGIN_DECLS
 
@@ -76,7 +77,7 @@ int_t al_light_set(al_light_t *light, uint8_t id, int_t value, uint16_t intv)
         return 0;
     }
 
-    light->value &= ~(1 << item->id);
+    clear_bit(light->value, item->id);
     item->value = value;
     item->intv = 0;
     item->tick = 0;
@@ -115,12 +116,10 @@ int_t al_light_routine(al_light_t *light)
 
         if (item->intv > 0) {
             if ((--item->tick) == 0) {
-                bool on = light->value & (1 << item->id) ? true : false;
-
-                item->set(item, on);
+                item->set(item, get_bit(light->value, item->id));
                 item->tick = item->intv;
 
-                light->value ^= (1 << item->id);
+                toggle_bit(light->value, item->id);
             }
         }
 

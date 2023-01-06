@@ -40,8 +40,22 @@ struct al_light_item {
 
 typedef struct al_light {
     list_head_t ls;
-    uint32_t value;
+    uint64_t value;
 } al_light_t;
+
+__static_inline__
+void al_light_item_init(al_light_item_t *item, uint8_t id, uint16_t intv,
+                        int_t (*set)(al_light_item_t *item, bool on),
+                        void *user_data)
+{
+    INIT_LIST_HEAD(&item->link);
+	item->id = id;
+	item->value = 0;
+	item->intv = AL_LIGHT_MS_TO_TICKS(intv);
+	item->tick = 0;
+	item->set = set;
+	item->user_data = user_data;
+}
 
 int_t al_light_init(al_light_t *this);
 int_t al_light_register(al_light_t *this, al_light_item_t *item);
