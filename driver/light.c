@@ -77,7 +77,7 @@ int_t al_light_set(al_light_t *light, uint8_t id, int_t value, uint16_t intv)
         return 0;
     }
 
-    clear_bit(light->value, item->id);
+	light->value &= ~(1ull << (uint64_t)item->id);
     item->value = value;
     item->intv = 0;
     item->tick = 0;
@@ -116,10 +116,10 @@ int_t al_light_routine(al_light_t *light)
 
         if (item->intv > 0) {
             if ((--item->tick) == 0) {
-                item->set(item, get_bit(light->value, item->id));
+                item->set(item, light->value & (1ull << (uint64_t)item->id));
                 item->tick = item->intv;
 
-                toggle_bit(light->value, item->id);
+				light->value ^= (1ull << (uint64_t)item->id);
             }
         }
 
