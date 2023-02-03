@@ -32,14 +32,37 @@ __BEGIN_DECLS
 #define toggle_bit(reg, bit)	((reg) ^= (1ul << (bit)))
 #endif
 
-__static_inline__ uint32_t al_popcount(uint32_t a)
+__static_inline__ uint32_t al_popcount(uint32_t x)
 {
-#if (defined(__GNUC__) || defined(__CC_ARM))
-    return __builtin_popcount(a);
+#if (defined(__GNUC__) || defined(__clang__))
+	return __builtin_popcount(x);
 #else
-    a = a - ((a >> 1) & 0x55555555);
-    a = (a & 0x33333333) + ((a >> 2) & 0x33333333);
-    return (((a + (a >> 4)) & 0xf0f0f0f) * 0x1010101) >> 24;
+	x = x - ((x >> 1) & 0x55555555UL);
+	x = (x & 0x33333333UL) + ((x >> 2) & 0x33333333UL);
+	return (((x + (x >> 4)) & 0xf0f0f0fUL) * 0x1010101UL) >> 24;
+#endif
+}
+
+__static_inline__ uint32_t al_popcountl(uint32_t x)
+{
+#if (defined(__GNUC__) || defined(__clang__))
+	return __builtin_popcountl(x);
+#else
+	x = x - ((x >> 1) & 0x55555555UL);
+	x = (x & 0x33333333UL) + ((x >> 2) & 0x33333333UL);
+	return (((x + (x >> 4)) & 0xf0f0f0fUL) * 0x1010101UL) >> 24;
+#endif
+}
+
+__static_inline__ uint32_t al_popcountll(uint64_t x)
+{
+#if (defined(__GNUC__) || defined(__clang__))
+	return __builtin_popcountll(x);
+#else
+	x = (x & 0x5555555555555555ULL) + ((x >>  1) & 0x5555555555555555ULL);
+	x = (x & 0x3333333333333333ULL) + ((x >>  2) & 0x3333333333333333ULL);
+	x = (x & 0x0F0F0F0F0F0F0F0FULL) + ((x >>  4) & 0x0F0F0F0F0F0F0F0FULL);
+	return (x * 0x0101010101010101ULL) >> 56;
 #endif
 }
 
