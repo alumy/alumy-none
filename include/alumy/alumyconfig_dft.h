@@ -30,6 +30,10 @@ extern "C" {
 #define AL_LOG_COLOR            1
 #endif
 
+#ifndef AL_LOG_CRYPTO
+#define AL_LOG_CRYPTO		0
+#endif
+
 #ifndef AL_PROVIDE_ERRNO
 #define AL_PROVIDE_ERRNO            1
 #endif
