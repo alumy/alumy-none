@@ -35,7 +35,7 @@ extern "C" {
 #endif
 
 #ifndef AL_PROVIDE_ERRNO
-#define AL_PROVIDE_ERRNO            1
+#define AL_PROVIDE_ERRNO	0
 #endif
 
 #ifndef AL_HAVE_SYS_CDEFS
