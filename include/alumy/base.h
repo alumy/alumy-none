@@ -70,6 +70,10 @@
     #define __likely(x)			__builtin_expect((x), 1)
   #endif
 
+  #ifndef __ramfunc
+	#define __ramfunc       __section(".ramfunc")
+  #endif
+
 #endif /* __GNUC__ */
 
 #if defined (__CC_ARM)
@@ -109,6 +113,11 @@
   #ifndef __attribute_const__
     #define __attribute_const__     __attribute__((__const__))
   #endif
+
+  #ifndef __ramfunc
+	#define __ramfunc       __section(".ramfunc")
+  #endif
+  
 #endif /* __CC_ARM */
 
 #if defined (__ICCRL78__)
