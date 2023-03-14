@@ -10,7 +10,6 @@ __BEGIN_DECLS
 
 #ifndef AL_CHECK_RET
 #define AL_CHECK_RET(exp, __errno, ret)     do {        \
-    BUG_ON(!(exp));                                     \
     if(!(exp)) {                                        \
         set_errno((__errno));                           \
         return (ret);                                   \
@@ -20,7 +19,6 @@ __BEGIN_DECLS
 
 #ifndef AL_CHECK
 #define AL_CHECK(exp, __errno)     do {                 \
-    BUG_ON(!(exp));                                     \
     if(!(exp)) {                                        \
         set_errno((__errno));                           \
         return;                                         \
