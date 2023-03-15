@@ -39,6 +39,7 @@
 #include "alumy/byteswap.h"
 #include "alumy/fifo.h"
 #include "alumy/crc.h"
+#include "alumy/lrc.h"
 #include "alumy/bug.h"
 #include "alumy/check.h"
 #include "alumy/xyzmodem.h"

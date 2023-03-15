@@ -2214,6 +2214,7 @@
                 <F N="../include/alumy/initialized.h"/>
                 <F N="../include/alumy/list.h"/>
                 <F N="../include/alumy/log.h"/>
+                <F N="../include/alumy/lrc.h"/>
                 <F N="../include/alumy/math.h"/>
                 <F N="../include/alumy/mem.h"/>
                 <F N="../include/alumy/mock.h"/>
@@ -2243,6 +2244,9 @@
             <F N="../lint/empty.c"/>
             <F N="../lint/lint_cmac.h"/>
             <F N="../lint/lint_cppmac.h"/>
+        </Folder>
+        <Folder Name="../lrc">
+            <F N="../lrc/lrc.c"/>
         </Folder>
         <Folder Name="../lzma">
             <F N="../lzma/Alloc.c"/>

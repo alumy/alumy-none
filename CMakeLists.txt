@@ -95,6 +95,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
 endif()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/crc)
+add_subdirectory(${PROJECT_SOURCE_DIR}/lrc)
 add_subdirectory(${PROJECT_SOURCE_DIR}/mem)
 add_subdirectory(${PROJECT_SOURCE_DIR}/string)
 add_subdirectory(${PROJECT_SOURCE_DIR}/bcd)
@@ -123,6 +124,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/3rd-party)
 set(objs
 		$<TARGET_OBJECTS:cunit>
 		$<TARGET_OBJECTS:crc>
+		$<TARGET_OBJECTS:lrc>
 		$<TARGET_OBJECTS:mem>
 		$<TARGET_OBJECTS:string>
 		$<TARGET_OBJECTS:bcd>

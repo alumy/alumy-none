@@ -74,3 +74,4 @@ uint16_t crc16_poly(uint16_t crc, uint16_t poly, const void *data, size_t len);
 __END_DECLS
 
 #endif
+
