@@ -10,7 +10,8 @@ __BEGIN_DECLS
 
 typedef struct al_tick {
     volatile time_t tv_sec;
-    volatile int32_t tv_msec;
+    volatile uint_t tv_msec;
+	volatile uint_t tv_tick;
 } al_tick_t;
 
 void al_tick_init(void);

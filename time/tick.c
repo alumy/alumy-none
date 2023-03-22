@@ -17,10 +17,12 @@ void al_tick_init(void)
 {
     tick.tv_sec = 0;
     tick.tv_msec = 0;
+	tick.tv_tick = 0;
 }
 
 void al_tick_inc(void)
 {
+	tick.tv_tick++;
     tick.tv_msec++;
     if (tick.tv_msec >= 1000) {
         tick.tv_msec = 0;
@@ -33,6 +35,7 @@ const al_tick_t *al_tick_get(al_tick_t *pt)
     if (pt != NULL) {
         pt->tv_sec = tick.tv_sec;
         pt->tv_msec = tick.tv_msec;
+		pt->tv_tick = tick.tv_tick;
 
         return pt;
     }
