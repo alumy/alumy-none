@@ -5,6 +5,7 @@
 #include "alumy/types.h"
 #include "alumy/base.h"
 #include "alumy/byteorder.h"
+#include "alumy/math/abs.h"
 
 __BEGIN_DECLS
 

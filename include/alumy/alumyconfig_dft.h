@@ -8,6 +8,10 @@ extern "C" {
 #ifndef __BYTE_ORDER
 #define __BYTE_ORDER		__LITTLE_ENDIAN
 #endif
+    
+#ifndef __SIZEOF_INT__
+#define __SIZEOF_INT__      4
+#endif
 
 /* Verbose log */
 #ifndef AL_LOG
