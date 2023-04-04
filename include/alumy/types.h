@@ -137,5 +137,10 @@ typedef long int off_t;
 	#endif
 #endif
 
+#ifndef __bool_t_defined
+typedef uint_t bool_t;
+#define __bool_t_defined
+#endif
+
 #endif	/* end of _TYPES_H */
 
