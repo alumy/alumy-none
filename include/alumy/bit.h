@@ -17,19 +17,19 @@ __BEGIN_DECLS
 #endif
 
 #ifndef set_bit
-#define set_bit(reg, bit)       ((reg) |= (1ul << (bit)))
+#define set_bit(reg, bit)       ((reg) |= (1u << (bit)))
 #endif
 
 #ifndef clear_bit
-#define clear_bit(reg, bit)     ((reg) &= ~(1ul << (bit)))
+#define clear_bit(reg, bit)     ((reg) &= ~(1u << (bit)))
 #endif
 
 #ifndef get_bit
-#define get_bit(reg, bit)       (!!((reg) & (1ul << (bit))))
+#define get_bit(reg, bit)       (!!((reg) & (1u << (bit))))
 #endif
 
 #ifndef toggle_bit
-#define toggle_bit(reg, bit)	((reg) ^= (1ul << (bit)))
+#define toggle_bit(reg, bit)	((reg) ^= (1u << (bit)))
 #endif
 
 __static_inline__ uint32_t al_popcount(uint32_t x)
