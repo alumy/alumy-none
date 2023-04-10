@@ -1,10 +1,10 @@
 #ifndef __AL_CONFIG_H
 #define __AL_CONFIG_H 1
 
-#ifdef AL_USE_DEFAULT_CONFIG
+#if !defined(ALUMY_CONFIG_FILE)
 #include "alumyconfig_dft.h"
 #else
-#include "alumyconfig.h"
+#include ALUMY_CONFIG_FILE
 #endif
 	
 #endif

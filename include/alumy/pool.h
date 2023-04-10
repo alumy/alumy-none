@@ -53,7 +53,7 @@ void *al_get_from_pool(al_pool_t *po, int32_t offset);
  * @param ent
  * @param offset
  */
-void al_put_into_pool(al_pool_t *po, void *ent, int32_t offset);
+void al_put_into_pool(al_pool_t *po, void *ent, uint_t offset);
 
 __END_DECLS
 
