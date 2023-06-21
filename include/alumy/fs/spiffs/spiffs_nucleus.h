@@ -381,6 +381,10 @@
 #define spiffs_get_cache_page(fs, c, ix) \
   ((u8_t *)(&((c)->cpages[(ix) * SPIFFS_CACHE_PAGE_SIZE(fs)])) + sizeof(spiffs_cache_page))
 
+#if defined(__CC_ARM)
+#pragma anon_unions
+#endif
+
 // cache page struct
 typedef struct {
   // cache flags
