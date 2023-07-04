@@ -2176,6 +2176,7 @@
                     <F N="../include/alumy/lzma/Precomp.h"/>
                 </Folder>
                 <Folder Name="net">
+                    <F N="../include/alumy/net/inet_addr.h"/>
                     <F N="../include/alumy/net/slip.h"/>
                 </Folder>
                 <Folder Name="time">
