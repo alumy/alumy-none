@@ -9,3 +9,5 @@ se/*.vtg
 se/*.vpwhist
 se/Debug
 
+git_hash.h
+svn_revision.h
