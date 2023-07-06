@@ -29,7 +29,7 @@ typedef struct al_version {
 } al_version_t;
 
 #define al_version_get_s(f) \
-	static inline uint16_t al_version_get_##f(const al_version_t *ver) \
+	static inline uint16_t al_version_get##f(const al_version_t *ver) \
 	{ \
 		return ver->av_##f; \
 	}
