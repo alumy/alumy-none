@@ -17,6 +17,7 @@ al_in_addr_t al_in_addr_combine(uint8_t a, uint8_t b, uint8_t c, uint8_t d)
 						   (((uint32_t)b << 16) & 0x00FF0000ul) |
 						   (((uint32_t)c << 8) & 0x0000FF00ul) |
 						   ((uint32_t)d & 0x000000FFul));
+
 	return in_addr;
 }
 
