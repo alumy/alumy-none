@@ -20,6 +20,9 @@ __BEGIN_DECLS
 #define AL_VERSION	\
 	__MS(ALUMY_MAJOR.ALUMY_MINOR.ALUMY_REV.ALUMY_BUILD)
 
+#define AL_VERSION_INIT(major, minor, rev, build, git_hash) \
+	{ (major), (minor), (rev), (build), (git_hash) }
+
 typedef struct al_version {
 	uint16_t av_major;
 	uint16_t av_minor;
