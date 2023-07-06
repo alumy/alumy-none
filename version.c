@@ -8,13 +8,8 @@
 
 __BEGIN_DECLS
 
-static const al_version_t al_version = {
-    .av_major = ALUMY_MAJOR,
-    .av_minor = ALUMY_MINOR,
-    .av_rev = ALUMY_REV,
-    .av_build = ALUMY_BUILD,
-	.av_git_hash = GIT_HASH,
-};
+static const al_version_t al_version = \
+	AL_VERSION_INIT(AL_MAJOR, AL_MINOR, AL_REV, AL_BUILD, AL_GIT_HASH);
 
 const char *al_get_version_s(void)
 {

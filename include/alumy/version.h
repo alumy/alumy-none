@@ -9,16 +9,13 @@
 
 __BEGIN_DECLS
 
-#define ALUMY_MAJOR		1
-#define ALUMY_MINOR		0
-#define ALUMY_REV		2
-#define ALUMY_BUILD		10
+#define AL_MAJOR		1
+#define AL_MINOR		0
+#define AL_REV			2
+#define AL_BUILD		10
 
-#define AL_PREREQ(ma, mi)	\
-	(ALUMY_MAJOR << 16 | ALUMY_MINOR >= (ma) << 16 | (mi))
-
-#define AL_VERSION	\
-	__MS(ALUMY_MAJOR.ALUMY_MINOR.ALUMY_REV.ALUMY_BUILD)
+#define AL_PREREQ(ma, mi)	(AL_MAJOR << 16 | AL_MINOR >= (ma) << 16 | (mi))
+#define AL_VERSION			__MS(AL_MAJOR.AL_MINOR.AL_REV.AL_BUILD)
 
 #define AL_VERSION_INIT(major, minor, rev, build, git_hash) \
 	{ (major), (minor), (rev), (build), (git_hash) }
