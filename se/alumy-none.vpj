@@ -629,6 +629,7 @@
             <Folder Name="lwip-2.1.3">
                 <Folder Name="doc">
                     <Folder Name="doxygen">
+                        <F N="../3rd-party/lwip-2.1.3/doc/doxygen/lwip.Doxyfile.cmake.in"/>
                         <F N="../3rd-party/lwip-2.1.3/doc/doxygen/main_page.h"/>
                     </Folder>
                     <F N="../3rd-party/lwip-2.1.3/doc/NO_SYS_SampleCode.c"/>
@@ -866,6 +867,7 @@
                             <F N="../3rd-party/lwip-2.1.3/src/include/lwip/inet.h"/>
                             <F N="../3rd-party/lwip-2.1.3/src/include/lwip/inet_chksum.h"/>
                             <F N="../3rd-party/lwip-2.1.3/src/include/lwip/init.h"/>
+                            <F N="../3rd-party/lwip-2.1.3/src/include/lwip/init.h.cmake.in"/>
                             <F N="../3rd-party/lwip-2.1.3/src/include/lwip/ip.h"/>
                             <F N="../3rd-party/lwip-2.1.3/src/include/lwip/ip4.h"/>
                             <F N="../3rd-party/lwip-2.1.3/src/include/lwip/ip4_addr.h"/>
@@ -1113,6 +1115,9 @@
                         <F N="../3rd-party/mbedtls-3.2.1/3rdparty/everest/CMakeLists.txt"/>
                     </Folder>
                     <F N="../3rd-party/mbedtls-3.2.1/3rdparty/CMakeLists.txt"/>
+                </Folder>
+                <Folder Name="cmake">
+                    <F N="../3rd-party/mbedtls-3.2.1/cmake/MbedTLSConfig.cmake.in"/>
                 </Folder>
                 <Folder Name="configs">
                     <F N="../3rd-party/mbedtls-3.2.1/configs/config-ccm-psk-dtls1_2.h"/>
@@ -1953,24 +1958,30 @@
         <Folder Name="../cunit">
             <Folder Name="Automated">
                 <F N="../cunit/Automated/Automated.c"/>
+                <F N="../cunit/Automated/Makefile.in"/>
             </Folder>
             <Folder Name="Basic">
                 <F N="../cunit/Basic/Basic.c"/>
+                <F N="../cunit/Basic/Makefile.in"/>
             </Folder>
             <Folder Name="Console">
                 <F N="../cunit/Console/Console.c"/>
+                <F N="../cunit/Console/Makefile.in"/>
             </Folder>
             <Folder Name="Curses">
                 <F N="../cunit/Curses/Curses.c"/>
+                <F N="../cunit/Curses/Makefile.in"/>
             </Folder>
             <Folder Name="Framework">
                 <F N="../cunit/Framework/CUError.c"/>
+                <F N="../cunit/Framework/Makefile.in"/>
                 <F N="../cunit/Framework/MyMem.c"/>
                 <F N="../cunit/Framework/TestDB.c"/>
                 <F N="../cunit/Framework/TestRun.c"/>
                 <F N="../cunit/Framework/Util.c"/>
             </Folder>
             <Folder Name="Test">
+                <F N="../cunit/Test/Makefile.in"/>
                 <F N="../cunit/Test/test_cunit.c"/>
                 <F N="../cunit/Test/test_cunit.h"/>
             </Folder>
@@ -1980,6 +1991,7 @@
                 <F N="../cunit/Win/Win.h"/>
             </Folder>
             <F N="../cunit/CMakeLists.txt"/>
+            <F N="../cunit/Makefile.in"/>
         </Folder>
         <Folder Name="../driver">
             <Folder Name="eeprom">
@@ -2099,6 +2111,7 @@
                     <F N="../include/alumy/cunit/CUnit.h"/>
                     <F N="../include/alumy/cunit/CUnit.h.in"/>
                     <F N="../include/alumy/cunit/CUnit_intl.h"/>
+                    <F N="../include/alumy/cunit/Makefile.in"/>
                     <F N="../include/alumy/cunit/MyMem.h"/>
                     <F N="../include/alumy/cunit/TestDB.h"/>
                     <F N="../include/alumy/cunit/TestRun.h"/>
@@ -2108,6 +2121,9 @@
                 <Folder Name="driver">
                     <Folder Name="eeprom">
                         <F N="../include/alumy/driver/eeprom/bl24c128.h"/>
+                    </Folder>
+                    <Folder Name="graphics">
+                        <F N="../include/alumy/driver/graphics/rgb.h"/>
                     </Folder>
                     <Folder Name="rtc">
                         <F N="../include/alumy/driver/rtc/bm8563.h"/>
@@ -2125,6 +2141,7 @@
                     <F N="../include/alumy/driver/flash_header.h"/>
                     <F N="../include/alumy/driver/flexible_button.h"/>
                     <F N="../include/alumy/driver/gpio.h"/>
+                    <F N="../include/alumy/driver/graphics.h"/>
                     <F N="../include/alumy/driver/i2c.h"/>
                     <F N="../include/alumy/driver/light.h"/>
                     <F N="../include/alumy/driver/rtc.h"/>
@@ -2175,7 +2192,11 @@
                     <F N="../include/alumy/lzma/LzmaDec.h"/>
                     <F N="../include/alumy/lzma/Precomp.h"/>
                 </Folder>
+                <Folder Name="math">
+                    <F N="../include/alumy/math/abs.h"/>
+                </Folder>
                 <Folder Name="net">
+                    <F N="../include/alumy/net/inet_addr.h"/>
                     <F N="../include/alumy/net/slip.h"/>
                 </Folder>
                 <Folder Name="time">
@@ -2246,6 +2267,7 @@
             <F N="../lint/lint_cppmac.h"/>
         </Folder>
         <Folder Name="../lrc">
+            <F N="../lrc/CMakeLists.txt"/>
             <F N="../lrc/lrc.c"/>
         </Folder>
         <Folder Name="../lzma">

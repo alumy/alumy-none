@@ -21,14 +21,69 @@ __BEGIN_DECLS
 	__MS(ALUMY_MAJOR.ALUMY_MINOR.ALUMY_REV.ALUMY_BUILD)
 
 typedef struct al_version {
-	uint16_t major;
-	uint16_t minor;
-	uint16_t rev;
-	uint16_t build;
+	uint16_t av_major;
+	uint16_t av_minor;
+	uint16_t av_rev;
+	uint16_t av_build;
+	char av_git_hash[8];
 } al_version_t;
 
-extern const char *al_get_version_s(void);
-extern const al_version_t *al_get_version(void);
+#define al_version_get_s(f) \
+	static inline uint16_t al_version_get##f(const al_version_t *ver) \
+	{ \
+		return ver->av_##f; \
+	}
+
+al_version_get_s(major)
+al_version_get_s(minor)
+al_version_get_s(rev)
+al_version_get_s(build)
+
+__static_inline__
+const char *al_version_get_git_hash(const al_version_t *ver)
+{
+	return (const char *)ver->av_git_hash;
+}
+
+/**
+ * @brief Get alumy version string
+ *
+ * @author jack (2023/7/6)
+ *
+ * @param void
+ *
+ * @return const char*
+ */
+const char *al_get_version_s(void);
+
+/**
+ * @brief Get alumy version struct
+ *
+ * @author jack (2023/7/6)
+ *
+ * @param void
+ *
+ * @return const al_version_t*
+ */
+const al_version_t *al_get_version(void);
+
+/**
+ * @brief al_version_init
+ *
+ * @author jack (2023/7/6)
+ *
+ * @param av
+ * @param major
+ * @param minor
+ * @param rev
+ * @param build
+ * @param git_hash
+ *
+ * @return int_t
+ */
+int_t al_version_init(al_version_t *av,
+					  uint16_t major, uint16_t minor, uint16_t rev,
+					  uint16_t build, const char *git_hash);
 
 __END_DECLS
 
