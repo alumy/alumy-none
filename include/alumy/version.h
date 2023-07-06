@@ -11,8 +11,8 @@ __BEGIN_DECLS
 
 #define AL_MAJOR		1
 #define AL_MINOR		0
-#define AL_REV			3
-#define AL_BUILD		11
+#define AL_REV			2
+#define AL_BUILD		10
 
 #define AL_PREREQ(ma, mi)	(AL_MAJOR << 16 | AL_MINOR >= (ma) << 16 | (mi))
 #define AL_VERSION			__MS(AL_MAJOR.AL_MINOR.AL_REV.AL_BUILD)
@@ -29,7 +29,7 @@ typedef struct al_version {
 } al_version_t;
 
 #define al_version_get_s(f) \
-	static inline uint16_t al_version_get##f(const al_version_t *ver) \
+	static inline uint16_t al_version_get_##f(const al_version_t *ver) \
 	{ \
 		return ver->av_##f; \
 	}
