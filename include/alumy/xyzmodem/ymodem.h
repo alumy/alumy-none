@@ -74,14 +74,15 @@ typedef struct al_ymodem {
     time_t timeout;
     int32_t timeout_cnt;
     al_ymodem_finish_reason_t finish_reason;
-    al_ymodem_callback_t *callback;
-    al_ymodem_opt_t *opt;
+    const al_ymodem_callback_t *callback;
+    const al_ymodem_opt_t *opt;
 } al_ymodem_t;
 
 int32_t al_ymodem_init(al_ymodem_t *ym,
                        uint8_t *recv_buf, size_t recv_bufsz, time_t timeout,
                        uint8_t *send_buf, size_t send_bufsz,
-                       al_ymodem_opt_t *opt, al_ymodem_callback_t *cb);
+                       const al_ymodem_opt_t *opt, 
+		       const al_ymodem_callback_t *cb);
 
 int32_t al_ymodem_recv(al_ymodem_t *ym);
 
