@@ -179,10 +179,10 @@ static int32_t ymodem_check_pkg(const void *__data, size_t len, int32_t __seq)
 }
 
 int32_t al_ymodem_init(al_ymodem_t *ym,
-                       uint8_t *recv_buf, size_t recv_bufsz, time_t timeout,
-                       uint8_t *send_buf, size_t send_bufsz,
-                       const al_ymodem_opt_t *opt, 
-		       const al_ymodem_callback_t *cb)
+					   uint8_t *recv_buf, size_t recv_bufsz, time_t timeout,
+					   uint8_t *send_buf, size_t send_bufsz,
+					   const al_ymodem_opt_t *opt,
+					   const al_ymodem_callback_t *cb)
 {
     memset(ym, 0, sizeof(al_ymodem_t));
 
