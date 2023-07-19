@@ -26,11 +26,11 @@ __BEGIN_DECLS
 
 #define YMODEM_RETRANS_CNT      10
 
-#define YMODEM_IS_HEADER(h)         ((h) == SOH || (h) == STX)
+#define YMODEM_IS_HEADER(h)         ((h) == AL_SOH || (h) == AL_STX)
 #define YMODEM_IS_FILL(f)           ((f) == 0x00 || (f) == 0x1A)
 #define YMODEM_IS_LEN(l)            ((l) < YMODEM_PACKET_SIZE_1K)
 
-#define YMODEM_GET_HEADER(len)      ((len) > 128 ? STX : SOH)
+#define YMODEM_GET_HEADER(len)      ((len) > 128 ? AL_STX : AL_SOH)
 
 typedef enum al_ymodem_finish_reason {
     AL_YM_FINISH_OK = 0,

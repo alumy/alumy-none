@@ -3,10 +3,13 @@
 #include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
+#include "alumy/config.h"
+#include "alumy/byteorder.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
-#include "alumy/log.h"
-#include "alumy/config.h"
+#include "alumy/bug.h"
+#include "alumy/check.h"
+#include "alumy/errno.h"
 
 __BEGIN_DECLS
 
