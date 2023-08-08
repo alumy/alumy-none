@@ -6,6 +6,7 @@
 #include "alumy/base.h"
 #include "alumy/bcd.h"
 #include "alumy/bug.h"
+#include "alumy/check.h"
 #include "alumy/log.h"
 #include "alumy/errno.h"
 #include "alumy/driver/rtc/ds1302.h"
@@ -202,12 +203,13 @@ int_fast8_t ds1302_read_date_time(ds1302_t *this, struct tm *tm)
              tm->tm_year + 1900, tm->tm_mon + 1, tm->tm_mday,
              tm->tm_hour, tm->tm_min, tm->tm_sec);
 
-    BUG_ON((tm->tm_sec < 0) || (tm->tm_sec > 60));
-    BUG_ON((tm->tm_min < 0) || (tm->tm_min > 59));
-    BUG_ON((tm->tm_hour < 0) || (tm->tm_hour > 23));
-    BUG_ON((tm->tm_mday < 1) || (tm->tm_mday > 31));
-    BUG_ON((tm->tm_mon < 0) || (tm->tm_mon > 11));
+    AL_CHECK_RET((tm->tm_sec >= 0) && (tm->tm_sec <= 59), EINVAL, -1);
+    AL_CHECK_RET((tm->tm_min >= 0) && (tm->tm_min <= 59), EINVAL, -1);
+    AL_CHECK_RET((tm->tm_hour >= 0) && (tm->tm_hour <= 23), EINVAL, -1);
+    AL_CHECK_RET((tm->tm_mday >= 1) && (tm->tm_mday <= 31), EINVAL, -1);
+    AL_CHECK_RET((tm->tm_mon >= 0) && (tm->tm_mon <= 11), EINVAL, -1);
 
+	set_errno(0);
     return 0;
 }
 

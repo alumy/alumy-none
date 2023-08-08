@@ -224,7 +224,7 @@ include(CPack)
 
 if(UNIT_TEST EQUAL 1)
     enable_testing()
-	add_subdirectory(${PROJECT_SOURCE_DIR}/test)
+    add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 endif()
 
 
