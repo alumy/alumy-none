@@ -53,6 +53,7 @@
 #include "alumy/crypto.h"
 #include "alumy/net.h"
 #include "alumy/math.h"
+#include "alumy/osal.h"
 
 __BEGIN_DECLS
 
