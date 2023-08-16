@@ -1603,9 +1603,6 @@
         </Folder>
         <Folder Name="../cmake">
             <Folder Name="toolchain">
-                <Folder Name="es32">
-                    <F N="../cmake/toolchain/es32/es32.cmake"/>
-                </Folder>
                 <Folder Name="hc32">
                     <F N="../cmake/toolchain/hc32/hc32.cmake"/>
                 </Folder>
@@ -1614,9 +1611,6 @@
                 </Folder>
                 <F N="../cmake/toolchain/arm-fsl-linux-gnueabi.cmake"/>
                 <F N="../cmake/toolchain/arm-none-eabi.cmake"/>
-                <F N="../cmake/toolchain/clang.cmake"/>
-                <F N="../cmake/toolchain/es32f0654lt.cmake"/>
-                <F N="../cmake/toolchain/es32f3696lt.cmake"/>
                 <F N="../cmake/toolchain/gcc.cmake"/>
                 <F N="../cmake/toolchain/hc32f460petb.cmake"/>
                 <F N="../cmake/toolchain/hc32f460xe.cmake"/>
