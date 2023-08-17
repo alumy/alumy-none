@@ -9,7 +9,7 @@
 __BEGIN_DECLS
 
 int32_t al_lfs_write_file(lfs_t *lfs, const char *file_name,
-						  const void *buf, size_t size);
+						  const void *buf, size_t size, int32_t flag);
 
 int32_t al_lfs_read_file(lfs_t *lfs, const char *file_name,
 						 void *buf, size_t size);

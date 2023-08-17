@@ -12,12 +12,12 @@
 __BEGIN_DECLS
 
 int32_t al_lfs_write_file(lfs_t *lfs, const char *file_name,
-						  const void *buf, size_t size)
+						  const void *buf, size_t size, int32_t flag)
 {
 	int32_t ret;
 	lfs_file_t file;
 
-	ret = lfs_file_open(lfs, &file, file_name, LFS_O_RDWR | LFS_O_CREAT);
+	ret = lfs_file_open(lfs, &file, file_name, flag);
 	if (ret != 0) {
 		set_errno(EIO);
 		return -1;
