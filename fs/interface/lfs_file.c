@@ -23,11 +23,6 @@ int32_t al_lfs_write_file(lfs_t *lfs, const char *file_name,
 		return -1;
 	}
 
-	ret = lfs_file_rewind(lfs, &file);
-	if (ret != 0) {
-		goto err;
-	}
-
 	ret = lfs_file_write(lfs, &file, buf, size);
 	if (ret != size) {
 		goto err;
