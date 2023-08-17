@@ -6,6 +6,9 @@
 #include "alumy/byteorder.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
+#include "alumy/bug.h"
+#include "alumy/check.h"
+#include "alumy/osal.h"
 
 __BEGIN_DECLS
 
