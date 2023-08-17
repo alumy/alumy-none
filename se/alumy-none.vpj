@@ -2041,14 +2041,26 @@
             <F N="../freemodbus/demo.c"/>
         </Folder>
         <Folder Name="../fs">
+            <Folder Name="interface">
+                <F N="../fs/interface/lfs_file.c"/>
+                <F N="../fs/interface/lfs_space.c"/>
+            </Folder>
             <Folder Name="littlefs">
                 <Folder Name="bd">
+                    <F N="../fs/littlefs/bd/lfs_emubd.c"/>
+                    <F N="../fs/littlefs/bd/lfs_emubd.h"/>
                     <F N="../fs/littlefs/bd/lfs_filebd.c"/>
                     <F N="../fs/littlefs/bd/lfs_filebd.h"/>
                     <F N="../fs/littlefs/bd/lfs_rambd.c"/>
                     <F N="../fs/littlefs/bd/lfs_rambd.h"/>
                     <F N="../fs/littlefs/bd/lfs_testbd.c"/>
                     <F N="../fs/littlefs/bd/lfs_testbd.h"/>
+                </Folder>
+                <Folder Name="runners">
+                    <F N="../fs/littlefs/runners/bench_runner.c"/>
+                    <F N="../fs/littlefs/runners/bench_runner.h"/>
+                    <F N="../fs/littlefs/runners/test_runner.c"/>
+                    <F N="../fs/littlefs/runners/test_runner.h"/>
                 </Folder>
                 <F N="../fs/littlefs/lfs.c"/>
                 <F N="../fs/littlefs/lfs_util.c"/>
@@ -2168,6 +2180,10 @@
                     <F N="../include/alumy/freemodbus/mbutils.h"/>
                 </Folder>
                 <Folder Name="fs">
+                    <Folder Name="interface">
+                        <F N="../include/alumy/fs/interface/lfs_file.h"/>
+                        <F N="../include/alumy/fs/interface/lfs_space.h"/>
+                    </Folder>
                     <Folder Name="littlefs">
                         <F N="../include/alumy/fs/littlefs/lfs.h"/>
                         <F N="../include/alumy/fs/littlefs/lfs_util.h"/>
@@ -2177,6 +2193,7 @@
                         <F N="../include/alumy/fs/spiffs/spiffs_config.h"/>
                         <F N="../include/alumy/fs/spiffs/spiffs_nucleus.h"/>
                     </Folder>
+                    <F N="../include/alumy/fs/interface.h"/>
                 </Folder>
                 <Folder Name="lzma">
                     <F N="../include/alumy/lzma/7zTypes.h"/>

@@ -3,6 +3,7 @@
 
 #include "alumy/fs/spiffs/spiffs.h"
 #include "alumy/fs/littlefs/lfs.h"
+#include "alumy/fs/interface.h"
 
 #endif
 
