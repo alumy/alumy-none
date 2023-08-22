@@ -16,6 +16,8 @@ __BEGIN_DECLS
 #define YMODEM_PACKET_SIZE_128      (128)
 #define YMODEM_PACKET_SIZE_1K       (1024)
 
+#define YMODEM_ACK_WAIT_TIMEOUT_DFT		(1000)	/* ms */
+
 #define YMODEM_TOTAL_LEN(pack_size)     \
     ((pack_size) + YMODEM_HEADER_SIZE + YMODEM_END_SIZE)
 
@@ -55,6 +57,7 @@ typedef struct al_ymodem_opt {
     int32_t (*recv_clear)(void);
     void (*set_dir)(al_rs485_dir_t dir);
     time_t (*uptime)(void);
+	uint32_t (*tick_ms)(void);
     void (*delay_ms)(int32_t ms);
 } al_ymodem_opt_t;
 
@@ -73,6 +76,7 @@ typedef struct al_ymodem {
     time_t last_time;
     time_t timeout;
     int32_t timeout_cnt;
+	int32_t wait_ack_timeout;
     al_ymodem_finish_reason_t finish_reason;
     const al_ymodem_callback_t *callback;
     const al_ymodem_opt_t *opt;
@@ -89,6 +93,8 @@ int32_t al_ymodem_recv(al_ymodem_t *ym);
 int32_t al_ymodem_wait_send(al_ymodem_t *ym);
 int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
                             const void *data, size_t file_size);
+
+int32_t al_ymodem_set_ack_wait_timeout(al_ymodem_t *ym, uint32_t timeout);
 
 __END_DECLS
 

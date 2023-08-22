@@ -196,6 +196,7 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     BUG_ON(opt->recv == NULL);
     BUG_ON(opt->uptime == NULL);
     BUG_ON(opt->delay_ms == NULL);
+	BUG_ON(opt->tick_ms == NULL);
 
     ym->recv_buf = recv_buf;
     ym->recv_bufsz = recv_bufsz;
@@ -205,6 +206,7 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     ym->opt = opt;
     ym->callback = cb;
     ym->session = false;
+	ym->wait_ack_timeout = YMODEM_ACK_WAIT_TIMEOUT_DFT;
 
     return 0;
 }
@@ -500,20 +502,22 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
     return res;
 }
 
-static int32_t al_ymodem_send_check_ack(al_ymodem_t *ym,
-                                        uint8_t expect, int32_t ms)
+static int32_t al_ymodem_send_check_ack(al_ymodem_t *ym, uint8_t expect)
 {
-    int32_t c;
+	int32_t c;
+	uint32_t t_end = ym->opt->tick_ms() + ym->wait_ack_timeout;
 
-    ym->opt->delay_ms(ms);
+	while (ym->opt->tick_ms() < t_end) {
+		ym->opt->delay_ms(1);
 
-    c = ym->opt->ym_getc();
+		c = ym->opt->ym_getc();
 
-    if (c == expect) {
-        return 0;
-    }
+		if (c == expect) {
+			return 0;
+		}
+	}
 
-    return -1;
+	return -1;
 }
 
 static ssize_t __al_ymodem_send_packet(al_ymodem_t *ym,
@@ -595,7 +599,7 @@ static int32_t al_ymodem_send_packet(al_ymodem_t *ym,
             return -1;
         }
 
-        if (al_ymodem_send_check_ack(ym, AL_ACK, 300) == 0) {
+        if (al_ymodem_send_check_ack(ym, AL_ACK) == 0) {
             ym->send_seq++;
 
             break;
@@ -667,6 +671,13 @@ int32_t al_ymodem_wait_send(al_ymodem_t *ym)
     return 0;
 }
 
+int32_t al_ymodem_set_ack_wait_timeout(al_ymodem_t *ym, uint32_t timeout)
+{
+	ym->wait_ack_timeout = timeout;
+
+	return 0;
+}
+
 int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
                             const void *data, size_t file_size)
 {
@@ -706,7 +717,7 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
         return -1;
     }
 
-    if (al_ymodem_send_check_ack(ym, 'C', 100) != 0) {
+    if (al_ymodem_send_check_ack(ym, 'C') != 0) {
         AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
                  __FILE__, __LINE__);
         return -1;
@@ -718,7 +729,7 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
     ym->opt->ym_putc(AL_EOT);
     ym->opt->set_dir(AL_RS485_IN);
 
-    if (al_ymodem_send_check_ack(ym, AL_NAK, 100) != 0) {
+    if (al_ymodem_send_check_ack(ym, AL_NAK) != 0) {
         AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
                  __FILE__, __LINE__);
         return -1;
@@ -728,13 +739,13 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
     ym->opt->ym_putc(AL_EOT);
     ym->opt->set_dir(AL_RS485_IN);
 
-    if (al_ymodem_send_check_ack(ym, AL_ACK, 100) != 0) {
+    if (al_ymodem_send_check_ack(ym, AL_ACK) != 0) {
         AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
                  __FILE__, __LINE__);
         return -1;
     }
 
-    if (al_ymodem_send_check_ack(ym, 'C', 100) != 0) {
+    if (al_ymodem_send_check_ack(ym, 'C') != 0) {
         AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
                  __FILE__, __LINE__);
         return -1;
