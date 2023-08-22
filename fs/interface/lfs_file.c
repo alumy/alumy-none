@@ -85,6 +85,7 @@ int32_t al_lfs_cp(lfs_t *src_lfs, lfs_t *dest_lfs,
 	uint8_t *buf = NULL;
 	bool src_open = false;
 	bool dest_open = false;
+	size_t size = 4096;
 	lfs_file_t src_file, dest_file;
 
 	ret = lfs_file_open(src_lfs, &src_file, src_path, LFS_O_RDONLY);
@@ -102,8 +103,6 @@ int32_t al_lfs_cp(lfs_t *src_lfs, lfs_t *dest_lfs,
 	}
 
 	dest_open = true;
-
-    size_t size = 4096;
 
 	buf = (uint8_t *)al_os_malloc(size);
 	if (buf == NULL) {
