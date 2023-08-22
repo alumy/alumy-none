@@ -508,7 +508,7 @@ static int32_t al_ymodem_send_check_ack(al_ymodem_t *ym, uint8_t expect)
 	uint32_t t_end = ym->opt->tick_ms() + ym->wait_ack_timeout;
 
 	while (ym->opt->tick_ms() < t_end) {
-		ym->opt->delay_ms(1);
+		ym->opt->delay_ms(10);
 
 		c = ym->opt->ym_getc();
 

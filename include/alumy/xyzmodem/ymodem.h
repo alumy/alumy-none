@@ -16,7 +16,7 @@ __BEGIN_DECLS
 #define YMODEM_PACKET_SIZE_128      (128)
 #define YMODEM_PACKET_SIZE_1K       (1024)
 
-#define YMODEM_ACK_WAIT_TIMEOUT_DFT		(1000)	/* ms */
+#define YMODEM_ACK_WAIT_TIMEOUT_DFT		(500)	/* ms */
 
 #define YMODEM_TOTAL_LEN(pack_size)     \
     ((pack_size) + YMODEM_HEADER_SIZE + YMODEM_END_SIZE)
@@ -76,7 +76,7 @@ typedef struct al_ymodem {
     time_t last_time;
     time_t timeout;
     int32_t timeout_cnt;
-	int32_t wait_ack_timeout;
+	uint32_t wait_ack_timeout;
     al_ymodem_finish_reason_t finish_reason;
     const al_ymodem_callback_t *callback;
     const al_ymodem_opt_t *opt;
