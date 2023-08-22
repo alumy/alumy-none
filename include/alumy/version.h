@@ -12,7 +12,7 @@ __BEGIN_DECLS
 #define AL_MAJOR		1
 #define AL_MINOR		0
 #define AL_REV			7
-#define AL_BUILD		15
+#define AL_BUILD		16
 
 #define AL_PREREQ(ma, mi)	(AL_MAJOR << 16 | AL_MINOR >= (ma) << 16 | (mi))
 #define AL_VERSION			__MS(AL_MAJOR.AL_MINOR.AL_REV.AL_BUILD)
