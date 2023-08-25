@@ -1,0 +1,12 @@
+set mem inaccessible-by-default off
+target remote localhost:2331
+monitor speed Auto
+monitor endian little
+monitor flash device = STM32F411CE
+monitor flash breakpoints = 1
+monitor flash download = 1
+load
+monitor reg r13 = (0x00000000)
+monitor reg pc = (0x00000004)
+monitor reset
+
