@@ -31,6 +31,7 @@ target_include_directories(${target} PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F4xx/Include
 	${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/Include)
 
+gdbinit(${PROJECT_NAME}-test)
 debug(${PROJECT_NAME}-test)
 gdbserver("STM32F411CE")
 jflash("STM32F411CE" ${PROJECT_NAME}-test)

@@ -82,7 +82,7 @@ set(jlink_cmd ${CMAKE_BINARY_DIR}/burn.jlink)
 
 function(debug proj_name)
 add_custom_target(debug
-		COMMAND ${CMAKE_DEBUGGER} ${CMAKE_BINARY_DIR}/${proj_name}
+		COMMAND ${CMAKE_DEBUGGER} -q -iex 'add-auto-load-safe-path ${CMAKE_BINARY_DIR}' ${CMAKE_BINARY_DIR}/${proj_name}
 		DEPENDS ${proj_name})
 endfunction(debug)
 

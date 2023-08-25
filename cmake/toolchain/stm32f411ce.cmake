@@ -17,3 +17,11 @@ add_definitions(-DAL_PROVIDE_ERRNO=0)
 
 include(${CMAKE_CURRENT_LIST_DIR}/stm32/stm32.cmake)
 
+function(gdbinit proj_name)
+add_custom_target(gdbinit
+		COMMAND ${CMAKE_COMMAND} -E copy
+			${PROJECT_SOURCE_DIR}/cmake/toolchain/stm32/stm32f411ce_gdb_cmd
+			${CMAKE_BINARY_DIR}/.gdbinit
+		DEPENDS ${proj_name})
+endfunction(gdbinit)
+
