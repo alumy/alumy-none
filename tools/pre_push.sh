@@ -16,3 +16,9 @@ cd $ROOTDIR
 cd $ROOTDIR/build
 make  && make -j32 test && make install
 
+echo "checking for stm32f411ce"
+cd $ROOTDIR
+./cmake_gen.sh stm32f411ce.cmake MinSizeRel 1 $ROOTDIR/build/release
+cd $ROOTDIR/build
+make  && make -j32 test && make install
+
