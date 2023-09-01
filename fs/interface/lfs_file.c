@@ -43,7 +43,7 @@ err:
 	return -1;
 }
 
-int32_t al_lfs_read_file(lfs_t *lfs, const char *file_name,
+ssize_t al_lfs_read_file(lfs_t *lfs, const char *file_name,
 						 void *buf, size_t size)
 {
 	int32_t ret;
