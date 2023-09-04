@@ -10,14 +10,19 @@
 
 __BEGIN_DECLS
 
-uint32_t al_os_get_tick(void)
+al_os_tick_t al_os_get_tick(void)
 {
 	return xTaskGetTickCount();
 }
 
-uint32_t al_os_get_tick_isr(void)
+al_os_tick_t al_os_get_tick_isr(void)
 {
 	return xTaskGetTickCountFromISR();
+}
+
+al_os_tick_t al_os_ms2tick(uint32_t ms)
+{
+	return pdMS_TO_TICKS(ms);
 }
 
 __END_DECLS
