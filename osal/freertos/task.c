@@ -19,11 +19,13 @@ void al_os_delay(int32_t ms)
 	vTaskDelay(__ms);
 }
 
-void al_os_delay_until(al_os_tick_t *prev, uint_t ms)
+void al_os_delay_until(al_os_tick_t *prev, int32_t ms)
 {
 	BUILD_BUG_ON(sizeof(al_os_tick_t) != sizeof(TickType_t));
 
-	vTaskDelayUntil(prev, pdMS_TO_TICKS(ms));
+	TickType_t __ms =( ms < 0) ? portMAX_DELAY : pdMS_TO_TICKS(ms);
+
+	vTaskDelayUntil(prev, __ms);
 }
 
 void al_os_yield_isr(bool_t yield)

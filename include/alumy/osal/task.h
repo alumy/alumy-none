@@ -12,7 +12,7 @@ __BEGIN_DECLS
 typedef void * al_os_task_t;
 
 void al_os_delay(int32_t ms);
-void al_os_delay_until(al_os_tick_t *prev, uint_t ms);
+void al_os_delay_until(al_os_tick_t *prev, int32_t ms);
 void al_os_yield_isr(bool_t yield);
 
 int32_t al_os_task_create(al_os_task_t *handle,
