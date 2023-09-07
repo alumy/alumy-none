@@ -13,7 +13,7 @@ int_t al_sw_i2c_init(al_sw_i2c_t *i2c, uint_t addr_bits,
 		return -1;
 	}
 
-	if (opt->gpio_init == NULL || opt->gpio_final ||
+	if (opt->gpio_init == NULL || opt->gpio_final == NULL ||
 		opt->delay == NULL || opt->scl_set == NULL ||
 		opt->sda_set == NULL || opt->sda_dir_set == NULL ||
 		opt->scl_dir_set == NULL || opt->sda_get == NULL) {
