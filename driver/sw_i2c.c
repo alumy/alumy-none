@@ -8,36 +8,37 @@ __BEGIN_DECLS
 int_t al_sw_i2c_init(al_sw_i2c_t *i2c, uint_t addr_bits,
 					 const al_sw_i2c_opt_t *opt)
 {
-    if (i2c == NULL || opt == NULL) {
-        set_errno(EINVAL);
-        return -1;
-    }
+	if (i2c == NULL || opt == NULL) {
+		set_errno(EINVAL);
+		return -1;
+	}
 
-    if (opt->delay == NULL || opt->scl_set == NULL ||
-        opt->sda_set == NULL || opt->sda_dir_set == NULL ||
-        opt->scl_dir_set == NULL || opt->sda_get == NULL) {
-        set_errno(EINVAL);
-        return -1;
-    }
+	if (opt->gpio_init == NULL || opt->gpio_final ||
+		opt->delay == NULL || opt->scl_set == NULL ||
+		opt->sda_set == NULL || opt->sda_dir_set == NULL ||
+		opt->scl_dir_set == NULL || opt->sda_get == NULL) {
+		set_errno(EINVAL);
+		return -1;
+	}
 
-    i2c->opt.delay = opt->delay;
-    i2c->opt.scl_set = opt->scl_set;
-    i2c->opt.sda_set = opt->sda_set;
-    i2c->opt.sda_dir_set = opt->sda_dir_set;
-    i2c->opt.scl_dir_set = opt->scl_dir_set;
-    i2c->opt.sda_get = opt->sda_get;
-    i2c->opt.gpio_init = opt->gpio_init;
-    i2c->opt.gpio_final = opt->gpio_final;
+	i2c->opt.delay = opt->delay;
+	i2c->opt.scl_set = opt->scl_set;
+	i2c->opt.sda_set = opt->sda_set;
+	i2c->opt.sda_dir_set = opt->sda_dir_set;
+	i2c->opt.scl_dir_set = opt->scl_dir_set;
+	i2c->opt.sda_get = opt->sda_get;
+	i2c->opt.gpio_init = opt->gpio_init;
+	i2c->opt.gpio_final = opt->gpio_final;
 
-    i2c->opt.gpio_init();
+	i2c->opt.gpio_init();
 
-    i2c->opt.scl_dir_set(AL_GPIO_OUTPUT);
+	i2c->opt.scl_dir_set(AL_GPIO_OUTPUT);
 
-    i2c->addr_bits = addr_bits;
+	i2c->addr_bits = addr_bits;
 
-    BUG_ON(!(i2c->addr_bits == 8 || i2c->addr_bits == 16));
+	BUG_ON(!(i2c->addr_bits == 8 || i2c->addr_bits == 16));
 
-    return 0;
+	return 0;
 }
 
 int_t al_sw_i2c_final(al_sw_i2c_t *i2c)
