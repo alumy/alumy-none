@@ -5,8 +5,8 @@
 
 __BEGIN_DECLS
 
-int_fast8_t al_sw_i2c_init(al_sw_i2c_t *i2c, uint8_t addr_bits,
-						   const al_sw_i2c_opt_t *opt)
+int_t al_sw_i2c_init(al_sw_i2c_t *i2c, uint_t addr_bits,
+					 const al_sw_i2c_opt_t *opt)
 {
     if (i2c == NULL || opt == NULL) {
         set_errno(EINVAL);
@@ -40,7 +40,7 @@ int_fast8_t al_sw_i2c_init(al_sw_i2c_t *i2c, uint8_t addr_bits,
     return 0;
 }
 
-int_fast8_t al_sw_i2c_final(al_sw_i2c_t *i2c)
+int_t al_sw_i2c_final(al_sw_i2c_t *i2c)
 {
     if (i2c->opt.gpio_final) {
         i2c->opt.gpio_final();
@@ -49,7 +49,7 @@ int_fast8_t al_sw_i2c_final(al_sw_i2c_t *i2c)
     return 0;
 }
 
-int_fast8_t al_sw_i2c_start(al_sw_i2c_t *i2c)
+int_t al_sw_i2c_start(al_sw_i2c_t *i2c)
 {
     i2c->opt.sda_dir_set(AL_GPIO_OUTPUT);
 
@@ -101,9 +101,9 @@ void al_sw_i2c_nack(al_sw_i2c_t *i2c)
     i2c->opt.scl_set(AL_GPIO_LOW);
 }
 
-int_fast8_t al_sw_i2c_wait_ack(al_sw_i2c_t *i2c, uint_fast16_t timeout)
+int_t al_sw_i2c_wait_ack(al_sw_i2c_t *i2c, uint_t timeout)
 {
-    uint_fast16_t wait = 0;
+    uint_t wait = 0;
 
     i2c->opt.sda_dir_set(AL_GPIO_INPUT);
 
@@ -126,7 +126,7 @@ int_fast8_t al_sw_i2c_wait_ack(al_sw_i2c_t *i2c, uint_fast16_t timeout)
 
 void al_sw_i2c_send_byte(al_sw_i2c_t *i2c, uint8_t byte)
 {
-    uint_fast8_t i = 8;
+    uint_t i = 8;
 
     i2c->opt.sda_dir_set(AL_GPIO_OUTPUT);
 
@@ -151,7 +151,7 @@ void al_sw_i2c_send_byte(al_sw_i2c_t *i2c, uint8_t byte)
 
 uint8_t al_sw_i2c_recv_byte(al_sw_i2c_t *i2c)
 {
-    uint_fast8_t i = 8;
+    uint_t i = 8;
     uint8_t byte = 0;
 
     i2c->opt.sda_dir_set(AL_GPIO_INPUT);
@@ -205,7 +205,7 @@ ssize_t al_sw_i2c_mem_write(al_sw_i2c_t *i2c, uint16_t dev_addr, uint16_t addr,
         return -1;
     }
 
-    for (uint_fast32_t i = 0; i < len; ++i) {
+    for (uint_t i = 0; i < len; ++i) {
         al_sw_i2c_send_byte(i2c, *p++);
         if (al_sw_i2c_wait_ack(i2c, timeout) != 0) {
             al_sw_i2c_stop(i2c);
@@ -222,7 +222,7 @@ ssize_t al_sw_i2c_mem_write(al_sw_i2c_t *i2c, uint16_t dev_addr, uint16_t addr,
 }
 
 ssize_t al_sw_i2c_mem_read(al_sw_i2c_t *i2c, uint16_t dev_addr, uint16_t addr,
-                        void *buf, size_t len, uint_t timeout)
+						   void *buf, size_t len, uint_t timeout)
 {
     uint8_t *p = (uint8_t *)buf;
 

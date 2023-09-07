@@ -22,15 +22,15 @@ typedef struct al_sw_i2c_opt {
 
 typedef struct al_sw_i2c {
     al_sw_i2c_opt_t opt;
-    uint8_t addr_bits;
+    uint_t addr_bits;
 } al_sw_i2c_t;
 
-int_fast8_t al_sw_i2c_init(al_sw_i2c_t *i2c, uint8_t addr_bits,
-						   const al_sw_i2c_opt_t *opt);
+int_t al_sw_i2c_init(al_sw_i2c_t *i2c, uint_t addr_bits,
+					 const al_sw_i2c_opt_t *opt);
 
-int_fast8_t al_sw_i2c_final(al_sw_i2c_t *i2c);
+int_t al_sw_i2c_final(al_sw_i2c_t *i2c);
 
-int_fast8_t al_sw_i2c_start(al_sw_i2c_t *i2c);
+int_t al_sw_i2c_start(al_sw_i2c_t *i2c);
 
 void al_sw_i2c_stop(al_sw_i2c_t *i2c);
 
@@ -38,7 +38,7 @@ void al_sw_i2c_ack(al_sw_i2c_t *i2c);
 
 void al_sw_i2c_nack(al_sw_i2c_t *i2c);
 
-int_fast8_t al_sw_i2c_wait_ack(al_sw_i2c_t *i2c, uint_fast16_t timeout);
+int_t al_sw_i2c_wait_ack(al_sw_i2c_t *i2c, uint_t timeout);
 
 void al_sw_i2c_send_byte(al_sw_i2c_t *i2c, uint8_t byte);
 
@@ -48,7 +48,7 @@ ssize_t al_sw_i2c_mem_write(al_sw_i2c_t *i2c, uint16_t dev_addr, uint16_t addr,
 							const void *data, size_t len, uint_t timeout);
 
 ssize_t al_sw_i2c_mem_read(al_sw_i2c_t *i2c, uint16_t dev_addr, uint16_t addr,
-                        void *buf, size_t len, uint_t timeout);
+						   void *buf, size_t len, uint_t timeout);
 
 __END_DECLS
 
