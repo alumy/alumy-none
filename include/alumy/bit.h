@@ -33,19 +33,19 @@ __BEGIN_DECLS
 #endif
 
 #ifndef set_bit_64
-#define set_bit_64(reg, bit, sfx)		((reg) |= (1##sfx << (bit)))
+#define set_bit_64(reg, bit)		((reg) |= (1ull << (bit)))
 #endif
 
 #ifndef clear_bit_64
-#define clear_bit_64(reg, bit, sfx)		((reg) &= ~(1##sfx << (bit)))
+#define clear_bit_64(reg, bit)		((reg) &= ~(1ull << (bit)))
 #endif
 
 #ifndef get_bit_64
-#define get_bit_64(reg, bit, sfx)		(!!((reg) & (1##sfx << (bit))))
+#define get_bit_64(reg, bit)		(!!((reg) & (1ull << (bit))))
 #endif
 
 #ifndef toggle_bit_64
-#define toggle_bit_64(reg, bit, sfx)	((reg) ^= (1##sfx << (bit)))
+#define toggle_bit_64(reg, bit)	((reg) ^= (1ull << (bit)))
 #endif
 
 __static_inline__ uint32_t al_popcount(uint32_t x)
