@@ -24,7 +24,7 @@ const al_version_t *al_get_version(void)
 int_t al_version_init(al_version_t *av, uint16_t major, uint16_t minor,
 					  uint16_t rev, uint16_t build, const char *git_hash)
 {
-	AL_CHECK_RET(av == NULL, EINVAL, -1);
+	AL_CHECK_RET(av != NULL, EINVAL, -1);
 
 	av->av_major = major;
 	av->av_minor = minor;
