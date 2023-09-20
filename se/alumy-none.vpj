@@ -2212,6 +2212,7 @@
                 </Folder>
                 <Folder Name="osal">
                     <F N="../include/alumy/osal/heap.h"/>
+                    <F N="../include/alumy/osal/queue.h"/>
                     <F N="../include/alumy/osal/semphr.h"/>
                     <F N="../include/alumy/osal/task.h"/>
                     <F N="../include/alumy/osal/tick.h"/>
@@ -2306,6 +2307,7 @@
             <Folder Name="freertos">
                 <F N="../osal/freertos/heap.c"/>
                 <F N="../osal/freertos/osal.c"/>
+                <F N="../osal/freertos/queue.c"/>
                 <F N="../osal/freertos/semphr.c"/>
                 <F N="../osal/freertos/task.c"/>
                 <F N="../osal/freertos/tick.c"/>
