@@ -114,6 +114,14 @@
     #define __attribute_const__     __attribute__((__const__))
   #endif
 
+  #ifndef __likely
+    #define __likely(x)			__builtin_expect(!!(x), 1)
+  #endif
+
+  #ifndef __unlikely
+    #define __unlikely(x)		__builtin_expect(!!(x), 0)
+  #endif
+
   #ifndef __ramfunc
 	#define __ramfunc       __section(".ramfunc")
   #endif
