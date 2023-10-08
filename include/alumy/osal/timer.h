@@ -30,6 +30,15 @@ int_t al_os_timer_start_isr(al_os_timer_t *tmr, bool_t *yield);
 
 int_t al_os_timer_stop_isr(al_os_timer_t *tmr, bool_t *yield);
 
+int_t al_os_timer_set_period(al_os_timer_t *tmr, uint_t period);
+
+int_t al_os_timer_set_period_isr(al_os_timer_t *tmr,
+								 uint_t period, bool_t *yield);
+
+int_t al_os_timer_reset(al_os_timer_t *tmr);
+
+int_t al_os_timer_reset_isr(al_os_timer_t *tmr, bool_t *yield);
+
 __END_DECLS
 
 #endif

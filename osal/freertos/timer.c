@@ -95,5 +95,58 @@ int_t al_os_timer_stop_isr(al_os_timer_t *tmr, bool_t *yield)
 	return 0;
 }
 
+int_t al_os_timer_set_period(al_os_timer_t *tmr, uint_t period)
+{
+	BaseType_t ret;
+
+	ret = xTimerChangePeriod(tmr->handle, pdMS_TO_TICKS(period),
+							 portMAX_DELAY);
+
+	if (ret != pdPASS) {
+		return -1;
+	}
+
+	return 0;
+}
+
+int_t al_os_timer_set_period_isr(al_os_timer_t *tmr,
+								 uint_t period, bool_t *yield)
+{
+	BaseType_t ret;
+	BaseType_t __yield = pdFALSE;
+
+	ret = xTimerChangePeriodFromISR(tmr->handle, pdMS_TO_TICKS(period),
+									&__yield);
+	if (ret != pdPASS) {
+		return -1;
+	}
+
+	*yield = __yield;
+
+	return 0;
+}
+
+int_t al_os_timer_reset(al_os_timer_t *tmr)
+{
+	if (xTimerReset(tmr->handle, portMAX_DELAY) != pdPASS) {
+		return -1;
+	}
+
+	return 0;
+}
+
+int_t al_os_timer_reset_isr(al_os_timer_t *tmr, bool_t *yield)
+{
+	BaseType_t __yield = pdFALSE;
+
+	if (xTimerResetFromISR(tmr->handle, &__yield) != pdPASS) {
+		return -1;
+	}
+
+	*yield = __yield;
+
+	return 0;
+}
+
 __END_DECLS
 
