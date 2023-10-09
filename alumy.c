@@ -4,14 +4,30 @@
 #include "alumy/base.h"
 #include "alumy/errno.h"
 #include "alumy/time.h"
+#include "alumy/osal.h"
+#include "mbedtls/aes.h"
+#include "mbedtls/cipher.h"
+#include "mbedtls/platform.h"
 
 __BEGIN_DECLS
 
 static uint32_t initialized = 0;
 
+static void *__mbedtls_calloc(size_t n, size_t size)
+{
+	return al_os_malloc(n * size);
+}
+
+static void __mbedtls_free(void *p)
+{
+	al_os_free(p);
+}
+
 __static_inline__ int32_t __al_init(void)
 {
 	al_tick_init();
+
+	mbedtls_platform_set_calloc_free(__mbedtls_calloc, __mbedtls_free);
 
 	return 0;
 }
