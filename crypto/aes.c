@@ -230,6 +230,7 @@ ssize_t aes_128_ctr_enc(void *out, size_t outsz, const void *in, size_t len,
 								MBEDTLS_ENCRYPT);
 	if (ret != 0) {
 		AL_ERROR(AL_LOG_CRYPTO, "mbedtls_cipher_setkey failed, ret = %d", ret);
+        mbedtls_cipher_free(&cipher_ctx);
 		return -1;
 	}
 
@@ -237,8 +238,11 @@ ssize_t aes_128_ctr_enc(void *out, size_t outsz, const void *in, size_t len,
 							   in, len, out, &olen);
 	if (ret != 0) {
 		AL_ERROR(AL_LOG_CRYPTO, "mbedtls_cipher_crypt failed, ret = %d", ret);
+        mbedtls_cipher_free(&cipher_ctx);
 		return -1;
 	}
+
+    mbedtls_cipher_free(&cipher_ctx);
 
 	return olen;
 }
@@ -264,6 +268,7 @@ ssize_t aes_128_ctr_dec(void *out, size_t outsz, const void *in, size_t len,
 								MBEDTLS_DECRYPT);
 	if (ret != 0) {
 		AL_ERROR(AL_LOG_CRYPTO, "mbedtls_cipher_setkey failed, ret = %d", ret);
+        mbedtls_cipher_free(&cipher_ctx);
 		return -1;
 	}
 
@@ -271,8 +276,11 @@ ssize_t aes_128_ctr_dec(void *out, size_t outsz, const void *in, size_t len,
 							   in, len, out, &olen);
 	if (ret != 0) {
 		AL_ERROR(AL_LOG_CRYPTO, "mbedtls_cipher_crypt failed, ret = %d", ret);
+        mbedtls_cipher_free(&cipher_ctx);
 		return -1;
 	}
+
+    mbedtls_cipher_free(&cipher_ctx);
 
 	return olen;
 }
