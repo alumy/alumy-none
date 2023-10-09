@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "alumy/config.h"
 #include "alumy/byteorder.h"
 #include "alumy/types.h"
