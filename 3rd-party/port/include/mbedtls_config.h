@@ -35,6 +35,7 @@
 
 /* mbed TLS feature support */
 #define MBEDTLS_CIPHER_MODE_CBC
+#define MBEDTLS_CIPHER_MODE_CTR
 #define MBEDTLS_CIPHER_PADDING_PKCS7
 #define MBEDTLS_ECP_DP_SECP256R1_ENABLED
 #define MBEDTLS_ECP_DP_SECP384R1_ENABLED
@@ -82,5 +83,5 @@
 //#define MBEDTLS_CMAC_C
 
 /* Miscellaneous options */
-#define MBEDTLS_AES_FEWER_TABLES
+#define MBEDTLS_AES_ROM_TABLES
 
