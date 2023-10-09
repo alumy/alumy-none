@@ -209,6 +209,8 @@ ssize_t aes_cbc_dec_base64(void *out, size_t outsz, const char *b64,
     return rv;
 }
 
+#if 0
+/* chipher, unused */
 ssize_t aes_128_ctr_enc(void *out, size_t outsz, const void *in, size_t len,
 						const al_aes_128_key_t key, const al_aes_128_iv_t iv)
 {
@@ -283,6 +285,94 @@ ssize_t aes_128_ctr_dec(void *out, size_t outsz, const void *in, size_t len,
     mbedtls_cipher_free(&cipher_ctx);
 
 	return olen;
+}
+
+#endif
+
+ssize_t aes_128_ctr_enc(void *out, size_t outsz, const void *in, size_t len,
+						const al_aes_128_key_t key, const al_aes_128_iv_t iv)
+{
+    int32_t ret;
+    ssize_t rv;
+	size_t nc_off = 0;
+	uint8_t nonce_counter[16];
+	uint8_t stream_block[16] = { 0 };
+    mbedtls_aes_context aes_ctx;
+
+	AL_CHECK_RET(outsz >= len, EINVAL, -1);
+
+    mbedtls_aes_init(&aes_ctx);
+
+	memcpy(nonce_counter, iv, sizeof(nonce_counter));
+
+    do {
+        rv = -EPERM;
+        ret = mbedtls_aes_setkey_enc(&aes_ctx, key, 128);
+        if (ret != 0) {
+            AL_ERROR(AL_LOG_CRYPTO,
+					 "mbedtls_aes_setkey_enc failed @ %s:%d, ret = %d",
+					 __func__, __LINE__, ret);
+            break;
+        }
+
+		ret = mbedtls_aes_crypt_ctr(&aes_ctx, len, &nc_off,
+									nonce_counter, stream_block, in, out);
+        if (ret != 0) {
+            AL_ERROR(AL_LOG_CRYPTO,
+                     "mbedtls_aes_crypt_ctr failed @ %s:%d, ret = %d",
+					 __func__, __LINE__, ret);
+            break;
+        }
+
+        rv = len;
+    } while (0);
+
+    mbedtls_aes_free(&aes_ctx);
+
+    return rv;
+}
+
+ssize_t aes_128_ctr_dec(void *out, size_t outsz, const void *in, size_t len,
+						const al_aes_128_key_t key, const al_aes_128_iv_t iv)
+{
+    int32_t ret;
+    ssize_t rv;
+	size_t nc_off = 0;
+	uint8_t nonce_counter[16];
+	uint8_t stream_block[16] = { 0 };
+	mbedtls_aes_context aes_ctx;
+
+	AL_CHECK_RET(outsz >= len, EINVAL, -1);
+
+    mbedtls_aes_init(&aes_ctx);
+
+	memcpy(nonce_counter, iv, sizeof(nonce_counter));
+
+    do {
+        rv = -EPERM;
+        ret = mbedtls_aes_setkey_enc(&aes_ctx, key, 128);
+        if (ret != 0) {
+            AL_ERROR(AL_LOG_CRYPTO,
+					 "mbedtls_aes_setkey_enc failed @ %s:%d, ret = %d",
+					 __func__, __LINE__, ret);
+            break;
+        }
+
+		ret = mbedtls_aes_crypt_ctr(&aes_ctx, len, &nc_off,
+									nonce_counter, stream_block, in, out);
+        if (ret != 0) {
+            AL_ERROR(AL_LOG_CRYPTO,
+                     "mbedtls_aes_crypt_ctr failed @ %s:%d, ret = %d",
+					 __func__, __LINE__, ret);
+            break;
+        }
+
+        rv = len;
+    } while (0);
+
+    mbedtls_aes_free(&aes_ctx);
+
+    return rv;
 }
 
 __END_DECLS
