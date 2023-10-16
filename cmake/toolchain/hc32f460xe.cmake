@@ -7,6 +7,7 @@ set(MCU "${CPU} -mthumb ${FPU} ${FLOAT-ABI}" CACHE STRING "" FORCE)
 
 set(LINKER_SCRIPT ${PROJECT_SOURCE_DIR}/test/bsp/hc32f460xe/hc32f460xe_flash.ld CACHE STRING "" FORCE)
 set(BSP_DIR ${PROJECT_SOURCE_DIR}/test/bsp/hc32f460xe CACHE STRING "" FORCE)
+set(OSAL_DIR ${PROJECT_SOURCE_DIR}/osal/none CACHE STRING "" FORCE)
 
 add_definitions(-DUSE_DEVICE_DRIVER_LIB)
 add_definitions(-DHC32F460)

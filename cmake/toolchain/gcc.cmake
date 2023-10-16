@@ -1,6 +1,7 @@
 # cmake_minimum_required(VERSION 2.8)
 
 set(LINKER_SCRIPT ${PROJECT_SOURCE_DIR}/test/bsp/x86_64/linker.ld CACHE STRING "" FORCE)
+set(OSAL_DIR ${PROJECT_SOURCE_DIR}/osal/linux CACHE STRING "" FORCE)
 
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR x86_64)

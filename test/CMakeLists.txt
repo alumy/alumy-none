@@ -9,14 +9,15 @@ include(${PROJECT_SOURCE_DIR}/cmake/cmock.cmake)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL Linux)
     message(STATUS "Building test for Linux")
-	
+
+    add_subdirectory(${OSAL_DIR} osal)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/portal)
 
     aux_source_directory(${PROJECT_SOURCE_DIR}/test test_src)
 
     add_executable(${PROJECT_NAME}-test ${test_src} ${mock_src})
 
-    target_link_libraries(${PROJECT_NAME}-test PRIVATE portal unity cmock)
+    target_link_libraries(${PROJECT_NAME}-test PRIVATE osal portal unity cmock)
     target_link_libraries(${PROJECT_NAME}-test PRIVATE ${PROJECT_NAME}-static)
 	
     target_include_directories(${PROJECT_NAME}-test PUBLIC ${mock_inc})
@@ -49,6 +50,7 @@ endif()
 if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
     message(STATUS "Building test for Generic")
 
+    add_subdirectory(${OSAL_DIR} osal)
     add_subdirectory(${BSP_DIR})
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/portal)
 
@@ -58,7 +60,12 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
 
     target_link_libraries(${PROJECT_NAME}-test PRIVATE 
                           -Wl,--whole-archive
-                          ${PROJECT_NAME}-static bsp portal unity cmock syscalls
+                          ${PROJECT_NAME}-static
+                          -Wl,--no-whole-archive)
+
+	target_link_libraries(${PROJECT_NAME}-test PRIVATE
+                          -Wl,--whole-archive
+                          bsp osal portal unity cmock syscalls
                           -Wl,--no-whole-archive)
 
     add_custom_command(TARGET ${PROJECT_NAME}-test
