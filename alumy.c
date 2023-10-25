@@ -5,6 +5,7 @@
 #include "alumy/errno.h"
 #include "alumy/time.h"
 #include "alumy/osal.h"
+#include "alumy/cJSON.h"
 #include "mbedtls/aes.h"
 #include "mbedtls/cipher.h"
 #include "mbedtls/platform.h"
@@ -25,9 +26,16 @@ static void __mbedtls_free(void *p)
 
 __static_inline__ int32_t __al_init(void)
 {
+	cJSON_Hooks cjson_hooks = {
+		.malloc_fn = al_os_malloc,
+		.free_fn = al_os_free,
+	};
+
 	al_tick_init();
 
 	mbedtls_platform_set_calloc_free(__mbedtls_calloc, __mbedtls_free);
+
+    cJSON_InitHooks(&cjson_hooks);
 
 	return 0;
 }
