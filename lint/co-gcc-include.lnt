@@ -6,3 +6,4 @@
 -i"../unity/unity/src"
 -i"../unity/unity/extras/fixture/src"
 -i"../unity/unity/extras/memory/src"
+-i"../3rd-party/mbedtls-3.2.1/include"
