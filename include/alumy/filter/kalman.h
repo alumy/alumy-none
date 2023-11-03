@@ -7,8 +7,11 @@
 
 __BEGIN_DECLS
 
-#define KALMAN_Q        0.01
-#define KALMAN_R        10.00
+#define AL_KALMAN1_A		(1)
+#define AL_KALMAN1_H		(1)
+#define AL_KALMAN1_Q		(10e-6)
+#define AL_KALMAN1_R		(10e-5)
+
 #define AL_KALMAN2_A		{ {1, 0.1}, {0, 1} }
 #define AL_KALMAN2_H		{ 1, 0 }
 #define AL_KALMAN2_Q		{ { 10e-6, 0 }, { 0, 10e-6 } }
