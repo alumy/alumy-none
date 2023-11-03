@@ -54,7 +54,7 @@ void al_kalman2_init(al_kalman2_t *k,
 					 const float a[2][2], const float h[2],
 					 const float q[2], float r);
 
-float al_kalman2_filter(al_kalman2_t *k, float measure);
+float al_kalman2_filter(al_kalman2_t *k, const float measure[2]);
 
 __END_DECLS
 
