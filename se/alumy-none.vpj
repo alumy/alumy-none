@@ -6019,6 +6019,10 @@
             <F N="../test/bitband.c"/>
             <F N="../test/CMakeLists.txt"/>
             <F N="../test/filter.c"/>
+            <F N="../test/filter_kalman.c"/>
+            <F N="../test/kalman_factory_cleanup.h"/>
+            <F N="../test/kalman_factory_filter.h"/>
+            <F N="../test/kalman_factory_measure.h"/>
             <F N="../test/math_matrix.c"/>
             <F N="../test/mem.c"/>
             <F N="../test/string.c"/>
