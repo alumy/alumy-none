@@ -45,7 +45,9 @@ int_t al_cholesky_decompose_lower(register const al_matrix_t *const mat)
             if( i == j )
             {
                 // is it positive-definite?
-                if( sum <= 0.0 ) return 1;
+                if( sum <= 0.0f ) {
+					return 1;
+				}
 
                 el_ii = (al_matrix_data_t)sqrt(sum);
                 t[i*n+i] = el_ii;
