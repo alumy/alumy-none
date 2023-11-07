@@ -12,15 +12,15 @@ __BEGIN_DECLS
 #define KALMAN_NAME gravity
 #define KALMAN_NUM_STATES 3
 #define KALMAN_NUM_INPUTS 0
-#include "kalman_factory_filter.h"
+#include "alumy/filter/kalman_factory_filter.h"
 
 // create the measurement structure
 #define KALMAN_MEASUREMENT_NAME position
 #define KALMAN_NUM_MEASUREMENTS 1
-#include "kalman_factory_measure.h"
+#include "alumy/filter/kalman_factory_measure.h"
 
 // clean up
-#include "kalman_factory_cleanup.h"
+#include "alumy/filter/kalman_factory_cleanup.h"
 
 TEST_GROUP(filter_kalman);
 

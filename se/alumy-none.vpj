@@ -3184,6 +3184,9 @@
                 </Folder>
                 <Folder Name="filter">
                     <F N="../include/alumy/filter/kalman.h"/>
+                    <F N="../include/alumy/filter/kalman_factory_cleanup.h"/>
+                    <F N="../include/alumy/filter/kalman_factory_filter.h"/>
+                    <F N="../include/alumy/filter/kalman_factory_measure.h"/>
                     <F N="../include/alumy/filter/kalman_matrix.h"/>
                 </Folder>
                 <Folder Name="freemodbus">

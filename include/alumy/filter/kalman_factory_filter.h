@@ -117,8 +117,6 @@
 #define STRINGIFY(x) __STRING2(x)
 #endif
 
-#pragma message("** Instantiating Kalman filter \"" STRINGIFY(KALMAN_NAME) "\" with " STRINGIFY(KALMAN_NUM_STATES) " states and " STRINGIFY(KALMAN_NUM_INPUTS) " inputs")
-
 #ifndef __CONCAT
 #define __CONCAT(x, y)                                  x ## y
 #endif
@@ -151,13 +149,8 @@
 #define __KALMAN_BUFFER_P   KALMAN_BUFFER_NAME(P)
 #define __KALMAN_BUFFER_x   KALMAN_BUFFER_NAME(x)
 
-#pragma message("Creating Kalman filter A buffer: " STRINGIFY(__KALMAN_BUFFER_A))
 static al_matrix_data_t __KALMAN_BUFFER_A[__KALMAN_A_ROWS * __KALMAN_A_COLS];
-
-#pragma message("Creating Kalman filter P buffer: " STRINGIFY(__KALMAN_BUFFER_P))
 static al_matrix_data_t __KALMAN_BUFFER_P[__KALMAN_P_ROWS * __KALMAN_P_COLS];
-
-#pragma message("Creating Kalman filter x buffer: " STRINGIFY(__KALMAN_BUFFER_x))
 static al_matrix_data_t __KALMAN_BUFFER_x[__KALMAN_x_ROWS * __KALMAN_x_COLS];
 
 /************************************************************************/
@@ -170,24 +163,14 @@ static al_matrix_data_t __KALMAN_BUFFER_x[__KALMAN_x_ROWS * __KALMAN_x_COLS];
 #define __KALMAN_BUFFER_Q   KALMAN_BUFFER_NAME(Q)
 #define __KALMAN_BUFFER_u   KALMAN_BUFFER_NAME(u)
 
-#pragma message("Creating Kalman filter B buffer: " STRINGIFY(__KALMAN_BUFFER_B))
 static al_matrix_data_t __KALMAN_BUFFER_B[__KALMAN_B_ROWS * __KALMAN_B_COLS];
-
-#pragma message("Creating Kalman filter Q buffer: " STRINGIFY(__KALMAN_BUFFER_Q))
 static al_matrix_data_t __KALMAN_BUFFER_Q[__KALMAN_Q_ROWS * __KALMAN_Q_COLS];
-
-#pragma message("Creating Kalman filter u buffer: " STRINGIFY(__KALMAN_BUFFER_u))
 static al_matrix_data_t __KALMAN_BUFFER_u[__KALMAN_x_ROWS * __KALMAN_u_COLS];
 
 #else
 
-#pragma message("Skipping Kalman filter B buffer: (zero inputs)")
 #define __KALMAN_BUFFER_B ((al_matrix_data_t*)0)
-
-#pragma message("Skipping Kalman filter Q buffer: (zero inputs)")
 #define __KALMAN_BUFFER_Q ((al_matrix_data_t*)0)
-
-#pragma message("Skipping Kalman filter u buffer: (zero inputs)")
 #define __KALMAN_BUFFER_u ((al_matrix_data_t*)0)
 
 #endif
@@ -205,24 +188,17 @@ static al_matrix_data_t __KALMAN_BUFFER_u[__KALMAN_x_ROWS * __KALMAN_u_COLS];
 
 #define __KALMAN_tempPBQ_size   ((__KALMAN_tempP_size > __KALMAN_tempBQ_size) ? __KALMAN_tempP_size : __KALMAN_tempBQ_size)
 
-#pragma message("Creating Kalman filter aux buffer: " STRINGIFY(__KALMAN_BUFFER_aux))
 static al_matrix_data_t __KALMAN_BUFFER_aux[__KALMAN_aux_size];
-
-#pragma message("Creating Kalman filter temporary P/BQ buffer: " STRINGIFY(__KALMAN_BUFFER_tempPBQ))
 static al_matrix_data_t __KALMAN_BUFFER_tempPBQ[__KALMAN_tempPBQ_size];
 
 /************************************************************************/
 /* Construct Kalman filter                                              */
 /************************************************************************/
 
-#pragma message("Creating Kalman filter structure: " STRINGIFY(KALMAN_STRUCT_NAME))
-
 /*!
 * \brief The Kalman filter structure
 */
 static al_kalman_t KALMAN_STRUCT_NAME;
-
-#pragma message ("Creating Kalman filter initialization function: " STRINGIFY(KALMAN_FUNCTION_NAME(init()) ))
 
 /*!
 * \brief Initializes the Kalman Filter
