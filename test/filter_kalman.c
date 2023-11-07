@@ -43,7 +43,7 @@ static void kalman_gravity_init()
     /* initialize the filter structures                                     */
     /************************************************************************/
     al_kalman_t *kf = kalman_filter_gravity_init();
-    al_kalman_measure_t *kfm = kalman_filter_gravity_measurement_position_init();
+    al_kalman_measure_t *kfm = kalman_filter_gravity_measure_position_init();
 
     /************************************************************************/
     /* set initial state                                                    */
@@ -163,7 +163,7 @@ TEST(filter_kalman, kalman_gravity)
 
     // fetch structures
     al_kalman_t *kf = &kalman_filter_gravity;
-    al_kalman_measure_t *kfm = &kalman_filter_gravity_measurement_position;
+    al_kalman_measure_t *kfm = &kalman_filter_gravity_measure_position;
 
     al_matrix_t *x = al_kalman_get_state_vector(kf);
     al_matrix_t *z = al_kalman_get_measure_vector(kfm);
@@ -197,7 +197,7 @@ TEST(filter_kalman, kalman_gravity_lambda)
 
     // fetch structures
     al_kalman_t *kf = &kalman_filter_gravity;
-    al_kalman_measure_t *kfm = &kalman_filter_gravity_measurement_position;
+    al_kalman_measure_t *kfm = &kalman_filter_gravity_measure_position;
 
     al_matrix_t *x = al_kalman_get_state_vector(kf);
     al_matrix_t *z = al_kalman_get_measure_vector(kfm);

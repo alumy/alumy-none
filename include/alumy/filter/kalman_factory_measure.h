@@ -142,7 +142,7 @@
 /* Name macro                                                           */
 /************************************************************************/
 
-#define KALMAN_MEASUREMENT_BASENAME_HELPER2(basename, measname)                 basename ## _measurement_ ## measname
+#define KALMAN_MEASUREMENT_BASENAME_HELPER2(basename, measname)                 basename ## _measure_ ## measname
 #define KALMAN_MEASUREMENT_BASENAME_HELPER(basename, measname)                  KALMAN_MEASUREMENT_BASENAME_HELPER2(basename, measname)
 #define KALMAN_MEASUREMENT_BASENAME                                             KALMAN_MEASUREMENT_BASENAME_HELPER(KALMAN_FILTER_BASENAME, KALMAN_MEASUREMENT_NAME)
 
@@ -150,11 +150,11 @@
 #define KALMAN_MEASUREMENT_STRUCT_HELPER(name)                                  KALMAN_MEASUREMENT_STRUCT_HELPER2(name)
 #define KALMAN_MEASUREMENT_STRUCT_NAME                                          KALMAN_MEASUREMENT_STRUCT_HELPER(KALMAN_FILTER_BASENAME)
 
-#define KALMAN_MEASUREMENT_FUNCTION_HELPER2(basename, measname, element)        basename ## _measurement_ ## measname ## _ ## element
+#define KALMAN_MEASUREMENT_FUNCTION_HELPER2(basename, measname, element)        basename ## _measure_ ## measname ## _ ## element
 #define KALMAN_MEASUREMENT_FUNCTION_HELPER(basename, measname, element)         KALMAN_MEASUREMENT_FUNCTION_HELPER2(basename, measname, element)
 #define KALMAN_MEASUREMENT_FUNCTION_NAME(action)                                KALMAN_MEASUREMENT_FUNCTION_HELPER(KALMAN_FILTER_BASENAME, KALMAN_MEASUREMENT_NAME, action)
 
-#define KALMAN_MEASUREMENT_BUFFER_HELPER2(basename, measname, element)          basename ## _measurement_ ## measname ## _ ## element ## _buffer
+#define KALMAN_MEASUREMENT_BUFFER_HELPER2(basename, measname, element)          basename ## _measure_ ## measname ## _ ## element ## _buffer
 #define KALMAN_MEASUREMENT_BUFFER_HELPER(basename, measname, element)           KALMAN_MEASUREMENT_BUFFER_HELPER2(basename, measname, element)
 #define KALMAN_MEASUREMENT_BUFFER_NAME(element)                                 KALMAN_MEASUREMENT_BUFFER_HELPER(KALMAN_FILTER_BASENAME, KALMAN_MEASUREMENT_NAME, element)
 
