@@ -94,9 +94,12 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
     link_libraries(rt)
 endif()
 
+link_libraries(m)
+
 add_subdirectory(${PROJECT_SOURCE_DIR}/crc)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lrc)
 add_subdirectory(${PROJECT_SOURCE_DIR}/mem)
+add_subdirectory(${PROJECT_SOURCE_DIR}/math)
 add_subdirectory(${PROJECT_SOURCE_DIR}/string)
 add_subdirectory(${PROJECT_SOURCE_DIR}/bcd)
 add_subdirectory(${PROJECT_SOURCE_DIR}/base64)
@@ -126,6 +129,7 @@ set(objs
 		$<TARGET_OBJECTS:crc>
 		$<TARGET_OBJECTS:lrc>
 		$<TARGET_OBJECTS:mem>
+		$<TARGET_OBJECTS:math>
 		$<TARGET_OBJECTS:string>
 		$<TARGET_OBJECTS:bcd>
 		$<TARGET_OBJECTS:sys>

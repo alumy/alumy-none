@@ -74,6 +74,22 @@
 	#define __ramfunc       __section(".ramfunc")
   #endif
 
+  #ifndef __hot
+	#define __hot			__attribute__ ((hot))
+  #endif
+
+  #ifndef __cold
+	#define __cold			__attribute__ ((cold))
+  #endif
+
+  #ifndef __pure
+	#define __pure			__attribute__ ((pure))
+  #endif
+
+  #ifndef __restrict
+	#define __restrict		__restrict__
+  #endif
+
 #endif /* __GNUC__ */
 
 #if defined (__CC_ARM)
@@ -124,6 +140,22 @@
 
   #ifndef __ramfunc
 	#define __ramfunc       __section(".ramfunc")
+  #endif
+
+  #ifndef __hot
+	#define __hot			__attribute__ ((hot))
+  #endif
+
+  #ifndef __cold
+	#define __cold			__attribute__ ((cold))
+  #endif
+
+  #ifndef __pure
+	#define __pure			__attribute__ ((pure))
+  #endif
+
+  #ifndef __restrict
+	#define __restrict		__restrict__
   #endif
   
 #endif /* __CC_ARM */

@@ -6,6 +6,8 @@
 #include "alumy/base.h"
 #include "alumy/byteorder.h"
 #include "alumy/math/abs.h"
+#include "alumy/math/matrix.h"
+#include "alumy/math/cholesky.h"
 
 __BEGIN_DECLS
 

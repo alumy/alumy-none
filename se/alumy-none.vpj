@@ -3036,6 +3036,7 @@
         <Folder Name="../filter">
             <F N="../filter/CMakeLists.txt"/>
             <F N="../filter/kalman.c"/>
+            <F N="../filter/kalman_matrix.c"/>
         </Folder>
         <Folder Name="../freemodbus">
             <Folder Name="modbus">
@@ -3183,6 +3184,7 @@
                 </Folder>
                 <Folder Name="filter">
                     <F N="../include/alumy/filter/kalman.h"/>
+                    <F N="../include/alumy/filter/kalman_matrix.h"/>
                 </Folder>
                 <Folder Name="freemodbus">
                     <Folder Name="ascii">
@@ -3231,6 +3233,8 @@
                 </Folder>
                 <Folder Name="math">
                     <F N="../include/alumy/math/abs.h"/>
+                    <F N="../include/alumy/math/cholesky.h"/>
+                    <F N="../include/alumy/math/matrix.h"/>
                 </Folder>
                 <Folder Name="net">
                     <F N="../include/alumy/net/inet_addr.h"/>
@@ -3320,6 +3324,11 @@
             <F N="../lzma/Alloc.c"/>
             <F N="../lzma/CMakeLists.txt"/>
             <F N="../lzma/LzmaDec.c"/>
+        </Folder>
+        <Folder Name="../math">
+            <F N="../math/cholesky.c"/>
+            <F N="../math/CMakeLists.txt"/>
+            <F N="../math/matrix.c"/>
         </Folder>
         <Folder Name="../mem">
             <F N="../mem/CMakeLists.txt"/>
@@ -6010,6 +6019,7 @@
             <F N="../test/bitband.c"/>
             <F N="../test/CMakeLists.txt"/>
             <F N="../test/filter.c"/>
+            <F N="../test/math_matrix.c"/>
             <F N="../test/mem.c"/>
             <F N="../test/string.c"/>
             <F N="../test/test.c"/>
