@@ -38,6 +38,18 @@ size_t strlcpy(char *dst, const char *src, size_t siz);
 ssize_t str_add_null(void *dst, size_t dstsz, const void *src, size_t len);
 
 /**
+ * @brief remove the char from string
+ *
+ * @author jack (2023/11/9)
+ *
+ * @param s
+ * @param c
+ *
+ * @return char*
+ */
+char *strrmchr(char *s, char c);
+
+/**
  *
  *
  * @author chenyj (2019/8/9)
