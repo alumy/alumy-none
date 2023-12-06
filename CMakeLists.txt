@@ -224,7 +224,7 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/freemodbus/port/
         FILES_MATCHING PATTERN "port.h")
 		
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/qpn/include/
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/qpn"
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
         FILES_MATCHING PATTERN "qepn.h" PATTERN "qpn_conf.h" PATTERN "qassert.h")
 
 include(InstallRequiredSystemLibraries)
