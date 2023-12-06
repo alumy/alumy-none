@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +22,7 @@
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
  *
+ * 1 tab == 4 spaces!
  */
 
 /*-----------------------------------------------------------
@@ -36,7 +35,6 @@
 
 /* Altera includes. */
 #include "sys/alt_irq.h"
-#include "sys/alt_exceptions.h"
 #include "altera_avalon_timer_regs.h"
 #include "priv/alt_irq_table.h"
 
@@ -47,8 +45,6 @@
 /* Interrupts are enabled. */
 #define portINITIAL_ESTATUS     ( StackType_t ) 0x01 
 
-int _alt_ic_isr_register(alt_u32 ic_id, alt_u32 irq, alt_isr_func isr,
-  void *isr_context, void *flags);
 /*-----------------------------------------------------------*/
 
 /* 
@@ -59,7 +55,7 @@ static void prvSetupTimerInterrupt( void );
 /*
  * Call back for the alarm function.
  */
-void vPortSysTickHandler( void * context);
+void vPortSysTickHandler( void * context, alt_u32 id );
 
 /*-----------------------------------------------------------*/
 
@@ -140,7 +136,7 @@ void vPortEndScheduler( void )
 void prvSetupTimerInterrupt( void )
 {
 	/* Try to register the interrupt handler. */
-	if ( -EINVAL == _alt_ic_isr_register( SYS_CLK_IRQ_INTERRUPT_CONTROLLER_ID, SYS_CLK_IRQ, vPortSysTickHandler, 0x0, 0x0 ) )
+	if ( -EINVAL == alt_irq_register( SYS_CLK_IRQ, 0x0, vPortSysTickHandler ) )
 	{ 
 		/* Failed to install the Interrupt Handler. */
 		asm( "break" );
@@ -159,7 +155,7 @@ void prvSetupTimerInterrupt( void )
 }
 /*-----------------------------------------------------------*/
 
-void vPortSysTickHandler( void * context)
+void vPortSysTickHandler( void * context, alt_u32 id )
 {
 	/* Increment the kernel tick. */
 	if( xTaskIncrementTick() != pdFALSE )
@@ -178,27 +174,25 @@ void vPortSysTickHandler( void * context)
  * kernel has its scheduler started so that contexts are saved and switched 
  * correctly.
  */
-int _alt_ic_isr_register(alt_u32 ic_id, alt_u32 irq, alt_isr_func isr,
-  void *isr_context, void *flags)
+int alt_irq_register( alt_u32 id, void* context, void (*handler)(void*, alt_u32) )
 {
 	int rc = -EINVAL;  
 	alt_irq_context status;
-	int id = irq;             /* IRQ interpreted as the interrupt ID. */
 
 	if (id < ALT_NIRQ)
 	{
 		/* 
 		 * interrupts are disabled while the handler tables are updated to ensure
-		 * that an interrupt doesn't occur while the tables are in an inconsistant
+		 * that an interrupt doesn't occur while the tables are in an inconsistent
 		 * state.
 		 */
 	
 		status = alt_irq_disable_all ();
 	
-		alt_irq[id].handler = isr;
-		alt_irq[id].context = isr_context;
+		alt_irq[id].handler = handler;
+		alt_irq[id].context = context;
 	
-		rc = (isr) ? alt_ic_irq_enable(ic_id, id) : alt_ic_irq_disable(ic_id, id);
+		rc = (handler) ? alt_irq_enable (id): alt_irq_disable (id);
 	
 		/* alt_irq_enable_all(status); This line is removed to prevent the interrupt from being immediately enabled. */
 	}

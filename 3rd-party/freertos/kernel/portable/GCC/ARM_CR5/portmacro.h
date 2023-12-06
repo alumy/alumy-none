@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +22,7 @@
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
  *
+ * 1 tab == 4 spaces!
  */
 
 #ifndef PORTMACRO_H
@@ -116,18 +115,9 @@
  * handler for whichever peripheral is used to generate the RTOS tick. */
     void FreeRTOS_Tick_Handler( void );
 
-/* If configUSE_TASK_FPU_SUPPORT is set to 1 (or left undefined) then tasks are
-created without an FPU context and must call vPortTaskUsesFPU() to give
-themselves an FPU context before using any FPU instructions. If
-configUSE_TASK_FPU_SUPPORT is set to 2 then all tasks will have an FPU context
-by default. */
-#if( configUSE_TASK_FPU_SUPPORT != 2 )
+/* Any task that uses the floating point unit MUST call vPortTaskUsesFPU()
+ * before any floating point instructions are executed. */
     void vPortTaskUsesFPU( void );
-#else
-    /* Each task has an FPU context already, so define this function away to
-    nothing to prevent it being called accidentally. */
-    #define vPortTaskUsesFPU()
-#endif /* configUSE_TASK_FPU_SUPPORT */
     #define portTASK_USES_FLOATING_POINT()    vPortTaskUsesFPU()
 
     #define portLOWEST_INTERRUPT_PRIORITY           ( ( ( uint32_t ) configUNIQUE_INTERRUPT_PRIORITIES ) - 1UL )

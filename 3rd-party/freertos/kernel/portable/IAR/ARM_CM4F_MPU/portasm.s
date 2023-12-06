@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +22,7 @@
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
  *
+ * 1 tab == 4 spaces!
  */
 /* Including FreeRTOSConfig.h here will cause build errors if the header file
 contains code not understood by the assembler - for example the 'extern' keyword.
@@ -70,15 +69,9 @@ xPortPendSVHandler:
 
 	stmdb sp!, {r0, r3}
 	mov r0, #configMAX_SYSCALL_INTERRUPT_PRIORITY
-	#if ( configENABLE_ERRATA_837070_WORKAROUND == 1 )
-		cpsid i /* ARM Cortex-M7 r0p1 Errata 837070 workaround. */
-	#endif
 	msr basepri, r0
 	dsb
 	isb
-	#if ( configENABLE_ERRATA_837070_WORKAROUND == 1 )
-		cpsie i /* ARM Cortex-M7 r0p1 Errata 837070 workaround. */
-	#endif
 	bl vTaskSwitchContext
 	mov r0, #0
 	msr basepri, r0

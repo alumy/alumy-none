@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +22,7 @@
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
  *
+ * 1 tab == 4 spaces!
  */
 
 /* Standard includes. */
@@ -132,8 +131,6 @@ BaseType_t xIsPrivileged( void ) /* __attribute__ (( naked )) */
 {
     __asm volatile
     (
-        "	.syntax unified									\n"
-        "													\n"
         "	mrs r0, control									\n"/* r0 = CONTROL. */
         "	movs r1, #1										\n"/* r1 = 1. */
         "	tst r0, r1										\n"/* Perform r0 & r1 (bitwise AND) and update the conditions flag. */
@@ -154,8 +151,6 @@ void vRaisePrivilege( void ) /* __attribute__ (( naked )) PRIVILEGED_FUNCTION */
 {
     __asm volatile
     (
-        "	.syntax unified									\n"
-        "													\n"
         "	mrs  r0, control								\n"/* Read the CONTROL register. */
         "	movs r1, #1										\n"/* r1 = 1. */
         "	bics r0, r1										\n"/* Clear the bit 0. */
@@ -170,8 +165,6 @@ void vResetPrivilege( void ) /* __attribute__ (( naked )) */
 {
     __asm volatile
     (
-        "	.syntax unified									\n"
-        "													\n"
         "	mrs r0, control									\n"/* r0 = CONTROL. */
         "	movs r1, #1										\n"/* r1 = 1. */
         "	orrs r0, r1										\n"/* r0 = r0 | r1. */
@@ -186,8 +179,6 @@ void vStartFirstTask( void ) /* __attribute__ (( naked )) PRIVILEGED_FUNCTION */
 {
     __asm volatile
     (
-        "	.syntax unified									\n"
-        "													\n"
         "	ldr r0, xVTORConst								\n"/* Use the NVIC offset register to locate the stack. */
         "	ldr r0, [r0]									\n"/* Read the VTOR register which gives the address of vector table. */
         "	ldr r0, [r0]									\n"/* The first entry in vector table is stack pointer. */
@@ -209,8 +200,6 @@ uint32_t ulSetInterruptMask( void ) /* __attribute__(( naked )) PRIVILEGED_FUNCT
 {
     __asm volatile
     (
-        "	.syntax unified									\n"
-        "													\n"
         "	mrs r0, PRIMASK									\n"
         "	cpsid i											\n"
         "	bx lr											\n"
@@ -223,8 +212,6 @@ void vClearInterruptMask( __attribute__( ( unused ) ) uint32_t ulMask ) /* __att
 {
     __asm volatile
     (
-        "	.syntax unified									\n"
-        "													\n"
         "	msr PRIMASK, r0									\n"
         "	bx lr											\n"
         ::: "memory"
@@ -360,8 +347,6 @@ void SVC_Handler( void ) /* __attribute__ (( naked )) PRIVILEGED_FUNCTION */
 {
     __asm volatile
     (
-        "	.syntax unified									\n"
-        "													\n"
         "	movs r0, #4										\n"
         "	mov r1, lr										\n"
         "	tst r0, r1										\n"

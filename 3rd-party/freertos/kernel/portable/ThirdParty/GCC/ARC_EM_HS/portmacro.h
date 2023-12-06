@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
+ * FreeRTOS Kernel V10.4.3
  * Copyright (C) 2020 Synopsys, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -144,6 +142,8 @@ extern volatile unsigned int ulCriticalNesting;
 #if defined( __MW__ )
     extern void task_end_hook( void * pxTCB );
     #define portCLEAN_UP_TCB( pxTCB )    task_end_hook( ( void * ) pxTCB )
+#else
+    #define portCLEAN_UP_TCB( pxTCB )    ( void ) pxTCB
 #endif
 
 void vPortYield( void );

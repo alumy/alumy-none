@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +22,7 @@
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
  *
+ * 1 tab == 4 spaces!
  */
 
 #ifndef PORTMACRO_H
@@ -123,7 +122,7 @@ volatile uint32_t ulCPSR;
 }
 
 #define portSET_INTERRUPT_MASK_FROM_ISR() portINLINE_SET_INTERRUPT_MASK_FROM_ISR()
-#define portCLEAR_INTERRUPT_MASK_FROM_ISR(x)	do { if( x == 0 ) portENABLE_INTERRUPTS(); } while( 0 )
+#define portCLEAR_INTERRUPT_MASK_FROM_ISR(x)	if( x == 0 ) portENABLE_INTERRUPTS()
 
 /*-----------------------------------------------------------*/
 

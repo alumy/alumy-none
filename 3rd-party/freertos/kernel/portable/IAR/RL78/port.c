@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +22,7 @@
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
  *
+ * 1 tab == 4 spaces!
  */
 
 /* Scheduler includes. */
@@ -45,7 +44,7 @@ interrupts don't accidentally become enabled before the scheduler is started. */
  *   |--------------------- Zero Flag set
  *   ---------------------- Global Interrupt Flag set (enabled)
  */
-#define portPSW    ( 0xc6UL )
+#define portPSW		  ( 0xc6UL )
 
 /* The address of the pxCurrentTCB variable, but don't know or need to know its
 type. */
@@ -65,13 +64,21 @@ volatile uint16_t usCriticalNesting = portINITIAL_CRITICAL_NESTING;
 /*-----------------------------------------------------------*/
 
 /*
- * Sets up the periodic ISR used for the RTOS tick.
+ * Sets up the periodic ISR used for the RTOS tick using the interval timer.
+ * The application writer can define configSETUP_TICK_INTERRUPT() (in
+ * FreeRTOSConfig.h) such that their own tick interrupt configuration is used
+ * in place of prvSetupTimerInterrupt().
  */
-extern void vApplicationSetupTimerInterrupt( void );
+static void prvSetupTimerInterrupt( void );
+#ifndef configSETUP_TICK_INTERRUPT
+	/* The user has not provided their own tick interrupt configuration so use
+    the definition in this file (which uses the interval timer). */
+	#define configSETUP_TICK_INTERRUPT() prvSetupTimerInterrupt()
+#endif /* configSETUP_TICK_INTERRUPT */
 
 /*
- * Starts the scheduler by loading the context of the first Task to run.
- * (implemented in portasm.s).
+ * Defined in portasm.s87, this function starts the scheduler by loading the
+ * context of the first task to run.
  */
 extern void vPortStartFirstTask( void );
 
@@ -92,119 +99,182 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 {
 uint32_t *pulLocal;
 
-    /* With large code and large data sizeof( StackType_t ) == 2, and
-    sizeof( StackType_t * ) == 4.  With small code and small data
-    sizeof( StackType_t ) == 2 and sizeof( StackType_t * ) == 2. */
+	/* With large code and large data sizeof( StackType_t ) == 2, and
+	sizeof( StackType_t * ) == 4.  With small code and small data
+	sizeof( StackType_t ) == 2 and sizeof( StackType_t * ) == 2. */
 
-    #if __DATA_MODEL__ == __DATA_MODEL_FAR__
-    {
-        /* Far pointer parameters are passed using the A:DE registers (24-bit).
-        Although they are stored in memory as a 32-bit value.  Hence decrement
-        the stack pointer, so 2 bytes are left for the contents of A, before 
-        storing the pvParameters value. */
-        pxTopOfStack--;
-        pulLocal =  ( uint32_t * ) pxTopOfStack;
-        *pulLocal = ( uint32_t ) pvParameters;
-        pxTopOfStack--;
+	#if __DATA_MODEL__ == __DATA_MODEL_FAR__
+	{
+		/* Parameters are passed in on the stack, and written using a 32-bit value
+		hence a space is left for the second two bytes. */
+		pxTopOfStack--;
 
-        /* The return address is a 32-bit value. So decrement the stack pointer
-        in order to make extra room needed to store the correct value.  See the
-        comments above the prvTaskExitError() prototype at the top of this file. */
-        pxTopOfStack--;
-        pulLocal = ( uint32_t * ) pxTopOfStack;
-        *pulLocal = ( uint32_t ) prvTaskExitError;
-        pxTopOfStack--;
+		/* Write in the parameter value. */
+		pulLocal =  ( uint32_t * ) pxTopOfStack;
+		*pulLocal = ( uint32_t ) pvParameters;
+		pxTopOfStack--;
 
-        /* The task function start address combined with the PSW is also stored
-        as a 32-bit value. So leave a space for the second two bytes. */
-        pxTopOfStack--;
-        pulLocal = ( uint32_t * ) pxTopOfStack;
-        *pulLocal = ( ( ( uint32_t ) pxCode ) | ( portPSW << 24UL ) );
-        pxTopOfStack--;
+		/* The return address, leaving space for the first two bytes of	the
+		32-bit value.  See the comments above the prvTaskExitError() prototype
+		at the top of this file. */
+		pxTopOfStack--;
+		pulLocal = ( uint32_t * ) pxTopOfStack;
+		*pulLocal = ( uint32_t ) prvTaskExitError;
+		pxTopOfStack--;
 
-        /* An initial value for the AX register. */
-        *pxTopOfStack = ( StackType_t ) 0x1111;
-        pxTopOfStack--;
-    }
-    #else
-    {
-        /* The return address, leaving space for the first two bytes of the
-        32-bit value.  See the comments above the prvTaskExitError() prototype
-        at the top of this file. */
-        pxTopOfStack--;
-        pulLocal = ( uint32_t * ) pxTopOfStack;
-        *pulLocal = ( uint32_t ) prvTaskExitError;
-        pxTopOfStack--;
+		/* The start address / PSW value is also written in as a 32-bit value,
+		so leave a space for the second two bytes. */
+		pxTopOfStack--;
 
-        /* Task function.  Again as it is written as a 32-bit value a space is
-        left on the stack for the second two bytes. */
-        pxTopOfStack--;
+		/* Task function start address combined with the PSW. */
+		pulLocal = ( uint32_t * ) pxTopOfStack;
+		*pulLocal = ( ( ( uint32_t ) pxCode ) | ( portPSW << 24UL ) );
+		pxTopOfStack--;
 
-        /* Task function start address combined with the PSW. */
-        pulLocal = ( uint32_t * ) pxTopOfStack;
-        *pulLocal = ( ( ( uint32_t ) pxCode ) | ( portPSW << 24UL ) );
-        pxTopOfStack--;
+		/* An initial value for the AX register. */
+		*pxTopOfStack = ( StackType_t ) 0x1111;
+		pxTopOfStack--;
+	}
+	#else
+	{
+		/* The return address, leaving space for the first two bytes of	the
+		32-bit value.  See the comments above the prvTaskExitError() prototype
+		at the top of this file. */
+		pxTopOfStack--;
+		pulLocal = ( uint32_t * ) pxTopOfStack;
+		*pulLocal = ( uint32_t ) prvTaskExitError;
+		pxTopOfStack--;
 
-        /* The parameter is passed in AX. */
-        *pxTopOfStack = ( StackType_t ) pvParameters;
-        pxTopOfStack--;
-    }
-    #endif
+		/* Task function.  Again as it is written as a 32-bit value a space is
+		left on the stack for the second two bytes. */
+		pxTopOfStack--;
 
-    /* An initial value for the HL register. */
-    *pxTopOfStack = ( StackType_t ) 0x2222;
-    pxTopOfStack--;
+		/* Task function start address combined with the PSW. */
+		pulLocal = ( uint32_t * ) pxTopOfStack;
+		*pulLocal = ( ( ( uint32_t ) pxCode ) | ( portPSW << 24UL ) );
+		pxTopOfStack--;
 
-    /* CS and ES registers. */
-    *pxTopOfStack = ( StackType_t ) 0x0F00;
-    pxTopOfStack--;
+		/* The parameter is passed in AX. */
+		*pxTopOfStack = ( StackType_t ) pvParameters;
+		pxTopOfStack--;
+	}
+	#endif
 
-    /* The remaining general purpose registers DE and BC */
-    *pxTopOfStack = ( StackType_t ) 0xDEDE;
-    pxTopOfStack--;
-    *pxTopOfStack = ( StackType_t ) 0xBCBC;
-    pxTopOfStack--;
+	/* An initial value for the HL register. */
+	*pxTopOfStack = ( StackType_t ) 0x2222;
+	pxTopOfStack--;
 
-    /* Finally the critical section nesting count is set to zero when the task
-    first starts. */
-    *pxTopOfStack = ( StackType_t ) portNO_CRITICAL_SECTION_NESTING;
+	/* CS and ES registers. */
+	*pxTopOfStack = ( StackType_t ) 0x0F00;
+	pxTopOfStack--;
 
-    /* Return a pointer to the top of the stack that has been generated so
-    it can be stored in the task control block for the task. */
-    return pxTopOfStack;
+	/* The remaining general purpose registers DE and BC */
+	*pxTopOfStack = ( StackType_t ) 0xDEDE;
+	pxTopOfStack--;
+	*pxTopOfStack = ( StackType_t ) 0xBCBC;
+	pxTopOfStack--;
+
+	/* Finally the critical section nesting count is set to zero when the task
+	first starts. */
+	*pxTopOfStack = ( StackType_t ) portNO_CRITICAL_SECTION_NESTING;
+
+	/* Return a pointer to the top of the stack that has been generated so it
+	can	be stored in the task control block for the task. */
+	return pxTopOfStack;
 }
 /*-----------------------------------------------------------*/
 
 static void prvTaskExitError( void )
 {
-    /* A function that implements a task must not exit or attempt to return to
-    its caller as there is nothing to return to.  If a task wants to exit it
-    should instead call vTaskDelete( NULL ).
+	/* A function that implements a task must not exit or attempt to return to
+	its caller as there is nothing to return to.  If a task wants to exit it
+	should instead call vTaskDelete( NULL ).
 
-    Artificially force an assert() to be triggered if configASSERT() is
-    defined, then stop here so application writers can catch the error. */
-    configASSERT( usCriticalNesting == ~0U );
-    portDISABLE_INTERRUPTS();
-    for( ;; );
+	Artificially force an assert() to be triggered if configASSERT() is
+	defined, then stop here so application writers can catch the error. */
+	configASSERT( usCriticalNesting == ~0U );
+	portDISABLE_INTERRUPTS();
+	for( ;; );
 }
 /*-----------------------------------------------------------*/
 
 BaseType_t xPortStartScheduler( void )
 {
-    /* Setup the hardware to generate the tick. Interrupts are disabled when
-     this function is called. */
-    vApplicationSetupTimerInterrupt();
+	/* Setup the hardware to generate the tick.  Interrupts are disabled when
+	this function is called. */
+	configSETUP_TICK_INTERRUPT();
 
-    /* Restore the context of the first task that is going to run. */
-    vPortStartFirstTask();
+	/* Restore the context of the first task that is going to run. */
+	vPortStartFirstTask();
 
-    /* Execution should not reach here as the tasks are now running! */
-    return pdTRUE;
+	/* Execution should not reach here as the tasks are now running!
+	prvSetupTimerInterrupt() is called here to prevent the compiler outputting
+	a warning about a statically declared function not being referenced in the
+	case that the application writer has provided their own tick interrupt
+	configuration routine (and defined configSETUP_TICK_INTERRUPT() such that
+	their own routine will be called in place of prvSetupTimerInterrupt()). */
+	prvSetupTimerInterrupt();
+	return pdTRUE;
 }
 /*-----------------------------------------------------------*/
 
 void vPortEndScheduler( void )
 {
-    /* It is unlikely that the RL78 port will get stopped. */
+	/* It is unlikely that the RL78 port will get stopped. */
 }
 /*-----------------------------------------------------------*/
+
+static void prvSetupTimerInterrupt( void )
+{
+const uint16_t usClockHz = 15000UL; /* Internal clock. */
+const uint16_t usCompareMatch = ( usClockHz / configTICK_RATE_HZ ) + 1UL;
+
+	/* Use the internal 15K clock. */
+	OSMC = ( uint8_t ) 0x16;
+
+	#ifdef RTCEN
+	{
+		/* Supply the interval timer clock. */
+		RTCEN = ( uint8_t ) 1U;
+
+		/* Disable INTIT interrupt. */
+		ITMK = ( uint8_t ) 1;
+
+		/* Disable ITMC operation. */
+		ITMC = ( uint8_t ) 0x0000;
+
+		/* Clear INIT interrupt. */
+		ITIF = ( uint8_t ) 0;
+
+		/* Set interval and enable interrupt operation. */
+		ITMC = usCompareMatch | 0x8000U;
+
+		/* Enable INTIT interrupt. */
+		ITMK = ( uint8_t ) 0;
+	}
+	#endif
+
+	#ifdef TMKAEN
+	{
+		/* Supply the interval timer clock. */
+		TMKAEN = ( uint8_t ) 1U;
+
+		/* Disable INTIT interrupt. */
+		TMKAMK = ( uint8_t ) 1;
+
+		/* Disable ITMC operation. */
+		ITMC = ( uint8_t ) 0x0000;
+
+		/* Clear INIT interrupt. */
+		TMKAIF = ( uint8_t ) 0;
+
+		/* Set interval and enable interrupt operation. */
+		ITMC = usCompareMatch | 0x8000U;
+
+		/* Enable INTIT interrupt. */
+		TMKAMK = ( uint8_t ) 0;
+	}
+	#endif
+}
+/*-----------------------------------------------------------*/
+

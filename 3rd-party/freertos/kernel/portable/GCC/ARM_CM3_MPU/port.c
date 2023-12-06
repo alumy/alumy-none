@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -50,11 +48,6 @@
 /* The way the SysTick is clocked is not modified in case it is not the same
  * as the core. */
     #define portNVIC_SYSTICK_CLK    ( 0 )
-#endif
-
-#ifndef configALLOW_UNPRIVILEGED_CRITICAL_SECTIONS
-    #warning "configALLOW_UNPRIVILEGED_CRITICAL_SECTIONS is not defined. We recommend defining it to 0 in FreeRTOSConfig.h for better security."
-    #define configALLOW_UNPRIVILEGED_CRITICAL_SECTIONS    1
 #endif
 
 /* Constants required to access and manipulate the NVIC. */
@@ -165,22 +158,17 @@ BaseType_t xIsPrivileged( void ) __attribute__( ( naked ) );
 void vResetPrivilege( void ) __attribute__( ( naked ) );
 
 /**
- * @brief Enter critical section.
+ * @brief Calls the port specific code to raise the privilege.
+ *
+ * @return pdFALSE if privilege was raised, pdTRUE otherwise.
  */
-#if( configALLOW_UNPRIVILEGED_CRITICAL_SECTIONS == 1 )
-    void vPortEnterCritical( void ) FREERTOS_SYSTEM_CALL;
-#else
-    void vPortEnterCritical( void ) PRIVILEGED_FUNCTION;
-#endif
+extern BaseType_t xPortRaisePrivilege( void );
 
 /**
- * @brief Exit from critical section.
+ * @brief If xRunningPrivileged is not pdTRUE, calls the port specific
+ * code to reset the privilege, otherwise does nothing.
  */
-#if( configALLOW_UNPRIVILEGED_CRITICAL_SECTIONS == 1 )
-    void vPortExitCritical( void ) FREERTOS_SYSTEM_CALL;
-#else
-    void vPortExitCritical( void ) PRIVILEGED_FUNCTION;
-#endif
+extern void vPortResetPrivilege( BaseType_t xRunningPrivileged );
 /*-----------------------------------------------------------*/
 
 /* Each task maintains its own interrupt status in the critical nesting
@@ -369,7 +357,6 @@ static void prvRestoreContextOfFirstTask( void )
         "	ldr r14, =0xfffffffd			\n"/* Load exec return code. */
         "	bx r14							\n"
         "									\n"
-        "	.ltorg							\n"/* Assemble current literal pool to avoid offset-out-of-bound errors with lto. */
         "	.align 4						\n"
         "pxCurrentTCBConst2: .word pxCurrentTCB	\n"
     );
@@ -446,7 +433,7 @@ BaseType_t xPortStartScheduler( void )
              * value. */
             *pucFirstUserPriorityRegister = ulOriginalPriority;
         }
-    #endif /* configASSERT_DEFINED */
+    #endif /* conifgASSERT_DEFINED */
 
     /* Make PendSV and SysTick the same priority as the kernel, and the SVC
      * handler higher priority so it can be used to exit a critical section (where
@@ -494,62 +481,19 @@ void vPortEndScheduler( void )
 
 void vPortEnterCritical( void )
 {
-#if( configALLOW_UNPRIVILEGED_CRITICAL_SECTIONS == 1 )
-    if( portIS_PRIVILEGED() == pdFALSE )
-    {
-        portRAISE_PRIVILEGE();
-        portMEMORY_BARRIER();
+    BaseType_t xRunningPrivileged = xPortRaisePrivilege();
 
-        portDISABLE_INTERRUPTS();
-        uxCriticalNesting++;
-        portMEMORY_BARRIER();
-
-        portRESET_PRIVILEGE();
-        portMEMORY_BARRIER();
-    }
-    else
-    {
-        portDISABLE_INTERRUPTS();
-        uxCriticalNesting++;
-    }
-#else
     portDISABLE_INTERRUPTS();
     uxCriticalNesting++;
-#endif
+
+    vPortResetPrivilege( xRunningPrivileged );
 }
 /*-----------------------------------------------------------*/
 
 void vPortExitCritical( void )
 {
-#if( configALLOW_UNPRIVILEGED_CRITICAL_SECTIONS == 1 )
-    if( portIS_PRIVILEGED() == pdFALSE )
-    {
-        portRAISE_PRIVILEGE();
-        portMEMORY_BARRIER();
+    BaseType_t xRunningPrivileged = xPortRaisePrivilege();
 
-        configASSERT( uxCriticalNesting );
-        uxCriticalNesting--;
-
-        if( uxCriticalNesting == 0 )
-        {
-            portENABLE_INTERRUPTS();
-        }
-        portMEMORY_BARRIER();
-
-        portRESET_PRIVILEGE();
-        portMEMORY_BARRIER();
-    }
-    else
-    {
-        configASSERT( uxCriticalNesting );
-        uxCriticalNesting--;
-
-        if( uxCriticalNesting == 0 )
-        {
-            portENABLE_INTERRUPTS();
-        }
-    }
-#else
     configASSERT( uxCriticalNesting );
     uxCriticalNesting--;
 
@@ -557,7 +501,8 @@ void vPortExitCritical( void )
     {
         portENABLE_INTERRUPTS();
     }
-#endif
+
+    vPortResetPrivilege( xRunningPrivileged );
 }
 /*-----------------------------------------------------------*/
 
@@ -612,7 +557,6 @@ void xPortPendSVHandler( void )
         "	msr psp, r0							\n"
         "	bx r14								\n"
         "										\n"
-        "	.ltorg								\n"/* Assemble current literal pool to avoid offset-out-of-bound errors with lto. */
         "	.align 4							\n"
         "pxCurrentTCBConst: .word pxCurrentTCB	\n"
         ::"i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY )
@@ -694,7 +638,6 @@ static void prvSetupMPU( void )
 
         portMPU_REGION_ATTRIBUTE_REG = ( portMPU_REGION_PRIVILEGED_READ_WRITE ) |
                                        ( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-                                       ( portMPU_REGION_EXECUTE_NEVER ) |
                                        prvGetMPURegionSizeSetting( ( uint32_t ) __privileged_data_end__ - ( uint32_t ) __privileged_data_start__ ) |
                                        ( portMPU_REGION_ENABLE );
 
@@ -789,19 +732,31 @@ void vPortStoreTaskMPUSettings( xMPU_SETTINGS * xMPUSettings,
         xMPUSettings->xRegion[ 0 ].ulRegionBaseAddress =
             ( ( uint32_t ) __SRAM_segment_start__ ) | /* Base address. */
             ( portMPU_REGION_VALID ) |
-            ( portSTACK_REGION ); /* Region number. */
+            ( portSTACK_REGION );
 
         xMPUSettings->xRegion[ 0 ].ulRegionAttribute =
             ( portMPU_REGION_READ_WRITE ) |
             ( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-            ( portMPU_REGION_EXECUTE_NEVER ) |
             ( prvGetMPURegionSizeSetting( ( uint32_t ) __SRAM_segment_end__ - ( uint32_t ) __SRAM_segment_start__ ) ) |
             ( portMPU_REGION_ENABLE );
 
-        /* Invalidate user configurable regions. */
-        for( ul = 1UL; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
+        /* Re-instate the privileged only RAM region as xRegion[ 0 ] will have
+         * just removed the privileged only parameters. */
+        xMPUSettings->xRegion[ 1 ].ulRegionBaseAddress =
+            ( ( uint32_t ) __privileged_data_start__ ) | /* Base address. */
+            ( portMPU_REGION_VALID ) |
+            ( portSTACK_REGION + 1 );
+
+        xMPUSettings->xRegion[ 1 ].ulRegionAttribute =
+            ( portMPU_REGION_PRIVILEGED_READ_WRITE ) |
+            ( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
+            prvGetMPURegionSizeSetting( ( uint32_t ) __privileged_data_end__ - ( uint32_t ) __privileged_data_start__ ) |
+            ( portMPU_REGION_ENABLE );
+
+        /* Invalidate all other regions. */
+        for( ul = 2; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
         {
-            xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( ( ul - 1UL ) | portMPU_REGION_VALID );
+            xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portSTACK_REGION + ul ) | portMPU_REGION_VALID;
             xMPUSettings->xRegion[ ul ].ulRegionAttribute = 0UL;
         }
     }
@@ -820,8 +775,7 @@ void vPortStoreTaskMPUSettings( xMPU_SETTINGS * xMPUSettings,
                 ( portSTACK_REGION ); /* Region number. */
 
             xMPUSettings->xRegion[ 0 ].ulRegionAttribute =
-                ( portMPU_REGION_READ_WRITE ) |
-                ( portMPU_REGION_EXECUTE_NEVER ) |
+                ( portMPU_REGION_READ_WRITE ) | /* Read and write. */
                 ( prvGetMPURegionSizeSetting( ulStackDepth * ( uint32_t ) sizeof( StackType_t ) ) ) |
                 ( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
                 ( portMPU_REGION_ENABLE );
@@ -829,7 +783,7 @@ void vPortStoreTaskMPUSettings( xMPU_SETTINGS * xMPUSettings,
 
         lIndex = 0;
 
-        for( ul = 1UL; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
+        for( ul = 1; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
         {
             if( ( xRegions[ lIndex ] ).ulLengthInBytes > 0UL )
             {
@@ -839,7 +793,7 @@ void vPortStoreTaskMPUSettings( xMPU_SETTINGS * xMPUSettings,
                 xMPUSettings->xRegion[ ul ].ulRegionBaseAddress =
                     ( ( uint32_t ) xRegions[ lIndex ].pvBaseAddress ) |
                     ( portMPU_REGION_VALID ) |
-                    ( ul - 1UL ); /* Region number. */
+                    ( portSTACK_REGION + ul ); /* Region number. */
 
                 xMPUSettings->xRegion[ ul ].ulRegionAttribute =
                     ( prvGetMPURegionSizeSetting( xRegions[ lIndex ].ulLengthInBytes ) ) |
@@ -849,7 +803,7 @@ void vPortStoreTaskMPUSettings( xMPU_SETTINGS * xMPUSettings,
             else
             {
                 /* Invalidate the region. */
-                xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( ( ul - 1UL ) | portMPU_REGION_VALID );
+                xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portSTACK_REGION + ul ) | portMPU_REGION_VALID;
                 xMPUSettings->xRegion[ ul ].ulRegionAttribute = 0UL;
             }
 

@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +22,7 @@
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
  *
+ * 1 tab == 4 spaces!
  */
 
 /*-----------------------------------------------------------
@@ -105,14 +104,9 @@ static XIntc xInterruptControllerInstance;
  *
  * See the portable.h header file.
  */
-#if ( portHAS_STACK_OVERFLOW_CHECKING == 1 )
-StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, StackType_t *pxEndOfStack, TaskFunction_t pxCode, void *pvParameters )
-#else
 StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters )
-#endif
 {
-extern void * _SDA2_BASE_;
-extern void * _SDA_BASE_;
+extern void *_SDA2_BASE_, *_SDA_BASE_;
 const uint32_t ulR2 = ( uint32_t ) &_SDA2_BASE_;
 const uint32_t ulR13 = ( uint32_t ) &_SDA_BASE_;
 extern void _start1( void );
@@ -126,14 +120,6 @@ extern void _start1( void );
 	pxTopOfStack--;
 	*pxTopOfStack = ( StackType_t ) 0x00000000;
 	pxTopOfStack--;
-
-	#if ( portHAS_STACK_OVERFLOW_CHECKING == 1 )
-		/* Store the stack limits. */
-		*pxTopOfStack = (StackType_t) (pxTopOfStack + 3);
-		pxTopOfStack--;
-		*pxTopOfStack = (StackType_t) pxEndOfStack;
-		pxTopOfStack--;
-	#endif
 
 	#if( XPAR_MICROBLAZE_USE_FPU != 0 )
 		/* The FSR value placed in the initial task context is just 0. */
@@ -328,7 +314,7 @@ int32_t lReturn;
 		portEXIT_CRITICAL();
 	}
 
-	configASSERT( lReturn == pdPASS );
+	configASSERT( lReturn );
 }
 /*-----------------------------------------------------------*/
 
@@ -346,7 +332,7 @@ int32_t lReturn;
 		XIntc_Disable( &xInterruptControllerInstance, ucInterruptID );
 	}
 
-	configASSERT( lReturn == pdPASS );
+	configASSERT( lReturn );
 }
 /*-----------------------------------------------------------*/
 
@@ -372,24 +358,6 @@ int32_t lReturn;
 	configASSERT( lReturn == pdPASS );
 
 	return lReturn;
-}
-/*-----------------------------------------------------------*/
-
-void vPortRemoveInterruptHandler( uint8_t ucInterruptID )
-{
-int32_t lReturn;
-
-	/* An API function is provided to remove an interrupt handler because the
-	interrupt controller instance variable is private to this file. */
-
-	lReturn = prvEnsureInterruptControllerIsInitialised();
-
-	if( lReturn == pdPASS )
-	{
-		XIntc_Disconnect( &xInterruptControllerInstance, ucInterruptID );
-	}
-
-	configASSERT( lReturn == pdPASS );
 }
 /*-----------------------------------------------------------*/
 
@@ -488,3 +456,5 @@ int32_t lStatus;
 	return lStatus;
 }
 /*-----------------------------------------------------------*/
+
+

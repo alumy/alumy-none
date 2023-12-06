@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -24,6 +22,7 @@
  * https://www.FreeRTOS.org
  * https://github.com/FreeRTOS
  *
+ * 1 tab == 4 spaces!
  */
 
 	.text
@@ -262,42 +261,6 @@ switch_before_exit:
 	next. */
 	portRESTORE_CONTEXT
 
-/******************************************************************************
- * If the application provides an implementation of vApplicationIRQHandler(),
- * then it will get called directly without saving the FPU registers on
- * interrupt entry, and this weak implementation of
- * vApplicationIRQHandler() will not get called.
- *
- * If the application provides its own implementation of
- * vApplicationFPUSafeIRQHandler() then this implementation of
- * vApplicationIRQHandler() will be called, save the FPU registers, and then
- * call vApplicationFPUSafeIRQHandler().
- *
- * Therefore, if the application writer wants FPU registers to be saved on
- * interrupt entry their IRQ handler must be called
- * vApplicationFPUSafeIRQHandler(), and if the application writer does not want
- * FPU registers to be saved on interrupt entry their IRQ handler must be
- * called vApplicationIRQHandler().
- *****************************************************************************/
-
-.align 4
-.weak vApplicationIRQHandler
-.type vApplicationIRQHandler, %function
-vApplicationIRQHandler:
-	PUSH	{LR}
-	FMRX	R1,  FPSCR
-	VPUSH	{D0-D15}
-	PUSH	{R1}
-
-	LDR		r1, vApplicationFPUSafeIRQHandlerConst
-	BLX		r1
-
-	POP		{R0}
-	VPOP	{D0-D15}
-	VMSR	FPSCR, R0
-
-	POP {PC}
-
 ulICCIARConst:	.word ulICCIAR
 ulICCEOIRConst:	.word ulICCEOIR
 ulICCPMRConst: .word ulICCPMR
@@ -308,7 +271,6 @@ ulMaxAPIPriorityMaskConst: .word ulMaxAPIPriorityMask
 vTaskSwitchContextConst: .word vTaskSwitchContext
 vApplicationIRQHandlerConst: .word vApplicationIRQHandler
 ulPortInterruptNestingConst: .word ulPortInterruptNesting
-vApplicationFPUSafeIRQHandlerConst: .word vApplicationFPUSafeIRQHandler
 
 .end
 

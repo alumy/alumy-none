@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -31,7 +29,7 @@
 
 /* This file redefines API functions to be called through a wrapper macro, but
  * only for ports that are using the MPU. */
-#if ( portUSING_MPU_WRAPPERS == 1 )
+#ifdef portUSING_MPU_WRAPPERS
 
 /* MPU_WRAPPERS_INCLUDED_FROM_API_FILE will be defined when this file is
  * included from queue.c or task.c to prevent it from having an effect within
@@ -46,7 +44,7 @@
  * privileges.
  */
 
-/* Map standard task.h API functions to the MPU equivalents. */
+/* Map standard tasks.h API functions to the MPU equivalents. */
         #define xTaskCreate                            MPU_xTaskCreate
         #define xTaskCreateStatic                      MPU_xTaskCreateStatic
         #define vTaskDelete                            MPU_vTaskDelete
@@ -77,7 +75,6 @@
         #define vTaskList                              MPU_vTaskList
         #define vTaskGetRunTimeStats                   MPU_vTaskGetRunTimeStats
         #define ulTaskGetIdleRunTimeCounter            MPU_ulTaskGetIdleRunTimeCounter
-        #define ulTaskGetIdleRunTimePercent            MPU_ulTaskGetIdleRunTimePercent
         #define xTaskGenericNotify                     MPU_xTaskGenericNotify
         #define xTaskGenericNotifyWait                 MPU_xTaskGenericNotifyWait
         #define ulTaskGenericNotifyTake                MPU_ulTaskGenericNotifyTake
@@ -120,10 +117,13 @@
         #endif
 
 /* Map standard timer.h API functions to the MPU equivalents. */
+        #define xTimerCreate                           MPU_xTimerCreate
+        #define xTimerCreateStatic                     MPU_xTimerCreateStatic
         #define pvTimerGetTimerID                      MPU_pvTimerGetTimerID
         #define vTimerSetTimerID                       MPU_vTimerSetTimerID
         #define xTimerIsTimerActive                    MPU_xTimerIsTimerActive
         #define xTimerGetTimerDaemonTaskHandle         MPU_xTimerGetTimerDaemonTaskHandle
+        #define xTimerPendFunctionCall                 MPU_xTimerPendFunctionCall
         #define pcTimerGetName                         MPU_pcTimerGetName
         #define vTimerSetReloadMode                    MPU_vTimerSetReloadMode
         #define uxTimerGetReloadMode                   MPU_uxTimerGetReloadMode
@@ -177,6 +177,7 @@
     #define PRIVILEGED_FUNCTION
     #define PRIVILEGED_DATA
     #define FREERTOS_SYSTEM_CALL
+    #define portUSING_MPU_WRAPPERS    0
 
 #endif /* portUSING_MPU_WRAPPERS */
 

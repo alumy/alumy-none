@@ -1,8 +1,6 @@
 /*
- * FreeRTOS Kernel V10.5.1
- * Copyright (C) 2021 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
- *
- * SPDX-License-Identifier: MIT
+ * FreeRTOS Kernel V10.4.3
+ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -70,7 +68,6 @@ typedef unsigned long    UBaseType_t;
  * not need to be guarded with a critical section. */
     #define portTICK_TYPE_IS_ATOMIC    1
 #endif
-
 /*-----------------------------------------------------------*/
 
 /* MPU specific constants. */
@@ -172,15 +169,15 @@ typedef unsigned long    UBaseType_t;
     #define configTEX_S_C_B_SRAM          ( 0x07UL )
 #endif
 
-#define portGENERAL_PERIPHERALS_REGION    ( configTOTAL_MPU_REGIONS - 5UL )
-#define portSTACK_REGION                  ( configTOTAL_MPU_REGIONS - 4UL )
-#define portUNPRIVILEGED_FLASH_REGION     ( configTOTAL_MPU_REGIONS - 3UL )
-#define portPRIVILEGED_FLASH_REGION       ( configTOTAL_MPU_REGIONS - 2UL )
-#define portPRIVILEGED_RAM_REGION         ( configTOTAL_MPU_REGIONS - 1UL )
-#define portFIRST_CONFIGURABLE_REGION     ( 0UL )
-#define portLAST_CONFIGURABLE_REGION      ( configTOTAL_MPU_REGIONS - 6UL )
-#define portNUM_CONFIGURABLE_REGIONS      ( configTOTAL_MPU_REGIONS - 5UL )
-#define portTOTAL_NUM_REGIONS_IN_TCB      ( portNUM_CONFIGURABLE_REGIONS + 1 ) /* Plus 1 to create space for the stack region. */
+#define portUNPRIVILEGED_FLASH_REGION     ( 0UL )
+#define portPRIVILEGED_FLASH_REGION       ( 1UL )
+#define portPRIVILEGED_RAM_REGION         ( 2UL )
+#define portGENERAL_PERIPHERALS_REGION    ( 3UL )
+#define portSTACK_REGION                  ( 4UL )
+#define portFIRST_CONFIGURABLE_REGION     ( 5UL )
+#define portTOTAL_NUM_REGIONS             ( configTOTAL_MPU_REGIONS )
+#define portNUM_CONFIGURABLE_REGIONS      ( portTOTAL_NUM_REGIONS - portFIRST_CONFIGURABLE_REGION )
+#define portLAST_CONFIGURABLE_REGION      ( portTOTAL_NUM_REGIONS - 1 )
 
 void vPortSwitchToUserMode( void );
 #define portSWITCH_TO_USER_MODE()    vPortSwitchToUserMode()
@@ -191,9 +188,10 @@ typedef struct MPU_REGION_REGISTERS
     uint32_t ulRegionAttribute;
 } xMPU_REGION_REGISTERS;
 
+/* Plus 1 to create space for the stack region. */
 typedef struct MPU_SETTINGS
 {
-    xMPU_REGION_REGISTERS xRegion[ portTOTAL_NUM_REGIONS_IN_TCB ];
+    xMPU_REGION_REGISTERS xRegion[ portTOTAL_NUM_REGIONS ];
 } xMPU_SETTINGS;
 
 /* Architecture specifics. */
@@ -228,7 +226,7 @@ typedef struct MPU_SETTINGS
 
 #define portNVIC_INT_CTRL_REG     ( *( ( volatile uint32_t * ) 0xe000ed04 ) )
 #define portNVIC_PENDSVSET_BIT    ( 1UL << 28UL )
-#define portEND_SWITCHING_ISR( xSwitchRequired )    do { if( xSwitchRequired ) portNVIC_INT_CTRL_REG = portNVIC_PENDSVSET_BIT; } while( 0 )
+#define portEND_SWITCHING_ISR( xSwitchRequired )    if( xSwitchRequired ) portNVIC_INT_CTRL_REG = portNVIC_PENDSVSET_BIT
 #define portYIELD_FROM_ISR( x )                     portEND_SWITCHING_ISR( x )
 /*-----------------------------------------------------------*/
 
@@ -334,15 +332,9 @@ static portFORCE_INLINE void vPortRaiseBASEPRI( void )
         /* Set BASEPRI to the max syscall priority to effect a critical
          * section. */
 /* *INDENT-OFF* */
-    #if ( configENABLE_ERRATA_837070_WORKAROUND == 1 )
-        cpsid i
-    #endif
         msr basepri, ulNewBASEPRI
         dsb
         isb
-    #if ( configENABLE_ERRATA_837070_WORKAROUND == 1 )
-        cpsie i
-    #endif
 /* *INDENT-ON* */
     }
 }
@@ -372,15 +364,9 @@ static portFORCE_INLINE uint32_t ulPortRaiseBASEPRI( void )
          * section. */
 /* *INDENT-OFF* */
         mrs ulReturn, basepri
-    #if ( configENABLE_ERRATA_837070_WORKAROUND == 1 )
-        cpsid i
-    #endif
         msr basepri, ulNewBASEPRI
         dsb
         isb
-    #if ( configENABLE_ERRATA_837070_WORKAROUND == 1 )
-        cpsie i
-    #endif
 /* *INDENT-ON* */
     }
 
