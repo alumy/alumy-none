@@ -29,8 +29,6 @@
 
 #if MB_MASTER_RTU_ENABLED > 0 || MB_MASTER_ASCII_ENABLED > 0
 /* ----------------------- Variables ----------------------------------------*/
-static USHORT usT35TimeOut50us;
-
 /* ----------------------- static functions ---------------------------------*/
 static void prvvTIMERExpiredISR(void);
 
@@ -38,8 +36,6 @@ static void prvvTIMERExpiredISR(void);
 __weak BOOL xMBMasterPortTimersInit(USHORT usTimeOut50us)
 {
     /* backup T35 ticks */
-    usT35TimeOut50us = usTimeOut50us;
-
     return TRUE;
 }
 
