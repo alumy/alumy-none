@@ -12,6 +12,7 @@ FILE (GLOB_RECURSE ${target}_src
 	${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/rtu/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/port/*.c
+	${CMAKE_CURRENT_SOURCE_DIR}/qpn/src/qfn/qepn.c
 	${CMAKE_CURRENT_SOURCE_DIR}/port/*.c)
 
 add_library(${target} OBJECT ${${target}_src} ${lwipsrc} ${lwipcontribsrc})
@@ -27,4 +28,5 @@ target_include_directories(${target}
 	PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/port
 	PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/rtu
 	PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/ascii
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/qpn/include
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/port/include)
