@@ -20,7 +20,7 @@ git clone https://github.com/alumy/alumy-none.git
 ```
 *  Generate Makefile for gcc
 ```shell
-./cmake_gen.sh gcc.cmake Debug
+./cmake_gen.sh gcc.cmake Debug 1
 ```
 * make and execute test
 ```shell
