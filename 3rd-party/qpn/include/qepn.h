@@ -41,6 +41,7 @@
 #define QEPN_H
 
 #include "alumy.h"
+#include "qpn_conf.h"
 
 /****************************************************************************/
 /*! The current QP version as a decimal constant XXYZ, where XX is a 2-digit
