@@ -64,6 +64,4 @@ typedef int32_t LONG;
 void EnterCriticalSection(void);
 void ExitCriticalSection(void);
 
-extern uint32_t vPortGetIPSR(void);
-
 #endif

@@ -88,6 +88,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/mbedtls-3.2.1/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/letter-shell-3.1.2/src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/lwip-2.1.3/src/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/freemodbus/modbus/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/port/include)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
@@ -210,6 +211,16 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/contrib-2.1.0/
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/port/include/
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/port"
         FILES_MATCHING PATTERN "*.h")
+		
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/freemodbus/modbus/include/
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/freemodbus"
+        FILES_MATCHING 
+		PATTERN "*.h"
+		PATTERN "port/port.h")
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/freemodbus/port/
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/freemodbus"
+        FILES_MATCHING PATTERN "port.h")
 
 include(InstallRequiredSystemLibraries)
 set(CPACK_PACKAGE_VENDOR alumy)
