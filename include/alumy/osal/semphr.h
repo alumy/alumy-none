@@ -14,7 +14,7 @@ typedef void * al_os_mutex_t;
 al_os_sem_t al_os_sem_bin_create(void);
 void al_os_sem_bin_del(al_os_sem_t sem);
 
-al_os_sem_t al_os_sem_count_create(uint_t max_count, uint_t min_count);
+al_os_sem_t al_os_sem_count_create(uint_t max_count, uint_t init_count);
 void al_os_sem_count_del(al_os_sem_t sem);
 
 al_os_mutex_t al_os_mutex_create(void);
