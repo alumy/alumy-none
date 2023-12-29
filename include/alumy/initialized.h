@@ -34,6 +34,11 @@ __static_inline__ bool al_initialized_cleanup(uint32_t *initialized)
     return true;
 }
 
+__static_inline__ bool al_initialized_is_init(uint32_t *initialized)
+{
+    return (*initialized);
+}
+
 __END_DECLS
 
 #endif
