@@ -54,6 +54,7 @@
 #include "alumy/net.h"
 #include "alumy/math.h"
 #include "alumy/osal.h"
+#include "alumy/thread.h"
 
 __BEGIN_DECLS
 

@@ -22,7 +22,7 @@ void al_os_yield_isr(bool_t yield)
 }
 
 int32_t al_os_task_create(al_os_task_t *handle,
-						  const void *name,
+						  const char *name,
 						  uint32_t prio,
 						  uint32_t stack,
 						  void (*func)(void *arg),
