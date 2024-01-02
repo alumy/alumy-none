@@ -38,6 +38,7 @@ int_t al_slip_init(al_slip_t *slip, void *recv_buf, size_t recv_size,
 
 	slip->opt.sl_getc = opt->sl_getc;
 	slip->opt.sl_putc = opt->sl_putc;
+	slip->opt.sl_flush = opt->sl_flush;
 
 	return 0;
 }
@@ -76,6 +77,15 @@ size_t al_slip_write(al_slip_t *slip, const void *data, size_t len)
 
 	set_errno(0);
 	return len;
+}
+
+int_t al_slip_flush(al_slip_t *slip)
+{
+	if (slip->opt.sl_flush) {
+		return slip->opt.sl_flush();
+	}
+
+	return 0;
 }
 
 __static_inline__ size_t al_slip_recv_byte(al_slip_t *slip, int_t c)

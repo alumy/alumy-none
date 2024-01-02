@@ -11,6 +11,7 @@ __BEGIN_DECLS
 typedef struct al_slip_opt {
 	int_t (*sl_putc)(int_t c);
 	int_t (*sl_getc)(void);
+	int_t (*sl_flush)(void);		/* let to NULL, if not need */
 } al_slip_opt_t;
 
 typedef struct al_slip {
@@ -28,6 +29,8 @@ int_t al_slip_init(al_slip_t *slip, void *recv_buf, size_t recv_size,
 				   const al_slip_opt_t *opt);
 
 size_t al_slip_write(al_slip_t *slip, const void *data, size_t len);
+
+int_t al_slip_flush(al_slip_t *slip);
 
 size_t al_slip_recv(al_slip_t *slip);
 
