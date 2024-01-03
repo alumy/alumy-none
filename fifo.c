@@ -76,6 +76,21 @@ size_t al_fifo_len(al_fifo_t *fifo)
     return fifo->in - fifo->out;
 }
 
+bool al_fifo_is_empty(al_fifo_t *fifo)
+{
+	return (al_fifo_len(fifo) == 0);
+}
+
+bool al_fifo_is_full(al_fifo_t *fifo)
+{
+	return (al_fifo_len(fifo) == fifo->size);
+}
+
+size_t al_fifo_size(al_fifo_t *fifo)
+{
+	return fifo->size;
+}
+
 size_t al_fifo_get(al_fifo_t *fifo, uint8_t *data, size_t len)
 {
 	size_t ret;
