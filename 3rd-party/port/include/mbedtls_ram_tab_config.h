@@ -84,5 +84,5 @@
 //#define MBEDTLS_CMAC_C
 
 /* Miscellaneous options */
-/* #define MBEDTLS_AES_ROM_TABLES */
+#define MBEDTLS_AES_FEWER_TABLES
 
