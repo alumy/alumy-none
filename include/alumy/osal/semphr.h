@@ -28,6 +28,10 @@ int_t al_os_sem_give_isr(al_os_sem_t sem, bool_t *yield);
 
 int_t al_os_sem_give(al_os_sem_t sem);
 
+int_t al_os_sem_reset(al_os_sem_t sem);
+
+int_t al_os_sem_reset_isr(al_os_sem_t sem);
+
 int_t al_os_mutex_take(al_os_mutex_t mutex, int_t timeout);
 
 int_t al_os_mutex_take_isr(al_os_mutex_t mutex, bool_t *yield);

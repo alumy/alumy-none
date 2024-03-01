@@ -86,6 +86,24 @@ int_t al_os_sem_give_isr(al_os_sem_t sem, bool_t *yield)
 	return 0;
 }
 
+int_t al_os_sem_reset(al_os_sem_t sem)
+{
+	while (al_os_sem_take(sem, 0) == 0) {
+		;
+	}
+
+	return 0;
+}
+
+int_t al_os_sem_reset_isr(al_os_sem_t sem)
+{
+	while (al_os_sem_take_isr(sem, NULL) == 0) {
+		;
+	}
+
+	return 0;
+}
+
 int_t al_os_mutex_take(al_os_mutex_t mutex, int_t timeout)
 {
 	TickType_t t = (timeout < 0) ? portMAX_DELAY : pdMS_TO_TICKS(timeout);

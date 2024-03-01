@@ -13,5 +13,6 @@
 #include "alumy/driver/gpio.h"
 #include "alumy/driver/flash_header.h"
 #include "alumy/driver/graphics.h"
+#include "alumy/driver/net/at.h"
 
 #endif
