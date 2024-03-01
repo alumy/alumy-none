@@ -227,6 +227,10 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/qpn/include/
         DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
         FILES_MATCHING PATTERN "qepn.h" PATTERN "qpn_conf.h" PATTERN "qassert.h")
 
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src
+	DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/MQTTPacket"
+        FILES_MATCHING PATTERN "*.h")
+
 include(InstallRequiredSystemLibraries)
 set(CPACK_PACKAGE_VENDOR alumy)
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")

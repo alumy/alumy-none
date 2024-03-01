@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <inttypes.h>
 #include "alumy/driver/net/at.h"
 
 /**
@@ -28,7 +29,8 @@ void at_print_raw_cmd(const char *name, const char *buf, size_t size)
 
     for (i = 0; i < size; i += WIDTH_SIZE)
     {
-        printf("[D/AT] %s: %04X-%04X: ", name, i, i + WIDTH_SIZE);
+        printf("[D/AT] %s: %04"PRIXPTR"-%04"PRIXPTR": ",
+			   name, i, i + WIDTH_SIZE);
         for (j = 0; j < WIDTH_SIZE; j++)
         {
             if (i + j < size)

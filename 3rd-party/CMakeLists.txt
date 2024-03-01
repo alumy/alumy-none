@@ -13,11 +13,16 @@ FILE (GLOB_RECURSE ${target}_src
 	${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/port/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/qpn/src/qfn/qepn.c
-	${CMAKE_CURRENT_SOURCE_DIR}/port/*.c)
+	${CMAKE_CURRENT_SOURCE_DIR}/port/*.c
+	${CMAKE_CURRENT_SOURCE_DIR}/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/*.c)
 
 add_library(${target} OBJECT ${${target}_src} ${lwipsrc} ${lwipcontribsrc})
+
 target_compile_options(${target} PRIVATE
-	-Wno-format -Wno-strict-aliasing -Wno-unused-const-variable -Wno-unused-function)
+	-Wno-format -Wno-strict-aliasing -Wno-unused-const-variable -Wno-unused-function
+	-Wno-unused-but-set-variable)
+
+target_compile_definitions(${target} PRIVATE MQTT_CLIENT)
 
 target_include_directories(${target}
 	PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/letter-shell-3.1.2/src
@@ -29,4 +34,7 @@ target_include_directories(${target}
 	PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/rtu
 	PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/ascii
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/qpn/include
-	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/port/include)
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/port/include
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src)
+
+

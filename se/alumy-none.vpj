@@ -2486,6 +2486,93 @@
                 </Folder>
                 <F N="../3rd-party/mbedtls-3.2.1/CMakeLists.txt"/>
             </Folder>
+            <Folder Name="paho.mqtt.embedded-c-1.1.0">
+                <Folder Name="MQTTClient">
+                    <Folder Name="src">
+                        <Folder Name="arduino">
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient/src/arduino/Countdown.h"/>
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient/src/arduino/IPStack.h"/>
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient/src/arduino/WifiIPStack.h"/>
+                        </Folder>
+                        <Folder Name="mbed">
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient/src/mbed/MQTTEthernet.h"/>
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient/src/mbed/MQTTSocket.h"/>
+                        </Folder>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient/src/FP.h"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient/src/MQTTClient.h"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient/src/MQTTLogging.h"/>
+                    </Folder>
+                </Folder>
+                <Folder Name="MQTTClient-C">
+                    <Folder Name="samples">
+                        <Folder Name="FreeRTOS">
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/samples/FreeRTOS/MQTTEcho.c"/>
+                        </Folder>
+                        <Folder Name="linux">
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/samples/linux/stdoutsub.c"/>
+                        </Folder>
+                    </Folder>
+                    <Folder Name="src">
+                        <Folder Name="cc3200">
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/src/cc3200/MQTTCC3200.c"/>
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/src/cc3200/MQTTCC3200.h"/>
+                        </Folder>
+                        <Folder Name="FreeRTOS">
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/src/FreeRTOS/MQTTFreeRTOS.c"/>
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/src/FreeRTOS/MQTTFreeRTOS.h"/>
+                        </Folder>
+                        <Folder Name="linux">
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/src/linux/MQTTLinux.c"/>
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/src/linux/MQTTLinux.h"/>
+                        </Folder>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/src/MQTTClient.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/src/MQTTClient.h"/>
+                    </Folder>
+                    <Folder Name="test">
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTClient-C/test/test1.c"/>
+                    </Folder>
+                </Folder>
+                <Folder Name="MQTTPacket">
+                    <Folder Name="samples">
+                        <Folder Name="baremetalserial">
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/baremetalserial/ping_nb.c"/>
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/baremetalserial/pub0sub1_nb.c"/>
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/baremetalserial/transport.c"/>
+                            <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/baremetalserial/transport.h"/>
+                        </Folder>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/null.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/ping.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/ping_nb.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/pub0sub1.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/pub0sub1_nb.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/qos0pub.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/transport.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/samples/transport.h"/>
+                    </Folder>
+                    <Folder Name="src">
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTConnect.h"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTConnectClient.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTConnectServer.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTDeserializePublish.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTFormat.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTFormat.h"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTPacket.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTPacket.h"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTPublish.h"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTSerializePublish.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTSubscribe.h"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTSubscribeClient.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTSubscribeServer.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTUnsubscribe.h"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTUnsubscribeClient.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/MQTTUnsubscribeServer.c"/>
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/StackTrace.h"/>
+                    </Folder>
+                    <Folder Name="test">
+                        <F N="../3rd-party/paho.mqtt.embedded-c-1.1.0/MQTTPacket/test/test1.c"/>
+                    </Folder>
+                </Folder>
+            </Folder>
             <Folder Name="port">
                 <Folder Name="include">
                     <Folder Name="arch">
@@ -2502,6 +2589,7 @@
                     <F N="../3rd-party/port/include/ethernetif.h"/>
                     <F N="../3rd-party/port/include/lwipopts.h"/>
                     <F N="../3rd-party/port/include/mbedtls_config.h"/>
+                    <F N="../3rd-party/port/include/mbedtls_ram_tab_config.h"/>
                 </Folder>
                 <F N="../3rd-party/port/app_ethernet.c"/>
                 <F N="../3rd-party/port/ethernetif.c"/>
@@ -3089,6 +3177,15 @@
             <F N="../bcd/bcd.c"/>
             <F N="../bcd/CMakeLists.txt"/>
         </Folder>
+        <Folder Name="../build">
+            <Folder Name="CMakeFiles">
+                <Folder Name="3.25.2">
+                    <Folder Name="CompilerIdC">
+                        <F N="../build/CMakeFiles/3.25.2/CompilerIdC/CMakeCCompilerId.c"/>
+                    </Folder>
+                </Folder>
+            </Folder>
+        </Folder>
         <Folder Name="../cjson">
             <F N="../cjson/cJSON.c"/>
             <F N="../cjson/cJSON_Utils.c"/>
@@ -3484,6 +3581,12 @@
             <Folder Name="eeprom">
                 <F N="../driver/eeprom/bl24cxx.c"/>
             </Folder>
+            <Folder Name="net">
+                <Folder Name="at">
+                    <F N="../driver/net/at/at_client.c"/>
+                    <F N="../driver/net/at/at_utils.c"/>
+                </Folder>
+            </Folder>
             <Folder Name="rtc">
                 <F N="../driver/rtc/bm8563.c"/>
                 <F N="../driver/rtc/ds1302.c"/>
@@ -3593,6 +3696,9 @@
                     <Folder Name="graphics">
                         <F N="../include/alumy/driver/graphics/rgb.h"/>
                     </Folder>
+                    <Folder Name="net">
+                        <F N="../include/alumy/driver/net/at.h"/>
+                    </Folder>
                     <Folder Name="rtc">
                         <F N="../include/alumy/driver/rtc/bm8563.h"/>
                         <F N="../include/alumy/driver/rtc/ds1302.h"/>
@@ -3664,6 +3770,9 @@
                     <F N="../include/alumy/osal/tick.h"/>
                     <F N="../include/alumy/osal/timer.h"/>
                 </Folder>
+                <Folder Name="thread">
+                    <F N="../include/alumy/thread/worker.h"/>
+                </Folder>
                 <Folder Name="time">
                     <F N="../include/alumy/time/tick.h"/>
                     <F N="../include/alumy/time/uptime.h"/>
@@ -3714,6 +3823,7 @@
                 <F N="../include/alumy/svn_revision.h"/>
                 <F N="../include/alumy/svn_revision.h.in"/>
                 <F N="../include/alumy/test_init.h"/>
+                <F N="../include/alumy/thread.h"/>
                 <F N="../include/alumy/time.h"/>
                 <F N="../include/alumy/types.h"/>
                 <F N="../include/alumy/version.h"/>
@@ -6442,6 +6552,9 @@
             <F N="../test/string.c"/>
             <F N="../test/test.c"/>
             <F N="../test/test.h"/>
+        </Folder>
+        <Folder Name="../thread">
+            <F N="../thread/worker.c"/>
         </Folder>
         <Folder Name="../time">
             <F N="../time/CMakeLists.txt"/>
