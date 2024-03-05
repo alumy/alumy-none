@@ -80,9 +80,10 @@ struct at_urc_table
 typedef struct at_urc *at_urc_table_t;
 
 typedef struct at_client_opt {
-	int_t (*ac_getc)(int32_t timeout);
+	int_t (*ac_getc)(int_t timeout);
 	int_t (*ac_putc)(int_t c);
 	ssize_t (*ac_send)(const void *data, size_t len);
+	ssize_t (*ac_recv)(void *buf, size_t bufsz, int_t timeout);
 } at_client_opt_t;
 
 struct at_client

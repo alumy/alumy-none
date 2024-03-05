@@ -10,6 +10,7 @@
 __BEGIN_DECLS
 
 typedef void * al_os_task_t;
+typedef uint64_t al_os_timeout_t;
 
 void al_os_delay(int32_t ms);
 void al_os_delay_until(al_os_tick_t *prev, int32_t ms);
@@ -23,6 +24,12 @@ int32_t al_os_task_create(al_os_task_t *handle,
 						  void *arg);
 
 int32_t al_os_task_delete(al_os_task_t handle);
+
+uint32_t al_os_task_get_prio(al_os_task_t handle);
+
+void al_os_set_timeout_state(al_os_timeout_t *timeout);
+
+bool_t al_os_check_timeout(al_os_timeout_t *timeout, al_os_tick_t *tick);
 
 __END_DECLS
 

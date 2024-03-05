@@ -25,4 +25,9 @@ al_os_tick_t al_os_ms2tick(uint32_t ms)
 	return pdMS_TO_TICKS(ms);
 }
 
+uint32_t al_os_tick2ms(al_os_tick_t tick)
+{
+	return tick * portTICK_PERIOD_MS;
+}
+
 __END_DECLS

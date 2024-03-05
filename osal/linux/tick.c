@@ -21,4 +21,9 @@ al_os_tick_t al_os_ms2tick(uint32_t ms)
 	return ms;
 }
 
+uint32_t al_os_tick2ms(al_os_tick_t tick)
+{
+	return tick;
+}
+
 __END_DECLS

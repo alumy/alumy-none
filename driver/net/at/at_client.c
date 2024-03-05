@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include "alumy/config.h"
 #include "alumy/driver/net/at.h"
 #include "alumy/log.h"
 #include "alumy/check.h"
@@ -34,8 +35,8 @@ const char *at_client_get_last_cmd(at_client_t client, size_t *cmd_size)
 
 size_t at_client_vprintf(at_client_t client, const char *format, va_list args)
 {
-    size_t len = vsnprintf(client->send_buf, sizeof(client->send_buf) - 2,
-                           format, args);
+	size_t len = vsnprintf(client->send_buf, client->send_bufsz - 2,
+						   format, args);
 	if (len == 0) {
         return 0;
 	}
@@ -46,7 +47,7 @@ size_t at_client_vprintf(at_client_t client, const char *format, va_list args)
 	client->last_cmd_len = len;
 
 #ifdef AT_PRINT_RAW_CMD
-    at_print_raw_cmd("sendline", send_buf, len);
+    at_print_raw_cmd("sendline", client->send_buf, len);
 #endif
 
 	return client->opt->ac_send(client->send_buf, client->last_cmd_len);

@@ -13,6 +13,7 @@ typedef uint32_t al_os_tick_t;
 al_os_tick_t al_os_get_tick(void);
 al_os_tick_t al_os_get_tick_isr(void);
 al_os_tick_t al_os_ms2tick(uint32_t ms);
+uint32_t al_os_tick2ms(al_os_tick_t tick);
 
 __END_DECLS
 
