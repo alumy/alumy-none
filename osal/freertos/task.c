@@ -59,7 +59,7 @@ int32_t al_os_task_delete(al_os_task_t handle)
 
 uint32_t al_os_task_get_prio(al_os_task_t handle)
 {
-	return uxTaskPriorityGet((TaskHandle_t *)handle);
+	return uxTaskPriorityGet(handle);
 }
 
 void al_os_set_timeout_state(al_os_timeout_t *timeout)
@@ -77,7 +77,7 @@ bool_t al_os_check_timeout(al_os_timeout_t *timeout, al_os_tick_t *tick)
 	BUILD_BUG_ON(sizeof(al_os_timeout_t) < sizeof(TimeOut_t));
 	BUILD_BUG_ON(sizeof(al_os_tick_t) < sizeof(TickType_t));
 
-	ret = xTaskCheckForTimeOut((TimeOut_t *)timeout, (TickType_t *)ticks);
+	ret = xTaskCheckForTimeOut((TimeOut_t *)timeout, (TickType_t *)tick);
 	return (ret == pdTRUE) ? 0 : -1;
 }
 
