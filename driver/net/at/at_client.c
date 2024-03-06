@@ -862,7 +862,7 @@ __exit:
  *        -5 : no memory
  */
 int at_client_init(at_client_t client, size_t recv_bufsz, size_t send_bufsz, 
-					const at_client_opt_t *opt)
+					const at_client_opt_t *opt, void *user_data)
 {
     int result = 0;
 
@@ -873,6 +873,7 @@ int at_client_init(at_client_t client, size_t recv_bufsz, size_t send_bufsz,
 	client->opt = opt;
     client->recv_bufsz = recv_bufsz;
     client->send_bufsz = send_bufsz;
+	client->user_data = user_data;
 
     result = at_client_para_init(client);
     if (result != 0)

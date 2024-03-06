@@ -7,6 +7,7 @@
 #include "alumy/osal/tick.h"
 #include "alumy/osal/task.h"
 #include "alumy/osal/heap.h"
+#include "alumy/osal/streambuffer.h"
 
 #endif
 
