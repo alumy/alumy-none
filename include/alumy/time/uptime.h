@@ -8,7 +8,15 @@
 
 __BEGIN_DECLS
 
+typedef struct al_uptime {
+	uint32_t days;
+	uint_t hours;
+	uint_t mins;
+} al_uptime_t;
+
 uint32_t al_uptime(void);
+
+void al_uptime_get(al_uptime_t *up);
 
 __END_DECLS
 
