@@ -14,6 +14,7 @@
 #include "alumy/log.h"
 #include "alumy/errno.h"
 #include "alumy/bug.h"
+#include "alumy/check.h"
 
 __BEGIN_DECLS
 
