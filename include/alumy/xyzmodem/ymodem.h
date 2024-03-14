@@ -77,6 +77,7 @@ typedef struct al_ymodem {
     time_t timeout;
     int32_t timeout_cnt;
 	uint32_t wait_ack_timeout;
+	bool send_packet_1k;
     al_ymodem_finish_reason_t finish_reason;
     const al_ymodem_callback_t *callback;
     const al_ymodem_opt_t *opt;
@@ -95,6 +96,8 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
                             const void *data, size_t file_size);
 
 int32_t al_ymodem_set_ack_wait_timeout(al_ymodem_t *ym, uint32_t timeout);
+
+int32_t al_ymodem_set_send_packet_1k(al_ymodem_t *ym, bool send_1k);
 
 __END_DECLS
 

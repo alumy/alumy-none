@@ -207,6 +207,7 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     ym->callback = cb;
     ym->session = false;
 	ym->wait_ack_timeout = YMODEM_ACK_WAIT_TIMEOUT_DFT;
+	ym->send_packet_1k = false;
 
     return 0;
 }
@@ -622,17 +623,19 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
     ssize_t remain = file_size;
     const uint8_t *p = (const uint8_t *)data;
 
-    while (remain >= YMODEM_PACKET_SIZE_1K) {
-        len = YMODEM_PACKET_SIZE_1K;
-        ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
-                                    ym->send_seq, 0x1A, p, len);
-        if (ret < 0) {
-            return -1;
-        }
+	if (ym->send_packet_1k) {
+		while (remain >= YMODEM_PACKET_SIZE_1K) {
+			len = YMODEM_PACKET_SIZE_1K;
+			ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
+										ym->send_seq, 0x1A, p, len);
+			if (ret < 0) {
+				return -1;
+			}
 
-        remain -= YMODEM_PACKET_SIZE_1K;
-        p += YMODEM_PACKET_SIZE_1K;
-    }
+			remain -= YMODEM_PACKET_SIZE_1K;
+			p += YMODEM_PACKET_SIZE_1K;
+		}
+	}
 
     while (remain >= YMODEM_PACKET_SIZE_128) {
         len = YMODEM_PACKET_SIZE_128;
@@ -667,7 +670,18 @@ int32_t al_ymodem_wait_send(al_ymodem_t *ym)
 
 int32_t al_ymodem_set_ack_wait_timeout(al_ymodem_t *ym, uint32_t timeout)
 {
+	AL_CHECK_RET(ym, EINVAL, -1);
+
 	ym->wait_ack_timeout = timeout;
+
+	return 0;
+}
+
+int32_t al_ymodem_set_send_packet_1k(al_ymodem_t *ym, bool send_1k)
+{
+	AL_CHECK_RET(ym, EINVAL, -1);
+
+	ym->send_packet_1k = send_1k;
 
 	return 0;
 }
