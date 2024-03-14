@@ -4,11 +4,12 @@
 #include "alumy/config.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
+#include "alumy/check.h"
 
 __BEGIN_DECLS
 
 #define AL_UART_WIDTH_MS(baud, bits, bytes)		\
-	(1000 * (bits) * (bytes) / (baud))
+	((baud) > 0 ? 1000 * (bits) * (bytes) / (baud) : 0)
 
 typedef enum al_rs485_dir {
     AL_RS485_IN = 0,
