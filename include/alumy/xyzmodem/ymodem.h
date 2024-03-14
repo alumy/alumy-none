@@ -17,6 +17,7 @@ __BEGIN_DECLS
 #define YMODEM_PACKET_SIZE_1K       (1024)
 
 #define YMODEM_ACK_WAIT_TIMEOUT_DFT		(500)	/* ms */
+#define YMODEM_GETC_TIMEOUT_DFT			(10)	/* ms */
 
 #define YMODEM_TOTAL_LEN(pack_size)     \
     ((pack_size) + YMODEM_HEADER_SIZE + YMODEM_END_SIZE)
@@ -52,7 +53,7 @@ typedef struct al_ymodem_callback {
 
 typedef struct al_ymodem_opt {
     int32_t (*ym_putc)(int32_t c);
-    int32_t (*ym_getc)(void);
+    int32_t (*ym_getc)(int32_t timeout);
 	void (*ym_flush)(void);
     ssize_t (*recv)(void *buf, size_t size);
     int32_t (*recv_clear)(void);
@@ -78,6 +79,7 @@ typedef struct al_ymodem {
     time_t timeout;
     int32_t timeout_cnt;
 	uint32_t wait_ack_timeout;
+	uint32_t getc_timeout;
 	bool send_packet_1k;
     al_ymodem_finish_reason_t finish_reason;
     const al_ymodem_callback_t *callback;
@@ -97,6 +99,8 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
                             const void *data, size_t file_size);
 
 int32_t al_ymodem_set_ack_wait_timeout(al_ymodem_t *ym, uint32_t timeout);
+
+int32_t al_ymodem_set_getc_timeout(al_ymodem_t *ym, uint32_t timeout);
 
 int32_t al_ymodem_set_send_packet_1k(al_ymodem_t *ym, bool send_1k);
 

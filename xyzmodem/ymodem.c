@@ -65,7 +65,7 @@ static ssize_t ymodem_recv_pkg(al_ymodem_t *ym)
         {
             ym->recv_wp = 0;
 
-            int32_t c = ym->opt->ym_getc();
+            int32_t c = ym->opt->ym_getc(ym->getc_timeout);
             switch (c) {
                 case AL_EOF:
                     break;
@@ -209,6 +209,7 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     ym->callback = cb;
     ym->session = false;
     ym->wait_ack_timeout = YMODEM_ACK_WAIT_TIMEOUT_DFT;
+	ym->getc_timeout = YMODEM_GETC_TIMEOUT_DFT;
     ym->send_packet_1k = true;
 
     return 0;
@@ -511,9 +512,7 @@ static int32_t al_ymodem_send_check_ack(al_ymodem_t *ym, uint8_t expect)
 	uint32_t t_end = ym->opt->tick_ms() + ym->wait_ack_timeout;
 
 	while (ym->opt->tick_ms() < t_end) {
-		ym->opt->delay_ms(10);
-
-		c = ym->opt->ym_getc();
+		c = ym->opt->ym_getc(ym->getc_timeout);
 
 		if (c == expect) {
 			return 0;
@@ -663,7 +662,7 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
 
 int32_t al_ymodem_wait_send(al_ymodem_t *ym)
 {
-    if (ym->opt->ym_getc() != 'C') {
+    if (ym->opt->ym_getc(ym->getc_timeout) != 'C') {
         return -1;
     }
 
@@ -675,6 +674,15 @@ int32_t al_ymodem_set_ack_wait_timeout(al_ymodem_t *ym, uint32_t timeout)
 	AL_CHECK_RET(ym, EINVAL, -1);
 
 	ym->wait_ack_timeout = timeout;
+
+	return 0;
+}
+
+int32_t al_ymodem_set_getc_timeout(al_ymodem_t *ym, uint32_t timeout)
+{
+	AL_CHECK_RET(ym, EINVAL, -1);
+
+	ym->getc_timeout = timeout;
 
 	return 0;
 }
