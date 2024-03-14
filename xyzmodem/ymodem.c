@@ -194,6 +194,7 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     BUG_ON(cb->recv_finish == NULL);
     BUG_ON(opt->ym_putc == NULL);
     BUG_ON(opt->ym_getc == NULL);
+    BUG_ON(opt->ym_flush == NULL);
     BUG_ON(opt->recv == NULL);
     BUG_ON(opt->uptime == NULL);
     BUG_ON(opt->delay_ms == NULL);
@@ -581,6 +582,8 @@ static ssize_t __al_ymodem_send_packet(al_ymodem_t *ym,
     ym->opt->ym_putc((crc & 0xFF00) >> 8);
     ym->opt->ym_putc(crc & 0x00FF);
 
+	ym->opt->ym_flush();
+
     ym->opt->set_dir(AL_RS485_IN);
 
     total_len += 2;
@@ -595,8 +598,6 @@ static int32_t al_ymodem_send_packet(al_ymodem_t *ym,
     int32_t i = 0;
 
     for (i = 0; i < YMODEM_RETRANS_CNT; ++i) {
-        AL_BIN_D(1, data, len);
-
         if (__al_ymodem_send_packet(ym, header, seq, fill, data, len) <= 0) {
             return -1;
         }

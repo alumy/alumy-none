@@ -53,6 +53,7 @@ typedef struct al_ymodem_callback {
 typedef struct al_ymodem_opt {
     int32_t (*ym_putc)(int32_t c);
     int32_t (*ym_getc)(void);
+	void (*ym_flush)(void);
     ssize_t (*recv)(void *buf, size_t size);
     int32_t (*recv_clear)(void);
     void (*set_dir)(al_rs485_dir_t dir);
