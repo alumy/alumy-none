@@ -197,7 +197,7 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     BUG_ON(opt->recv == NULL);
     BUG_ON(opt->uptime == NULL);
     BUG_ON(opt->delay_ms == NULL);
-	BUG_ON(opt->tick_ms == NULL);
+    BUG_ON(opt->tick_ms == NULL);
 
     ym->recv_buf = recv_buf;
     ym->recv_bufsz = recv_bufsz;
@@ -207,8 +207,8 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     ym->opt = opt;
     ym->callback = cb;
     ym->session = false;
-	ym->wait_ack_timeout = YMODEM_ACK_WAIT_TIMEOUT_DFT;
-	ym->send_packet_1k = false;
+    ym->wait_ack_timeout = YMODEM_ACK_WAIT_TIMEOUT_DFT;
+    ym->send_packet_1k = true;
 
     return 0;
 }
