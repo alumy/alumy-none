@@ -7,6 +7,9 @@
 
 __BEGIN_DECLS
 
+#define AL_UART_WIDTH_MS(baud, bits, bytes)		\
+	(1000 * (bits) * (bytes) / (baud))
+
 typedef enum al_rs485_dir {
     AL_RS485_IN = 0,
     AL_RS485_OUT
