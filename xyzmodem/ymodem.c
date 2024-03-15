@@ -551,8 +551,6 @@ static ssize_t __al_ymodem_send_packet(al_ymodem_t *ym,
         return -1;
     }
 
-    ym->opt->set_dir(AL_RS485_OUT);
-
     ym->opt->ym_putc(header);
     ym->opt->ym_putc(seq);
     ym->opt->ym_putc(~seq);
@@ -582,8 +580,6 @@ static ssize_t __al_ymodem_send_packet(al_ymodem_t *ym,
     ym->opt->ym_putc(crc & 0x00FF);
 
 	ym->opt->ym_flush();
-
-    ym->opt->set_dir(AL_RS485_IN);
 
     total_len += 2;
 
@@ -741,11 +737,11 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
         return -1;
     }
 
-    al_ymodem_send_file_data(ym, file_name, data, file_size);
+    if (al_ymodem_send_file_data(ym, file_name, data, file_size) != 0) {
+        AL_ERROR(1, "al_ymodem_send_file_data failed @ %s:%d",
+                 __FILE__, __LINE__);	}
 
-    ym->opt->set_dir(AL_RS485_OUT);
     ym->opt->ym_putc(AL_EOT);
-    ym->opt->set_dir(AL_RS485_IN);
 
     if (al_ymodem_send_check_ack(ym, AL_NAK) != 0) {
         AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
@@ -753,9 +749,7 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
         return -1;
     }
 
-    ym->opt->set_dir(AL_RS485_OUT);
     ym->opt->ym_putc(AL_EOT);
-    ym->opt->set_dir(AL_RS485_IN);
 
     if (al_ymodem_send_check_ack(ym, AL_ACK) != 0) {
         AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",

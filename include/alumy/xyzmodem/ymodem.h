@@ -57,7 +57,6 @@ typedef struct al_ymodem_opt {
 	void (*ym_flush)(void);
     ssize_t (*recv)(void *buf, size_t size);
     int32_t (*recv_clear)(void);
-    void (*set_dir)(al_rs485_dir_t dir);
     time_t (*uptime)(void);
 	uint32_t (*tick_ms)(void);
     void (*delay_ms)(int32_t ms);
