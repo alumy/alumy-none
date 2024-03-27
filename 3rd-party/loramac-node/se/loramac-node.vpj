@@ -1,0 +1,2085 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+    Version="10.0"
+    VendorName="SlickEdit"
+    TemplateName="GNU C/C++"
+    WorkingDir="."
+    BuildSystem="vsbuild">
+    <Config
+        Name="Debug"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        Version="1"
+        OutputFile="%bdloramac-node.exe"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                OutputExts="*.o"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='gcc -c %xup  %defd -g -o "%bd%n%oe" %i "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                ShowOnMenu="Never"
+                Dialog="_gnuc_options_form Link"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='gcc %xup -g -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="GNU C Options"
+                MenuCaption="GNU C &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="gnucoptions"
+                    Type="Slick-C"/>
+            </Target>
+        </Menu>
+        <Rules Name="Compile">
+            <Rule
+                InputExts="*.ada"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -g -c -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.adb"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -g -c -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.f"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gfortran -c -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.f90"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gfortran -c -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.d"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gdc -c -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+        </Rules>
+        <List Name="GNUC Options">
+            <Item
+                Name="LinkerOutputType"
+                Value="Executable"/>
+        </List>
+    </Config>
+    <Config
+        Name="Release"
+        Type="gnuc"
+        DebugCallbackName="gdb"
+        Version="1"
+        OutputFile="%bdloramac-node.exe"
+        CompilerConfigName="Latest Version">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                OutputExts="*.o"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='gcc -c %xup %defd -o "%bd%n%oe" %i "%f"'/>
+            </Target>
+            <Target
+                Name="Link"
+                MenuCaption="&amp;Link"
+                ShowOnMenu="Never"
+                Dialog="_gnuc_options_form Link"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec CmdLine='gcc %xup -o "%o" %f %libs'/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t build'/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                Dialog="_gnuc_options_form Compile"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%(VSLICKBIN1)vsbuild" "%w" "%r" -t rebuild'/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='vsdebugio -prog "%o"'/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                Dialog="_gnuc_options_form Run/Debug"
+                BuildFirst="1"
+                CaptureOutputWith="ProcessBuffer"
+                Deletable="0"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec CmdLine='"%o"'/>
+            </Target>
+            <Target
+                Name="dash"
+                MenuCaption="-"
+                Deletable="0">
+                <Exec/>
+            </Target>
+            <Target
+                Name="GNU C Options"
+                MenuCaption="GNU C &amp;Options..."
+                ShowOnMenu="HideIfNoCmdLine"
+                Deletable="0"
+                SaveOption="SaveNone">
+                <Exec
+                    CmdLine="gnucoptions"
+                    Type="Slick-C"/>
+            </Target>
+        </Menu>
+        <Rules Name="Compile">
+            <Rule
+                InputExts="*.ada"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.adb"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gnat -O -c -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.f"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gfortran -O -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.f90"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gfortran -O -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+            <Rule
+                InputExts="*.d"
+                OutputExts="*.o"
+                LinkObject="1">
+                <Exec CmdLine='gdc -c -g -o "%bd%n.o" "%f"'/>
+            </Rule>
+        </Rules>
+        <List Name="GNUC Options">
+            <Item
+                Name="LinkerOutputType"
+                Value="Executable"/>
+        </List>
+    </Config>
+    <CustomFolders>
+        <Folder
+            Name="Source Files"
+            Filters="*.c;*.C;*.cc;*.cpp;*.cp;*.cxx;*.c++;*.prg;*.pas;*.dpr;*.asm;*.s;*.bas;*.java;*.cs;*.sc;*.e;*.cob;*.html;*.rc;*.tcl;*.py;*.pl;*.d;*.m;*.mm;*.go;*.groovy;*.gsh"
+            GUID="{583E2E69-2009-4F62-EC06-5B39E3308982}"></Folder>
+        <Folder
+            Name="Header Files"
+            Filters="*.h;*.H;*.hh;*.hpp;*.hxx;*.h++;*.inc;*.sh;*.cpy;*.if"
+            GUID="{EEA9B211-4520-46B5-7567-7B55606707B9}"></Folder>
+        <Folder
+            Name="Resource Files"
+            Filters="*.ico;*.cur;*.dlg"
+            GUID="{661F73A1-B28B-47BF-5620-BFAD57AC08AD}"/>
+        <Folder
+            Name="Bitmaps"
+            Filters="*.bmp"
+            GUID="{89706B05-ABA9-4E80-F057-BF8AC3EB67A3}"/>
+        <Folder
+            Name="Other Files"
+            Filters=""
+            GUID="{C567EF8C-0EC3-4C74-2D62-8E3C11D3708D}"/>
+    </CustomFolders>
+    <Files AutoFolders="DirectoryView">
+        <Folder Name="../src">
+            <Folder Name="apps">
+                <Folder Name="LoRaMac">
+                    <Folder Name="common">
+                        <Folder Name="LmHandler">
+                            <Folder Name="packages">
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/FragDecoder.c"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/FragDecoder.h"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/LmhPackage.h"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/LmhpClockSync.c"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/LmhpClockSync.h"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/LmhpCompliance.c"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/LmhpCompliance.h"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/LmhpFragmentation.c"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/LmhpFragmentation.h"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/LmhpRemoteMcastSetup.c"/>
+                                <F N="../src/apps/LoRaMac/common/LmHandler/packages/LmhpRemoteMcastSetup.h"/>
+                            </Folder>
+                            <F N="../src/apps/LoRaMac/common/LmHandler/LmHandler.c"/>
+                            <F N="../src/apps/LoRaMac/common/LmHandler/LmHandler.h"/>
+                            <F N="../src/apps/LoRaMac/common/LmHandler/LmHandlerTypes.h"/>
+                        </Folder>
+                        <F N="../src/apps/LoRaMac/common/CayenneLpp.c"/>
+                        <F N="../src/apps/LoRaMac/common/CayenneLpp.h"/>
+                        <F N="../src/apps/LoRaMac/common/cli.c"/>
+                        <F N="../src/apps/LoRaMac/common/cli.h"/>
+                        <F N="../src/apps/LoRaMac/common/Commissioning.h"/>
+                        <F N="../src/apps/LoRaMac/common/githubVersion.h"/>
+                        <F N="../src/apps/LoRaMac/common/LmHandlerMsgDisplay.c"/>
+                        <F N="../src/apps/LoRaMac/common/LmHandlerMsgDisplay.h"/>
+                        <F N="../src/apps/LoRaMac/common/NvmDataMgmt.c"/>
+                        <F N="../src/apps/LoRaMac/common/NvmDataMgmt.h"/>
+                    </Folder>
+                    <Folder Name="fuota-test-01">
+                        <Folder Name="B-L072Z-LRWAN1">
+                            <F N="../src/apps/LoRaMac/fuota-test-01/B-L072Z-LRWAN1/main.c"/>
+                        </Folder>
+                        <Folder Name="NAMote72">
+                            <F N="../src/apps/LoRaMac/fuota-test-01/NAMote72/main.c"/>
+                        </Folder>
+                        <Folder Name="NucleoL073">
+                            <F N="../src/apps/LoRaMac/fuota-test-01/NucleoL073/main.c"/>
+                        </Folder>
+                        <Folder Name="NucleoL152">
+                            <F N="../src/apps/LoRaMac/fuota-test-01/NucleoL152/main.c"/>
+                        </Folder>
+                        <Folder Name="NucleoL476">
+                            <F N="../src/apps/LoRaMac/fuota-test-01/NucleoL476/main.c"/>
+                        </Folder>
+                        <Folder Name="SAMR34">
+                            <F N="../src/apps/LoRaMac/fuota-test-01/SAMR34/main.c"/>
+                        </Folder>
+                        <Folder Name="SKiM880B">
+                            <F N="../src/apps/LoRaMac/fuota-test-01/SKiM880B/main.c"/>
+                        </Folder>
+                        <Folder Name="SKiM881AXL">
+                            <F N="../src/apps/LoRaMac/fuota-test-01/SKiM881AXL/main.c"/>
+                        </Folder>
+                        <Folder Name="SKiM980A">
+                            <F N="../src/apps/LoRaMac/fuota-test-01/SKiM980A/main.c"/>
+                        </Folder>
+                        <F N="../src/apps/LoRaMac/fuota-test-01/firmwareVersion.h"/>
+                    </Folder>
+                    <Folder Name="periodic-uplink-lpp">
+                        <Folder Name="B-L072Z-LRWAN1">
+                            <F N="../src/apps/LoRaMac/periodic-uplink-lpp/B-L072Z-LRWAN1/main.c"/>
+                        </Folder>
+                        <Folder Name="NAMote72">
+                            <F N="../src/apps/LoRaMac/periodic-uplink-lpp/NAMote72/main.c"/>
+                        </Folder>
+                        <Folder Name="NucleoL073">
+                            <F N="../src/apps/LoRaMac/periodic-uplink-lpp/NucleoL073/main.c"/>
+                        </Folder>
+                        <Folder Name="NucleoL152">
+                            <F N="../src/apps/LoRaMac/periodic-uplink-lpp/NucleoL152/main.c"/>
+                        </Folder>
+                        <Folder Name="NucleoL476">
+                            <F N="../src/apps/LoRaMac/periodic-uplink-lpp/NucleoL476/main.c"/>
+                        </Folder>
+                        <Folder Name="SAMR34">
+                            <F N="../src/apps/LoRaMac/periodic-uplink-lpp/SAMR34/main.c"/>
+                        </Folder>
+                        <Folder Name="SKiM880B">
+                            <F N="../src/apps/LoRaMac/periodic-uplink-lpp/SKiM880B/main.c"/>
+                        </Folder>
+                        <Folder Name="SKiM881AXL">
+                            <F N="../src/apps/LoRaMac/periodic-uplink-lpp/SKiM881AXL/main.c"/>
+                        </Folder>
+                        <Folder Name="SKiM980A">
+                            <F N="../src/apps/LoRaMac/periodic-uplink-lpp/SKiM980A/main.c"/>
+                        </Folder>
+                        <F N="../src/apps/LoRaMac/periodic-uplink-lpp/firmwareVersion.h"/>
+                    </Folder>
+                </Folder>
+                <Folder Name="ping-pong">
+                    <Folder Name="B-L072Z-LRWAN1">
+                        <F N="../src/apps/ping-pong/B-L072Z-LRWAN1/main.c"/>
+                    </Folder>
+                    <Folder Name="NAMote72">
+                        <F N="../src/apps/ping-pong/NAMote72/main.c"/>
+                    </Folder>
+                    <Folder Name="NucleoL073">
+                        <F N="../src/apps/ping-pong/NucleoL073/main.c"/>
+                    </Folder>
+                    <Folder Name="NucleoL152">
+                        <F N="../src/apps/ping-pong/NucleoL152/main.c"/>
+                    </Folder>
+                    <Folder Name="NucleoL476">
+                        <F N="../src/apps/ping-pong/NucleoL476/main.c"/>
+                    </Folder>
+                    <Folder Name="SAMR34">
+                        <F N="../src/apps/ping-pong/SAMR34/main.c"/>
+                    </Folder>
+                    <Folder Name="SKiM880B">
+                        <F N="../src/apps/ping-pong/SKiM880B/main.c"/>
+                    </Folder>
+                    <Folder Name="SKiM881AXL">
+                        <F N="../src/apps/ping-pong/SKiM881AXL/main.c"/>
+                    </Folder>
+                    <Folder Name="SKiM980A">
+                        <F N="../src/apps/ping-pong/SKiM980A/main.c"/>
+                    </Folder>
+                </Folder>
+                <Folder Name="rx-sensi">
+                    <Folder Name="B-L072Z-LRWAN1">
+                        <F N="../src/apps/rx-sensi/B-L072Z-LRWAN1/main.c"/>
+                    </Folder>
+                    <Folder Name="NAMote72">
+                        <F N="../src/apps/rx-sensi/NAMote72/main.c"/>
+                    </Folder>
+                    <Folder Name="NucleoL073">
+                        <F N="../src/apps/rx-sensi/NucleoL073/main.c"/>
+                    </Folder>
+                    <Folder Name="NucleoL152">
+                        <F N="../src/apps/rx-sensi/NucleoL152/main.c"/>
+                    </Folder>
+                    <Folder Name="NucleoL476">
+                        <F N="../src/apps/rx-sensi/NucleoL476/main.c"/>
+                    </Folder>
+                    <Folder Name="SAMR34">
+                        <F N="../src/apps/rx-sensi/SAMR34/main.c"/>
+                    </Folder>
+                    <Folder Name="SKiM880B">
+                        <F N="../src/apps/rx-sensi/SKiM880B/main.c"/>
+                    </Folder>
+                    <Folder Name="SKiM881AXL">
+                        <F N="../src/apps/rx-sensi/SKiM881AXL/main.c"/>
+                    </Folder>
+                    <Folder Name="SKiM980A">
+                        <F N="../src/apps/rx-sensi/SKiM980A/main.c"/>
+                    </Folder>
+                </Folder>
+                <Folder Name="tx-cw">
+                    <Folder Name="B-L072Z-LRWAN1">
+                        <F N="../src/apps/tx-cw/B-L072Z-LRWAN1/main.c"/>
+                    </Folder>
+                    <Folder Name="NAMote72">
+                        <F N="../src/apps/tx-cw/NAMote72/main.c"/>
+                    </Folder>
+                    <Folder Name="NucleoL073">
+                        <F N="../src/apps/tx-cw/NucleoL073/main.c"/>
+                    </Folder>
+                    <Folder Name="NucleoL152">
+                        <F N="../src/apps/tx-cw/NucleoL152/main.c"/>
+                    </Folder>
+                    <Folder Name="NucleoL476">
+                        <F N="../src/apps/tx-cw/NucleoL476/main.c"/>
+                    </Folder>
+                    <Folder Name="SAMR34">
+                        <F N="../src/apps/tx-cw/SAMR34/main.c"/>
+                    </Folder>
+                    <Folder Name="SKiM880B">
+                        <F N="../src/apps/tx-cw/SKiM880B/main.c"/>
+                    </Folder>
+                    <Folder Name="SKiM881AXL">
+                        <F N="../src/apps/tx-cw/SKiM881AXL/main.c"/>
+                    </Folder>
+                    <Folder Name="SKiM980A">
+                        <F N="../src/apps/tx-cw/SKiM980A/main.c"/>
+                    </Folder>
+                </Folder>
+            </Folder>
+            <Folder Name="boards">
+                <Folder Name="B-L072Z-LRWAN1">
+                    <Folder Name="cmsis">
+                        <F N="../src/boards/B-L072Z-LRWAN1/cmsis/mxconstants.h"/>
+                        <F N="../src/boards/B-L072Z-LRWAN1/cmsis/stm32l072xx.h"/>
+                        <F N="../src/boards/B-L072Z-LRWAN1/cmsis/stm32l0xx.h"/>
+                        <F N="../src/boards/B-L072Z-LRWAN1/cmsis/stm32l0xx_hal_conf.h"/>
+                        <F N="../src/boards/B-L072Z-LRWAN1/cmsis/system_stm32l0xx.c"/>
+                        <F N="../src/boards/B-L072Z-LRWAN1/cmsis/system_stm32l0xx.h"/>
+                    </Folder>
+                    <F N="../src/boards/B-L072Z-LRWAN1/adc-board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/board-config.h"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/delay-board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/eeprom-board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/gpio-board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/i2c-board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/lpm-board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/rtc-board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/spi-board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/sx1276-board.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/sysIrqHandlers.c"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/sysIrqHandlers.h"/>
+                    <F N="../src/boards/B-L072Z-LRWAN1/uart-board.c"/>
+                </Folder>
+                <Folder Name="mcu">
+                    <Folder Name="saml21">
+                        <Folder Name="cmsis">
+                            <F N="../src/boards/mcu/saml21/cmsis/arm_common_tables.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/arm_const_structs.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/arm_math.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_cm0.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_cm0plus.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_cm3.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_cm4.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_cm7.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_cmFunc.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_cmInstr.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_cmSimd.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_sc000.h"/>
+                            <F N="../src/boards/mcu/saml21/cmsis/core_sc300.h"/>
+                        </Folder>
+                        <Folder Name="config">
+                            <F N="../src/boards/mcu/saml21/config/hpl_dmac_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/hpl_eic_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/hpl_gclk_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/hpl_mclk_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/hpl_osc32kctrl_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/hpl_oscctrl_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/hpl_rtc_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/hpl_sercom_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/hpl_systick_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/peripheral_clk_config.h"/>
+                            <F N="../src/boards/mcu/saml21/config/RTE_Components.h"/>
+                        </Folder>
+                        <Folder Name="hal">
+                            <Folder Name="include">
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_atomic.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_delay.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_ext_irq.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_gpio.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_i2c_m_sync.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_init.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_io.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_sleep.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_spi_m_sync.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_timer.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hal_usart_sync.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_calendar.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_core.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_delay.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_dma.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_ext_irq.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_gpio.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_i2c_m_async.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_i2c_m_sync.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_i2c_s_async.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_i2c_s_sync.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_init.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_irq.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_missing_features.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_reset.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_sleep.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_spi.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_spi_async.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_spi_dma.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_spi_m_async.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_spi_m_dma.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_spi_m_sync.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_spi_s_async.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_spi_s_sync.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_spi_sync.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_time_measure.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_timer.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_usart.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_usart_async.h"/>
+                                <F N="../src/boards/mcu/saml21/hal/include/hpl_usart_sync.h"/>
+                            </Folder>
+                            <Folder Name="src">
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_atomic.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_delay.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_ext_irq.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_gpio.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_i2c_m_sync.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_init.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_io.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_sleep.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_spi_m_sync.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_timer.c"/>
+                                <F N="../src/boards/mcu/saml21/hal/src/hal_usart_sync.c"/>
+                            </Folder>
+                            <Folder Name="utils">
+                                <Folder Name="include">
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/compiler.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/err_codes.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/events.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/parts.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/utils.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/utils_assert.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/utils_decrement_macro.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/utils_event.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/utils_increment_macro.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/utils_list.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/utils_recursion_macro.h"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/include/utils_repeat_macro.h"/>
+                                </Folder>
+                                <Folder Name="src">
+                                    <F N="../src/boards/mcu/saml21/hal/utils/src/utils_assert.c"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/src/utils_event.c"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/src/utils_list.c"/>
+                                    <F N="../src/boards/mcu/saml21/hal/utils/src/utils_syscalls.c"/>
+                                </Folder>
+                            </Folder>
+                        </Folder>
+                        <Folder Name="hpl">
+                            <Folder Name="core">
+                                <F N="../src/boards/mcu/saml21/hpl/core/hpl_core_m0plus_base.c"/>
+                                <F N="../src/boards/mcu/saml21/hpl/core/hpl_core_port.h"/>
+                                <F N="../src/boards/mcu/saml21/hpl/core/hpl_init.c"/>
+                            </Folder>
+                            <Folder Name="dmac">
+                                <F N="../src/boards/mcu/saml21/hpl/dmac/hpl_dmac.c"/>
+                            </Folder>
+                            <Folder Name="eic">
+                                <F N="../src/boards/mcu/saml21/hpl/eic/hpl_eic.c"/>
+                            </Folder>
+                            <Folder Name="gclk">
+                                <F N="../src/boards/mcu/saml21/hpl/gclk/hpl_gclk.c"/>
+                                <F N="../src/boards/mcu/saml21/hpl/gclk/hpl_gclk_base.h"/>
+                            </Folder>
+                            <Folder Name="mclk">
+                                <F N="../src/boards/mcu/saml21/hpl/mclk/hpl_mclk.c"/>
+                            </Folder>
+                            <Folder Name="osc32kctrl">
+                                <F N="../src/boards/mcu/saml21/hpl/osc32kctrl/hpl_osc32kctrl.c"/>
+                            </Folder>
+                            <Folder Name="oscctrl">
+                                <F N="../src/boards/mcu/saml21/hpl/oscctrl/hpl_oscctrl.c"/>
+                            </Folder>
+                            <Folder Name="pm">
+                                <F N="../src/boards/mcu/saml21/hpl/pm/hpl_pm.c"/>
+                                <F N="../src/boards/mcu/saml21/hpl/pm/hpl_pm_base.h"/>
+                            </Folder>
+                            <Folder Name="port">
+                                <F N="../src/boards/mcu/saml21/hpl/port/hpl_gpio_base.h"/>
+                            </Folder>
+                            <Folder Name="rtc">
+                                <F N="../src/boards/mcu/saml21/hpl/rtc/hpl_rtc.c"/>
+                                <F N="../src/boards/mcu/saml21/hpl/rtc/hpl_rtc_base.h"/>
+                            </Folder>
+                            <Folder Name="sercom">
+                                <F N="../src/boards/mcu/saml21/hpl/sercom/hpl_sercom.c"/>
+                            </Folder>
+                            <Folder Name="systick">
+                                <F N="../src/boards/mcu/saml21/hpl/systick/hpl_systick.c"/>
+                            </Folder>
+                        </Folder>
+                        <Folder Name="hri">
+                            <F N="../src/boards/mcu/saml21/hri/hri_ac_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_adc_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_aes_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_ccl_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_dac_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_dmac_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_dsu_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_eic_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_evsys_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_gclk_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_l21b.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_mclk_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_mtb_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_nvic_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_nvmctrl_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_opamp_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_osc32kctrl_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_oscctrl_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_pac_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_pm_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_port_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_rstc_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_rtc_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_sercom_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_supc_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_systemcontrol_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_systick_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_tal_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_tc_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_tcc_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_trng_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_usb_l21.h"/>
+                            <F N="../src/boards/mcu/saml21/hri/hri_wdt_l21.h"/>
+                        </Folder>
+                        <Folder Name="saml21b">
+                            <Folder Name="gcc">
+                                <Folder Name="gcc">
+                                    <F N="../src/boards/mcu/saml21/saml21b/gcc/gcc/startup_saml21.c"/>
+                                </Folder>
+                                <F N="../src/boards/mcu/saml21/saml21b/gcc/system_saml21.c"/>
+                            </Folder>
+                            <Folder Name="include">
+                                <Folder Name="component">
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/ac.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/adc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/aes.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/ccl.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/dac.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/dmac.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/dsu.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/eic.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/evsys.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/gclk.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/mclk.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/mtb.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/nvmctrl.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/opamp.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/osc32kctrl.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/oscctrl.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/pac.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/pm.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/port.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/rstc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/rtc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/sercom.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/supc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/tal.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/tc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/tcc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/trng.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/usb.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/component/wdt.h"/>
+                                </Folder>
+                                <Folder Name="instance">
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/ac.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/adc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/aes.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/ccl.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/dac.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/dmac.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/dsu.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/eic.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/evsys.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/gclk.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/mclk.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/mtb.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/nvmctrl.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/opamp.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/osc32kctrl.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/oscctrl.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/pac.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/pm.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/port.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/rstc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/rtc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/sercom0.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/sercom1.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/sercom2.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/sercom3.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/sercom4.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/sercom5.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/supc.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/tal.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/tc0.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/tc1.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/tc2.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/tc3.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/tc4.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/tcc0.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/tcc1.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/tcc2.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/trng.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/usb.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/instance/wdt.h"/>
+                                </Folder>
+                                <Folder Name="pio">
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21e15b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21e16b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21e17b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21e18b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21g16b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21g17b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21g18b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21j16b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21j17b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21j18b.h"/>
+                                    <F N="../src/boards/mcu/saml21/saml21b/include/pio/saml21j18bu.h"/>
+                                </Folder>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/component-version.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/sam.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21e15b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21e16b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21e17b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21e18b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21g16b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21g17b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21g18b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21j16b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21j17b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21j18b.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/saml21j18bu.h"/>
+                                <F N="../src/boards/mcu/saml21/saml21b/include/system_saml21.h"/>
+                            </Folder>
+                        </Folder>
+                        <F N="../src/boards/mcu/saml21/hw_timer.c"/>
+                        <F N="../src/boards/mcu/saml21/hw_timer.h"/>
+                    </Folder>
+                    <Folder Name="stm32">
+                        <Folder Name="cmsis">
+                            <F N="../src/boards/mcu/stm32/cmsis/arm_common_tables.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/arm_const_structs.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/arm_math.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/cmsis_armcc.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/cmsis_armcc_V6.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/cmsis_gcc.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_cm0.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_cm0plus.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_cm3.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_cm4.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_cm7.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_cmFunc.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_cmInstr.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_cmSimd.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_sc000.h"/>
+                            <F N="../src/boards/mcu/stm32/cmsis/core_sc300.h"/>
+                        </Folder>
+                        <Folder Name="EEPROM_Emul">
+                            <Folder Name="Core">
+                                <F N="../src/boards/mcu/stm32/EEPROM_Emul/Core/eeprom_emul.c"/>
+                                <F N="../src/boards/mcu/stm32/EEPROM_Emul/Core/eeprom_emul.h"/>
+                                <F N="../src/boards/mcu/stm32/EEPROM_Emul/Core/eeprom_emul_conf_template.h"/>
+                                <F N="../src/boards/mcu/stm32/EEPROM_Emul/Core/eeprom_emul_types.h"/>
+                            </Folder>
+                            <Folder Name="Porting">
+                                <Folder Name="STM32L4">
+                                    <F N="../src/boards/mcu/stm32/EEPROM_Emul/Porting/STM32L4/flash_interface.c"/>
+                                    <F N="../src/boards/mcu/stm32/EEPROM_Emul/Porting/STM32L4/flash_interface.h"/>
+                                </Folder>
+                            </Folder>
+                        </Folder>
+                        <Folder Name="STM32_USB_Device_Library">
+                            <Folder Name="Class">
+                                <Folder Name="CDC">
+                                    <Folder Name="Inc">
+                                        <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h"/>
+                                    </Folder>
+                                    <Folder Name="Src">
+                                        <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c"/>
+                                    </Folder>
+                                </Folder>
+                                <Folder Name="DFU">
+                                    <Folder Name="Inc">
+                                        <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Class/DFU/Inc/usbd_dfu.h"/>
+                                    </Folder>
+                                    <Folder Name="Src">
+                                        <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Class/DFU/Src/usbd_dfu.c"/>
+                                    </Folder>
+                                </Folder>
+                            </Folder>
+                            <Folder Name="Core">
+                                <Folder Name="Inc">
+                                    <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Core/Inc/usbd_core.h"/>
+                                    <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h"/>
+                                    <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Core/Inc/usbd_def.h"/>
+                                    <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h"/>
+                                </Folder>
+                                <Folder Name="Src">
+                                    <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Core/Src/usbd_core.c"/>
+                                    <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c"/>
+                                    <F N="../src/boards/mcu/stm32/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c"/>
+                                </Folder>
+                            </Folder>
+                        </Folder>
+                        <Folder Name="STM32L0xx_HAL_Driver">
+                            <Folder Name="Inc">
+                                <Folder Name="Legacy">
+                                    <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h"/>
+                                </Folder>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32_assert_template.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_adc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_comp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_comp_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_conf_template.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_crc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_crc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cryp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cryp_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dac.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dac_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_firewall.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ramfunc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2c_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_i2s.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_irda.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_irda_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_iwdg.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_lcd.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_lptim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_lptim_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pcd.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pcd_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_pwr_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rcc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rng.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rtc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_rtc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_smartcard.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_smartcard_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_smbus.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_spi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tsc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_usart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_usart_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_wwdg.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_adc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_bus.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_comp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_cortex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_crc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_crs.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_dac.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_dma.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_exti.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_gpio.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_i2c.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_iwdg.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_lptim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_lpuart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_pwr.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_rcc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_rng.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_rtc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_spi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_system.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_tim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_usart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_utils.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Inc/stm32l0xx_ll_wwdg.h"/>
+                            </Folder>
+                            <Folder Name="Src">
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_adc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_comp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_comp_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cortex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_crc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_crc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cryp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_cryp_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dac.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dac_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_dma.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_firewall.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_flash_ramfunc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_gpio.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2c_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_i2s.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_irda.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_iwdg.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_lcd.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_lptim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_msp_template.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pcd.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pcd_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_pwr_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rcc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rng.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rtc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_rtc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_smartcard.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_smartcard_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_smbus.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_spi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tim_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_tsc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_uart_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_usart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_hal_wwdg.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_adc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_comp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_crc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_crs.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_dac.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_dma.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_exti.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_gpio.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_i2c.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_lptim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_lpuart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_pwr.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_rcc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_rng.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_rtc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_spi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_tim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_usart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_utils.c"/>
+                            </Folder>
+                        </Folder>
+                        <Folder Name="STM32L1xx_HAL_Driver">
+                            <Folder Name="Inc">
+                                <Folder Name="Legacy">
+                                    <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h"/>
+                                </Folder>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32_assert_template.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_adc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_adc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_comp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_comp_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_conf_template.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_cortex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_crc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_cryp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_cryp_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_dac.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_dac_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_def.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_dma.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_flash.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_flash_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_flash_ramfunc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_gpio.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_gpio_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_i2c.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_i2s.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_irda.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_iwdg.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_lcd.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_nor.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_opamp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_opamp_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_pcd.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_pcd_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_pwr.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_pwr_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rtc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rtc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_sd.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_smartcard.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_spi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_spi_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_sram.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_tim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_tim_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_uart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_usart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_wwdg.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_adc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_bus.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_comp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_cortex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_crc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dac.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_dma.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_exti.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_fsmc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_gpio.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_i2c.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_iwdg.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_opamp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_pwr.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_rcc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_rtc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_sdmmc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_spi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_system.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_tim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_usart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_utils.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Inc/stm32l1xx_ll_wwdg.h"/>
+                            </Folder>
+                            <Folder Name="Src">
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_adc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_adc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_comp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_cortex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_crc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_cryp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_cryp_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dac.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dac_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_dma.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_flash_ramfunc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_gpio.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_i2c.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_i2s.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_irda.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_iwdg.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_lcd.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_msp_template.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_nor.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_opamp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_opamp_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_pcd.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_pcd_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_pwr.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_pwr_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_rcc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_rcc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_rtc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_rtc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_sd.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_smartcard.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_spi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_spi_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_sram.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_tim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_tim_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_uart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_usart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal_wwdg.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_adc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_comp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_crc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dac.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_dma.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_exti.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_fsmc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_gpio.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_i2c.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_opamp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_pwr.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_rcc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_rtc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_sdmmc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_spi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_tim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_usart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L1xx_HAL_Driver/Src/stm32l1xx_ll_utils.c"/>
+                            </Folder>
+                        </Folder>
+                        <Folder Name="STM32L4xx_HAL_Driver">
+                            <Folder Name="Inc">
+                                <Folder Name="Legacy">
+                                    <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h"/>
+                                    <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/Legacy/stm32l4xx_hal_can_legacy.h"/>
+                                </Folder>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32_assert_template.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_adc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_can.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_comp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_conf_template.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cryp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cryp_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dac.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dac_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dcmi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dfsdm.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dfsdm_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma2d.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dsi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_firewall.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gfxmmu.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hash.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hash_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_hcd.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_irda.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_irda_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_iwdg.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lcd.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_lptim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ltdc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ltdc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_nand.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_nor.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_opamp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_opamp_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_ospi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pcd.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pcd_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_qspi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rng.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rtc_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sai_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sd.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sd_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smartcard.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smartcard_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_smbus.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_sram.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_swpmi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tsc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_usart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_usart_ex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_wwdg.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_adc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_bus.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_comp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_cortex.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_crc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_crs.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dac.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma2d.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dmamux.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_exti.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_fmc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_gpio.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_iwdg.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_lptim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_lpuart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_opamp.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_pwr.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rcc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rng.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_rtc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_sdmmc.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_spi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_swpmi.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_system.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_tim.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usart.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_utils.h"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_wwdg.h"/>
+                            </Folder>
+                            <Folder Name="Src">
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_adc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_comp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_crc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cryp_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dac_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dcmi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dfsdm_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma2d.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dsi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_firewall.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gfxmmu.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hash_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_hcd.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_irda.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_iwdg.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lcd.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_lptim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ltdc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ltdc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_msp_template.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nand.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_nor.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_opamp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_opamp_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_ospi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_qspi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rng.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rtc_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sai_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sd_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smartcard.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smartcard_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_smbus.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_sram.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_swpmi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_timebase_tim_template.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tsc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_uart_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_usart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_usart_ex.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_wwdg.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_adc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_comp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_crc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_crs.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dac.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma2d.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_exti.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_fmc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_gpio.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_i2c.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_lptim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_lpuart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_opamp.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_pwr.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rcc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rng.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_rtc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_sdmmc.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_spi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_swpmi.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_tim.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usart.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c"/>
+                                <F N="../src/boards/mcu/stm32/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_utils.c"/>
+                            </Folder>
+                        </Folder>
+                        <F N="../src/boards/mcu/stm32/RTE_Components.h"/>
+                    </Folder>
+                    <F N="../src/boards/mcu/utilities.c"/>
+                </Folder>
+                <Folder Name="NAMote72">
+                    <Folder Name="cmsis">
+                        <F N="../src/boards/NAMote72/cmsis/mxconstants.h"/>
+                        <F N="../src/boards/NAMote72/cmsis/stm32l152xc.h"/>
+                        <F N="../src/boards/NAMote72/cmsis/stm32l1xx.h"/>
+                        <F N="../src/boards/NAMote72/cmsis/stm32l1xx_hal_conf.h"/>
+                        <F N="../src/boards/NAMote72/cmsis/system_stm32l1xx.c"/>
+                        <F N="../src/boards/NAMote72/cmsis/system_stm32l1xx.h"/>
+                    </Folder>
+                    <F N="../src/boards/NAMote72/adc-board.c"/>
+                    <F N="../src/boards/NAMote72/board-config.h"/>
+                    <F N="../src/boards/NAMote72/board.c"/>
+                    <F N="../src/boards/NAMote72/delay-board.c"/>
+                    <F N="../src/boards/NAMote72/eeprom-board.c"/>
+                    <F N="../src/boards/NAMote72/gpio-board.c"/>
+                    <F N="../src/boards/NAMote72/gps-board.c"/>
+                    <F N="../src/boards/NAMote72/i2c-board.c"/>
+                    <F N="../src/boards/NAMote72/lpm-board.c"/>
+                    <F N="../src/boards/NAMote72/rtc-board.c"/>
+                    <F N="../src/boards/NAMote72/spi-board.c"/>
+                    <F N="../src/boards/NAMote72/sx1272-board.c"/>
+                    <F N="../src/boards/NAMote72/sysIrqHandlers.c"/>
+                    <F N="../src/boards/NAMote72/sysIrqHandlers.h"/>
+                    <F N="../src/boards/NAMote72/uart-board.c"/>
+                </Folder>
+                <Folder Name="NucleoL073">
+                    <Folder Name="cmsis">
+                        <F N="../src/boards/NucleoL073/cmsis/mxconstants.h"/>
+                        <F N="../src/boards/NucleoL073/cmsis/stm32l073xx.h"/>
+                        <F N="../src/boards/NucleoL073/cmsis/stm32l0xx.h"/>
+                        <F N="../src/boards/NucleoL073/cmsis/stm32l0xx_hal_conf.h"/>
+                        <F N="../src/boards/NucleoL073/cmsis/system_stm32l0xx.c"/>
+                        <F N="../src/boards/NucleoL073/cmsis/system_stm32l0xx.h"/>
+                    </Folder>
+                    <F N="../src/boards/NucleoL073/adc-board.c"/>
+                    <F N="../src/boards/NucleoL073/board-config.h"/>
+                    <F N="../src/boards/NucleoL073/board.c"/>
+                    <F N="../src/boards/NucleoL073/delay-board.c"/>
+                    <F N="../src/boards/NucleoL073/eeprom-board.c"/>
+                    <F N="../src/boards/NucleoL073/gpio-board.c"/>
+                    <F N="../src/boards/NucleoL073/i2c-board.c"/>
+                    <F N="../src/boards/NucleoL073/lpm-board.c"/>
+                    <F N="../src/boards/NucleoL073/lr1110mb1xxs-board.c"/>
+                    <F N="../src/boards/NucleoL073/rtc-board.c"/>
+                    <F N="../src/boards/NucleoL073/spi-board.c"/>
+                    <F N="../src/boards/NucleoL073/sx1261mbxbas-board.c"/>
+                    <F N="../src/boards/NucleoL073/sx1262mbxcas-board.c"/>
+                    <F N="../src/boards/NucleoL073/sx1262mbxdas-board.c"/>
+                    <F N="../src/boards/NucleoL073/sx1272mb2das-board.c"/>
+                    <F N="../src/boards/NucleoL073/sx1276mb1las-board.c"/>
+                    <F N="../src/boards/NucleoL073/sx1276mb1mas-board.c"/>
+                    <F N="../src/boards/NucleoL073/sysIrqHandlers.c"/>
+                    <F N="../src/boards/NucleoL073/sysIrqHandlers.h"/>
+                    <F N="../src/boards/NucleoL073/uart-board.c"/>
+                </Folder>
+                <Folder Name="NucleoL152">
+                    <Folder Name="cmsis">
+                        <F N="../src/boards/NucleoL152/cmsis/mxconstants.h"/>
+                        <F N="../src/boards/NucleoL152/cmsis/stm32l152xe.h"/>
+                        <F N="../src/boards/NucleoL152/cmsis/stm32l1xx.h"/>
+                        <F N="../src/boards/NucleoL152/cmsis/stm32l1xx_hal_conf.h"/>
+                        <F N="../src/boards/NucleoL152/cmsis/system_stm32l1xx.c"/>
+                        <F N="../src/boards/NucleoL152/cmsis/system_stm32l1xx.h"/>
+                    </Folder>
+                    <F N="../src/boards/NucleoL152/adc-board.c"/>
+                    <F N="../src/boards/NucleoL152/board-config.h"/>
+                    <F N="../src/boards/NucleoL152/board.c"/>
+                    <F N="../src/boards/NucleoL152/delay-board.c"/>
+                    <F N="../src/boards/NucleoL152/eeprom-board.c"/>
+                    <F N="../src/boards/NucleoL152/gpio-board.c"/>
+                    <F N="../src/boards/NucleoL152/i2c-board.c"/>
+                    <F N="../src/boards/NucleoL152/lpm-board.c"/>
+                    <F N="../src/boards/NucleoL152/lr1110mb1xxs-board.c"/>
+                    <F N="../src/boards/NucleoL152/rtc-board.c"/>
+                    <F N="../src/boards/NucleoL152/spi-board.c"/>
+                    <F N="../src/boards/NucleoL152/sx1261mbxbas-board.c"/>
+                    <F N="../src/boards/NucleoL152/sx1262mbxcas-board.c"/>
+                    <F N="../src/boards/NucleoL152/sx1262mbxdas-board.c"/>
+                    <F N="../src/boards/NucleoL152/sx1272mb2das-board.c"/>
+                    <F N="../src/boards/NucleoL152/sx1276mb1las-board.c"/>
+                    <F N="../src/boards/NucleoL152/sx1276mb1mas-board.c"/>
+                    <F N="../src/boards/NucleoL152/sysIrqHandlers.c"/>
+                    <F N="../src/boards/NucleoL152/sysIrqHandlers.h"/>
+                    <F N="../src/boards/NucleoL152/uart-board.c"/>
+                </Folder>
+                <Folder Name="NucleoL476">
+                    <Folder Name="cmsis">
+                        <F N="../src/boards/NucleoL476/cmsis/mxconstants.h"/>
+                        <F N="../src/boards/NucleoL476/cmsis/stm32l476xx.h"/>
+                        <F N="../src/boards/NucleoL476/cmsis/stm32l4xx.h"/>
+                        <F N="../src/boards/NucleoL476/cmsis/stm32l4xx_hal_conf.h"/>
+                        <F N="../src/boards/NucleoL476/cmsis/system_stm32l4xx.c"/>
+                        <F N="../src/boards/NucleoL476/cmsis/system_stm32l4xx.h"/>
+                    </Folder>
+                    <F N="../src/boards/NucleoL476/adc-board.c"/>
+                    <F N="../src/boards/NucleoL476/board-config.h"/>
+                    <F N="../src/boards/NucleoL476/board.c"/>
+                    <F N="../src/boards/NucleoL476/delay-board.c"/>
+                    <F N="../src/boards/NucleoL476/eeprom-board.c"/>
+                    <F N="../src/boards/NucleoL476/eeprom_emul_conf.h"/>
+                    <F N="../src/boards/NucleoL476/gpio-board.c"/>
+                    <F N="../src/boards/NucleoL476/i2c-board.c"/>
+                    <F N="../src/boards/NucleoL476/lpm-board.c"/>
+                    <F N="../src/boards/NucleoL476/lr1110mb1xxs-board.c"/>
+                    <F N="../src/boards/NucleoL476/rtc-board.c"/>
+                    <F N="../src/boards/NucleoL476/spi-board.c"/>
+                    <F N="../src/boards/NucleoL476/sx1261mbxbas-board.c"/>
+                    <F N="../src/boards/NucleoL476/sx1262mbxcas-board.c"/>
+                    <F N="../src/boards/NucleoL476/sx1262mbxdas-board.c"/>
+                    <F N="../src/boards/NucleoL476/sx1272mb2das-board.c"/>
+                    <F N="../src/boards/NucleoL476/sx1276mb1las-board.c"/>
+                    <F N="../src/boards/NucleoL476/sx1276mb1mas-board.c"/>
+                    <F N="../src/boards/NucleoL476/sysIrqHandlers.c"/>
+                    <F N="../src/boards/NucleoL476/sysIrqHandlers.h"/>
+                    <F N="../src/boards/NucleoL476/uart-board.c"/>
+                </Folder>
+                <Folder Name="SAMR34">
+                    <F N="../src/boards/SAMR34/board-config.h"/>
+                    <F N="../src/boards/SAMR34/board.c"/>
+                    <F N="../src/boards/SAMR34/delay-board.c"/>
+                    <F N="../src/boards/SAMR34/eeprom-board.c"/>
+                    <F N="../src/boards/SAMR34/gpio-board.c"/>
+                    <F N="../src/boards/SAMR34/i2c-board.c"/>
+                    <F N="../src/boards/SAMR34/rtc-board.c"/>
+                    <F N="../src/boards/SAMR34/spi-board.c"/>
+                    <F N="../src/boards/SAMR34/sx1276-board.c"/>
+                    <F N="../src/boards/SAMR34/uart-board.c"/>
+                </Folder>
+                <Folder Name="SKiM880B">
+                    <Folder Name="cmsis">
+                        <F N="../src/boards/SKiM880B/cmsis/mxconstants.h"/>
+                        <F N="../src/boards/SKiM880B/cmsis/stm32l151xba.h"/>
+                        <F N="../src/boards/SKiM880B/cmsis/stm32l1xx.h"/>
+                        <F N="../src/boards/SKiM880B/cmsis/stm32l1xx_hal_conf.h"/>
+                        <F N="../src/boards/SKiM880B/cmsis/system_stm32l1xx.c"/>
+                        <F N="../src/boards/SKiM880B/cmsis/system_stm32l1xx.h"/>
+                    </Folder>
+                    <F N="../src/boards/SKiM880B/adc-board.c"/>
+                    <F N="../src/boards/SKiM880B/board-config.h"/>
+                    <F N="../src/boards/SKiM880B/board.c"/>
+                    <F N="../src/boards/SKiM880B/delay-board.c"/>
+                    <F N="../src/boards/SKiM880B/eeprom-board.c"/>
+                    <F N="../src/boards/SKiM880B/gpio-board.c"/>
+                    <F N="../src/boards/SKiM880B/lpm-board.c"/>
+                    <F N="../src/boards/SKiM880B/rtc-board.c"/>
+                    <F N="../src/boards/SKiM880B/spi-board.c"/>
+                    <F N="../src/boards/SKiM880B/sx1272-board.c"/>
+                    <F N="../src/boards/SKiM880B/sysIrqHandlers.c"/>
+                    <F N="../src/boards/SKiM880B/sysIrqHandlers.h"/>
+                    <F N="../src/boards/SKiM880B/uart-board.c"/>
+                </Folder>
+                <Folder Name="SKiM881AXL">
+                    <Folder Name="cmsis">
+                        <F N="../src/boards/SKiM881AXL/cmsis/mxconstants.h"/>
+                        <F N="../src/boards/SKiM881AXL/cmsis/stm32l081xx.h"/>
+                        <F N="../src/boards/SKiM881AXL/cmsis/stm32l0xx.h"/>
+                        <F N="../src/boards/SKiM881AXL/cmsis/stm32l0xx_hal_conf.h"/>
+                        <F N="../src/boards/SKiM881AXL/cmsis/system_stm32l0xx.c"/>
+                        <F N="../src/boards/SKiM881AXL/cmsis/system_stm32l0xx.h"/>
+                    </Folder>
+                    <F N="../src/boards/SKiM881AXL/adc-board.c"/>
+                    <F N="../src/boards/SKiM881AXL/board-config.h"/>
+                    <F N="../src/boards/SKiM881AXL/board.c"/>
+                    <F N="../src/boards/SKiM881AXL/delay-board.c"/>
+                    <F N="../src/boards/SKiM881AXL/eeprom-board.c"/>
+                    <F N="../src/boards/SKiM881AXL/gpio-board.c"/>
+                    <F N="../src/boards/SKiM881AXL/lpm-board.c"/>
+                    <F N="../src/boards/SKiM881AXL/rtc-board.c"/>
+                    <F N="../src/boards/SKiM881AXL/spi-board.c"/>
+                    <F N="../src/boards/SKiM881AXL/sx1272-board.c"/>
+                    <F N="../src/boards/SKiM881AXL/sysIrqHandlers.c"/>
+                    <F N="../src/boards/SKiM881AXL/sysIrqHandlers.h"/>
+                    <F N="../src/boards/SKiM881AXL/uart-board.c"/>
+                </Folder>
+                <Folder Name="SKiM980A">
+                    <Folder Name="cmsis">
+                        <F N="../src/boards/SKiM980A/cmsis/mxconstants.h"/>
+                        <F N="../src/boards/SKiM980A/cmsis/stm32l151xba.h"/>
+                        <F N="../src/boards/SKiM980A/cmsis/stm32l1xx.h"/>
+                        <F N="../src/boards/SKiM980A/cmsis/stm32l1xx_hal_conf.h"/>
+                        <F N="../src/boards/SKiM980A/cmsis/system_stm32l1xx.c"/>
+                        <F N="../src/boards/SKiM980A/cmsis/system_stm32l1xx.h"/>
+                    </Folder>
+                    <F N="../src/boards/SKiM980A/adc-board.c"/>
+                    <F N="../src/boards/SKiM980A/board-config.h"/>
+                    <F N="../src/boards/SKiM980A/board.c"/>
+                    <F N="../src/boards/SKiM980A/delay-board.c"/>
+                    <F N="../src/boards/SKiM980A/eeprom-board.c"/>
+                    <F N="../src/boards/SKiM980A/gpio-board.c"/>
+                    <F N="../src/boards/SKiM980A/lpm-board.c"/>
+                    <F N="../src/boards/SKiM980A/rtc-board.c"/>
+                    <F N="../src/boards/SKiM980A/spi-board.c"/>
+                    <F N="../src/boards/SKiM980A/sx1272-board.c"/>
+                    <F N="../src/boards/SKiM980A/sysIrqHandlers.c"/>
+                    <F N="../src/boards/SKiM980A/sysIrqHandlers.h"/>
+                    <F N="../src/boards/SKiM980A/uart-board.c"/>
+                </Folder>
+                <F N="../src/boards/adc-board.h"/>
+                <F N="../src/boards/board.h"/>
+                <F N="../src/boards/delay-board.h"/>
+                <F N="../src/boards/display-board.h"/>
+                <F N="../src/boards/eeprom-board.h"/>
+                <F N="../src/boards/gpio-board.h"/>
+                <F N="../src/boards/gps-board.h"/>
+                <F N="../src/boards/i2c-board.h"/>
+                <F N="../src/boards/lpm-board.h"/>
+                <F N="../src/boards/lr1110-board.h"/>
+                <F N="../src/boards/pinName-board.h"/>
+                <F N="../src/boards/pinName-ioe.h"/>
+                <F N="../src/boards/rtc-board.h"/>
+                <F N="../src/boards/spi-board.h"/>
+                <F N="../src/boards/sx126x-board.h"/>
+                <F N="../src/boards/sx1272-board.h"/>
+                <F N="../src/boards/sx1276-board.h"/>
+                <F N="../src/boards/uart-board.h"/>
+                <F N="../src/boards/uart-usb-board.h"/>
+                <F N="../src/boards/utilities.h"/>
+            </Folder>
+            <Folder Name="mac">
+                <Folder Name="region">
+                    <F N="../src/mac/region/Region.c"/>
+                    <F N="../src/mac/region/Region.h"/>
+                    <F N="../src/mac/region/RegionAS923.c"/>
+                    <F N="../src/mac/region/RegionAS923.h"/>
+                    <F N="../src/mac/region/RegionAU915.c"/>
+                    <F N="../src/mac/region/RegionAU915.h"/>
+                    <F N="../src/mac/region/RegionBaseUS.c"/>
+                    <F N="../src/mac/region/RegionBaseUS.h"/>
+                    <F N="../src/mac/region/RegionCN470.c"/>
+                    <F N="../src/mac/region/RegionCN470.h"/>
+                    <F N="../src/mac/region/RegionCN470A20.c"/>
+                    <F N="../src/mac/region/RegionCN470A20.h"/>
+                    <F N="../src/mac/region/RegionCN470A26.c"/>
+                    <F N="../src/mac/region/RegionCN470A26.h"/>
+                    <F N="../src/mac/region/RegionCN470B20.c"/>
+                    <F N="../src/mac/region/RegionCN470B20.h"/>
+                    <F N="../src/mac/region/RegionCN470B26.c"/>
+                    <F N="../src/mac/region/RegionCN470B26.h"/>
+                    <F N="../src/mac/region/RegionCN779.c"/>
+                    <F N="../src/mac/region/RegionCN779.h"/>
+                    <F N="../src/mac/region/RegionCommon.c"/>
+                    <F N="../src/mac/region/RegionCommon.h"/>
+                    <F N="../src/mac/region/RegionEU433.c"/>
+                    <F N="../src/mac/region/RegionEU433.h"/>
+                    <F N="../src/mac/region/RegionEU868.c"/>
+                    <F N="../src/mac/region/RegionEU868.h"/>
+                    <F N="../src/mac/region/RegionIN865.c"/>
+                    <F N="../src/mac/region/RegionIN865.h"/>
+                    <F N="../src/mac/region/RegionKR920.c"/>
+                    <F N="../src/mac/region/RegionKR920.h"/>
+                    <F N="../src/mac/region/RegionNvm.h"/>
+                    <F N="../src/mac/region/RegionRU864.c"/>
+                    <F N="../src/mac/region/RegionRU864.h"/>
+                    <F N="../src/mac/region/RegionUS915.c"/>
+                    <F N="../src/mac/region/RegionUS915.h"/>
+                </Folder>
+                <F N="../src/mac/LoRaMac.c"/>
+                <F N="../src/mac/LoRaMac.h"/>
+                <F N="../src/mac/LoRaMacAdr.c"/>
+                <F N="../src/mac/LoRaMacAdr.h"/>
+                <F N="../src/mac/LoRaMacClassB.c"/>
+                <F N="../src/mac/LoRaMacClassB.h"/>
+                <F N="../src/mac/LoRaMacClassBConfig.h"/>
+                <F N="../src/mac/LoRaMacClassBNvm.h"/>
+                <F N="../src/mac/LoRaMacCommands.c"/>
+                <F N="../src/mac/LoRaMacCommands.h"/>
+                <F N="../src/mac/LoRaMacConfirmQueue.c"/>
+                <F N="../src/mac/LoRaMacConfirmQueue.h"/>
+                <F N="../src/mac/LoRaMacCrypto.c"/>
+                <F N="../src/mac/LoRaMacCrypto.h"/>
+                <F N="../src/mac/LoRaMacCryptoNvm.h"/>
+                <F N="../src/mac/LoRaMacHeaderTypes.h"/>
+                <F N="../src/mac/LoRaMacMessageTypes.h"/>
+                <F N="../src/mac/LoRaMacParser.c"/>
+                <F N="../src/mac/LoRaMacParser.h"/>
+                <F N="../src/mac/LoRaMacSerializer.c"/>
+                <F N="../src/mac/LoRaMacSerializer.h"/>
+                <F N="../src/mac/LoRaMacTest.h"/>
+                <F N="../src/mac/LoRaMacTypes.h"/>
+                <F N="../src/mac/secure-element-nvm.h"/>
+                <F N="../src/mac/secure-element.h"/>
+            </Folder>
+            <Folder Name="peripherals">
+                <Folder Name="atecc608a-tnglora-se">
+                    <Folder Name="cryptoauthlib">
+                        <Folder Name="app">
+                            <Folder Name="api_206a">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/api_206a/api_206a.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/api_206a/api_206a.h"/>
+                            </Folder>
+                            <Folder Name="ip_protection">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/ip_protection/symmetric_authentication.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/ip_protection/symmetric_authentication.h"/>
+                            </Folder>
+                            <Folder Name="secure_boot">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/secure_boot/io_protection_key.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/secure_boot/secure_boot.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/secure_boot/secure_boot.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/secure_boot/secure_boot_memory.h"/>
+                            </Folder>
+                            <Folder Name="tng">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tng_atca.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tng_atca.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tng_atcacert_client.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tng_atcacert_client.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tng_root_cert.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tng_root_cert.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tnglora_cert_def_1_signer.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tnglora_cert_def_1_signer.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tnglora_cert_def_2_device.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tnglora_cert_def_2_device.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tnglora_cert_def_4_device.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tnglora_cert_def_4_device.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tngtls_cert_def_1_signer.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tngtls_cert_def_1_signer.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tngtls_cert_def_2_device.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tngtls_cert_def_2_device.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tngtls_cert_def_3_device.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/app/tng/tngtls_cert_def_3_device.h"/>
+                            </Folder>
+                        </Folder>
+                        <Folder Name="harmony">
+                            <Folder Name="src">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/harmony/src/cryptoauthlib_main.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/harmony/src/hal_i2c_harmony.h"/>
+                            </Folder>
+                        </Folder>
+                        <Folder Name="lib">
+                            <Folder Name="atcacert">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_client.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_client.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_date.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_date.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_def.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_def.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_der.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_der.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_host_hw.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_host_hw.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_host_sw.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_host_sw.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_pem.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atcacert/atcacert_pem.h"/>
+                            </Folder>
+                            <Folder Name="basic">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_aes.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_aes_cbc.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_aes_cmac.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_aes_ctr.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_aes_gcm.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_aes_gcm.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_checkmac.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_counter.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_derivekey.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_ecdh.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_gendig.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_genkey.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_hmac.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_info.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_kdf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_lock.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_mac.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_nonce.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_privwrite.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_random.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_read.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_secureboot.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_selftest.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_sha.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_sign.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_updateextra.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_verify.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_basic_write.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_helpers.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/basic/atca_helpers.h"/>
+                            </Folder>
+                            <Folder Name="crypto">
+                                <Folder Name="hashes">
+                                    <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/hashes/sha1_routines.c"/>
+                                    <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/hashes/sha1_routines.h"/>
+                                    <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/hashes/sha2_routines.c"/>
+                                    <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/hashes/sha2_routines.h"/>
+                                </Folder>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/atca_crypto_sw.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/atca_crypto_sw_ecdsa.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/atca_crypto_sw_ecdsa.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/atca_crypto_sw_rand.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/atca_crypto_sw_rand.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/atca_crypto_sw_sha1.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/atca_crypto_sw_sha1.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/atca_crypto_sw_sha2.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/crypto/atca_crypto_sw_sha2.h"/>
+                            </Folder>
+                            <Folder Name="hal">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/atca_hal.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/atca_hal.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/atca_start_config.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/atca_start_iface.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_all_platforms_kit_hidapi.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_all_platforms_kit_hidapi.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_at90usb1287_i2c_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_at90usb1287_i2c_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_at90usb1287_timer_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_esp32_i2c.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_esp32_timer.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_freertos.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_i2c_bitbang.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_i2c_bitbang.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_i2c_harmony.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_i2c_start.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_i2c_start.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_linux_i2c_userspace.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_linux_i2c_userspace.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_linux_kit_cdc.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_linux_kit_cdc.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_linux_kit_hid.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_linux_kit_hid.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_linux_timer.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_pic32mx695f512h_i2c.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_pic32mx695f512h_i2c.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_pic32mx695f512h_timer.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_pic32mz2048efm_i2c.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_pic32mz2048efm_i2c.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_pic32mz2048efm_timer.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_sam4s_i2c_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_sam4s_i2c_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_sam4s_timer_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samb11_i2c_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samb11_i2c_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samb11_timer_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samd21_i2c_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samd21_i2c_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samd21_timer_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samg55_i2c_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samg55_i2c_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samg55_timer_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samv71_i2c_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samv71_i2c_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_samv71_timer_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_swi_bitbang.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_swi_bitbang.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_swi_uart.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_swi_uart.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_timer_start.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_uc3_i2c_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_uc3_i2c_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_uc3_timer_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_win_kit_cdc.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_win_kit_cdc.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_win_kit_hid.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_win_kit_hid.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_win_timer.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_xmega_a3bu_i2c_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_xmega_a3bu_i2c_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/hal_xmega_a3bu_timer_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/i2c_bitbang_samd21.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/i2c_bitbang_samd21.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/kit_phy.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/kit_protocol.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/kit_protocol.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_bitbang_samd21.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_bitbang_samd21.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_uart_at90usb1287_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_uart_at90usb1287_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_uart_samd21_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_uart_samd21_asf.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_uart_start.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_uart_start.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_uart_xmega_a3bu_asf.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/hal/swi_uart_xmega_a3bu_asf.h"/>
+                            </Folder>
+                            <Folder Name="host">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/host/atca_host.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/host/atca_host.h"/>
+                            </Folder>
+                            <Folder Name="jwt">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/jwt/atca_jwt.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/jwt/atca_jwt.h"/>
+                            </Folder>
+                            <Folder Name="mbedtls">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/mbedtls/atca_mbedtls_ecdh.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/mbedtls/atca_mbedtls_ecdsa.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/mbedtls/atca_mbedtls_wrap.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/mbedtls/atca_mbedtls_wrap.h"/>
+                            </Folder>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_bool.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_cfgs.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_cfgs.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_command.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_command.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_compiler.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_device.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_device.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_devtypes.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_execution.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_execution.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_iface.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_iface.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_status.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/atca_version.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/lib/cryptoauthlib.h"/>
+                        </Folder>
+                        <Folder Name="test">
+                            <Folder Name="atcacert">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/all_atcacert_tests.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_client.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_client_runner.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_date.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_date_runner.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_def.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_def_runner.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_der_ecdsa_sig_value.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_der_ecdsa_sig_value_runner.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_der_integer.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_der_integer_runner.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_der_length.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_der_length_runner.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_host_hw.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_atcacert_host_hw_runner.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_cert_def_0_device.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_cert_def_0_device.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_cert_def_1_signer.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_cert_def_1_signer.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_cert_def_2_device_csr.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_cert_def_2_device_csr.h"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_cert_def_3_device.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atcacert/test_cert_def_3_device.h"/>
+                            </Folder>
+                            <Folder Name="jwt">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/jwt/atca_jwt_test.c"/>
+                            </Folder>
+                            <Folder Name="tng">
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/tng/tng_atca_test.c"/>
+                                <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/tng/tng_atcacert_client_test.c"/>
+                            </Folder>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_crypto_sw_tests.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_crypto_sw_tests.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_test.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_test.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_aes.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_aes_cbc.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_aes_cmac.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_aes_ctr.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_aes_gcm.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_counter.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_derivekey.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_ecdh.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_gendig.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_genkey.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_helper.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_hmac.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_info.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_kdf.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_lock.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_mac.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_nonce.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_otpzero.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_pause.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_privwrite.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_random.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_read.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_secureboot.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_selftest.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_sha.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_sign.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_startup.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_updateextra.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_verify.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_tests_write.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/atca_utils_sizes.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/cbuf.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/cmd-processor.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/cmd-processor.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/unity.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/unity.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/unity_fixture.c"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/unity_fixture.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/unity_fixture_internals.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/unity_fixture_malloc_overrides.h"/>
+                            <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/test/unity_internals.h"/>
+                        </Folder>
+                        <Folder Name="third_party">
+                            <Folder Name="hidapi">
+                                <Folder Name="hidapi">
+                                    <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/third_party/hidapi/hidapi/hidapi.h"/>
+                                </Folder>
+                                <Folder Name="libusb">
+                                    <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/third_party/hidapi/libusb/hid.c"/>
+                                </Folder>
+                                <Folder Name="linux">
+                                    <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/third_party/hidapi/linux/hid.c"/>
+                                </Folder>
+                                <Folder Name="mac">
+                                    <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/third_party/hidapi/mac/hid.c"/>
+                                </Folder>
+                                <Folder Name="windows">
+                                    <F N="../src/peripherals/atecc608a-tnglora-se/cryptoauthlib/third_party/hidapi/windows/hid.c"/>
+                                </Folder>
+                            </Folder>
+                        </Folder>
+                    </Folder>
+                    <F N="../src/peripherals/atecc608a-tnglora-se/atca_config.h"/>
+                    <F N="../src/peripherals/atecc608a-tnglora-se/atecc608a-tnglora-se-hal.c"/>
+                    <F N="../src/peripherals/atecc608a-tnglora-se/atecc608a-tnglora-se-hal.h"/>
+                    <F N="../src/peripherals/atecc608a-tnglora-se/atecc608a-tnglora-se.c"/>
+                    <F N="../src/peripherals/atecc608a-tnglora-se/se-identity.h"/>
+                </Folder>
+                <Folder Name="lr1110-se">
+                    <F N="../src/peripherals/lr1110-se/lr1110-se-hal.c"/>
+                    <F N="../src/peripherals/lr1110-se/lr1110-se-hal.h"/>
+                    <F N="../src/peripherals/lr1110-se/lr1110-se.c"/>
+                    <F N="../src/peripherals/lr1110-se/se-identity.h"/>
+                </Folder>
+                <Folder Name="soft-se">
+                    <F N="../src/peripherals/soft-se/aes.c"/>
+                    <F N="../src/peripherals/soft-se/aes.h"/>
+                    <F N="../src/peripherals/soft-se/cmac.c"/>
+                    <F N="../src/peripherals/soft-se/cmac.h"/>
+                    <F N="../src/peripherals/soft-se/se-identity.h"/>
+                    <F N="../src/peripherals/soft-se/soft-se-hal.c"/>
+                    <F N="../src/peripherals/soft-se/soft-se-hal.h"/>
+                    <F N="../src/peripherals/soft-se/soft-se.c"/>
+                </Folder>
+                <F N="../src/peripherals/gpio-ioe.c"/>
+                <F N="../src/peripherals/gpio-ioe.h"/>
+                <F N="../src/peripherals/mag3110.c"/>
+                <F N="../src/peripherals/mag3110.h"/>
+                <F N="../src/peripherals/mma8451.c"/>
+                <F N="../src/peripherals/mma8451.h"/>
+                <F N="../src/peripherals/mpl3115.c"/>
+                <F N="../src/peripherals/mpl3115.h"/>
+                <F N="../src/peripherals/pam7q.c"/>
+                <F N="../src/peripherals/pam7q.h"/>
+                <F N="../src/peripherals/sx1509.c"/>
+                <F N="../src/peripherals/sx1509.h"/>
+                <F N="../src/peripherals/sx9500.c"/>
+                <F N="../src/peripherals/sx9500.h"/>
+            </Folder>
+            <Folder Name="radio">
+                <Folder Name="lr1110">
+                    <Folder Name="lr1110_driver">
+                        <Folder Name="src">
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_bootloader.c"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_bootloader.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_bootloader_types.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_crypto_engine.c"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_crypto_engine.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_crypto_engine_types.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_driver_version.c"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_driver_version.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_gnss.c"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_gnss.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_gnss_types.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_hal.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_radio.c"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_radio.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_radio_types.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_regmem.c"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_regmem.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_system.c"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_system.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_system_types.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_wifi.c"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_wifi.h"/>
+                            <F N="../src/radio/lr1110/lr1110_driver/src/lr1110_wifi_types.h"/>
+                        </Folder>
+                    </Folder>
+                    <F N="../src/radio/lr1110/lr1110.h"/>
+                    <F N="../src/radio/lr1110/radio.c"/>
+                </Folder>
+                <Folder Name="sx126x">
+                    <F N="../src/radio/sx126x/radio.c"/>
+                    <F N="../src/radio/sx126x/sx126x.c"/>
+                    <F N="../src/radio/sx126x/sx126x.h"/>
+                </Folder>
+                <Folder Name="sx1272">
+                    <F N="../src/radio/sx1272/sx1272.c"/>
+                    <F N="../src/radio/sx1272/sx1272.h"/>
+                    <F N="../src/radio/sx1272/sx1272Regs-Fsk.h"/>
+                    <F N="../src/radio/sx1272/sx1272Regs-LoRa.h"/>
+                </Folder>
+                <Folder Name="sx1276">
+                    <F N="../src/radio/sx1276/sx1276.c"/>
+                    <F N="../src/radio/sx1276/sx1276.h"/>
+                    <F N="../src/radio/sx1276/sx1276Regs-Fsk.h"/>
+                    <F N="../src/radio/sx1276/sx1276Regs-LoRa.h"/>
+                </Folder>
+                <F N="../src/radio/radio.h"/>
+            </Folder>
+            <Folder Name="system">
+                <F N="../src/system/adc.c"/>
+                <F N="../src/system/adc.h"/>
+                <F N="../src/system/delay.c"/>
+                <F N="../src/system/delay.h"/>
+                <F N="../src/system/fifo.c"/>
+                <F N="../src/system/fifo.h"/>
+                <F N="../src/system/gpio.c"/>
+                <F N="../src/system/gpio.h"/>
+                <F N="../src/system/gps.c"/>
+                <F N="../src/system/gps.h"/>
+                <F N="../src/system/i2c.c"/>
+                <F N="../src/system/i2c.h"/>
+                <F N="../src/system/nvmm.c"/>
+                <F N="../src/system/nvmm.h"/>
+                <F N="../src/system/serial.h"/>
+                <F N="../src/system/spi.h"/>
+                <F N="../src/system/systime.c"/>
+                <F N="../src/system/systime.h"/>
+                <F N="../src/system/timer.c"/>
+                <F N="../src/system/timer.h"/>
+                <F N="../src/system/uart.c"/>
+                <F N="../src/system/uart.h"/>
+            </Folder>
+        </Folder>
+    </Files>
+</Project>
