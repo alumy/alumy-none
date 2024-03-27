@@ -14,5 +14,6 @@
 #include "alumy/driver/flash_header.h"
 #include "alumy/driver/graphics.h"
 #include "alumy/driver/net/at.h"
+#include "alumy/driver/radio.h"
 
 #endif
