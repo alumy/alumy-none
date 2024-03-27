@@ -38,7 +38,7 @@ __BEGIN_DECLS
 #define AL_EOF		(-1)
 #endif
 
-__static_inline__ char al_hex2asc(uint8_t value)
+__static_inline__ __attribute_const__ char al_hex2asc(uint8_t value)
 {
     static const char al_hex_asc_tab[16] = "0123456789ABCDEF";
 
@@ -49,7 +49,7 @@ __static_inline__ char al_hex2asc(uint8_t value)
     return 0;
 }
 
-__static_inline__ uint8_t al_asc2hex(char asc)
+__static_inline__ __attribute_const__ uint8_t al_asc2hex(char asc)
 {
     static const uint8_t al_asc_hex_tab[128] = {
         ['0'] = 0x00, ['1'] = 0x01, ['2'] = 0x02, ['3'] = 0x03,
