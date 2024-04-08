@@ -70,27 +70,27 @@
 * strings. Use of this type, rather than plain 'char', is in compliance
 * with the MISRA-C 2004 Rules 6.1(req), 6.3(adv).
 */
-typedef char char_t;
+/* typedef char char_t; */
 
 /*! typedef for line numbers in assertions and return from QF_run() */
 // typedef int int_t;
 
 /*! typedef for enumerations used for event signals */
-typedef int enum_t;
+/* typedef int enum_t; */
 
 /*! IEEE 754 32-bit floating point number, MISRA-C 2004 rule 6.3(req) */
 /**
 * @note QP-nano does not use floating-point types anywhere in the internal
 * implementation.
 */
-typedef float float32_t;
+/* typedef float float32_t; */
 
 /*! IEEE 754 64-bit floating point number, MISRA-C 2004 rule 6.3(req) */
 /**
 * @note QP-nano does not use floating-point types anywhere in the internal
 * implementation.
 */
-typedef double float64_t;
+/* typedef double float64_t; */
 
 /*! Scalar type describing the signal of an event. */
 typedef uint8_t QSignal;

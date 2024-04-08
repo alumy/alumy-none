@@ -142,5 +142,10 @@ typedef uint_t bool_t;
 #define __bool_t_defined
 #endif
 
+#ifndef __char_t_defined
+typedef char char_t;
+#define __char_t_defined
+#endif
+
 #endif	/* end of _TYPES_H */
 
