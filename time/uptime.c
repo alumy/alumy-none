@@ -29,5 +29,14 @@ void al_uptime_get(al_uptime_t *up)
 	up->mins = uptime % 86400 % 3600 / 60;
 }
 
+void al_uptime_get_r(uint32_t uptime, al_uptime_t *up)
+{
+    AL_CHECK(up, EINVAL);
+
+    up->days = uptime / 86400;
+    up->hours = uptime % 86400 / 3600;
+    up->mins = uptime % 86400 % 3600 / 60;
+}
+
 __END_DECLS
 

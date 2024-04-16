@@ -17,6 +17,7 @@ typedef struct al_uptime {
 uint32_t al_uptime(void);
 
 void al_uptime_get(al_uptime_t *up);
+void al_uptime_get_r(uint32_t uptime, al_uptime_t *up);
 
 __END_DECLS
 
