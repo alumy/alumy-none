@@ -11,36 +11,51 @@
 
 __BEGIN_DECLS
 
-static al_tick_t tick = { 0 };
+static uint32_t tick_tick = 0;
+static uint32_t tick_msec = 0;
+static uint32_t tick_sec = 0;
 
 void al_tick_init(void)
 {
-    tick.tv_sec = 0;
-    tick.tv_msec = 0;
-	tick.tv_tick = 0;
+    tick_tick = 0;
+    tick_msec = 0;
+    tick_sec = 0;
 }
 
 void al_tick_inc(void)
 {
-	tick.tv_tick++;
-    tick.tv_msec++;
-    if (tick.tv_msec >= 1000) {
-        tick.tv_msec = 0;
-        tick.tv_sec++;
+    tick_tick++;
+
+    tick_msec++;
+    if (tick_msec >= 1000) {
+        tick_msec = 0;
+        tick_sec++;
     }
 }
 
-const al_tick_t *al_tick_get(al_tick_t *pt)
+__always_inline uint32_t al_tick_get_tick(void)
 {
-    if (pt != NULL) {
-        pt->tv_sec = tick.tv_sec;
-        pt->tv_msec = tick.tv_msec;
-		pt->tv_tick = tick.tv_tick;
+    return tick_tick;
+}
 
-        return pt;
-    }
+__always_inline uint32_t al_tick_get_sec(void)
+{
+    return tick_sec;
+}
 
-    return &tick;
+__always_inline uint32_t al_tick_get_msec(void)
+{
+    return tick_msec;
+}
+
+__always_inline uint32_t al_tick_elapsed_tick(uint32_t last)
+{
+    return al_tick_get_tick() - last;
+}
+
+__always_inline uint32_t al_tick_elapsed_sec(uint32_t last)
+{
+    return al_tick_get_sec() - last;
 }
 
 __END_DECLS

@@ -8,12 +8,12 @@ __BEGIN_DECLS
 
 al_os_tick_t al_os_get_tick(void)
 {
-	return 0;
+    return al_tick_get_tick();
 }
 
 al_os_tick_t al_os_get_tick_isr(void)
 {
-	return 0;
+    return al_tick_get_tick();
 }
 
 al_os_tick_t al_os_ms2tick(uint32_t ms)

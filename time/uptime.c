@@ -15,7 +15,7 @@ __BEGIN_DECLS
 
 uint32_t al_uptime(void)
 {
-    return al_tick_get(NULL)->tv_sec;
+    return al_tick_get_sec();
 }
 
 void al_uptime_get(al_uptime_t *up)

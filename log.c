@@ -37,15 +37,12 @@ __weak void al_vlog(int32_t pri, const char *fmt, va_list ap)
 
 __weak const char *al_log_timestamp(void)
 {
-    static char str[16];
-    al_tick_t tick;
-	long tv_sec;
-	int tv_msec;
+    static char str[26];
+    register long tv_sec;
+    register int tv_msec;
 
-    al_tick_get(&tick);
-	
-	tv_sec = tick.tv_sec;
-	tv_msec = tick.tv_msec;
+	tv_sec = al_tick_get_sec();
+	tv_msec = al_tick_get_msec();
 
     snprintf(str, sizeof(str), "[%5ld.%03d]", (long)tv_sec, (int)tv_msec);
 

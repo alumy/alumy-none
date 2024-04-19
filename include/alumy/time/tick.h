@@ -8,15 +8,22 @@
 
 __BEGIN_DECLS
 
-typedef struct al_tick {
-    volatile time_t tv_sec;
-    volatile uint_t tv_msec;
-	volatile uint_t tv_tick;
-} al_tick_t;
-
 void al_tick_init(void);
+
+/**
+ * @brief This should invoke in 1 msecond timer callback
+ *
+ * @author jack (2024/4/19)
+ *
+ * @param void
+ */
 void al_tick_inc(void);
-const al_tick_t *al_tick_get(al_tick_t *pt);
+
+uint32_t al_tick_get_sec(void);
+uint32_t al_tick_get_msec(void);
+uint32_t al_tick_get_tick(void);
+uint32_t al_tick_elapsed_tick(uint32_t last);
+uint32_t al_tick_elapsed_sec(uint32_t last);
 
 __END_DECLS
 
