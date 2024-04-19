@@ -3,6 +3,8 @@
 #include "alumy/types.h"
 #include "alumy/base.h"
 #include "alumy/osal.h"
+#include "alumy/time/tick.h"
+#include "alumy/time/uptime.h"
 
 __BEGIN_DECLS
 
