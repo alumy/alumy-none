@@ -99,7 +99,7 @@
   #endif /* __packed */
 
   #ifndef __used
-    #define __used    __attribute__((unused))
+    #define __used    __attribute__((used))
   #endif /* __used */
 
   #ifndef __maybe_unused
