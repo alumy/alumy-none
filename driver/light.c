@@ -72,7 +72,7 @@ int_t al_light_set(al_light_t *light, uint8_t id, int_t value, uint16_t intv)
         return -1;
     }
     
-    if(value == item->value) {
+    if(value == item->value && intv == item->intv) {
 		set_errno(0);
         return 0;
     }
