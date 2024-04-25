@@ -29,6 +29,10 @@
 #define __static_inline__		static __inline
 #endif
 
+#ifndef __has_builtin
+#define __has_builtin(x)	(0)
+#endif
+
 #ifndef UNUSED
 #define UNUSED(v)	(void)(v)
 #endif
