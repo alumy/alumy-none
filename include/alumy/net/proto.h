@@ -14,6 +14,8 @@ typedef struct al_net_proto_item {
     uint_t version;
 
     const void * const opt;
+    const void (*urc_handle)(const void *data, size_t len, void *arg);
+
     void * const arg;
 } al_net_proto_item_t;
 
