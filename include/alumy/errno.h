@@ -193,6 +193,9 @@ defined in armcc/errno.h
 
 #endif
 
+#undef errno
+#define errno   (*__al_errno())
+
 void set_errno(int errnum);
 
 __END_DECLS

@@ -1,0 +1,35 @@
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+#include "semphr.h"
+#include "alumy/config.h"
+#include "alumy/byteorder.h"
+#include "alumy/types.h"
+#include "alumy/base.h"
+#include "alumy/bug.h"
+#include "alumy/osal.h"
+#include "alumy/errno.h"
+
+__BEGIN_DECLS
+
+#define LSP_ERRNO_INDEX     0
+
+#if (configNUM_THREAD_LOCAL_STORAGE_POINTERS > 0)
+int *__al_errno(void)
+{
+    int *__e;
+
+	__e = (int *)pvTaskGetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX);
+    if (__e == NULL) {
+        __e = al_os_malloc(sizeof(int));
+        BUG_ON(__e == NULL);
+
+        vTaskSetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX, __e);
+    }
+
+    return (int *)__e;
+}
+#endif
+
+__END_DECLS
+
