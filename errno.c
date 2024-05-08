@@ -5,14 +5,14 @@
 
 __BEGIN_DECLS
 
-__weak void set_errno(int e)
-{
-    errno = e;
-}
-
 __weak int *__al_errno(void)
 {
     return (int *)&(errno);
+}
+
+void set_errno(int e)
+{
+    *__al_errno() = e;
 }
 
 __END_DECLS
