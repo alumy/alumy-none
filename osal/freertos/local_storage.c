@@ -17,17 +17,18 @@ __BEGIN_DECLS
 #if (configNUM_THREAD_LOCAL_STORAGE_POINTERS > 0)
 int *__al_errno(void)
 {
-    int *__e;
+    int *e;
 
-	__e = (int *)pvTaskGetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX);
-    if (__e == NULL) {
-        __e = al_os_malloc(sizeof(int));
-        BUG_ON(__e == NULL);
+    e = (int *)pvTaskGetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX);
+    if (e == NULL) {
+        e = al_os_malloc(sizeof(int));
+        vTaskSetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX, e);
 
-        vTaskSetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX, __e);
+        e = (int *)pvTaskGetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX);
+        BUG_ON(e == NULL);
     }
 
-    return (int *)__e;
+    return (int *)e;
 }
 #endif
 
