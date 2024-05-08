@@ -14,7 +14,7 @@ __BEGIN_DECLS
 
 #define LSP_ERRNO_INDEX     0
 
-#if (configNUM_THREAD_LOCAL_STORAGE_POINTERS > 0)
+#if (configNUM_THREAD_LOCAL_STORAGE_POINTERS >= 1)
 int *__al_errno(void)
 {
     int *e;
@@ -30,6 +30,9 @@ int *__al_errno(void)
 
     return (int *)e;
 }
+#else
+#error("configNUM_THREAD_LOCAL_STORAGE_POINTERS must greather than 1 and \
+the index 0 is reserved for errno");
 #endif
 
 __END_DECLS
