@@ -17,12 +17,14 @@ __BEGIN_DECLS
 #if (configNUM_THREAD_LOCAL_STORAGE_POINTERS >= 1)
 int *__al_errno(void)
 {
+    /* in the interrupt or scheduler is not running */
     if(vPortGetIPSR() || (xTaskGetCurrentTaskHandle() == NULL)) {
         static volatile int __e;
 
         return (int *)&__e;
     }
 
+    /* get the current task storage */
     int *e = (int *)pvTaskGetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX);
     if (e == NULL) {
         e = al_os_malloc(sizeof(int));
