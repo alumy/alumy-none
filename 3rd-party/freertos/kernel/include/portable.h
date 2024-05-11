@@ -196,6 +196,11 @@ BaseType_t xPortStartScheduler( void ) PRIVILEGED_FUNCTION;
 void vPortEndScheduler( void ) PRIVILEGED_FUNCTION;
 
 /*
+ * Get current interrupt
+ */
+uint32_t vPortGetIPSR( void ) PRIVILEGED_FUNCTION;
+
+/*
  * The structures and methods of manipulating the MPU are contained within the
  * port layer.
  *

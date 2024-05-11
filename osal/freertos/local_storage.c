@@ -17,9 +17,13 @@ __BEGIN_DECLS
 #if (configNUM_THREAD_LOCAL_STORAGE_POINTERS >= 1)
 int *__al_errno(void)
 {
-    int *e;
+    if(vPortGetIPSR() || (xTaskGetCurrentTaskHandle() == NULL)) {
+        static volatile int __e;
 
-    e = (int *)pvTaskGetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX);
+        return (int *)&__e;
+    }
+
+    int *e = (int *)pvTaskGetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX);
     if (e == NULL) {
         e = al_os_malloc(sizeof(int));
         vTaskSetThreadLocalStoragePointer(NULL, LSP_ERRNO_INDEX, e);
