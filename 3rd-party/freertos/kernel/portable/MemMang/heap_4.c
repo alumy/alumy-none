@@ -33,6 +33,7 @@
  * memory management pages of https://www.FreeRTOS.org for more information.
  */
 #include <stdlib.h>
+#include <string.h>
 
 /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
  * all the API functions to use the MPU wrappers.  That should only be done when
@@ -336,6 +337,43 @@ size_t xPortGetMinimumEverFreeHeapSize( void )
 void vPortInitialiseBlocks( void )
 {
     /* This just exists to keep the linker quiet. */
+}
+/*-----------------------------------------------------------*/
+
+void *pvPortCalloc(size_t xNum, size_t xSize)
+{
+    void *p;
+
+    /* allocate 'count' objects of size 'size' */
+    p = pvPortMalloc(xNum * xSize);
+    if (p) {
+        /* zero the memory */
+        memset(p, 0, xNum * xSize);
+    }
+
+    return p;
+}
+/*-----------------------------------------------------------*/
+
+void *pvPortRealloc(void *ptr, size_t size)
+{
+    void *p;
+
+    if (size == 0) {
+        vPortFree(ptr);
+        return NULL;
+    }
+
+    p = pvPortMalloc(size);
+    if (p) {
+        /* zero the memory */
+        if (ptr != NULL) {
+            memcpy(p, ptr, size);
+            vPortFree(ptr);
+        }
+    }
+
+    return p;
 }
 /*-----------------------------------------------------------*/
 

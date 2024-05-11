@@ -20,6 +20,16 @@ void al_os_free(void *p)
 	vPortFree(p);
 }
 
+void *al_os_calloc(size_t nmemb, size_t size)
+{
+    return pvPortCalloc(nmemb, size);
+}
+
+void *al_os_realloc(void *ptr, size_t size)
+{
+    return pvPortRealloc(ptr, size);
+}
+
 size_t al_os_get_free_heap_size(void)
 {
 	return xPortGetFreeHeapSize();

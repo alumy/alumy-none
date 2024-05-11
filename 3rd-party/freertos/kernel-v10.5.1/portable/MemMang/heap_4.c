@@ -376,6 +376,28 @@ void * pvPortCalloc( size_t xNum,
 }
 /*-----------------------------------------------------------*/
 
+void *pvPortRealloc(void *ptr, size_t size)
+{
+    void *p;
+
+    if (size == 0) {
+        vPortFree(ptr);
+        return NULL;
+    }
+
+    p = pvPortMalloc(size);
+    if (p) {
+        /* zero the memory */
+        if (ptr != NULL) {
+            memcpy(p, ptr, size);
+            vPortFree(ptr);
+        }
+    }
+
+    return p;
+}
+/*-----------------------------------------------------------*/
+
 static void prvHeapInit( void ) /* PRIVILEGED_FUNCTION */
 {
     BlockLink_t * pxFirstFreeBlock;
