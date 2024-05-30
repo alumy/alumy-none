@@ -6,7 +6,6 @@
 #include "alumy/config.h"
 #include "alumy/base.h"
 #include "alumy/types.h"
-#include "alumy/driver.h"
 
 __BEGIN_DECLS
 
