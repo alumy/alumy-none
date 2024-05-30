@@ -7,7 +7,6 @@
 #include "alumy/cdefs.h"
 #endif
 
-
 #if  defined ( __GNUC__ ) || defined ( __clang__ )
 
   #ifndef __weak
@@ -90,6 +89,12 @@
 	#define __restrict		__restrict__
   #endif
 
+  /* The nonull function attribute allows to mark pointer parameters which
+   *    must not be NULL.  */
+  #ifndef __nonnull
+    # define __nonnull(params) __attribute__ ((__nonnull__ params))
+  #endif
+
 #endif /* __GNUC__ */
 
 #if defined (__CC_ARM)
@@ -158,6 +163,12 @@
 	#define __restrict		__restrict__
   #endif
   
+  /* The nonull function attribute allows to mark pointer parameters which
+   *    must not be NULL.  */
+  #ifndef __nonnull
+    # define __nonnull(params) __attribute__ ((__nonnull__ params))
+  #endif
+
 #endif /* __CC_ARM */
 
 #if defined (__ICCRL78__)

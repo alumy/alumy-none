@@ -402,14 +402,14 @@ void *rbtree_search_dft(rbtree_t *rb, const void *key, off_t offset)
 	struct rb_node *node = rb->root.rb_node;
 
 	while (node) {
-        ret = rb->compare(key, (const void *)((uintptr_t)node - offset));
+        ret = rb->compare(key, ((const uint8_t *)node - offset));
 
 		if (ret < 0)
 			node = node->rb_left;
 		else if (ret > 0)
 			node = node->rb_right;
 		else
-			return (void *)((uintptr_t)node - offset);
+            return (void *)((const uint8_t *)node - offset);
 	}
 
 	return NULL;
@@ -426,7 +426,7 @@ int32_t rbtree_insert_dft(rbtree_t *rb, void *key, off_t offset)
 
 	/* Figure out where to put new node */
 	while (*new) {
-		ret = rb->compare(key, (const void *)((uintptr_t)*new - offset));
+        ret = rb->compare(key, ((const uint8_t *)*new - offset));
 
 		parent = *new;
 		if (ret < 0)

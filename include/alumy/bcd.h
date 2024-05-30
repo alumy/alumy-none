@@ -10,6 +10,9 @@ __BEGIN_DECLS
 uint8_t bcd2bin(uint8_t bcd);
 uint8_t bin2bcd(uint8_t bin);
 
+uint8_t al_bcd2bin(uint8_t bcd);
+uint8_t al_bin2bcd(uint8_t bin);
+
 __END_DECLS
 
 #endif

@@ -79,9 +79,11 @@
 #define is_power_of_2(x)        ((x) != 0 && (((x) & ((x) - 1)) == 0))
 #endif
 
-#ifndef __off_t_defined
+#if !(defined( __off_t_defined) || \
+	  defined(__DEFINED_off_t))
 typedef long int off_t;
 #define __off_t_defined
+#define __DEFINED_off_t
 #endif
 
 #if defined(__CC_ARM)
@@ -121,9 +123,13 @@ typedef long int off_t;
 #if defined(__GNUC__)
     #if !(defined(__ssize_t_defined) || \
           defined(_SSIZE_T_DECLARED) || \
-          defined(_SSIZE_T_DEFINED))
+          defined(_SSIZE_T_DEFINED) || \
+          defined(__DEFINED_ssize_t))
         typedef long ssize_t;
         #define __ssize_t_defined
+        #define __DEFINED_ssize_t
+        #define _SSIZE_T_DECLARED
+        #define _SSIZE_T_DEFINED
         
         #ifndef SSIZE_MAX
             #define SSIZE_MAX INT_MAX

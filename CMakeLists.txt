@@ -98,10 +98,13 @@ endif()
 
 link_libraries(m)
 
+add_subdirectory(${PROJECT_SOURCE_DIR}/3rd-party)
+add_subdirectory(${PROJECT_SOURCE_DIR}/crypto)
 add_subdirectory(${PROJECT_SOURCE_DIR}/crc)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lrc)
 add_subdirectory(${PROJECT_SOURCE_DIR}/mem)
 add_subdirectory(${PROJECT_SOURCE_DIR}/math)
+add_subdirectory(${PROJECT_SOURCE_DIR}/sys)
 add_subdirectory(${PROJECT_SOURCE_DIR}/filter)
 add_subdirectory(${PROJECT_SOURCE_DIR}/string)
 add_subdirectory(${PROJECT_SOURCE_DIR}/bcd)
@@ -109,7 +112,6 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/base64)
 add_subdirectory(${PROJECT_SOURCE_DIR}/unity)
 add_subdirectory(${PROJECT_SOURCE_DIR}/cmock)
 add_subdirectory(${PROJECT_SOURCE_DIR}/cunit)
-add_subdirectory(${PROJECT_SOURCE_DIR}/sys)
 add_subdirectory(${PROJECT_SOURCE_DIR}/cjson)
 add_subdirectory(${PROJECT_SOURCE_DIR}/fs)
 add_subdirectory(${PROJECT_SOURCE_DIR}/driver)
@@ -117,17 +119,19 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/libcsv)
 add_subdirectory(${PROJECT_SOURCE_DIR}/protobuf-c)
 add_subdirectory(${PROJECT_SOURCE_DIR}/pid)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lzma)
-add_subdirectory(${PROJECT_SOURCE_DIR}/crypto)
 add_subdirectory(${PROJECT_SOURCE_DIR}/xyzmodem)
 add_subdirectory(${PROJECT_SOURCE_DIR}/time)
 add_subdirectory(${PROJECT_SOURCE_DIR}/net)
-add_subdirectory(${PROJECT_SOURCE_DIR}/3rd-party)
+add_subdirectory(${PROJECT_SOURCE_DIR}/expect)
 
 #############################################################################
 # libalumy
 #############################################################################
 
 set(objs
+		$<TARGET_OBJECTS:3rd-party>
+		$<TARGET_OBJECTS:sys>
+		$<TARGET_OBJECTS:crypto>
 		$<TARGET_OBJECTS:cunit>
 		$<TARGET_OBJECTS:crc>
 		$<TARGET_OBJECTS:lrc>
@@ -136,7 +140,6 @@ set(objs
 		$<TARGET_OBJECTS:filter>
 		$<TARGET_OBJECTS:string>
 		$<TARGET_OBJECTS:bcd>
-		$<TARGET_OBJECTS:sys>
 		$<TARGET_OBJECTS:base64>
 		$<TARGET_OBJECTS:cjson>
 		$<TARGET_OBJECTS:driver>
@@ -147,9 +150,8 @@ set(objs
 		$<TARGET_OBJECTS:lzma>
 		$<TARGET_OBJECTS:xyzmodem>
 		$<TARGET_OBJECTS:time>
-		$<TARGET_OBJECTS:3rd-party>
 		$<TARGET_OBJECTS:net>
-		$<TARGET_OBJECTS:crypto>)
+		$<TARGET_OBJECTS:expect>)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_src)
 
