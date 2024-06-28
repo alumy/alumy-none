@@ -626,6 +626,8 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
 			ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
 										ym->send_seq, 0x1A, p, len);
 			if (ret < 0) {
+                AL_ERROR(1, "ymodem send packet failed @ %s:%d, send_seq = %d",
+                         __func__, __LINE__, ym->send_seq);
 				return -1;
 			}
 
@@ -639,6 +641,8 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
         ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
                                     ym->send_seq, 0x1A, p, len);
         if (ret != 0) {
+            AL_ERROR(1, "ymodem send packet failed @ %s:%d, send_seq = %d",
+                     __func__, __LINE__, ym->send_seq);
             return -1;
         }
 
@@ -650,6 +654,8 @@ static int32_t al_ymodem_send_file_data(al_ymodem_t *ym,
     ret = al_ymodem_send_packet(ym, YMODEM_GET_HEADER(len),
                                 ym->send_seq, 0x1A, p, len);
     if (ret != 0) {
+        AL_ERROR(1, "ymodem send packet failed @ %s:%d, send_seq = %d",
+                 __func__, __LINE__, ym->send_seq);
         return -1;
     }
 
@@ -713,8 +719,7 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
     send_len = len + 1;
 	remain = YMODEM_PACKET_SIZE_128 - (len + 1);
 
-    len = snprintf((char *)ym->send_buf + (len + 1), remain,
-				   "%"PRIuPTR, file_size);
+    len = snprintf((char *)ym->send_buf + (len + 1), remain, "%u", file_size);
 
     if ((len <= 0) || (len >= remain)) {
         set_errno(EINVAL);
@@ -732,24 +737,24 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
     }
 
     if (al_ymodem_send_check_ack(ym, 'C') != 0) {
-        AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
-                 __FILE__, __LINE__);
+        AL_ERROR(1, "ymodem check ack failed @ %s:%d", __FILE__, __LINE__);
         return -1;
     }
 
     if (al_ymodem_send_file_data(ym, file_name, data, file_size) != 0) {
-        AL_ERROR(1, "al_ymodem_send_file_data failed @ %s:%d",
-                 __FILE__, __LINE__);	}
+        AL_ERROR(1, "ymodem send file failed @ %s:%d", __FILE__, __LINE__);
+    }
 
     ym->opt->ym_putc(AL_EOT);
+    ym->opt->ym_flush();
 
     if (al_ymodem_send_check_ack(ym, AL_NAK) != 0) {
-        AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
-                 __FILE__, __LINE__);
+        AL_ERROR(1, "ymodem check ack failed @ %s:%d", __FILE__, __LINE__);
         return -1;
     }
 
     ym->opt->ym_putc(AL_EOT);
+    ym->opt->ym_flush();
 
     if (al_ymodem_send_check_ack(ym, AL_ACK) != 0) {
         AL_ERROR(1, "al_ymodem_send_check_ack failed @ %s:%d",
