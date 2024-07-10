@@ -719,7 +719,8 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
     send_len = len + 1;
 	remain = YMODEM_PACKET_SIZE_128 - (len + 1);
 
-    len = snprintf((char *)ym->send_buf + (len + 1), remain, "%u", file_size);
+    len = snprintf((char *)ym->send_buf + (len + 1), remain, 
+		    "%"PRIuPTR, file_size);
 
     if ((len <= 0) || (len >= remain)) {
         set_errno(EINVAL);
