@@ -25,7 +25,7 @@ void al_vlog(int32_t pri, const char *fmt, va_list ap)
 
     SEGGER_RTT_printf(0, "%s ", al_log_timestamp());
 
-    if (__unlikely(vPortGetIPSR())) {
+    if (__unlikely(vPortGetIPSR() || (xTaskGetCurrentTaskHandle() == NULL))) {
         n = vsnprintf(buf, sizeof(buf), fmt, ap);
         if (n > 0)
             SEGGER_RTT_Write(0, buf, min((ssize_t)VLOG_SIZE - 1, n));
