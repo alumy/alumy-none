@@ -3,6 +3,7 @@
 #include "timers.h"
 #include "semphr.h"
 #include "alumy.h"
+#include "alumy/osal/freertos.h"
 
 __BEGIN_DECLS
 
@@ -124,17 +125,11 @@ static void stat_task(void *arg)
 
 int32_t al_freertos_stat_task_init(int_t interval)
 {
-    static StaticTask_t task;
-    static StackType_t stack[128];
     TaskHandle_t handle;
 
-    handle = xTaskCreateStatic(stat_task,
-                               "stat",
-                               ARRAY_SIZE(stack),
-                               (void *)interval,
-                               configMAX_PRIORITIES - 1,
-                               stack,
-                               &task);
+    handle = AL_FREERTOS_TASK_CREATE_STATIC(stat, stat_task, 128,
+                                            configMAX_PRIORITIES - 1,
+                                            (void *)interval);
     AL_CHECK_RET(handle, EPERM, -1);
 
     return 0;
