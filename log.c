@@ -172,27 +172,39 @@ void al_log_bin(int32_t pri,
 				const char *file, int32_t line, const char *func,
 				const void *data, size_t len)
 {
-    char buf[80];
+    static const char *fmt_tab[] = {
+        [AL_LOG_DEBUG] = AL_LOG_FMT(D, "%s"),
+        [AL_LOG_INFO] = AL_LOG_FMT(I, "%s"),
+        [AL_LOG_NOTICE] = AL_LOG_FMT(N, "%s"),
+        [AL_LOG_WARN] = AL_LOG_FMT(W, "%s"),
+        [AL_LOG_ERR] = AL_LOG_FMT(E, "%s"),
+        [AL_LOG_CRIT] = AL_LOG_FMT(C, "%s"),
+        [AL_LOG_ALERT] = AL_LOG_FMT(A, "%s"),
+        [AL_LOG_EMERG] = AL_LOG_FMT(E, "%s"),
+    };
 
+    char buf[80];
+    const char *fmt = AL_LOG_FMT(D, "%s");
     int32_t nline = len >> 4;
     int32_t remain = len & 0x0F;
-
     intptr_t addr = 0;
     const uint8_t *rp = (const uint8_t *)data;
 
+    if (pri < ARRAY_SIZE(fmt_tab)) {
+        fmt = fmt_tab[pri];
+    }
+
     while (nline--) {
-        hex_raw_fmt_line(buf, sizeof(buf),
-                         addr, rp + addr, BIN_LINE_SIZE);
+        hex_raw_fmt_line(buf, sizeof(buf), addr, rp + addr, BIN_LINE_SIZE);
         addr += BIN_LINE_SIZE;
 
-        al_log(pri, file, line, func, "%s\r\n", buf);
+        al_log(pri, file, line, func, fmt, buf);
     }
 
     if (remain > 0) {
-        hex_raw_fmt_line(buf, sizeof(buf),
-                         addr, rp + addr, (size_t)remain);
+        hex_raw_fmt_line(buf, sizeof(buf), addr, rp + addr, (size_t)remain);
 
-        al_log(pri, file, line, func, "%s\r\n", buf);
+        al_log(pri, file, line, func, fmt, buf);
     }
 }
 
