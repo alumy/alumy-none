@@ -3,6 +3,7 @@
 #include "alumy/byteorder.h"
 #include "alumy/byteswap.h"
 #include "alumy/types.h"
+#include "alumy/watchdog.h"
 
 #define htonl(x)            al_htonl(x)
 #define cpu_to_le32(x)      al_cpu_to_le32(x)

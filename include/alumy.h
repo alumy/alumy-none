@@ -55,6 +55,7 @@
 #include "alumy/math.h"
 #include "alumy/osal.h"
 #include "alumy/thread.h"
+#include "alumy/watchdog.h"
 
 __BEGIN_DECLS
 
