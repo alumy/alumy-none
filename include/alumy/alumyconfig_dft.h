@@ -67,7 +67,7 @@ extern "C" {
 #endif
 
 #ifndef AL_CONFIG_HW_WATCHDOG
-#define AL_CONFIG_HW_WATCHDOG		0		/* Hardware watchdog */
+#define AL_CONFIG_HW_WATCHDOG		1		/* Hardware watchdog */
 #endif
 
 #ifndef AL_CONFIG_WATCHDOG
@@ -75,7 +75,7 @@ extern "C" {
 #endif
 
 #ifndef AL_WATCHDOG_RESET
-#define AL_WATCHDOG_RESET()			(void)(0)
+#define AL_WATCHDOG_RESET()			al_watchdog_reset()
 #endif
 
 #ifndef AL_LIGHT_UPDATE_FREQ_HZ
