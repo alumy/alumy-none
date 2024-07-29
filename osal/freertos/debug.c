@@ -127,7 +127,7 @@ int32_t al_freertos_stat_task_init(int_t interval)
 {
     TaskHandle_t handle;
 
-    handle = AL_FREERTOS_TASK_CREATE_STATIC(stat, stat_task, 128,
+    handle = AL_FREERTOS_TASK_CREATE_STATIC(stat, stat_task, 160,
                                             configMAX_PRIORITIES - 1,
                                             (void *)interval);
     AL_CHECK_RET(handle, EPERM, -1);
