@@ -15,14 +15,14 @@ typedef struct al_slip_opt {
 } al_slip_opt_t;
 
 typedef struct al_slip {
-	void *recv_buf;
-	size_t recv_size;
+    void * const recv_buf;
+    const size_t recv_size;
 
 	uintptr_t recv_wp;
 	size_t recv_len;
-	int_t recv_state;
+    uint_t recv_state;
 
-	al_slip_opt_t opt;
+    const al_slip_opt_t * const opt;
 } al_slip_t;
 
 int_t al_slip_init(al_slip_t *slip, void *recv_buf, size_t recv_size,
@@ -31,6 +31,8 @@ int_t al_slip_init(al_slip_t *slip, void *recv_buf, size_t recv_size,
 size_t al_slip_write(al_slip_t *slip, const void *data, size_t len);
 
 int_t al_slip_flush(al_slip_t *slip);
+
+size_t al_slip_recv_byte(al_slip_t *slip, int_t c);
 
 size_t al_slip_recv(al_slip_t *slip);
 

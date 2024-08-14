@@ -33,12 +33,10 @@ int_t al_slip_init(al_slip_t *slip, void *recv_buf, size_t recv_size,
 	slip->recv_wp = 0;
 	slip->recv_state = SLIP_RECV_NORMAL;
 
-	slip->recv_buf = recv_buf;
-	slip->recv_size = recv_size;
+    *((void **)&slip->recv_buf) = recv_buf;
+    *((size_t *)&slip->recv_size) = recv_size;
 
-	slip->opt.sl_getc = opt->sl_getc;
-	slip->opt.sl_putc = opt->sl_putc;
-	slip->opt.sl_flush = opt->sl_flush;
+    *((const al_slip_opt_t **)&slip->opt) = opt;
 
 	return 0;
 }
@@ -49,7 +47,7 @@ size_t al_slip_write(al_slip_t *slip, const void *data, size_t len)
 	int_t c;
 
 	/* Start with packet delimiter. */
-	slip->opt.sl_putc(SLIP_END);
+	slip->opt->sl_putc(SLIP_END);
 
 	for (i = 0; i < len; i++) {
 		c = ((const uint8_t *)data)[i];
@@ -57,23 +55,23 @@ size_t al_slip_write(al_slip_t *slip, const void *data, size_t len)
 		switch (c) {
 		case SLIP_END:
 			/* need to escape this byte (0xC0 -> 0xDB, 0xDC) */
-			slip->opt.sl_putc(SLIP_ESC);
-			slip->opt.sl_putc(SLIP_ESC_END);
+			slip->opt->sl_putc(SLIP_ESC);
+			slip->opt->sl_putc(SLIP_ESC_END);
 			break;
 		case SLIP_ESC:
 			/* need to escape this byte (0xDB -> 0xDB, 0xDD) */
-			slip->opt.sl_putc(SLIP_ESC);
-			slip->opt.sl_putc(SLIP_ESC_ESC);
+			slip->opt->sl_putc(SLIP_ESC);
+			slip->opt->sl_putc(SLIP_ESC_ESC);
 			break;
 		default:
 			/* normal byte - no need for escaping */
-			slip->opt.sl_putc(c);
+			slip->opt->sl_putc(c);
 			break;
 		}
 	}
 
 	/* End with packet delimiter. */
-	slip->opt.sl_putc(SLIP_END);
+	slip->opt->sl_putc(SLIP_END);
 
 	set_errno(0);
 	return len;
@@ -81,14 +79,14 @@ size_t al_slip_write(al_slip_t *slip, const void *data, size_t len)
 
 int_t al_slip_flush(al_slip_t *slip)
 {
-	if (slip->opt.sl_flush) {
-		return slip->opt.sl_flush();
+	if (slip->opt->sl_flush) {
+		return slip->opt->sl_flush();
 	}
 
 	return 0;
 }
 
-__static_inline__ size_t al_slip_recv_byte(al_slip_t *slip, int_t c)
+size_t al_slip_recv_byte(al_slip_t *slip, int_t c)
 {
 	size_t recv_len = 0;
 
@@ -151,7 +149,7 @@ size_t al_slip_recv(al_slip_t *slip)
 	int_t c;
 	size_t len = 0;
 
-	while (((c = slip->opt.sl_getc()) != EOF)) {
+	while (((c = slip->opt->sl_getc()) != EOF)) {
 		len = al_slip_recv_byte(slip, c);
 		if (len != 0) {
 			break;
