@@ -5,8 +5,8 @@ set(LWIP_CONTRIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/contrib-2.1.0)
 include(${CMAKE_CURRENT_SOURCE_DIR}/lwip.cmake)
 
 FILE (GLOB_RECURSE ${target}_src
-    	${CMAKE_CURRENT_SOURCE_DIR}/letter-shell-3.1.2/src/*.c
-    	${CMAKE_CURRENT_SOURCE_DIR}/mbedtls-3.2.1/library/*.c
+	${CMAKE_CURRENT_SOURCE_DIR}/letter-shell-3.1.2/src/*.c
+	${CMAKE_CURRENT_SOURCE_DIR}/mbedtls-3.2.1/library/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/ascii/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/functions/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/freemodbus/modbus/rtu/*.c

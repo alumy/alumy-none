@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <string.h>
+#include "aes.h"
 #include "alumy/config.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
@@ -373,6 +374,28 @@ ssize_t aes_128_ctr_dec(void *out, size_t outsz, const void *in, size_t len,
     mbedtls_aes_free(&aes_ctx);
 
     return rv;
+}
+
+void al_aes128_ctr_encrypt(void *data, size_t len,
+                           const al_aes_128_key_t key,
+                           const al_aes_128_iv_t iv)
+{
+    struct AES_ctx aes_ctx;
+
+    AES_init_ctx_iv(&aes_ctx, key, iv);
+
+    AES_CTR_xcrypt_buffer(&aes_ctx, data, len);
+}
+
+void al_aes128_ctr_decrypt(void *data, size_t len,
+                           const al_aes_128_key_t key,
+                           const al_aes_128_iv_t iv)
+{
+    struct AES_ctx aes_ctx;
+
+    AES_init_ctx_iv(&aes_ctx, key, iv);
+
+    AES_CTR_xcrypt_buffer(&aes_ctx, data, len);
 }
 
 __END_DECLS

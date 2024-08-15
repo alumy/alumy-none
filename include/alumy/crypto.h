@@ -39,5 +39,13 @@ ssize_t aes_128_ctr_enc(void *out, size_t outsz, const void *in, size_t len,
 ssize_t aes_128_ctr_dec(void *out, size_t outsz, const void *in, size_t len,
 						const al_aes_128_key_t key, const al_aes_128_iv_t iv);
 
+void al_aes128_ctr_encrypt(void *data, size_t len,
+                           const al_aes_128_key_t key,
+                           const al_aes_128_iv_t iv);
+
+void al_aes128_ctr_decrypt(void *data, size_t len,
+                           const al_aes_128_key_t key,
+                           const al_aes_128_iv_t iv);
+
 #endif  /* __AL_CRYPTO_H */
 
