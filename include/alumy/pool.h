@@ -21,7 +21,7 @@ typedef struct al_pool {
 /**
  * @brief Create a memory pool
  *
- * @author chenyj (9/17/2019)
+ * @author jack (9/17/2019)
  *
  * @param po
  * @param buf
@@ -35,7 +35,7 @@ void al_create_pool(al_pool_t *po,
 /**
  * @brief Get item from memory pool
  *
- * @author chenyj (9/17/2019)
+ * @author jack (9/17/2019)
  *
  * @param po
  * @param offset
@@ -47,7 +47,7 @@ void *al_get_from_pool(al_pool_t *po, int32_t offset);
 /**
  * @brief Put the item to memory pool
  *
- * @author chenyj (9/17/2019)
+ * @author jack (9/17/2019)
  *
  * @param po
  * @param ent
