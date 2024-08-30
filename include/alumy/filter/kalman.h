@@ -50,7 +50,7 @@ void al_kalman1_init(al_kalman1_t *kf,
                      al_kf_t x, al_kf_t p, al_kf_t a, al_kf_t h,
                      al_kf_t q, al_kf_t r);
 
-al_kf_t al_kalman1_filter(al_kalman1_t *kf, float measure);
+al_kf_t al_kalman1_filter(al_kalman1_t *kf, al_kf_t measure);
 
 void al_kalman2_init(al_kalman2_t *k,
                      const al_kf_t x[2], const al_kf_t p[2][2],
