@@ -22,7 +22,8 @@ __BEGIN_DECLS
  * @retval
  */
 void al_kalman1_init(al_kalman1_t *k,
-                     float x, float p, float a, float h, float q, float r)
+                     al_kf_t x, al_kf_t p, al_kf_t a, al_kf_t h,
+                     al_kf_t q, al_kf_t r)
 {
     k->x = x;
     k->p = p;
@@ -42,7 +43,7 @@ void al_kalman1_init(al_kalman1_t *k,
  * @retval
  *   Estimated result
  */
-float al_kalman1_filter(al_kalman1_t *k, float measure)
+al_kf_t al_kalman1_filter(al_kalman1_t *k, al_kf_t measure)
 {
     /* Predict */
     k->x = k->a * k->x;
@@ -52,7 +53,7 @@ float al_kalman1_filter(al_kalman1_t *k, float measure)
     /* Measurement */
     k->gain = k->p * k->h / (k->p * k->h * k->h + k->r);
     k->x = k->x + k->gain * (measure - k->h * k->x);
-    k->p = (1 - k->gain * k->h) * k->p;
+    k->p = ((al_kf_t)1.0 - k->gain * k->h) * k->p;
 
     return k->x;
 }
@@ -72,9 +73,9 @@ float al_kalman1_filter(al_kalman1_t *k, float measure)
  * @retval
  */
 void al_kalman2_init(al_kalman2_t *k,
-					 const float x[2], const float p[2][2],
-					 const float a[2][2], const float h[2],
-					 const float q[2], float r)
+                     const al_kf_t x[2], const al_kf_t p[2][2],
+                     const al_kf_t a[2][2], const al_kf_t h[2],
+                     const al_kf_t q[2], al_kf_t r)
 {
     k->x[0] = x[0];
     k->x[1] = x[1];
@@ -110,11 +111,11 @@ void al_kalman2_init(al_kalman2_t *k,
  * @retval
  *   Return value is equals to state->x[0], so maybe angle or velocity.
  */
-float al_kalman2_filter(al_kalman2_t *k, const float measure[2])
+al_kf_t al_kalman2_filter(al_kalman2_t *k, const al_kf_t measure[2])
 {
-	float temp = 0.0f;
-	float temp0 = 0.0f;
-	float temp1 = 0.0f;
+    al_kf_t temp = (al_kf_t)0;
+    al_kf_t temp0 = (al_kf_t)0;
+    al_kf_t temp1 = (al_kf_t)0;
 
 	/* Step1: Predict */
 	k->x[0] = k->a[0][0] * k->x[0] + k->a[0][1] * k->x[1];
@@ -138,10 +139,10 @@ float al_kalman2_filter(al_kalman2_t *k, const float measure[2])
 	k->x[1] = k->x[1] + k->gain[1] *(measure[1] - temp);
 
 	/* Update @p: p(n|n) = [I - gain * H] * p(n|n-1) */
-	k->p[0][0] = (1 - k->gain[0] * k->h[0])* k->p[0][0];
-	k->p[0][1] = (1 - k->gain[0] * k->h[1])* k->p[0][1];
-	k->p[1][0] = (1 - k->gain[1] * k->h[0])* k->p[1][0];
-	k->p[1][1] = (1 - k->gain[1] * k->h[1])* k->p[1][1];
+    k->p[0][0] = ((al_kf_t)1.0 - k->gain[0] * k->h[0])* k->p[0][0];
+    k->p[0][1] = ((al_kf_t)1.0 - k->gain[0] * k->h[1])* k->p[0][1];
+    k->p[1][0] = ((al_kf_t)1.0 - k->gain[1] * k->h[0])* k->p[1][0];
+    k->p[1][1] = ((al_kf_t)1.0 - k->gain[1] * k->h[1])* k->p[1][1];
 
 	return k->x[0];
 }
