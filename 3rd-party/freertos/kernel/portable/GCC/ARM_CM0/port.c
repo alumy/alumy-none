@@ -564,3 +564,14 @@ __attribute__( ( weak ) ) void vPortSetupTimerInterrupt( void )
     }
 
 #endif /* configUSE_TICKLESS_IDLE */
+
+/*-----------------------------------------------------------*/
+
+uint32_t vPortGetIPSR( void )
+{
+	uint32_t ulCurrentInterrupt;
+	
+	__asm volatile ( "mrs %0, ipsr" : "=r" ( ulCurrentInterrupt )::"memory" );
+	
+	return ulCurrentInterrupt;
+}
