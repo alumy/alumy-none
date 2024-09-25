@@ -38,7 +38,9 @@ int_t al_os_stream_send_isr(al_os_stream_t stream,
 	n = xStreamBufferSendFromISR(
 				(StreamBufferHandle_t)stream, data, len, &__yield);
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return n;
 }
@@ -60,7 +62,9 @@ int_t al_os_stream_recv_isr(al_os_stream_t stream,
 	n = xStreamBufferReceiveFromISR(
 				(StreamBufferHandle_t)stream, buf, size, &__yield);
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return n;
 }

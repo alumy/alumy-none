@@ -121,7 +121,9 @@ int_t al_os_timer_set_period_isr(al_os_timer_t *tmr,
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }
@@ -143,7 +145,9 @@ int_t al_os_timer_reset_isr(al_os_timer_t *tmr, bool_t *yield)
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }

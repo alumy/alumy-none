@@ -59,7 +59,9 @@ int_t al_os_sem_take_isr(al_os_sem_t sem, bool_t *yield)
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }
@@ -81,7 +83,9 @@ int_t al_os_sem_give_isr(al_os_sem_t sem, bool_t *yield)
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }
@@ -123,7 +127,9 @@ int_t al_os_mutex_take_isr(al_os_mutex_t mutex, bool_t *yield)
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }
@@ -145,7 +151,9 @@ int_t al_os_mutex_give_isr(al_os_mutex_t mutex, bool_t *yield)
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }

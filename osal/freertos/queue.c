@@ -42,7 +42,9 @@ int_t al_os_queue_send_isr(al_os_queue_t queue, const void *data,
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }
@@ -69,7 +71,9 @@ int_t al_os_queue_send_back_isr(al_os_queue_t queue,
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }
@@ -96,7 +100,9 @@ int_t al_os_queue_send_front_isr(al_os_queue_t queue,
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }
@@ -120,7 +126,9 @@ int_t al_os_queue_recv_isr(al_os_queue_t queue, void *data, bool_t *yield)
 		return -1;
 	}
 
-	*yield = __yield;
+    if (yield) {
+        *yield = __yield;
+    }
 
 	return 0;
 }
