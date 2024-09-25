@@ -3,6 +3,9 @@
 
 #include "alumy/osal/freertos/debug.h"
 #include "alumy/osal/freertos/task.h"
+#include "alumy/osal/freertos/semphr.h"
+#include "alumy/osal/freertos/queue.h"
+#include "alumy/osal/freertos/streambuffer.h"
 
 #endif
 
