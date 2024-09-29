@@ -33,7 +33,8 @@ int32_t al_worker_init(al_worker_t *ctx, int_t cnt,
 
 int_t al_worker_check(al_worker_t *ctx);
 
-int32_t al_worker_run(al_worker_t *ctx, void (*func)(void *arg), void *arg);
+int32_t al_worker_run(al_worker_t *ctx,
+                      void (*func)(void *arg), void *arg, int32_t timeout);
 
 __END_DECLS
 

@@ -57,24 +57,25 @@ static void al_worker_loop(al_worker_t *ctx)
 	}
 }
 
-int32_t al_worker_run(al_worker_t *ctx, void (*func)(void *arg), void *arg)
+int32_t al_worker_run(al_worker_t *ctx,
+                      void (*func)(void *arg), void *arg, int32_t timeout)
 {
-	al_worker_item_t item;
+    al_worker_item_t item;
 
-	if (func == NULL) {
-		set_errno(ENOEXEC);
-		return -1;
-	}
+    if (func == NULL) {
+        set_errno(ENOEXEC);
+        return -1;
+    }
 
-	item.func = func;
-	item.arg = arg;
+    item.func = func;
+    item.arg = arg;
 
-	if (al_os_queue_send(ctx->queue, &item, 0) != 0) {
-		set_errno(ENOMEM);
-		return -1;
-	}
+    if (al_os_queue_send(ctx->queue, &item, timeout) != 0) {
+        set_errno(ENOMEM);
+        return -1;
+    }
 
-	return 0;
+    return 0;
 }
 
 static void al_worker_task(void *arg)
