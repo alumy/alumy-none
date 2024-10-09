@@ -11,9 +11,9 @@
 
 __BEGIN_DECLS
 
-static uint32_t tick_tick = 0;
-static uint32_t tick_msec = 0;
-static uint32_t tick_sec = 0;
+static volatile uint32_t tick_tick = 0;
+static volatile uint32_t tick_msec = 0;
+static volatile uint32_t tick_sec = 0;
 
 void al_tick_init(void)
 {
@@ -22,7 +22,7 @@ void al_tick_init(void)
     tick_sec = 0;
 }
 
-void al_tick_inc(void)
+__always_inline void al_tick_inc(void)
 {
     tick_tick++;
 
@@ -30,6 +30,18 @@ void al_tick_inc(void)
     if (tick_msec >= 1000) {
         tick_msec = 0;
         tick_sec++;
+    }
+}
+
+__always_inline void al_tick_adj(uint32_t tick_elapsed)
+{
+    tick_tick += tick_elapsed;
+
+    tick_msec += tick_elapsed;
+
+    while (tick_msec > 1000) {
+        tick_sec++;
+        tick_msec -= 1000;
     }
 }
 

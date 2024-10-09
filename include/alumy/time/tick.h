@@ -19,6 +19,8 @@ void al_tick_init(void);
  */
 void al_tick_inc(void);
 
+void al_tick_adj(uint32_t tick_elapsed);
+
 uint32_t al_tick_get_sec(void);
 uint32_t al_tick_get_msec(void);
 uint32_t al_tick_get_tick(void);
