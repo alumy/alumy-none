@@ -764,7 +764,7 @@ static void client_parser(at_client_t client)
 }
 
 /* initialize the client object parameters */
-static int at_client_para_init(at_client_t client)
+static int at_client_para_init(at_client_t client, int32_t prio, size_t stack)
 {
     int result = 0;
 
@@ -814,8 +814,7 @@ static int at_client_para_init(at_client_t client)
     client->urc_table = NULL;
     client->urc_table_size = 0;
 
-	if(al_os_task_create(&client->parser, 
-						 "at_client", 10, (1024 + 512) >> 2,
+    if(al_os_task_create(&client->parser, "at_client", prio, stack,
 						 (void (*)(void *))client_parser, client) != 0)
     {
         result = -ENOMEM;
@@ -862,7 +861,8 @@ __exit:
  *        -5 : no memory
  */
 int at_client_init(at_client_t client, size_t recv_bufsz, size_t send_bufsz, 
-					const at_client_opt_t *opt, void *user_data)
+                   int32_t prio, size_t stack_size,
+                   const at_client_opt_t *opt, void *user_data)
 {
     int result = 0;
 
@@ -875,7 +875,7 @@ int at_client_init(at_client_t client, size_t recv_bufsz, size_t send_bufsz,
     client->send_bufsz = send_bufsz;
 	client->user_data = user_data;
 
-    result = at_client_para_init(client);
+    result = at_client_para_init(client, prio, stack_size);
     if (result != 0)
     {
         goto __exit;

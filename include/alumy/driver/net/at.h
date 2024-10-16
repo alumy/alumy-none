@@ -123,7 +123,8 @@ typedef struct at_client *at_client_t;
 
 /* AT client initialize and start*/
 int at_client_init(at_client_t client, size_t recv_bufsz, size_t send_bufsz,
-					const at_client_opt_t *opt, void *user_data);
+                   int32_t prio, size_t stack_size,
+                   const at_client_opt_t *opt, void *user_data);
 
 /* ========================== multiple AT client function ============================ */
 
