@@ -77,8 +77,7 @@ bool_t al_os_check_timeout(al_os_timeout_t *timeout, al_os_tick_t *tick)
 	BUILD_BUG_ON(sizeof(al_os_timeout_t) < sizeof(TimeOut_t));
 	BUILD_BUG_ON(sizeof(al_os_tick_t) < sizeof(TickType_t));
 
-	ret = xTaskCheckForTimeOut((TimeOut_t *)timeout, (TickType_t *)tick);
-	return (ret == pdTRUE) ? 0 : -1;
+    return !!xTaskCheckForTimeOut((TimeOut_t *)timeout, (TickType_t *)tick);
 }
 
 __END_DECLS
