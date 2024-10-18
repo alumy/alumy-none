@@ -40,7 +40,7 @@ int_t al_worker_check(al_worker_t *ctx)
 	return (ctx->queue && ctx->task) ? 0 : -1;
 }
 
-static void al_worker_loop(al_worker_t *ctx)
+__static_inline__ __always_inline void al_worker_loop(al_worker_t *ctx)
 {
 	al_worker_item_t item;
 
