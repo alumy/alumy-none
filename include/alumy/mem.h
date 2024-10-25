@@ -53,11 +53,8 @@ __BEGIN_DECLS
 #define AL_ALIGN_DOWN(x, a)		AL_ALIGN((x) - ((a) - 1), (a))
 
 
-__static_inline__ bool al_mem_is_overflow(
-    uintptr_t addr, size_t len, uintptr_t start, uintptr_t end)
-{
-    return !((addr >= start) && (addr + len <= end));
-}
+#define al_mem_is_overflow(addr, len, start, end)   \
+        (!(((addr) >= (start)) && ((addr) + (len) <= (end))))
 
 /**
  * @brief Check if the buffer is filled with the specified value
