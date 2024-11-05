@@ -4,7 +4,7 @@
 #undef __LITTLE_ENDIAN
 #undef __BIG_ENDIAN
 
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__CC_ARM)
 	#define __LITTLE_ENDIAN		__ORDER_LITTLE_ENDIAN__
 	#define __BIG_ENDIAN		__ORDER_BIG_ENDIAN__
 #endif /* __GNUC__ */

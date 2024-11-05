@@ -7,7 +7,7 @@
 #include "alumy/cdefs.h"
 #endif
 
-#if  defined ( __GNUC__ ) || defined ( __clang__ )
+#if defined ( __GNUC__ ) || defined ( __clang__ )
 
   #ifndef __weak
     #define __weak   __attribute__((weak))
@@ -95,7 +95,17 @@
     # define __nonnull(params) __attribute__ ((__nonnull__ params))
   #endif
 
-  #define __must_check __attribute__((warn_unused_result))
+  #ifndef __must_check
+    #define __must_check __attribute__((warn_unused_result))
+  #endif
+
+  #ifndef __builtin_constant_p
+    #define __builtin_constant_p(x)     (!!(x))
+  #endif
+
+  #ifndef __has_builtin
+    #define __has_builtin(x)    0
+  #endif
 
 #endif /* __GNUC__ */
 
@@ -171,7 +181,17 @@
     # define __nonnull(params) __attribute__ ((__nonnull__ params))
   #endif
 
-  #define __must_check __attribute__((warn_unused_result))
+  #ifndef __must_check
+    #define __must_check __attribute__((warn_unused_result))
+  #endif
+
+  #ifndef __builtin_constant_p
+    #define __builtin_constant_p(x)     (!!(x))
+  #endif
+
+  #ifndef __has_builtin
+    #define __has_builtin(x)    0
+  #endif
 
 #endif /* __CC_ARM */
 

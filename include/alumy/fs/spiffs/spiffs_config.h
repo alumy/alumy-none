@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
-#if defined(__GNUC__) && !defined(__clang__)
+#if defined(__GNUC__) && !defined(__CC_ARM) && !defined(__clang__)
 #include <unistd.h>
 #endif
 #ifdef _SPIFFS_TEST

@@ -57,6 +57,10 @@
 #include "alumy/thread.h"
 #include "alumy/watchdog.h"
 
+#if defined(__GNUC__)
+#include "alumy/kfifo.h"
+#endif
+
 __BEGIN_DECLS
 
 /**

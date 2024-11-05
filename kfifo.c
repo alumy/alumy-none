@@ -97,8 +97,8 @@ static void kfifo_copy_in(struct __kfifo *fifo, const void *src,
     }
     l = min(len, size - off);
 
-    memcpy(fifo->data + off, src, l);
-    memcpy(fifo->data, src + l, len - l);
+    memcpy((uint8_t *)fifo->data + off, src, l);
+    memcpy((uint8_t *)fifo->data, (const uint8_t *)src + l, len - l);
 }
 
 unsigned int __kfifo_in(struct __kfifo *fifo,
@@ -130,8 +130,8 @@ static void kfifo_copy_out(struct __kfifo *fifo, void *dst,
     }
     l = min(len, size - off);
 
-    memcpy(dst, fifo->data + off, l);
-    memcpy(dst + l, fifo->data, len - l);
+    memcpy((uint8_t *)dst, (const uint8_t *)fifo->data + off, l);
+    memcpy((uint8_t *)dst + l, (const uint8_t *)fifo->data, len - l);
 }
 
 unsigned int __kfifo_out_peek(struct __kfifo *fifo,

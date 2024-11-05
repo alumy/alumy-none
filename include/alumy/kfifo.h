@@ -41,6 +41,10 @@
 #include "alumy/base.h"
 #include "alumy/log2.h"
 
+#if defined(__CC_ARM)
+#pragma anon_unions
+#endif
+
 struct __kfifo {
     unsigned int    in;
     unsigned int    out;
@@ -322,13 +326,13 @@ __kfifo_uint_must_check_helper( \
  * The fifo will be release with kfifo_free().
  * Return 0 if no error, otherwise an error code.
  */
-#define kfifo_alloc(fifo, size, gfp_mask) \
+#define kfifo_alloc(fifo, size) \
 __kfifo_int_must_check_helper( \
 ({ \
     typeof((fifo) + 1) __tmp = (fifo); \
     struct __kfifo *__kfifo = &__tmp->kfifo; \
     __is_kfifo_ptr(__tmp) ? \
-    __kfifo_alloc(__kfifo, size, sizeof(*__tmp->type), gfp_mask) : \
+    __kfifo_alloc(__kfifo, size, sizeof(*__tmp->type)) : \
     -EINVAL; \
 }) \
 )
@@ -395,7 +399,6 @@ __kfifo_int_must_check_helper( \
             (__tmp->buf) \
             )[__kfifo->in & __tmp->kfifo.mask] = \
                 *(typeof(__tmp->type))&__val; \
-            smp_wmb(); \
             __kfifo->in++; \
         } \
     } \
@@ -433,7 +436,6 @@ __kfifo_uint_must_check_helper( \
                 ((typeof(__tmp->type))__kfifo->data) : \
                 (__tmp->buf) \
                 )[__kfifo->out & __tmp->kfifo.mask]; \
-            smp_wmb(); \
             __kfifo->out++; \
         } \
     } \
@@ -472,7 +474,6 @@ __kfifo_uint_must_check_helper( \
                 ((typeof(__tmp->type))__kfifo->data) : \
                 (__tmp->buf) \
                 )[__kfifo->out & __tmp->kfifo.mask]; \
-            smp_wmb(); \
         } \
     } \
     __ret; \

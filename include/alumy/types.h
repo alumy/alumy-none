@@ -1,6 +1,8 @@
 #ifndef __AL_TYPES_H
 #define __AL_TYPES_H 1
 
+#include "alumy/config.h"
+
 #if AL_HAVE_STDINT
 #include <stdint.h>
 #endif
@@ -27,10 +29,6 @@
 
 #ifndef __static_inline__
 #define __static_inline__		static __inline
-#endif
-
-#ifndef __has_builtin
-#define __has_builtin(x)	(0)
 #endif
 
 #ifndef UNUSED
@@ -71,14 +69,21 @@
 #endif
 #endif
 
-
 /**
  * min3 - return minimum of three values
  * @x: first value
  * @y: second value
  * @z: third value
  */
-#define min3(x, y, z) min((typeof(x))min(x, y), z)
+#ifndef min3
+#if defined(__GNUC__)
+    #define min3(x, y, z) min((typeof(x))min((x), (y)), (z))
+#elif defined(__CC_ARM)
+    #define min3(x, y, z) min(min((x), (y)), (z))
+#else
+    #define min3(x, y, z) min(min((x), (y)), (z))
+#endif
+#endif
 
 /**
  * max3 - return maximum of three values
@@ -86,7 +91,15 @@
  * @y: second value
  * @z: third value
  */
-#define max3(x, y, z) max((typeof(x))max(x, y), z)
+#ifndef max3
+#if defined(__GNUC__)
+    #define max3(x, y, z) max((typeof(x))max((x), (y)), (z))
+#elif defined(__CC_ARM)
+    #define max3(x, y, z) max(max((x), (y)), (z))
+#else
+    #define max3(x, y, z) max(max((x), (y)), (z))
+#endif
+#endif
 
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(a) (sizeof((a)) / sizeof((a)[0]))
