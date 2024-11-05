@@ -316,6 +316,7 @@
             <F N="../CMakeLists.txt"/>
             <F N="../errno.c"/>
             <F N="../fifo.c"/>
+            <F N="../kfifo.c"/>
             <F N="../log.c"/>
             <F N="../pool.c"/>
             <F N="../rbtree.c"/>
@@ -7033,8 +7034,10 @@
                 <F N="../include/alumy/git_hash.h"/>
                 <F N="../include/alumy/git_hash.h.in"/>
                 <F N="../include/alumy/initialized.h"/>
+                <F N="../include/alumy/kfifo.h"/>
                 <F N="../include/alumy/list.h"/>
                 <F N="../include/alumy/log.h"/>
+                <F N="../include/alumy/log2.h"/>
                 <F N="../include/alumy/lrc.h"/>
                 <F N="../include/alumy/math.h"/>
                 <F N="../include/alumy/mem.h"/>

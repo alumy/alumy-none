@@ -71,12 +71,25 @@
 #endif
 #endif
 
+
+/**
+ * min3 - return minimum of three values
+ * @x: first value
+ * @y: second value
+ * @z: third value
+ */
+#define min3(x, y, z) min((typeof(x))min(x, y), z)
+
+/**
+ * max3 - return maximum of three values
+ * @x: first value
+ * @y: second value
+ * @z: third value
+ */
+#define max3(x, y, z) max((typeof(x))max(x, y), z)
+
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(a) (sizeof((a)) / sizeof((a)[0]))
-#endif
-
-#ifndef is_power_of_2
-#define is_power_of_2(x)        ((x) != 0 && (((x) & ((x) - 1)) == 0))
 #endif
 
 #if !(defined( __off_t_defined) || \
@@ -156,6 +169,9 @@ typedef uint_t bool_t;
 typedef char char_t;
 #define __char_t_defined
 #endif
+
+typedef uint32_t u32;
+typedef uint64_t u64;
 
 #endif	/* end of _TYPES_H */
 

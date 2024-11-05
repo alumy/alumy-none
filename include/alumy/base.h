@@ -95,6 +95,8 @@
     # define __nonnull(params) __attribute__ ((__nonnull__ params))
   #endif
 
+  #define __must_check __attribute__((warn_unused_result))
+
 #endif /* __GNUC__ */
 
 #if defined (__CC_ARM)
@@ -168,6 +170,8 @@
   #ifndef __nonnull
     # define __nonnull(params) __attribute__ ((__nonnull__ params))
   #endif
+
+  #define __must_check __attribute__((warn_unused_result))
 
 #endif /* __CC_ARM */
 
