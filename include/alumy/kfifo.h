@@ -531,62 +531,6 @@ __kfifo_uint_must_check_helper( \
 )
 
 /**
- * kfifo_from_user - puts some data from user space into the fifo
- * @fifo: address of the fifo to be used
- * @from: pointer to the data to be added
- * @len: the length of the data to be added
- * @copied: pointer to output variable to store the number of copied bytes
- *
- * This macro copies at most @len bytes from the @from into the
- * fifo, depending of the available space and returns -EFAULT/0.
- *
- * Note that with only one concurrent reader and one concurrent
- * writer, you don't need extra locking to use these macro.
- */
-#define kfifo_from_user(fifo, from, len, copied) \
-__kfifo_uint_must_check_helper( \
-({ \
-    typeof((fifo) + 1) __tmp = (fifo); \
-    const void __user *__from = (from); \
-    unsigned int __len = (len); \
-    unsigned int *__copied = (copied); \
-    const size_t __recsize = sizeof(*__tmp->rectype); \
-    struct __kfifo *__kfifo = &__tmp->kfifo; \
-    (__recsize) ? \
-    __kfifo_from_user_r(__kfifo, __from, __len,  __copied, __recsize) : \
-    __kfifo_from_user(__kfifo, __from, __len, __copied); \
-}) \
-)
-
-/**
- * kfifo_to_user - copies data from the fifo into user space
- * @fifo: address of the fifo to be used
- * @to: where the data must be copied
- * @len: the size of the destination buffer
- * @copied: pointer to output variable to store the number of copied bytes
- *
- * This macro copies at most @len bytes from the fifo into the
- * @to buffer and returns -EFAULT/0.
- *
- * Note that with only one concurrent reader and one concurrent
- * writer, you don't need extra locking to use these macro.
- */
-#define kfifo_to_user(fifo, to, len, copied) \
-__kfifo_int_must_check_helper( \
-({ \
-    typeof((fifo) + 1) __tmp = (fifo); \
-    void __user *__to = (to); \
-    unsigned int __len = (len); \
-    unsigned int *__copied = (copied); \
-    const size_t __recsize = sizeof(*__tmp->rectype); \
-    struct __kfifo *__kfifo = &__tmp->kfifo; \
-    (__recsize) ? \
-    __kfifo_to_user_r(__kfifo, __to, __len, __copied, __recsize) : \
-    __kfifo_to_user(__kfifo, __to, __len, __copied); \
-}) \
-)
-
-/**
  * kfifo_out_peek - gets some data from the fifo
  * @fifo: address of the fifo to be used
  * @buf: pointer to the storage buffer
