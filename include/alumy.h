@@ -53,6 +53,7 @@
 #include "alumy/crypto.h"
 #include "alumy/net.h"
 #include "alumy/math.h"
+#include "alumy/log2.h"
 #include "alumy/osal.h"
 #include "alumy/thread.h"
 #include "alumy/watchdog.h"
