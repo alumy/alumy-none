@@ -6375,6 +6375,9 @@
             <F N="../bcd/bcd.c"/>
             <F N="../bcd/CMakeLists.txt"/>
         </Folder>
+        <Folder Name="../bitops">
+            <F N="../bitops/bit_reverse.c"/>
+        </Folder>
         <Folder Name="../build">
             <Folder Name="CMakeFiles">
                 <Folder Name="3.25.2">
@@ -6875,6 +6878,9 @@
                         <F N="../include/alumy/arch/arm/bitband.h"/>
                     </Folder>
                     <F N="../include/alumy/arch/arm.h"/>
+                </Folder>
+                <Folder Name="bitops">
+                    <F N="../include/alumy/bitops/bit_reverse.h"/>
                 </Folder>
                 <Folder Name="cm_backtrace">
                     <F N="../include/alumy/cm_backtrace/cmb_cfg.h"/>
