@@ -64,9 +64,17 @@
   #ifndef __likely
     #define __likely(x)			__builtin_expect(!!(x), 1)
   #endif
+
+  #ifndef likely
+    #define likely(x)         __likely((x))
+  #endif
   
   #ifndef __unlikely
     #define __unlikely(x)		__builtin_expect(!!(x), 0)
+  #endif
+
+  #ifndef unlikely
+    #define unlikely(x)         __unlikely((x))
   #endif
 
   #ifndef __ramfunc
@@ -151,8 +159,16 @@
     #define __likely(x)			__builtin_expect(!!(x), 1)
   #endif
 
+  #ifndef likely
+    #define likely(x)         __likely((x))
+  #endif
+
   #ifndef __unlikely
     #define __unlikely(x)		__builtin_expect(!!(x), 0)
+  #endif
+
+  #ifndef unlikely
+    #define unlikely(x)         __unlikely((x))
   #endif
 
   #ifndef __ramfunc

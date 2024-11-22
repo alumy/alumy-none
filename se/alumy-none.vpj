@@ -321,6 +321,7 @@
             <F N="../pool.c"/>
             <F N="../rbtree.c"/>
             <F N="../version.c"/>
+            <F N="../watchdog.c"/>
         </Folder>
         <Folder Name="../3rd-party">
             <Folder Name="contrib-2.1.0">
@@ -6364,6 +6365,11 @@
                     </Folder>
                 </Folder>
             </Folder>
+            <Folder Name="tiny-AES-c">
+                <F N="../3rd-party/tiny-AES-c/aes.c"/>
+                <F N="../3rd-party/tiny-AES-c/aes.h"/>
+                <F N="../3rd-party/tiny-AES-c/test.c"/>
+            </Folder>
             <F N="../3rd-party/CMakeLists.txt"/>
             <F N="../3rd-party/lwip.cmake"/>
         </Folder>
@@ -6377,6 +6383,7 @@
         </Folder>
         <Folder Name="../bitops">
             <F N="../bitops/bit_reverse.c"/>
+            <F N="../bitops/bitmap.c"/>
         </Folder>
         <Folder Name="../build">
             <Folder Name="CMakeFiles">
@@ -6739,6 +6746,7 @@
         <Folder Name="../crypto">
             <F N="../crypto/aes.c"/>
             <F N="../crypto/CMakeLists.txt"/>
+            <F N="../crypto/md5.c"/>
         </Folder>
         <Folder Name="../cunit">
             <Folder Name="Automated">
@@ -6880,7 +6888,22 @@
                     <F N="../include/alumy/arch/arm.h"/>
                 </Folder>
                 <Folder Name="bitops">
+                    <F N="../include/alumy/bitops/__ffs.h"/>
+                    <F N="../include/alumy/bitops/__fls.h"/>
+                    <F N="../include/alumy/bitops/arch_hweight.h"/>
+                    <F N="../include/alumy/bitops/atomic.h"/>
                     <F N="../include/alumy/bitops/bit_reverse.h"/>
+                    <F N="../include/alumy/bitops/bitmap.h"/>
+                    <F N="../include/alumy/bitops/bitops.h"/>
+                    <F N="../include/alumy/bitops/bitsperlong.h"/>
+                    <F N="../include/alumy/bitops/const_hweight.h"/>
+                    <F N="../include/alumy/bitops/ffs.h"/>
+                    <F N="../include/alumy/bitops/ffz.h"/>
+                    <F N="../include/alumy/bitops/fls.h"/>
+                    <F N="../include/alumy/bitops/fls64.h"/>
+                    <F N="../include/alumy/bitops/generic-non-atomic.h"/>
+                    <F N="../include/alumy/bitops/hweight.h"/>
+                    <F N="../include/alumy/bitops/non-atomic.h"/>
                 </Folder>
                 <Folder Name="cm_backtrace">
                     <F N="../include/alumy/cm_backtrace/cmb_cfg.h"/>
@@ -6888,6 +6911,9 @@
                 </Folder>
                 <Folder Name="crc">
                     <F N="../include/alumy/crc/crc8.h"/>
+                </Folder>
+                <Folder Name="crypto">
+                    <F N="../include/alumy/crypto/md5.h"/>
                 </Folder>
                 <Folder Name="cunit">
                     <F N="../include/alumy/cunit/Automated.h"/>
@@ -6992,8 +7018,14 @@
                 </Folder>
                 <Folder Name="osal">
                     <Folder Name="freertos">
+                        <F N="../include/alumy/osal/freertos/debug.h"/>
                         <F N="../include/alumy/osal/freertos/freertos_debug.h"/>
+                        <F N="../include/alumy/osal/freertos/queue.h"/>
+                        <F N="../include/alumy/osal/freertos/semphr.h"/>
+                        <F N="../include/alumy/osal/freertos/streambuffer.h"/>
+                        <F N="../include/alumy/osal/freertos/task.h"/>
                     </Folder>
+                    <F N="../include/alumy/osal/freertos.h"/>
                     <F N="../include/alumy/osal/heap.h"/>
                     <F N="../include/alumy/osal/queue.h"/>
                     <F N="../include/alumy/osal/semphr.h"/>
@@ -7018,6 +7050,7 @@
                 <F N="../include/alumy/base64.h"/>
                 <F N="../include/alumy/bcd.h"/>
                 <F N="../include/alumy/bit.h"/>
+                <F N="../include/alumy/bits.h"/>
                 <F N="../include/alumy/bug.h"/>
                 <F N="../include/alumy/byteorder.h"/>
                 <F N="../include/alumy/byteswap.h"/>
@@ -7035,6 +7068,7 @@
                 <F N="../include/alumy/expect.h"/>
                 <F N="../include/alumy/fifo.h"/>
                 <F N="../include/alumy/filter.h"/>
+                <F N="../include/alumy/find.h"/>
                 <F N="../include/alumy/format_color.h"/>
                 <F N="../include/alumy/fs.h"/>
                 <F N="../include/alumy/git_hash.h"/>
@@ -7060,9 +7094,11 @@
                 <F N="../include/alumy/test_init.h"/>
                 <F N="../include/alumy/thread.h"/>
                 <F N="../include/alumy/time.h"/>
+                <F N="../include/alumy/typecheck.h"/>
                 <F N="../include/alumy/types.h"/>
                 <F N="../include/alumy/version.h"/>
                 <F N="../include/alumy/version.h.in"/>
+                <F N="../include/alumy/watchdog.h"/>
                 <F N="../include/alumy/xyzmodem.h"/>
             </Folder>
             <F N="../include/alumy.h"/>
@@ -7102,9 +7138,11 @@
         </Folder>
         <Folder Name="../osal">
             <Folder Name="freertos">
+                <F N="../osal/freertos/debug.c"/>
                 <F N="../osal/freertos/freertos_debug.c"/>
                 <F N="../osal/freertos/heap.c"/>
                 <F N="../osal/freertos/local_storage.c"/>
+                <F N="../osal/freertos/log.c"/>
                 <F N="../osal/freertos/osal.c"/>
                 <F N="../osal/freertos/queue.c"/>
                 <F N="../osal/freertos/semphr.c"/>
@@ -7148,6 +7186,11 @@
             <F N="../qrcode/CMakeLists.txt"/>
             <F N="../qrcode/qrcode.c"/>
         </Folder>
+        <Folder Name="../reentrant">
+            <Folder Name="armclang">
+                <F N="../reentrant/armclang/heap.c"/>
+            </Folder>
+        </Folder>
         <Folder Name="../string">
             <F N="../string/CMakeLists.txt"/>
             <F N="../string/format.c"/>
@@ -7155,6 +7198,7 @@
             <F N="../string/str_add_null.c"/>
             <F N="../string/strlcpy.c"/>
             <F N="../string/strrmchr.c"/>
+            <F N="../string/strset.c"/>
         </Folder>
         <Folder Name="../sys">
             <F N="../sys/CMakeLists.txt"/>
@@ -9958,5 +10002,6 @@
             <F N="../xyzmodem/CMakeLists.txt"/>
             <F N="../xyzmodem/ymodem.c"/>
         </Folder>
+        <F N="hweight.c"/>
     </Files>
 </Project>

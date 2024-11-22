@@ -15,6 +15,8 @@ __BEGIN_DECLS
 #define al_p2n(n)		al_p_n((n))
 #define al_n2p(n)		al_p_n((n))
 
+#define DIV_ROUND_UP(n,d) (((n) + (d) - 1) / (d))
+
 __END_DECLS
 
 #endif

@@ -2,6 +2,7 @@
 #define __AL_TYPES_H 1
 
 #include "alumy/config.h"
+#include "alumy/typecheck.h"
 
 #if AL_HAVE_STDINT
 #include <stdint.h>

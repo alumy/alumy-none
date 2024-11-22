@@ -13,6 +13,8 @@ extern "C" {
 #define __SIZEOF_INT__      4
 #endif
 
+#define __BITS_PER_LONG     32
+
 /* Verbose log */
 #ifndef AL_LOG
 #define AL_LOG                  1
