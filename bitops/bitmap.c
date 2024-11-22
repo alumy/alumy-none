@@ -634,3 +634,4 @@ void bitmap_to_arr64(u64 *buf, const unsigned long *bitmap, unsigned int nbits)
 		buf[-1] &= GENMASK_ULL((nbits - 1) % 64, 0);
 }
 #endif
+
