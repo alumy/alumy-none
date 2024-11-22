@@ -7051,6 +7051,7 @@
                 <F N="../include/alumy/bcd.h"/>
                 <F N="../include/alumy/bit.h"/>
                 <F N="../include/alumy/bits.h"/>
+                <F N="../include/alumy/bits_latency.h"/>
                 <F N="../include/alumy/bug.h"/>
                 <F N="../include/alumy/byteorder.h"/>
                 <F N="../include/alumy/byteswap.h"/>

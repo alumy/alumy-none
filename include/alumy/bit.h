@@ -10,42 +10,6 @@
 
 __BEGIN_DECLS
 
-#ifndef BIT_COUNT
-#define BIT_COUNT(x)			((x) << 3)
-#endif
-
-#ifndef set_bit
-#define set_bit(reg, bit)       ((reg) |= (1u << (bit)))
-#endif
-
-#ifndef clear_bit
-#define clear_bit(reg, bit)     ((reg) &= ~(1u << (bit)))
-#endif
-
-#ifndef get_bit
-#define get_bit(reg, bit)       (!!((reg) & (1u << (bit))))
-#endif
-
-#ifndef toggle_bit
-#define toggle_bit(reg, bit)	((reg) ^= (1u << (bit)))
-#endif
-
-#ifndef set_bit_64
-#define set_bit_64(reg, bit)		((reg) |= (1ull << (bit)))
-#endif
-
-#ifndef clear_bit_64
-#define clear_bit_64(reg, bit)		((reg) &= ~(1ull << (bit)))
-#endif
-
-#ifndef get_bit_64
-#define get_bit_64(reg, bit)		(!!((reg) & (1ull << (bit))))
-#endif
-
-#ifndef toggle_bit_64
-#define toggle_bit_64(reg, bit)	((reg) ^= (1ull << (bit)))
-#endif
-
 __static_inline__ int al_popcount(int x)
 {
 #if __has_builtin(__builtin_popcount)

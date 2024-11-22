@@ -3,6 +3,7 @@
 
 #include "alumy/config.h"
 #include "alumy/typecheck.h"
+#include "alumy/bits.h"
 
 #if AL_HAVE_STDINT
 #include <stdint.h>
@@ -105,6 +106,9 @@
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(a) (sizeof((a)) / sizeof((a)[0]))
 #endif
+
+#define DECLARE_BITMAP(name,bits) \
+    unsigned long name[BITS_TO_LONGS(bits)]
 
 #if !(defined( __off_t_defined) || \
 	  defined(__DEFINED_off_t))
