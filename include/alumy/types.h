@@ -191,5 +191,8 @@ typedef char char_t;
 typedef uint32_t u32;
 typedef uint64_t u64;
 
+typedef uint32_t __u32;
+typedef uint64_t __u64;
+
 #endif	/* end of _TYPES_H */
 
