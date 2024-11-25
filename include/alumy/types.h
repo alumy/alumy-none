@@ -103,9 +103,27 @@
 #endif
 #endif
 
+/*
+ *  * ..and if you can't take the strict
+ *   * types, you can specify one yourself.
+ *    *
+ *     * Or not use min/max/clamp at all, of course.
+ *      */
+#define min_t(type, x, y) ({              \
+    type __min1 = (x);                    \
+    type __min2 = (y);                    \
+    __min1 < __min2 ? __min1: __min2; })
+
+#define max_t(type, x, y) ({              \
+    type __max1 = (x);                    \
+    type __max2 = (y);                    \
+    __max1 > __max2 ? __max1: __max2; })
+
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(a) (sizeof((a)) / sizeof((a)[0]))
 #endif
+
+#define __KERNEL_DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
 
 #define DECLARE_BITMAP(name,bits) \
     unsigned long name[BITS_TO_LONGS(bits)]
@@ -188,9 +206,11 @@ typedef char char_t;
 #define __char_t_defined
 #endif
 
+typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
 
+typedef uint16_t __u16;
 typedef uint32_t __u32;
 typedef uint64_t __u64;
 

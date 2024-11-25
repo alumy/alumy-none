@@ -10003,6 +10003,7 @@
             <F N="../xyzmodem/CMakeLists.txt"/>
             <F N="../xyzmodem/ymodem.c"/>
         </Folder>
+        <F N="find_bit.c"/>
         <F N="hweight.c"/>
     </Files>
 </Project>

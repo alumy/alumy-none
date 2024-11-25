@@ -124,6 +124,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/time)
 add_subdirectory(${PROJECT_SOURCE_DIR}/net)
 add_subdirectory(${PROJECT_SOURCE_DIR}/expect)
 add_subdirectory(${PROJECT_SOURCE_DIR}/bitops)
+add_subdirectory(${PROJECT_SOURCE_DIR}/lib)
 
 #############################################################################
 # libalumy
@@ -153,6 +154,7 @@ set(objs
 		$<TARGET_OBJECTS:time>
 		$<TARGET_OBJECTS:net>
 		$<TARGET_OBJECTS:expect>
+		$<TARGET_OBJECTS:lib>
 		$<TARGET_OBJECTS:bitops>)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_src)

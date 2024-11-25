@@ -11,7 +11,8 @@
 #include "alumy/errno.h"
 #include "alumy/mock.h"
 #include "alumy/bitops/bitsperlong.h"
-#include "alumy/bitops/bitmap.h"
+#include "alumy/bitops/bitops.h"
+#include "alumy/bitmap.h"
 #include "alumy/bug.h"
 
 /**
