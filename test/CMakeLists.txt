@@ -63,7 +63,7 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL Generic)
                           ${PROJECT_NAME}-static
                           -Wl,--no-whole-archive)
 
-	target_link_libraries(${PROJECT_NAME}-test PRIVATE
+    target_link_libraries(${PROJECT_NAME}-test PRIVATE
                           -Wl,--whole-archive
                           bsp osal portal unity cmock syscalls
                           -Wl,--no-whole-archive)

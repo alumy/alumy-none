@@ -1,3 +1,4 @@
+#include "lfs.h"
 #include "alumy/config.h"
 #include "alumy/byteorder.h"
 #include "alumy/types.h"
@@ -7,7 +8,6 @@
 #include "alumy/log.h"
 #include "alumy/check.h"
 #include "alumy/osal.h"
-#include "alumy/fs/littlefs/lfs.h"
 #include "alumy/fs/interface/lfs_space.h"
 
 __BEGIN_DECLS

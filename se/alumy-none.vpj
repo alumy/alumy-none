@@ -6384,6 +6384,7 @@
         <Folder Name="../bitops">
             <F N="../bitops/bit_reverse.c"/>
             <F N="../bitops/bitmap.c"/>
+            <F N="../bitops/bitops.c"/>
         </Folder>
         <Folder Name="../build">
             <Folder Name="CMakeFiles">
@@ -7019,7 +7020,6 @@
                 <Folder Name="osal">
                     <Folder Name="freertos">
                         <F N="../include/alumy/osal/freertos/debug.h"/>
-                        <F N="../include/alumy/osal/freertos/freertos_debug.h"/>
                         <F N="../include/alumy/osal/freertos/queue.h"/>
                         <F N="../include/alumy/osal/freertos/semphr.h"/>
                         <F N="../include/alumy/osal/freertos/streambuffer.h"/>
@@ -7050,6 +7050,7 @@
                 <F N="../include/alumy/base64.h"/>
                 <F N="../include/alumy/bcd.h"/>
                 <F N="../include/alumy/bit.h"/>
+                <F N="../include/alumy/bitmap.h"/>
                 <F N="../include/alumy/bits.h"/>
                 <F N="../include/alumy/bits_latency.h"/>
                 <F N="../include/alumy/bug.h"/>
@@ -7092,6 +7093,7 @@
                 <F N="../include/alumy/string.h"/>
                 <F N="../include/alumy/svn_revision.h"/>
                 <F N="../include/alumy/svn_revision.h.in"/>
+                <F N="../include/alumy/swab.h"/>
                 <F N="../include/alumy/test_init.h"/>
                 <F N="../include/alumy/thread.h"/>
                 <F N="../include/alumy/time.h"/>
@@ -7103,6 +7105,11 @@
                 <F N="../include/alumy/xyzmodem.h"/>
             </Folder>
             <F N="../include/alumy.h"/>
+        </Folder>
+        <Folder Name="../lib">
+            <F N="../lib/bitmap.c"/>
+            <F N="../lib/find_bit.c"/>
+            <F N="../lib/hweight.c"/>
         </Folder>
         <Folder Name="../libcsv">
             <F N="../libcsv/CMakeLists.txt"/>
@@ -7140,7 +7147,6 @@
         <Folder Name="../osal">
             <Folder Name="freertos">
                 <F N="../osal/freertos/debug.c"/>
-                <F N="../osal/freertos/freertos_debug.c"/>
                 <F N="../osal/freertos/heap.c"/>
                 <F N="../osal/freertos/local_storage.c"/>
                 <F N="../osal/freertos/log.c"/>
@@ -10003,7 +10009,5 @@
             <F N="../xyzmodem/CMakeLists.txt"/>
             <F N="../xyzmodem/ymodem.c"/>
         </Folder>
-        <F N="find_bit.c"/>
-        <F N="hweight.c"/>
     </Files>
 </Project>

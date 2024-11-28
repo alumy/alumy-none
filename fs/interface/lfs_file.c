@@ -7,7 +7,7 @@
 #include "alumy/log.h"
 #include "alumy/check.h"
 #include "alumy/osal.h"
-#include "alumy/fs/littlefs/lfs.h"
+#include "lfs.h"
 
 __BEGIN_DECLS
 

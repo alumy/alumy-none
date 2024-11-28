@@ -1,10 +1,10 @@
 #ifndef __AL_FS_INTERFACE_LFS_SPACE_H
 #define __AL_FS_INTERFACE_LFS_SPACE_H 1
 
+#include "lfs.h"
 #include "alumy/config.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
-#include "alumy/fs/littlefs/lfs.h"
 
 __BEGIN_DECLS
 
