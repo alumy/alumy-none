@@ -107,11 +107,11 @@ static int task_stat(int argc, char *argv[])
     return 0;
 }
 
-static void stat_task(void *arg)
+void al_freertos_stat_task(void *arg)
 {
-    static int_t interval;
+    static int32_t interval;
 
-    interval = (int_t)arg;
+    interval = (int32_t)arg;
 
     if (interval < 1000) {
         interval = 1000;
@@ -121,18 +121,6 @@ static void stat_task(void *arg)
         task_stat(0, NULL);
         al_os_delay(interval);
     }
-}
-
-int32_t al_freertos_stat_task_init(int_t interval)
-{
-    TaskHandle_t handle;
-
-    handle = AL_FREERTOS_TASK_CREATE_STATIC(stat, stat_task, 160,
-                                            configMAX_PRIORITIES - 1,
-                                            (void *)interval);
-    AL_CHECK_RET(handle, EPERM, -1);
-
-    return 0;
 }
 
 __END_DECLS
