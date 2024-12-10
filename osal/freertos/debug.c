@@ -109,9 +109,9 @@ static int task_stat(int argc, char *argv[])
 
 void al_freertos_stat_task(void *arg)
 {
-    static int32_t interval;
+    static intptr_t interval;
 
-    interval = (int32_t)arg;
+    interval = (intptr_t)arg;
 
     if (interval < 1000) {
         interval = 1000;

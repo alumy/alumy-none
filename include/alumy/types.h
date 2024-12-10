@@ -214,5 +214,17 @@ typedef uint16_t __u16;
 typedef uint32_t __u32;
 typedef uint64_t __u64;
 
+/* bsd */
+typedef unsigned char       u_char;
+typedef unsigned short      u_short;
+typedef unsigned int        u_int;
+typedef unsigned long       u_long;
+
+/* sysv */
+typedef unsigned char       unchar;
+typedef unsigned short      ushort;
+typedef unsigned int        uint;
+typedef unsigned long       ulong;
+
 #endif	/* end of _TYPES_H */
 

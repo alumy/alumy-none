@@ -16,12 +16,13 @@ __BEGIN_DECLS
 
 #define al_freertos_stat_task_init(stack_size, interval)    ({              \
     TaskHandle_t handle;                                                    \
+    intptr_t __i = (interval);                                               \
                                                                             \
     handle = AL_FREERTOS_TASK_CREATE_STATIC(stat, al_freertos_stat_task,    \
                                             (stack_size),                   \
                                             configMAX_PRIORITIES - 1,       \
-                                            (void *)((int32_t)(interval))); \
-    handle ? 0 : -1;
+                                            (void *)__i);                   \
+    handle ? 0 : -1;                                                        \
 })
 
 void al_freertos_mutex_get_holder(SemaphoreHandle_t mutex, const char *name);
