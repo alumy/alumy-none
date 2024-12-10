@@ -341,6 +341,45 @@ size_t xPortGetMinimumEverFreeHeapSize( void )
 }
 /*-----------------------------------------------------------*/
 
+/*-----------------------------------------------------------*/
+
+void *pvPortCalloc(size_t xNum, size_t xSize)
+{
+    void *p;
+
+    /* allocate 'count' objects of size 'size' */
+    p = pvPortMalloc(xNum * xSize);
+    if (p) {
+        /* zero the memory */
+        memset(p, 0, xNum * xSize);
+    }
+
+    return p;
+}
+/*-----------------------------------------------------------*/
+
+void *pvPortRealloc(void *ptr, size_t size)
+{
+    void *p;
+
+    if (size == 0) {
+        vPortFree(ptr);
+        return NULL;
+    }
+
+    p = pvPortMalloc(size);
+    if (p) {
+        /* zero the memory */
+        if (ptr != NULL) {
+            memcpy(p, ptr, size);
+            vPortFree(ptr);
+        }
+    }
+
+    return p;
+}
+/*-----------------------------------------------------------*/
+
 static void prvInsertBlockIntoFreeList( BlockLink_t * pxBlockToInsert )
 {
     BlockLink_t * pxIterator;
