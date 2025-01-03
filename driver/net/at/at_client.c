@@ -312,7 +312,7 @@ int at_obj_exec_cmd(at_client_t client, at_response_t resp, const char *cmd_expr
     if (client == NULL)
     {
         AL_ERROR(1, "input AT Client object is NULL, please create or get AT Client object!");
-        return -EPERM;
+        return -EINVAL;
     }
 
     /* check AT CLI mode */
