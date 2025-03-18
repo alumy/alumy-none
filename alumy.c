@@ -9,6 +9,7 @@
 #include "mbedtls/aes.h"
 #include "mbedtls/cipher.h"
 #include "mbedtls/platform.h"
+#include "tinyprintf.h"
 
 __BEGIN_DECLS
 
@@ -24,12 +25,19 @@ static void __mbedtls_free(void *p)
 	al_os_free(p);
 }
 
+static void __putc(void *p, char c)
+{
+    al_putc(c);
+}
+
 __static_inline__ int32_t __al_init(void)
 {
 	cJSON_Hooks cjson_hooks = {
 		.malloc_fn = al_os_malloc,
 		.free_fn = al_os_free,
 	};
+
+    init_printf(NULL, __putc);
 
 	al_tick_init();
 
