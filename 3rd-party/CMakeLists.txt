@@ -17,7 +17,8 @@ FILE (GLOB_RECURSE ${target}_src
 	${CMAKE_CURRENT_SOURCE_DIR}/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/tiny-AES-c/aes.c
 	${CMAKE_CURRENT_SOURCE_DIR}/littlefs-2.10.1/lfs_util.c
-	${CMAKE_CURRENT_SOURCE_DIR}/littlefs-2.10.1/lfs.c)
+	${CMAKE_CURRENT_SOURCE_DIR}/littlefs-2.10.1/lfs.c
+	${CMAKE_CURRENT_SOURCE_DIR}/tinyprintf/tinyprintf.c)
 
 add_library(${target} OBJECT ${${target}_src} ${lwipsrc} ${lwipcontribsrc})
 
@@ -40,6 +41,7 @@ target_include_directories(${target}
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/port/include
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/paho.mqtt.embedded-c-1.1.0/MQTTPacket/src
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/tiny-AES-c
+	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/tinyprintf
 	PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/littlefs-2.10.1)
 
 
