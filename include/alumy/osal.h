@@ -8,6 +8,7 @@
 #include "alumy/osal/task.h"
 #include "alumy/osal/heap.h"
 #include "alumy/osal/streambuffer.h"
+#include "alumy/osal/putc.h"
 
 #endif
 

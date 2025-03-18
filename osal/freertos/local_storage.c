@@ -39,15 +39,15 @@ void al_vlog(int32_t pri, const char *fmt, va_list ap)
 #define VLOG_SIZE       128
     static char buf[VLOG_SIZE];
     ssize_t n;
-	
-    snprintf(buf, sizeof(buf), "[%5u.%03u]", al_uptime(), al_tick_get_msec());
 
-    /* Print timestamp first */
-    SEGGER_RTT_printf(0, "%s ", buf);
+    n = tfp_snprintf(
+            buf, sizeof(buf), "[%5u.%03u]", al_uptime(), al_tick_get_msec());
+
+    SEGGER_RTT_Write(0, buf, n);
 
     /* Check if in interrupt or scheduler not running */
     if (__unlikely(vPortGetIPSR() || (xTaskGetCurrentTaskHandle() == NULL))) {
-        n = vsnprintf(buf, sizeof(buf), fmt, ap);
+        n = tfp_snprintf(buf, sizeof(buf), fmt, ap);
         if (n > 0)
             SEGGER_RTT_Write(0, buf, min((ssize_t)VLOG_SIZE - 1, n));
 		
@@ -65,7 +65,7 @@ void al_vlog(int32_t pri, const char *fmt, va_list ap)
     }
 
     /* In task context */
-    n = vsnprintf(logbuf, VLOG_SIZE, fmt, ap);
+    n = tfp_vsnprintf(logbuf, VLOG_SIZE, fmt, ap);
     if (n > 0)
         SEGGER_RTT_Write(0, logbuf, min((ssize_t)VLOG_SIZE - 1, n));
 #undef VLOG_SIZE
