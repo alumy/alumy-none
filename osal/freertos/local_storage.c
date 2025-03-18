@@ -55,15 +55,19 @@ void al_vlog(int32_t pri, const char *fmt, va_list ap)
     }
 
     /* get the current task storage */
-    char *logbuf = al_os_malloc(VLOG_SIZE);
-    if (logbuf) {
-    	/* In task context */
-    	n = tfp_vsnprintf(logbuf, VLOG_SIZE, fmt, ap);
-    	if (n > 0)
-        	SEGGER_RTT_Write(0, logbuf, min((ssize_t)VLOG_SIZE - 1, n));
+    char *logbuf = pvTaskGetThreadLocalStoragePointer(NULL, LSP_LOGBUF_INDEX);
+    if (logbuf == NULL) {
+        logbuf = al_os_malloc(VLOG_SIZE);
+        vTaskSetThreadLocalStoragePointer(NULL, LSP_LOGBUF_INDEX, logbuf);
 
-	al_os_free(logbuf);
+        logbuf = pvTaskGetThreadLocalStoragePointer(NULL, LSP_LOGBUF_INDEX);
+        BUG_ON(logbuf == NULL);
     }
+
+    /* In task context */
+    n = tfp_vsnprintf(logbuf, VLOG_SIZE, fmt, ap);
+    if (n > 0)
+        SEGGER_RTT_Write(0, logbuf, min((ssize_t)VLOG_SIZE - 1, n));
 #undef VLOG_SIZE
 }
 
