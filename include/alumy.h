@@ -66,6 +66,8 @@
 #include "alumy/kfifo.h"
 #endif
 
+#include "tinyprintf.h"
+
 __BEGIN_DECLS
 
 /**
