@@ -92,6 +92,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/freemodbus/modbus/incl
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/littlefs-2.9.3)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/qpn/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/port/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/tinyprintf)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/protobuf-c/protobuf-c)
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL Linux)
     link_libraries(rt)
@@ -117,7 +119,6 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/cjson)
 add_subdirectory(${PROJECT_SOURCE_DIR}/fs)
 add_subdirectory(${PROJECT_SOURCE_DIR}/driver)
 add_subdirectory(${PROJECT_SOURCE_DIR}/libcsv)
-add_subdirectory(${PROJECT_SOURCE_DIR}/protobuf-c)
 add_subdirectory(${PROJECT_SOURCE_DIR}/pid)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lzma)
 add_subdirectory(${PROJECT_SOURCE_DIR}/xyzmodem)
@@ -148,7 +149,6 @@ set(objs
 		$<TARGET_OBJECTS:driver>
 		$<TARGET_OBJECTS:libcsv>
 		$<TARGET_OBJECTS:fs>
-		$<TARGET_OBJECTS:protobuf-c>
 		$<TARGET_OBJECTS:pid>
 		$<TARGET_OBJECTS:lzma>
 		$<TARGET_OBJECTS:xyzmodem>
@@ -239,6 +239,10 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/paho.mqtt.embedded-c-1.1
         FILES_MATCHING PATTERN "*.h")
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/tinyprintf/
+	DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+        FILES_MATCHING PATTERN "*.h")
+
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3rd-party/protobuf-c/protobuf-c/
 	DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
         FILES_MATCHING PATTERN "*.h")
 
