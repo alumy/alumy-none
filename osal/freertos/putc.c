@@ -7,6 +7,7 @@
 #include "alumy/types.h"
 #include "alumy/base.h"
 #include "alumy/osal.h"
+#include "SEGGER_RTT.h"
 
 __BEGIN_DECLS
 
