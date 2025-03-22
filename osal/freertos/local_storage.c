@@ -47,7 +47,7 @@ void al_vlog(int32_t pri, const char *fmt, va_list ap)
 
     /* Check if in interrupt or scheduler not running */
     if (__unlikely(vPortGetIPSR() || (xTaskGetCurrentTaskHandle() == NULL))) {
-        n = tfp_snprintf(buf, sizeof(buf), fmt, ap);
+        n = tfp_vsnprintf(buf, sizeof(buf), fmt, ap);
         if (n > 0)
             SEGGER_RTT_Write(0, buf, min((ssize_t)VLOG_SIZE - 1, n));
 		
