@@ -53,12 +53,12 @@ static const char *get_cpu_usage(char *buf, size_t bufsz,
         cpu_usage = run / total;
 
         if (cpu_usage > 0) {
-            snprintf(buf, bufsz, "%d", cpu_usage);
+            tfp_snprintf(buf, bufsz, "%d", cpu_usage);
         } else {
-            snprintf(buf, bufsz, "<1");
+            tfp_snprintf(buf, bufsz, "<1");
         }
     } else {
-        snprintf(buf, bufsz, "-");
+        tfp_snprintf(buf, bufsz, "-");
     }
 
     return buf;
