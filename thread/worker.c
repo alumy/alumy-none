@@ -81,7 +81,9 @@ static void al_worker_task(void *arg)
 {
 	al_worker_loop((al_worker_t *)arg);
 
-	al_os_task_delete(NULL);
+    BUG_ON("i am worker, new run to here");
+
+    al_os_task_delete(((al_worker_t *)arg)->task);
 }
 
 __END_DECLS
