@@ -33,33 +33,44 @@ void al_os_yield_isr(bool_t yield)
 	portYIELD_FROM_ISR(yield);
 }
 
-int32_t al_os_task_create(al_os_task_t *handle,
-						  const char *name,
-						  uint32_t prio,
-						  uint32_t stack,
-						  void (*func)(void *arg),
-						  void *arg)
+al_os_task_t *al_os_task_create(const char *name,
+                                uint32_t prio,
+                                uint32_t stack,
+                                void (*func)(void *arg),
+                                void *arg)
 {
-	BaseType_t ret;
+    BaseType_t ret;
+    TaskHandle_t __handle;
 
-	ret = xTaskCreate(func, name, stack, arg, prio, (TaskHandle_t *)handle);
-	if (ret != pdPASS) {
-		return -1;
-	}
+    ret = xTaskCreate(func, name, stack, arg, prio, &__handle);
+    if (ret != pdPASS) {
+        set_errno(EPERM);
+        return NULL;
+    }
 
-	return 0;
+    al_os_task_t *handle = al_os_malloc(sizeof(al_os_task_t));
+    if (handle == NULL) {
+        set_errno(ENOMEM);
+        return NULL;
+    }
+
+    *handle = __handle;
+
+    return handle;
 }
 
-int32_t al_os_task_delete(al_os_task_t handle)
+int32_t al_os_task_delete(al_os_task_t *handle)
 {
-	vTaskDelete(handle);
+    vTaskDelete((TaskHandle_t)*handle);
+
+    al_os_free(handle);
 
 	return 0;
 }
 
 uint32_t al_os_task_get_prio(al_os_task_t handle)
 {
-	return uxTaskPriorityGet(handle);
+    return uxTaskPriorityGet((TaskHandle_t)handle);
 }
 
 void al_os_set_timeout_state(al_os_timeout_t *timeout)

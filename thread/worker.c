@@ -28,8 +28,8 @@ int32_t al_worker_init(al_worker_t *ctx, int_t cnt,
 	ctx->queue = al_os_queue_create(cnt, sizeof(al_worker_item_t));
 	AL_CHECK_RET(ctx->queue, ENOMEM, -1);
 
-	ret = al_os_task_create(&ctx->task, name, prio, stack, al_worker_task, ctx);
-	AL_CHECK_RET(ret == 0, ENOMEM, -1);
+	ctx->task = al_os_task_create(name, prio, stack, al_worker_task, ctx);
+	AL_CHECK_RET(ctx->task != NULL, ENOMEM, -1);
 
 	return 0;
 }

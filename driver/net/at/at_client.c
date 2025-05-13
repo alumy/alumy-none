@@ -814,8 +814,10 @@ static int at_client_para_init(at_client_t client, int32_t prio, size_t stack)
     client->urc_table = NULL;
     client->urc_table_size = 0;
 
-    if(al_os_task_create(&client->parser, "at_client", prio, stack,
-						 (void (*)(void *))client_parser, client) != 0)
+	client->parser = al_os_task_create(
+							"at_client", prio, stack, 
+							(void (*)(void *))client_parser, client); 
+    if(client->parser == NULL)
     {
         result = -ENOMEM;
         goto __exit;
