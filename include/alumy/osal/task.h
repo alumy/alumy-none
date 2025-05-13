@@ -9,7 +9,7 @@
 
 __BEGIN_DECLS
 
-typedef void * al_os_task_t;
+typedef uintptr_t al_os_task_t;
 typedef uint64_t al_os_timeout_t;
 
 void al_os_delay(int32_t ms);
