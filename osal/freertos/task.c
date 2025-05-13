@@ -63,13 +63,13 @@ int32_t al_os_task_delete(al_os_task_t *handle)
 {
     if (handle == NULL) {
         vTaskDelete(NULL);
-        return;
+        return 0;
     }
 
     vTaskDelete((TaskHandle_t)*handle);
     al_os_free(handle);
 
-	return 0;
+    return 0;
 }
 
 uint32_t al_os_task_get_prio(al_os_task_t handle)
