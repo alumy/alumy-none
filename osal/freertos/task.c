@@ -61,8 +61,12 @@ al_os_task_t *al_os_task_create(const char *name,
 
 int32_t al_os_task_delete(al_os_task_t *handle)
 {
-    vTaskDelete((TaskHandle_t)*handle);
+    if (handle == NULL) {
+        vTaskDelete(NULL);
+        return;
+    }
 
+    vTaskDelete((TaskHandle_t)*handle);
     al_os_free(handle);
 
 	return 0;
