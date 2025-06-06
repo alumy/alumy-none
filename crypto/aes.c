@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <string.h>
-#include "aes.h"
 #include "alumy/config.h"
 #include "alumy/types.h"
 #include "alumy/base.h"
@@ -16,6 +15,7 @@
 #include "alumy/crypto.h"
 #include "mbedtls/aes.h"
 #include "mbedtls/cipher.h"
+#include "aes.h"
 
 __BEGIN_DECLS
 
