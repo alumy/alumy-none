@@ -94,6 +94,30 @@ int32_t alumy_init(void);
  */
 int32_t alumy_cleanup(void);
 
+/**
+ * @brief alumy lite init
+ *
+ * @author jack (2025/6/21)
+ *
+ * @param void
+ *
+ * @return int32_t return 0 on first init success, return 1 on
+ *         already initialized, return -1 on error
+ */
+int32_t alumy_lite_init(void);
+
+/**
+ * @brief alumy lite cleanup
+ *
+ * @author jack (2025/6/21)
+ *
+ * @param void
+ *
+ * @return int32_t return 0 on cleanup success, return 1 on need
+ *         more cleanup, return -1 on not initialized
+ */
+int32_t alumy_lite_cleanup(void);
+
 __END_DECLS
 
 #endif

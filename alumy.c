@@ -87,5 +87,34 @@ int32_t alumy_cleanup(void)
 	return 0;
 }
 
+int32_t alumy_lite_init(void)
+{
+	if (initialized++) {
+		/* already initialized */
+		return 1;
+	}
+
+	init_printf(NULL, __putc);
+
+	al_tick_init();
+
+	return 0;
+}
+
+int32_t alumy_lite_cleanup(void)
+{
+	if (!initialized) {
+		/* not initialized */
+		return -1;
+	}
+
+	if (--initialized) {
+		/* multi initialze, need cleanup all */
+		return 1;
+	}
+
+	return 0;
+}
+
 __END_DECLS
 
