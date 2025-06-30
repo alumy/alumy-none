@@ -12,7 +12,7 @@ __BEGIN_DECLS
 #ifndef AL_CHECK_RET
 #define AL_CHECK_RET(exp, __errno, ret)     do {        \
     if(__unlikely(!(exp))) {                            \
-        set_errno((__errno));                           \
+        errno = (__errno);                              \
         return (ret);                                   \
     }                                                   \
 } while(0)
@@ -21,7 +21,7 @@ __BEGIN_DECLS
 #ifndef AL_CHECK
 #define AL_CHECK(exp, __errno)     do {                 \
     if(__unlikely(!(exp))) {                            \
-        set_errno((__errno));                           \
+        errno = (__errno);                              \
         return;                                         \
     }                                                   \
 } while(0)
