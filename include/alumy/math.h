@@ -1,3 +1,17 @@
+/**
+ * @file    math.h
+ * @author  alumy project
+ * @version v0.0.1
+ * @brief   Mathematical utilities and operations for the alumy library
+ * 
+ * This header file provides various mathematical utilities including
+ * rounding operations, division utilities, and common mathematical
+ * functions. It serves as a central include point for math-related
+ * functionality in the alumy library.
+ * 
+ * @copyright Copyright (c) 2019 alumy project
+ */
+
 #ifndef __AL_MATH_H
 #define __AL_MATH_H 1
 

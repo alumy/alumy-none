@@ -1,3 +1,18 @@
+/**
+ * @file    version.h
+ * @author  jackchen
+ * @version v1.0.9
+ * @date    15-Jan-2019
+ * @brief   Version management interface for the alumy library
+ * 
+ * This header file provides version information and utilities for the alumy
+ * library, including version checking macros, version structure definitions,
+ * and functions to retrieve version information.
+ * 
+ * @copyright Copyright (c) 2019 alumy project
+ * 
+ */
+
 #ifndef __AL_VERSION_H
 #define __AL_VERSION_H
 
@@ -9,36 +24,81 @@
 
 __BEGIN_DECLS
 
+/** @brief Major version number */
 #define AL_MAJOR		1
+
+/** @brief Minor version number */
 #define AL_MINOR		0
+
+/** @brief Revision number */
 #define AL_REV			9
+
+/** @brief Build number */
 #define AL_BUILD		20
 
+/**
+ * @brief Check if current version meets minimum requirements
+ * @param ma Required major version
+ * @param mi Required minor version
+ * @return Non-zero if requirements are met
+ */
 #define AL_PREREQ(ma, mi)	(AL_MAJOR << 16 | AL_MINOR >= (ma) << 16 | (mi))
+
+/** @brief String representation of the current version */
 #define AL_VERSION			__MS(AL_MAJOR.AL_MINOR.AL_REV.AL_BUILD)
 
+/**
+ * @brief Initialize version structure with given parameters
+ * @param major Major version number
+ * @param minor Minor version number
+ * @param rev Revision number
+ * @param build Build number
+ * @param git_hash Git commit hash
+ */
 #define AL_VERSION_INIT(major, minor, rev, build, git_hash) \
 	{ (major), (minor), (rev), (build), (git_hash) }
 
+/**
+ * @brief Version information structure
+ * 
+ * This structure contains all version-related information including
+ * major, minor, revision, build numbers and git hash.
+ */
 typedef struct al_version {
-	uint16_t av_major;
-	uint16_t av_minor;
-	uint16_t av_rev;
-	uint16_t av_build;
-	char av_git_hash[8];
+	uint16_t av_major;		/**< Major version number */
+	uint16_t av_minor;		/**< Minor version number */
+	uint16_t av_rev;		/**< Revision number */
+	uint16_t av_build;		/**< Build number */
+	char av_git_hash[8];	/**< Git commit hash (first 7 chars + null terminator) */
 } al_version_t;
 
+/**
+ * @brief Macro to generate getter functions for version fields
+ * @param f Field name suffix (major, minor, rev, build)
+ */
 #define al_version_get_s(f) \
 	static inline uint16_t al_version_get_##f(const al_version_t *ver) \
 	{ \
 		return ver->av_##f; \
 	}
 
+/** @brief Generate getter function for major version */
 al_version_get_s(major)
+
+/** @brief Generate getter function for minor version */
 al_version_get_s(minor)
+
+/** @brief Generate getter function for revision number */
 al_version_get_s(rev)
+
+/** @brief Generate getter function for build number */
 al_version_get_s(build)
 
+/**
+ * @brief Get git hash from version structure
+ * @param ver Pointer to version structure
+ * @return Pointer to git hash string
+ */
 __static_inline__
 const char *al_version_get_git_hash(const al_version_t *ver)
 {
@@ -52,7 +112,7 @@ const char *al_version_get_git_hash(const al_version_t *ver)
  *
  * @param void
  *
- * @return const char*
+ * @return const char* Version string in format "major.minor.rev.build"
  */
 const char *al_get_version_s(void);
 
@@ -63,23 +123,23 @@ const char *al_get_version_s(void);
  *
  * @param void
  *
- * @return const al_version_t*
+ * @return const al_version_t* Pointer to the global version structure
  */
 const al_version_t *al_get_version(void);
 
 /**
- * @brief al_version_init
+ * @brief Initialize a version structure
  *
  * @author jack (2023/7/6)
  *
- * @param av
- * @param major
- * @param minor
- * @param rev
- * @param build
- * @param git_hash
+ * @param av Pointer to version structure to initialize
+ * @param major Major version number
+ * @param minor Minor version number
+ * @param rev Revision number
+ * @param build Build number
+ * @param git_hash Git commit hash string (will be truncated to 7 chars)
  *
- * @return int_t
+ * @return int_t 0 on success, negative error code on failure
  */
 int_t al_version_init(al_version_t *av,
 					  uint16_t major, uint16_t minor, uint16_t rev,

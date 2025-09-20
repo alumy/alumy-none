@@ -1,3 +1,12 @@
+/**
+ * @file crc.h
+ * @brief CRC (Cyclic Redundancy Check) calculation functions
+ * 
+ * This header provides various CRC calculation functions including CRC8 and CRC32
+ * implementations. CRC is commonly used for error detection in digital networks
+ * and storage devices.
+ */
+
 #ifndef __AL_CRC_H
 #define __AL_CRC_H 1
 

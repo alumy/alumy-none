@@ -1,3 +1,12 @@
+/**
+ * @file cdefs.h
+ * @brief Common definitions and macros for C/C++ compatibility
+ * 
+ * This header provides essential macros and definitions that facilitate
+ * compatibility between C and C++ code, particularly for function declarations
+ * and linkage specifications.
+ */
+
 #ifndef __AL_CDEFS_H
 #define __AL_CDEFS_H 1
 

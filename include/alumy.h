@@ -1,19 +1,31 @@
 /**
- ******************************************************************************
  * @file    alumy.h
  * @author  jackchen
  * @version v0.0.3
  * @date    15-Jan-2019
- * @brief   The header of libalumy
- ******************************************************************************
- * @attention
- *
- * <h2><center>&copy; </center></h2>
- * alumy/test.h or alumy/unity.h will overwrite the malloc and
- * free, so please include the two headers alone or pairing for
- * c file that called malloc and free
- *
- ******************************************************************************
+ * @brief   Main header file for the alumy library
+ * 
+ * This is the primary header file that includes all necessary alumy library
+ * components. It provides a comprehensive collection of utilities, data
+ * structures, and algorithms for embedded system development.
+ * 
+ * @warning
+ * The headers alumy/test.h and alumy/unity.h will override the standard
+ * malloc() and free() functions. When using these testing frameworks,
+ * ensure these headers are included separately or in pairs for any C files
+ * that call malloc() and free() to avoid conflicts.
+ * 
+ * @copyright Copyright (c) 2019 alumy project
+ * 
+ * @par Example Usage:
+ * @code
+ * #include "alumy.h"
+ * 
+ * int main(void) {
+ *     // Use alumy library functions
+ *     return 0;
+ * }
+ * @endcode
  */
 #ifndef __ALUMY_H
 #define __ALUMY_H 1
