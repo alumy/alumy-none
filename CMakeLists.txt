@@ -9,8 +9,8 @@ project(alumy C ASM)
 
 set(PROJECT_VERSION_MAJOR 1)
 set(PROJECT_VERSION_MINOR 0)
-set(PROJECT_VERSION_PATCH 9)
-set(PROJECT_VERSION_TWEAK 20)
+set(PROJECT_VERSION_PATCH 10)
+set(PROJECT_VERSION_TWEAK 21)
 set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
 
 #############################################################################
@@ -262,6 +262,41 @@ set(CPACK_SOURCE_IGNORE_FILES
 set(CPACK_SOURCE_GENERATOR "TGZ")
 
 include(CPack)
+
+#############################################################################
+# Doxygen documentation
+#############################################################################
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    # Set input and output files
+    set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
+    set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+
+    # Request to configure the file
+    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
+    message(STATUS "Doxygen build started")
+
+    # Note the option ALL which allows to build the docs together with the application
+    add_custom_target(doc_doxygen ALL
+        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating API documentation with Doxygen"
+        VERBATIM)
+
+    # Create a separate target for documentation only (without ALL)
+    add_custom_target(docs
+        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating API documentation with Doxygen"
+        VERBATIM)
+
+    # Install documentation
+    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/docs/html/
+            DESTINATION ${CMAKE_INSTALL_DOCDIR}/html
+            OPTIONAL)
+else (DOXYGEN_FOUND)
+    message(WARNING "Doxygen need to be installed to generate the doxygen documentation")
+endif(DOXYGEN_FOUND)
 
 if(UNIT_TEST EQUAL 1)
     enable_testing()

@@ -1,13 +1,14 @@
 /**
- * @file    version.h
+ * @file    version.h.in
  * @author  jackchen
- * @version v1.0.9
+ * @version v1.0.10
  * @date    15-Jan-2019
- * @brief   Version management interface for the alumy library
+ * @brief   Version management interface for the alumy library (template file)
  * 
  * This header file provides version information and utilities for the alumy
  * library, including version checking macros, version structure definitions,
- * and functions to retrieve version information.
+ * and functions to retrieve version information. This is a template file that
+ * gets processed by CMake to generate the actual version.h header.
  * 
  * @copyright Copyright (c) 2019 alumy project
  * 
@@ -24,17 +25,17 @@
 
 __BEGIN_DECLS
 
-/** @brief Major version number */
+/** @brief Major version number (replaced by CMake) */
 #define AL_MAJOR		1
 
-/** @brief Minor version number */
+/** @brief Minor version number (replaced by CMake) */
 #define AL_MINOR		0
 
-/** @brief Revision number */
-#define AL_REV			9
+/** @brief Revision/patch number (replaced by CMake) */
+#define AL_REV			10
 
-/** @brief Build number */
-#define AL_BUILD		20
+/** @brief Build number (replaced by CMake) */
+#define AL_BUILD		21
 
 /**
  * @brief Check if current version meets minimum requirements
@@ -123,12 +124,12 @@ const char *al_get_version_s(void);
  *
  * @param void
  *
- * @return const al_version_t* Pointer to the global version structure
+ * @return const al_version_t* Pointer to version structure
  */
 const al_version_t *al_get_version(void);
 
 /**
- * @brief Initialize a version structure
+ * @brief Initialize version structure
  *
  * @author jack (2023/7/6)
  *
@@ -137,9 +138,9 @@ const al_version_t *al_get_version(void);
  * @param minor Minor version number
  * @param rev Revision number
  * @param build Build number
- * @param git_hash Git commit hash string (will be truncated to 7 chars)
+ * @param git_hash Git commit hash string
  *
- * @return int_t 0 on success, negative error code on failure
+ * @return int_t 0 on success, negative on error
  */
 int_t al_version_init(al_version_t *av,
 					  uint16_t major, uint16_t minor, uint16_t rev,
