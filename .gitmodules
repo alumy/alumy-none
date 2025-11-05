@@ -1,6 +1,3 @@
-[submodule "3rd-party/tinyprintf"]
-	path = 3rd-party/tinyprintf
-	url = ../../cjlano/tinyprintf.git
 [submodule "3rd-party/protobuf-c"]
 	path = 3rd-party/protobuf-c
 	url = ../../protobuf-c/protobuf-c.git
