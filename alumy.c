@@ -27,6 +27,8 @@ static void __mbedtls_free(void *p)
 
 static void __putc(void *p, char c)
 {
+	UNUSED(p);
+
     al_putc(c);
 }
 

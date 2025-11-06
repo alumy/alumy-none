@@ -80,7 +80,6 @@ struct param {
     char *bf;           /**<  Buffer to output */
 };
 
-
 #ifdef PRINTF_LONG_LONG_SUPPORT
 static void _TFP_GCC_NO_INLINE_ ulli2a(
     unsigned long long int num, struct param *p)
@@ -421,23 +420,49 @@ void tfp_format(void *putp, putcf putf, const char *fmt, va_list va)
 }
 
 #if TINYPRINTF_DEFINE_TFP_PRINTF
-static putcf stdout_putf;
-static void *stdout_putp;
+struct stdout_put_data 
+{
+  size_t num_chars;
+  void *putp;
+  putcf putf;
+};
+
+static struct stdout_put_data _stdout_put_data;
+
+static void stdout_putf(void *p, char c)
+{
+    struct stdout_put_data *data = (struct stdout_put_data *)p;
+
+    data->putf(data->putp, c);
+    data->num_chars++;
+}
 
 void init_printf(void *putp, putcf putf)
 {
-    stdout_putf = putf;
-    stdout_putp = putp;
+    _stdout_put_data.putf = putf;
+    _stdout_put_data.putp = putp;
 }
 
 int tfp_printf(const char *fmt, ...)
 {
     va_list va;
+
+    _stdout_put_data.num_chars = 0;
+
     va_start(va, fmt);
-    tfp_format(stdout_putp, stdout_putf, fmt, va);
+    tfp_format(&_stdout_put_data, stdout_putf, fmt, va);
     va_end(va);
 
-    return 0;
+    return _stdout_put_data.num_chars;
+}
+
+int tfp_vprintf(const char *fmt, va_list ap)
+{
+    _stdout_put_data.num_chars = 0;
+
+    tfp_format(&_stdout_put_data, stdout_putf, fmt, ap);
+
+    return _stdout_put_data.num_chars;
 }
 #endif
 

@@ -174,6 +174,7 @@ int tfp_sprintf(char *str, const char *fmt, ...) \
 #if TINYPRINTF_DEFINE_TFP_PRINTF
 void init_printf(void *putp, putcf putf);
 int tfp_printf(const char *fmt, ...) _TFP_SPECIFY_PRINTF_FMT(1, 2);
+int tfp_vprintf(const char *fmt, va_list ap) _TFP_SPECIFY_PRINTF_FMT(1, 0);
 # if TINYPRINTF_OVERRIDE_LIBC
 #  define printf tfp_printf
 # endif

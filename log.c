@@ -12,6 +12,7 @@
 #include "alumy/base.h"
 #include "alumy/log.h"
 #include "alumy/time.h"
+#include "alumy/osal/putc.h"
 #include "tinyprintf.h"
 
 __BEGIN_DECLS
