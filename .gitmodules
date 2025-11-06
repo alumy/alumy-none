@@ -1,3 +1,6 @@
 [submodule "3rd-party/protobuf-c"]
 	path = 3rd-party/protobuf-c
 	url = ../../protobuf-c/protobuf-c.git
+[submodule "3rd-party/minlzma"]
+	path = 3rd-party/minlzma
+	url = https://github.com/ionescu007/minlzma.git

@@ -15,6 +15,7 @@
 #include "alumy/errno.h"
 #include "alumy/bug.h"
 #include "alumy/check.h"
+#include "tinyprintf.h"
 
 __BEGIN_DECLS
 
@@ -708,8 +709,8 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
 
     ym->opt->recv_clear();
 
-    len = snprintf((char *)ym->send_buf, YMODEM_PACKET_SIZE_128,
-                   "%s", file_name);
+    len = tfp_snprintf(
+            (char *)ym->send_buf, YMODEM_PACKET_SIZE_128, "%s", file_name);
 
     if ((len <= 0) || (len >= YMODEM_PACKET_SIZE_128)) {
         set_errno(EINVAL);
@@ -719,8 +720,8 @@ int32_t al_ymodem_send_file(al_ymodem_t *ym, const char *file_name,
     send_len = len + 1;
 	remain = YMODEM_PACKET_SIZE_128 - (len + 1);
 
-    len = snprintf((char *)ym->send_buf + (len + 1), remain, 
-		    "%"PRIuPTR, file_size);
+    len = tfp_snprintf(
+            (char *)ym->send_buf + (len + 1), remain, "%"PRIuPTR, file_size);
 
     if ((len <= 0) || (len >= remain)) {
         set_errno(EINVAL);

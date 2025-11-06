@@ -24,30 +24,11 @@ static int32_t logmask = 0xFF;
 
 __weak void al_vlog(int32_t pri, const char *fmt, va_list ap)
 {
-    FILE *stream = stdout;
+    long tv_sec = al_tick_get_sec();
+    int tv_msec = al_tick_get_msec();
 
-    if (pri == AL_LOG_EMERG || pri == AL_LOG_ERR ||
-        pri == AL_LOG_WARN || pri == AL_LOG_CRIT ||
-        pri == AL_LOG_ALERT) {
-        stream = stderr;
-    }
-
-    fprintf(stream, "%s ", al_log_timestamp());
-    vfprintf(stream, fmt, ap);
-}
-
-__weak const char *al_log_timestamp(void)
-{
-    static char str[26];
-    register long tv_sec;
-    register int tv_msec;
-
-	tv_sec = al_tick_get_sec();
-	tv_msec = al_tick_get_msec();
-
-    snprintf(str, sizeof(str), "[%5ld.%03d]", (long)tv_sec, (int)tv_msec);
-
-    return str;
+    tfp_printf("[%5ld.%03d] ", (long)tv_sec, (int)tv_msec);
+    tfp_vprintf(fmt, ap);
 }
 
 void al_log(int32_t pri, const char *file, int32_t line, const char *func,
