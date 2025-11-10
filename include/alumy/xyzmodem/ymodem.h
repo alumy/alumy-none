@@ -22,7 +22,6 @@ __BEGIN_DECLS
 #define YMODEM_GETC_TIMEOUT_DFT			(10)	/* ms */
 #define YMODEM_MAX_ERR_CNT_DFT			(10)	/* times */
 #define YMODEM_TIMEOUT_DFT				(1000)	/* ms */
-#define YMODEM_EOT_TIMEOUT_DFT			(3000)	/* ms */
 
 /* Calculate total packet length including header and CRC */
 #define YMODEM_TOTAL_LEN(pack_size)     \
@@ -102,8 +101,6 @@ typedef struct al_ymodem {
     int32_t timeout;                         /* Operation timeout */
     int32_t err_cnt;                        /* Timeout counter */
     int32_t max_err_cnt;                    /* Maximum error count */
-    int32_t eot_timeout;                    /* EOT timeout in ms */
-    bool rcvd_eot;                          /* Received EOT flag */
 	uint32_t wait_ack_timeout;              /* ACK wait timeout in ms */
 	uint32_t getc_timeout;                  /* Character receive timeout in ms */
 	bool send_packet_1k;                    /* Use 1K packets for sending */
@@ -122,9 +119,6 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
 
 /* Set maximum error count */
 int32_t al_ymodem_set_max_err_cnt(al_ymodem_t *ym, int32_t cnt);
-
-/* Set EOT timeout value */
-int32_t al_ymodem_set_eot_timeout(al_ymodem_t *ym, int32_t timeout);
 
 /* Set operation timeout value */
 int32_t al_ymodem_set_timeout(al_ymodem_t *ym, int32_t timeout);

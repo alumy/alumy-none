@@ -211,7 +211,6 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
 	ym->getc_timeout = YMODEM_GETC_TIMEOUT_DFT;
     ym->timeout = YMODEM_TIMEOUT_DFT;
     ym->max_err_cnt = YMODEM_MAX_ERR_CNT_DFT;
-    ym->eot_timeout = YMODEM_EOT_TIMEOUT_DFT;
     ym->send_packet_1k = true;
 
     return 0;
@@ -222,15 +221,6 @@ int32_t al_ymodem_set_max_err_cnt(al_ymodem_t *ym, int32_t cnt)
     AL_CHECK_RET(ym, EINVAL, -1);
 
     ym->max_err_cnt = cnt;
-
-    return 0;
-}
-
-int32_t al_ymodem_set_eot_timeout(al_ymodem_t *ym, int32_t timeout)
-{
-    AL_CHECK_RET(ym, EINVAL, -1);
-
-    ym->eot_timeout = timeout;
 
     return 0;
 }
@@ -351,14 +341,12 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
 
                 ym->last_time = ym->opt->tick_ms();
                 ym->err_cnt = 0;
-                ym->rcvd_eot = false;
 
                 ret = ymodem_check_pkg(ym->recv_buf, ym->recv_wp, ym->seq);
                 switch (ret) {
                     case AL_EOT:
                         ym->status = YMODEM_STATUS_RECV_EOT_CONFIRM;
                         ym->opt->ym_putc(AL_NAK);
-                        ym->rcvd_eot = true;
                         break;
 
                     case AL_CAN:
@@ -411,8 +399,9 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                 int32_t ret = ymodem_check_pkg(ym->recv_buf, ym->recv_wp, 0);
                 switch (ret) {
                     case AL_EOT:
-                        ym->status = YMODEM_STATUS_RECV_EOT_CONFIRM;
+                        ym->status = YMODEM_STATUS_RECV_FINISH;
                         ym->opt->ym_putc(AL_ACK);
+                        ym->opt->ym_putc('C');
                         break;
 
                     case AL_CAN:
@@ -427,16 +416,7 @@ int32_t al_ymodem_recv(al_ymodem_t *ym)
                 }
             }
 
-            if (ym->rcvd_eot) {
-                if ((ym->opt->tick_ms() - ym->last_time) > ym->eot_timeout) {
-                    ym->status = YMODEM_STATUS_RECV_FINISH;
-                    ym->opt->ym_putc('C');
-                    break;
-                }
-            }
-
             if ((ym->opt->tick_ms() - ym->last_time) > ym->timeout) {
-                ym->opt->ym_putc(AL_NAK);
                 ym->last_time = ym->opt->tick_ms();
                 ymodem_recv_status_reset(ym);
 
