@@ -20,6 +20,7 @@ __BEGIN_DECLS
 /* Default timeout values in milliseconds */
 #define YMODEM_ACK_WAIT_TIMEOUT_DFT		(500)	/* ms */
 #define YMODEM_GETC_TIMEOUT_DFT			(10)	/* ms */
+#define YMODEM_MAX_ERR_CNT_DFT			(10)	/* times */
 
 /* Calculate total packet length including header and CRC */
 #define YMODEM_TOTAL_LEN(pack_size)     \
@@ -76,7 +77,6 @@ typedef struct al_ymodem_opt {
     /* Receive data into buffer */
     ssize_t (*recv)(void *buf, size_t size);
     int32_t (*recv_clear)(void);            /* Clear receive buffer */
-    time_t (*uptime)(void);                 /* Get system uptime */
 	uint32_t (*tick_ms)(void);              /* Get system tick in ms */
     /* Delay for specified milliseconds */
     void (*delay_ms)(int32_t ms);
@@ -96,9 +96,12 @@ typedef struct al_ymodem {
     uint8_t *send_buf;                      /* Send buffer pointer */
     size_t send_bufsz;                      /* Send buffer size */
     uint8_t send_seq;                       /* Send sequence number */
-    time_t last_time;                       /* Last operation timestamp */
-    time_t timeout;                         /* Operation timeout */
-    int32_t timeout_cnt;                    /* Timeout counter */
+    uint32_t last_time;                       /* Last operation timestamp */
+    int32_t timeout;                         /* Operation timeout */
+    int32_t err_cnt;                        /* Timeout counter */
+    int32_t max_err_cnt;                    /* Maximum error count */
+    int32_t eot_timeout;                    /* EOT timeout in ms */
+    bool rcvd_eot;                          /* Received EOT flag */
 	uint32_t wait_ack_timeout;              /* ACK wait timeout in ms */
 	uint32_t getc_timeout;                  /* Character receive timeout in ms */
 	bool send_packet_1k;                    /* Use 1K packets for sending */
@@ -110,10 +113,19 @@ typedef struct al_ymodem {
 
 /* Initialize YMODEM context with buffers and options */
 int32_t al_ymodem_init(al_ymodem_t *ym,
-					   uint8_t *recv_buf, size_t recv_bufsz, time_t timeout,
+					   uint8_t *recv_buf, size_t recv_bufsz, int32_t timeout,
 					   uint8_t *send_buf, size_t send_bufsz,
 					   const al_ymodem_opt_t *opt,
 					   const al_ymodem_callback_t *cb);
+
+/* Set maximum error count */
+int32_t al_ymodem_set_max_err_cnt(al_ymodem_t *ym, int32_t cnt);
+
+/* Set EOT timeout value */
+int32_t al_ymodem_set_eot_timeout(al_ymodem_t *ym, int32_t timeout);
+
+/* Set operation timeout value */
+int32_t al_ymodem_set_timeout(al_ymodem_t *ym, int32_t timeout);
 
 /* Receive data using YMODEM protocol */
 int32_t al_ymodem_recv(al_ymodem_t *ym);
