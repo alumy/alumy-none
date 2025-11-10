@@ -181,7 +181,7 @@ static int32_t ymodem_check_pkg(const void *__data, size_t len, int32_t __seq)
 }
 
 int32_t al_ymodem_init(al_ymodem_t *ym,
-					   uint8_t *recv_buf, size_t recv_bufsz, int32_t timeout,
+					   uint8_t *recv_buf, size_t recv_bufsz,
 					   uint8_t *send_buf, size_t send_bufsz,
 					   const al_ymodem_opt_t *opt,
 					   const al_ymodem_callback_t *cb)
@@ -210,7 +210,9 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     ym->session = false;
     ym->wait_ack_timeout = YMODEM_ACK_WAIT_TIMEOUT_DFT;
 	ym->getc_timeout = YMODEM_GETC_TIMEOUT_DFT;
+    ym->timeout = YMODEM_TIMEOUT_DFT;
     ym->max_err_cnt = YMODEM_MAX_ERR_CNT_DFT;
+    ym->eot_timeout = YMODEM_EOT_TIMEOUT_DFT;
     ym->send_packet_1k = true;
 
     return 0;

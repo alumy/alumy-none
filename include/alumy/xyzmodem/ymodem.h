@@ -21,6 +21,8 @@ __BEGIN_DECLS
 #define YMODEM_ACK_WAIT_TIMEOUT_DFT		(500)	/* ms */
 #define YMODEM_GETC_TIMEOUT_DFT			(10)	/* ms */
 #define YMODEM_MAX_ERR_CNT_DFT			(10)	/* times */
+#define YMODEM_TIMEOUT_DFT				(1000)	/* ms */
+#define YMODEM_EOT_TIMEOUT_DFT			(3000)	/* ms */
 
 /* Calculate total packet length including header and CRC */
 #define YMODEM_TOTAL_LEN(pack_size)     \
@@ -113,7 +115,7 @@ typedef struct al_ymodem {
 
 /* Initialize YMODEM context with buffers and options */
 int32_t al_ymodem_init(al_ymodem_t *ym,
-					   uint8_t *recv_buf, size_t recv_bufsz, int32_t timeout,
+					   uint8_t *recv_buf, size_t recv_bufsz,
 					   uint8_t *send_buf, size_t send_bufsz,
 					   const al_ymodem_opt_t *opt,
 					   const al_ymodem_callback_t *cb);
