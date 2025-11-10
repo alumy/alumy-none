@@ -204,7 +204,6 @@ int32_t al_ymodem_init(al_ymodem_t *ym,
     ym->recv_bufsz = recv_bufsz;
     ym->send_buf = send_buf;
     ym->send_bufsz = send_bufsz;
-    ym->timeout = timeout;
     ym->opt = opt;
     ym->callback = cb;
     ym->session = false;
