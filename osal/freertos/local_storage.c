@@ -4,6 +4,7 @@
 #include "semphr.h"
 #include "alumy.h"
 #include "SEGGER_RTT.h"
+#include "tinyprintf.h"
 
 __BEGIN_DECLS
 

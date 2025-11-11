@@ -4,6 +4,7 @@
 #include "semphr.h"
 #include "alumy.h"
 #include "alumy/osal/freertos.h"
+#include "tinyprintf.h"
 
 __BEGIN_DECLS
 
